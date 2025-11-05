@@ -1,5 +1,28 @@
 ## Product Roadmap (0–12 Months)
 
+### Status Checkpoint — 2025-11-05
+| Phase | What We Delivered | Status | Evidence |
+| --- | --- | --- | --- |
+| Foundation | Monorepo scaffolded (Next.js app, FastAPI API, shared packages, fixtures, Turbo workspace). | ✅ Complete | Commit `2c1dbea`, pnpm install/Poetry install passing. |
+| Core Intelligence MVP | Ingestion endpoint, clause intelligence UI, negotiation playbooks, portfolio dashboard with SaaS/NIL/Healthcare/Public Sector coverage. | ✅ Core slice live | Commit `ff9a47a`, Vitest + Pytest suites green. |
+| Portfolio Intelligence & Collaboration | Portfolio KPI dashboards available; alert scheduler and collaboration loops pending. | ⏳ In progress | Alerts UI shipped; API scheduler tracked in iteration plan. |
+| Growth & Defensibility | Pending future milestones. | ⬜ Not started | — |
+
+#### Backlog Ledger (as of 2025-11-05)
+- ✅ Monorepo workspace established with lint/test/build tooling (`2c1dbea`).
+- ✅ Multi-vertical fixture ingestion and dashboard metrics (`ff9a47a`).
+- ✅ Demo seeding CLI (`pnpm demo:seed`) with snapshot output.
+- ✅ Updated demo/QA documentation (`docs/demo-environment-plan.md`, `docs/status/2025-11-05-qa-audit.md`).
+- ⏳ Outbound alerting + notification routing (tracked in iteration plan).
+- ⏳ Infrastructure deployment workflows (Terraform + CI runners).
+- ⏳ UX research backlog for portfolio/dashboard polish (captured in iteration plan).
+
+#### Upcoming Focus (Iteration 2025-11-05 → 2025-11-19)
+- Operationalize alert delivery (Slack/email) and background schedulers.
+- Stand up Terraform scaffolding + CI pipelines for API/Web deploys.
+- Validate demo environment runbook end-to-end using `pnpm demo:seed` snapshot.
+- Launch structured UX evaluation: dashboard information architecture, dossier navigation flow, playbook usability tests.
+
 ### Phase 0 — Foundation (Weeks 0–2)
 - Confirm vertical focus via founder-market fit scorecard and live pipeline validation.
 - Form legal entity, banking, data privacy policies, and SOC 2 readiness plan.

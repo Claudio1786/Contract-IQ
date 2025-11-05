@@ -58,6 +58,28 @@ Deliver the first usable AI wrapper increment by wiring ingestion, intelligence 
 - Analytics events emitted for new flows and captured in logs.
 - Demo script updated to include new capability.
 
+### Backlog Checkpoint — 2025-11-05
+| Backlog Item | Status | Evidence |
+| --- | --- | --- |
+| Monorepo scaffold (web, API, shared packages, fixtures) | ✅ Done | Commit `2c1dbea`; `pnpm install --frozen-lockfile`, `py -m poetry install --no-root`. |
+| Contract ingestion + intelligence surfaces (SaaS/NIL/Healthcare/Public Sector) | ✅ Done | Commit `ff9a47a`; `node ./node_modules/vitest/vitest.mjs run`, `py -m poetry run pytest`. |
+| Demo seeding CLI + documentation refresh | ✅ Done | `pnpm demo:seed`, `docs/demo-environment-plan.md`, `docs/status/2025-11-05-qa-audit.md`. |
+| Outbound alerting orchestration | ⏳ Open | Requires scheduler + Slack/email integrations. |
+| Deployment workflows (Terraform + CI) | ⏳ Open | Pending infra scaffolding. |
+| UX research & IA improvements for dashboard/dossier | ⏳ Open | See UX discovery plan below. |
+
+### Path to QA & Demo Readiness (Next Iteration)
+1. **Alerts & Notifications** – Implement background scheduler, event persistence, Slack/email delivery, and expand test coverage.
+2. **Infrastructure & CI** – Provision Azure resources, codify Terraform modules, add GitHub Actions for API + web deployments with smoke tests.
+3. **Demo Runbook Validation** – Execute `pnpm demo:seed` against deployed API, capture portfolio snapshot, and rehearse demo script end-to-end.
+4. **Regression Automation** – Add Turbo targets for `test`, `lint`, `build`; integrate into CI to block regressions before QA sign-off.
+
+### UX & UI Discovery Plan
+- Conduct heuristic review of dashboard layout: evaluate KPI hierarchy, alert readability, and drill-down affordances.
+- Schedule 30-minute internal walkthrough to capture friction points in `/contracts/[templateId]` dossier navigation.
+- Prototype quick wins (e.g., vertical filters, clause card grouping) in Figma and validate with stakeholders.
+- Instrument PostHog events for key navigation actions to gather usage heuristics once demo environment is live.
+
 ### Risks & Mitigations
 - **LLM latency / costs** – use fixtures + logs for first iteration; integrate providers behind interface later.
 - **Windows path issues** – continue using direct `node`/Poetry commands documented in `dev-cli-workaround.md` until resolved.
