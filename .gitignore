@@ -1,0 +1,19 @@
+﻿# General
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Env & secrets
+.env
+.env.*
