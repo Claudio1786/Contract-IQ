@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "template": "nil-athlete-endorsement",
+    "version": "2025.11",
+    "vertical": "nil",
+    "jurisdiction": "NCAA / State of Texas",
+    "renewal": {
+      "type": "manual",
+      "termMonths": 9,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      { "name": "Lone Star University", "role": "institution" },
+      { "name": "Maya Carter", "role": "athlete" },
+      { "name": "HydraFuel Beverages", "role": "brand" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 35000,
+      "currency": "USD",
+      "billingFrequency": "quarterly"
+    },
+    "incentives": [
+      {
+        "type": "performance",
+        "description": "Bonus for 3 sponsored social campaigns achieving >5% engagement",
+        "trigger": "Campaign engagement",
+        "amount": 5000
+      },
+      {
+        "type": "appearance",
+        "description": "Per in-person appearance exceeding 4 per semester",
+        "trigger": "Event participation",
+        "amount": 750
+      }
+    ],
+    "royalties": {
+      "percentage": 4,
+      "cap": 15000,
+      "description": "Merchandise co-branded with athlete likeness"
+    }
+  },
+  "clauses": [
+    {
+      "id": "school-usage-rights",
+      "category": "compliance",
+      "text": "Athlete may use university marks for approved campaigns subject to compliance office review.",
+      "benchmarkPercentile": 62,
+      "riskPosture": "standard",
+      "source": { "page": 4, "section": "3.1" },
+      "playbook": {
+        "fallback": "Require 5-business-day review window with default approval if no response.",
+        "impact": "medium",
+        "stakeholders": ["compliance", "marketing"]
+      }
+    },
+    {
+      "id": "academic-standing",
+      "category": "eligibility",
+      "text": "Agreement terminates if athlete GPA falls below 2.8 for two consecutive terms.",
+      "benchmarkPercentile": 70,
+      "riskPosture": "watch",
+      "source": { "page": 6, "section": "5.2" },
+      "playbook": {
+        "fallback": "Introduce remediation plan before termination.",
+        "impact": "medium",
+        "stakeholders": ["compliance", "student-success"]
+      }
+    },
+    {
+      "id": "category-exclusivity",
+      "category": "commercial",
+      "text": "Athlete grants HydraFuel exclusive beverage sponsorship rights during the term.",
+      "benchmarkPercentile": 58,
+      "riskPosture": "elevated",
+      "source": { "page": 5, "section": "4.1" },
+      "playbook": {
+        "fallback": "Narrow exclusivity to energy drinks; allow protein/hydration categories.",
+        "impact": "high",
+        "stakeholders": ["athlete-agent", "legal"]
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "gpa-termination",
+      "severity": 3,
+      "signal": "Termination trigger lacks cure period.",
+      "recommendation": "Add academic remediation step.",
+      "linkedClause": "academic-standing"
+    },
+    {
+      "id": "exclusive-category",
+      "severity": 4,
+      "signal": "Exclusivity broader than Keye benchmark (single sub-category).",
+      "recommendation": "Limit to energy drinks only.",
+      "linkedClause": "category-exclusivity"
+    }
+  ],
+  "obligations": [
+    {
+      "owner": "brand",
+      "description": "Provide campaign briefs at least 10 business days before activation.",
+      "kpi": "marketing",
+      "due": null
+    },
+    {
+      "owner": "athlete",
+      "description": "Submit quarterly compliance attestations to university compliance office.",
+      "kpi": "compliance",
+      "due": "2026-01-10"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Category Exclusivity",
+        "current": "All beverages",
+        "target": "Energy drinks only",
+        "fallback": "Energy + sports drinks with carve-out for hydration",
+        "impact": "high",
+        "confidence": 0.68
+      }
+    ],
+    "personaNotes": {
+      "compliance": "Emphasize NCAA interim policy alignment and state NIL disclosure requirements.",
+      "athlete-agent": "Highlight revenue upside from royalty plus appearance mix." }
+  },
+  "audit": {
+    "sourceFile": "nil-athlete-agreement-redacted.pdf",
+    "confidence": {
+      "overall": 0.87,
+      "fields": {
+        "financials.royalties": 0.92,
+        "clauses.category-exclusivity": 0.81
+      }
+    }
+  }
+}
