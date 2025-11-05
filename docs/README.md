@@ -9,5 +9,8 @@ This directory contains the foundational product materials that inform the Contr
 - `data-incentives.md` – incentive loops designed to compound the dataset.
 - `analytics-instrumentation.md` – telemetry required to measure product health from day one.
 - `prototype-plan.md` – execution steps for getting from design sprint to pilot-ready release.
+- `wireframe-spec.md` – low-fidelity layout guidance for critical user journeys.
+- `repo-scaffolding-plan.md` – recommended project structure and tooling for the MVP build.
+- `ingestion-pipeline-plan.md` – next-step implementation tasks for the data ingestion prototype.
 
-> These docs live on a dedicated branch (`docs/product-foundation`) to preserve a clean main branch for product code.
+> Documentation updates are maintained on dedicated `docs/*` branches to preserve a clean `main` for product code.
