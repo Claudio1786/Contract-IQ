@@ -1,5 +1,7 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import { createApiContractResponse } from '@contract-iq/fixtures';
 import { ContractDetail } from '../components/contract-detail';
@@ -64,5 +66,71 @@ describe('ContractDetail', () => {
     expect(screen.getByText(/No risks flagged/i)).toBeInTheDocument();
     expect(screen.getByText(/No negotiation topics/i)).toBeInTheDocument();
     expect(screen.getByText(/No obligations surfaced/i)).toBeInTheDocument();
+  });
+
+  it('allows expanding clause fallback guidance', async () => {
+    const contract = mapContractResponse(response);
+    const user = userEvent.setup();
+
+    render(<ContractDetail contract={contract} />);
+
+    const clauseCards = screen.getAllByRole('article');
+    const firstClauseCard = clauseCards[0];
+    const fallbackToggle = within(firstClauseCard).getByRole('button', { name: /View fallback guidance/i });
+    expect(
+      within(firstClauseCard).queryByText(/Set cap to 2x fees with carve-outs for data breach and IP claims/i)
+    ).not.toBeInTheDocument();
+
+    await user.click(fallbackToggle);
+
+    expect(
+      within(firstClauseCard).getByText(/Set cap to 2x fees with carve-outs for data breach and IP claims/i)
+    ).toBeInTheDocument();
+    expect(within(firstClauseCard).getByRole('button', { name: /Hide fallback guidance/i })).toBeInTheDocument();
+  });
+
+  it('tracks risk escalation and copies negotiation prompts', async () => {
+    const contract = mapContractResponse(response);
+    const user = userEvent.setup();
+    const clipboardWrite = vi.fn().mockResolvedValue(undefined);
+    const originalClipboard = navigator.clipboard;
+
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: clipboardWrite
+      }
+    });
+
+    try {
+      render(<ContractDetail contract={contract} />);
+
+      const riskHeading = screen.getByRole('heading', { level: 2, name: /Risk posture/i });
+      const riskSection = riskHeading.closest('section');
+      if (!riskSection) {
+        throw new Error('Risk section not found');
+      }
+      const escalateButton = within(riskSection).getAllByRole('button', { name: /Escalate risk/i })[0];
+      await user.click(escalateButton);
+
+      expect(within(riskSection).getByText(/Escalation logged/i)).toBeInTheDocument();
+      expect(within(riskSection).getByRole('button', { name: /Escalated/i })).toBeDisabled();
+
+      const playbookHeading = screen.getByRole('heading', { level: 2, name: /Negotiation playbook/i });
+      const playbookSection = playbookHeading.closest('section');
+      if (!playbookSection) {
+        throw new Error('Playbook section not found');
+      }
+      const copyButton = within(playbookSection).getAllByRole('button', { name: /Copy prompt/i })[0];
+      await user.click(copyButton);
+
+      expect(clipboardWrite).toHaveBeenCalledTimes(1);
+      expect(within(playbookSection).getByRole('button', { name: /Copied!/i })).toBeInTheDocument();
+    } finally {
+      Object.defineProperty(navigator, 'clipboard', {
+        configurable: true,
+        value: originalClipboard
+      });
+    }
   });
 });

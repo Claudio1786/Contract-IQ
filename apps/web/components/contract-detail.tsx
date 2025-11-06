@@ -1,9 +1,12 @@
-import React from 'react';
+'use client';
+
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { buildPlaybookPrompt } from '@contract-iq/prompts';
 import { Pill } from '@contract-iq/ui';
 
 import { ContractRecord, ApiClause, severityToVariant, ApiRisk, ApiObligation, ApiPlaybookTopic } from '../lib/contracts';
+import { analytics } from '../lib/analytics';
 
 interface ContractDetailProps {
   contract: ContractRecord;
@@ -40,6 +43,71 @@ export function ContractDetail({ contract }: ContractDetailProps) {
   const financials = contract.payload.financials as Financials | undefined;
   const processedDate = new Date(contract.processedAt);
   const contractTitle = metadata.template ? humanize(metadata.template) : 'Contract Intelligence Briefing';
+  const templateId = typeof metadata.template === 'string' ? metadata.template : undefined;
+  const vertical = typeof metadata.vertical === 'string' ? metadata.vertical : undefined;
+  const clauseCount = contract.payload.clauses.length;
+  const riskCount = contract.payload.risks.length;
+  const playbookCount = Array.isArray(contract.payload.negotiation?.playbook)
+    ? contract.payload.negotiation?.playbook?.length
+    : 0;
+
+  useEffect(() => {
+    analytics.init();
+  }, []);
+
+  useEffect(() => {
+    analytics.capture('contract.dossier.viewed', {
+      contractId: contract.contractId,
+      templateId,
+      vertical,
+      clauseCount,
+      riskCount,
+      playbookCount
+    });
+  }, [clauseCount, contract.contractId, playbookCount, riskCount, templateId, vertical]);
+
+  const handleClauseExpanded = useCallback(
+    (clause: ApiClause) => {
+      analytics.capture('clause.card.expanded', {
+        contractId: contract.contractId,
+        templateId,
+        vertical,
+        clauseId: clause.id,
+        category: clause.category,
+        riskPosture: clause.riskPosture,
+        hasFallback: Boolean(clause.playbook && (clause.playbook as { fallback?: unknown }).fallback)
+      });
+    },
+    [contract.contractId, templateId, vertical]
+  );
+
+  const handleRiskEscalated = useCallback(
+    (risk: ApiRisk) => {
+      analytics.capture('risk.card.escalated', {
+        contractId: contract.contractId,
+        templateId,
+        vertical,
+        riskId: risk.id,
+        severity: risk.severity,
+        linkedClause: risk.linkedClause
+      });
+    },
+    [contract.contractId, templateId, vertical]
+  );
+
+  const handlePromptGenerated = useCallback(
+    (payload: { topic: string; impact?: string; clauseId?: string }) => {
+      analytics.capture('playbook.prompt.generated', {
+        contractId: contract.contractId,
+        templateId,
+        vertical,
+        topic: payload.topic,
+        impact: payload.impact,
+        clauseId: payload.clauseId
+      });
+    },
+    [contract.contractId, templateId, vertical]
+  );
 
   return (
     <div className="mx-auto max-w-6xl space-y-8 px-6 py-10">
@@ -80,7 +148,13 @@ export function ContractDetail({ contract }: ContractDetailProps) {
             </div>
             <div className="space-y-4" aria-live="polite">
               {contract.payload.clauses.length ? (
-                contract.payload.clauses.map((clause) => <ClauseCard key={clause.id} clause={clause} />)
+                contract.payload.clauses.map((clause) => (
+                  <ClauseCard
+                    key={clause.id}
+                    clause={clause}
+                    onExpand={handleClauseExpanded}
+                  />
+                ))
               ) : (
                 <EmptyMessage
                   title="No clause intelligence yet"
@@ -106,13 +180,14 @@ export function ContractDetail({ contract }: ContractDetailProps) {
         </section>
 
         <aside className="space-y-6">
-          <RiskPanel risks={contract.payload.risks} />
+          <RiskPanel risks={contract.payload.risks} onEscalate={handleRiskEscalated} />
           <PlaybookPanel
             negotiation={contract.payload.negotiation}
             clauses={contract.payload.clauses}
             risks={contract.payload.risks}
             contractName={contractTitle}
             contractType={metadata.vertical?.toString()}
+            onPromptGenerated={handlePromptGenerated}
           />
           <ObligationsPanel obligations={contract.payload.obligations} />
         </aside>
@@ -190,7 +265,7 @@ function Metric({ label, value, description }: MetricProps) {
   );
 }
 
-function ClauseCard({ clause }: { clause: ApiClause }) {
+function ClauseCard({ clause, onExpand }: { clause: ApiClause; onExpand: (clause: ApiClause) => void }) {
   const riskVariant = variantFromPosture(clause.riskPosture);
   const playbook = clause.playbook as
     | {
@@ -202,6 +277,17 @@ function ClauseCard({ clause }: { clause: ApiClause }) {
   const stakeholders = Array.isArray(playbook?.stakeholders)
     ? playbook.stakeholders.filter((value): value is string => typeof value === 'string')
     : undefined;
+  const [expanded, setExpanded] = useState(false);
+
+  const handleToggle = () => {
+    setExpanded((previous) => {
+      const next = !previous;
+      if (next) {
+        onExpand(clause);
+      }
+      return next;
+    });
+  };
 
   return (
     <article className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
@@ -220,11 +306,23 @@ function ClauseCard({ clause }: { clause: ApiClause }) {
       </div>
       <p className="text-sm text-slate-200">{clause.text}</p>
       {fallback ? (
-        <div className="rounded-xl border border-amber-500/10 bg-amber-500/5 p-4">
-          <h3 className="text-xs uppercase tracking-[0.2em] text-amber-300">Fallback</h3>
-          <p className="mt-1 text-sm text-amber-100/90">{fallback}</p>
-          {stakeholders?.length ? (
-            <p className="mt-2 text-xs text-amber-200/80">Stakeholders: {stakeholders.join(', ')}</p>
+        <div className="space-y-2">
+          <button
+            type="button"
+            onClick={handleToggle}
+            className="text-xs font-semibold text-amber-300 underline-offset-2 hover:text-amber-200 hover:underline"
+            aria-expanded={expanded}
+          >
+            {expanded ? 'Hide fallback guidance' : 'View fallback guidance'}
+          </button>
+          {expanded ? (
+            <div className="rounded-xl border border-amber-500/10 bg-amber-500/5 p-4">
+              <h3 className="text-xs uppercase tracking-[0.2em] text-amber-300">Fallback</h3>
+              <p className="mt-1 text-sm text-amber-100/90">{fallback}</p>
+              {stakeholders?.length ? (
+                <p className="mt-2 text-xs text-amber-200/80">Stakeholders: {stakeholders.join(', ')}</p>
+              ) : null}
+            </div>
           ) : null}
         </div>
       ) : null}
@@ -232,7 +330,7 @@ function ClauseCard({ clause }: { clause: ApiClause }) {
   );
 }
 
-function RiskPanel({ risks }: { risks: ApiRisk[] }) {
+function RiskPanel({ risks, onEscalate }: { risks: ApiRisk[]; onEscalate: (risk: ApiRisk) => void }) {
   return (
     <section className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-5" aria-live="polite">
       <h2 className="text-lg font-semibold text-rose-100">Risk posture</h2>
@@ -241,18 +339,7 @@ function RiskPanel({ risks }: { risks: ApiRisk[] }) {
       </p>
       <div className="mt-4 space-y-4">
         {risks.length ? (
-          risks.map((risk) => (
-            <div key={risk.id} className="rounded-xl border border-rose-500/20 bg-slate-950/40 p-4">
-              <div className="flex items-center justify-between">
-                <Pill label={`Severity ${risk.severity}/5`} variant={severityToVariant(risk.severity)} />
-                {risk.linkedClause ? (
-                  <span className="text-xs text-rose-200/70">Clause: {risk.linkedClause}</span>
-                ) : null}
-              </div>
-              <p className="mt-2 text-sm text-rose-50">{risk.signal}</p>
-              <p className="text-xs text-rose-200/80">{risk.recommendation}</p>
-            </div>
-          ))
+          risks.map((risk) => <RiskCard key={risk.id} risk={risk} onEscalate={onEscalate} />)
         ) : (
           <EmptyMessage
             title="No risks flagged"
@@ -285,9 +372,10 @@ interface PlaybookPanelProps {
   risks: ApiRisk[];
   contractName: string;
   contractType?: string;
+  onPromptGenerated: (payload: { topic: string; impact?: string; clauseId?: string }) => void;
 }
 
-function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType }: PlaybookPanelProps) {
+function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType, onPromptGenerated }: PlaybookPanelProps) {
   const topics = Array.isArray(negotiation?.playbook) ? (negotiation?.playbook as ApiPlaybookTopic[]) : [];
 
   return (
@@ -301,47 +389,16 @@ function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType
           topics.map((topic) => {
             const clause = findClauseForTopic(topic, clauses);
             const risk = clause ? risks.find((item) => item.linkedClause === clause.id) : undefined;
-            const stakeholdersCandidate = clause?.playbook?.stakeholders;
-            const stakeholders = Array.isArray(stakeholdersCandidate)
-              ? (stakeholdersCandidate as string[])
-              : [];
-            const prompt = buildPlaybookPrompt({
-              contractName,
-              contractType,
-              topic: topic.topic,
-              currentPosition: topic.current,
-              targetPosition: topic.target ?? 'Not specified',
-              fallbackPosition: topic.fallback ?? (clause?.playbook?.fallback as string | undefined),
-              impactLevel: asImpactLevel(topic.impact),
-              stakeholders,
-              riskSignal: risk?.signal,
-              clauseSynopsis: clause?.text,
-              confidence: topic.confidence,
-            });
-
             return (
-              <div key={topic.topic} className="rounded-xl border border-slate-800 bg-slate-950/80 p-4">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-sm font-semibold text-slate-100">{topic.topic}</h3>
-                  {topic.impact ? (
-                    <Pill label={`Impact: ${capitalize(topic.impact)}`} variant={impactToVariant(topic.impact)} />
-                  ) : null}
-                </div>
-                <dl className="mt-3 grid gap-2 text-xs text-slate-300">
-                  {topic.current ? <PlaybookMeta label="Current" value={topic.current} /> : null}
-                  {topic.target ? <PlaybookMeta label="Target" value={topic.target} /> : null}
-                  {topic.fallback ? <PlaybookMeta label="Fallback" value={topic.fallback} /> : null}
-                </dl>
-                {typeof topic.confidence === 'number' ? (
-                  <p className="mt-3 text-xs text-slate-500">Confidence {Math.round(topic.confidence * 100)}%</p>
-                ) : null}
-                <div className="mt-4 space-y-2">
-                  <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">LLM negotiation prompt</h4>
-                  <pre className="whitespace-pre-wrap rounded-lg border border-slate-800 bg-slate-950/70 p-3 text-[11px] leading-relaxed text-slate-200">
-                    {prompt}
-                  </pre>
-                </div>
-              </div>
+              <PlaybookTopicCard
+                key={topic.topic}
+                topic={topic}
+                clause={clause}
+                risk={risk}
+                contractName={contractName}
+                contractType={contractType}
+                onPromptGenerated={onPromptGenerated}
+              />
             );
           })
         ) : (
@@ -366,6 +423,138 @@ function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType
         )}
       </div>
     </section>
+  );
+}
+
+function RiskCard({ risk, onEscalate }: { risk: ApiRisk; onEscalate: (risk: ApiRisk) => void }) {
+  const [escalated, setEscalated] = useState(false);
+
+  const handleEscalate = () => {
+    if (escalated) {
+      return;
+    }
+
+    onEscalate(risk);
+    setEscalated(true);
+  };
+
+  return (
+    <div className="space-y-3 rounded-xl border border-rose-500/20 bg-slate-950/40 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <Pill label={`Severity ${risk.severity}/5`} variant={severityToVariant(risk.severity)} />
+        {risk.linkedClause ? (
+          <span className="text-xs text-rose-200/70">Clause: {risk.linkedClause}</span>
+        ) : null}
+      </div>
+      <p className="text-sm text-rose-50">{risk.signal}</p>
+      <p className="text-xs text-rose-200/80">{risk.recommendation}</p>
+      <div className="flex items-center justify-between gap-2">
+        <button
+          type="button"
+          onClick={handleEscalate}
+          disabled={escalated}
+          className="text-xs font-semibold text-rose-200 underline-offset-2 hover:text-rose-100 hover:underline disabled:cursor-not-allowed disabled:text-rose-200/60"
+        >
+          {escalated ? 'Escalated' : 'Escalate risk'}
+        </button>
+        {escalated ? <span className="text-[11px] text-rose-200/70">Escalation logged</span> : null}
+      </div>
+    </div>
+  );
+}
+
+interface PlaybookTopicCardProps {
+  topic: ApiPlaybookTopic;
+  clause?: ApiClause;
+  risk?: ApiRisk;
+  contractName: string;
+  contractType?: string;
+  onPromptGenerated: (payload: { topic: string; impact?: string; clauseId?: string }) => void;
+}
+
+function PlaybookTopicCard({
+  topic,
+  clause,
+  risk,
+  contractName,
+  contractType,
+  onPromptGenerated
+}: PlaybookTopicCardProps) {
+  const stakeholdersCandidate = clause?.playbook?.stakeholders;
+  const stakeholders = useMemo(
+    () =>
+      Array.isArray(stakeholdersCandidate)
+        ? (stakeholdersCandidate as string[])
+        : [],
+    [stakeholdersCandidate]
+  );
+
+  const prompt = useMemo(
+    () =>
+      buildPlaybookPrompt({
+        contractName,
+        contractType,
+        topic: topic.topic,
+        currentPosition: topic.current,
+        targetPosition: topic.target ?? 'Not specified',
+        fallbackPosition: topic.fallback ?? (clause?.playbook?.fallback as string | undefined),
+        impactLevel: asImpactLevel(topic.impact),
+        stakeholders,
+        riskSignal: risk?.signal,
+        clauseSynopsis: clause?.text,
+        confidence: topic.confidence
+      }),
+    [clause?.playbook?.fallback, clause?.text, contractName, contractType, risk?.signal, stakeholders, topic.confidence, topic.current, topic.fallback, topic.impact, topic.target, topic.topic]
+  );
+
+  const [copied, setCopied] = useState(false);
+
+  const handlePromptClick = useCallback(async () => {
+    onPromptGenerated({ topic: topic.topic, impact: topic.impact, clauseId: clause?.id });
+
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(prompt);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      setCopied(false);
+    }
+  }, [clause?.id, onPromptGenerated, prompt, topic.impact, topic.topic]);
+
+  return (
+    <div className="space-y-3 rounded-xl border border-slate-800 bg-slate-950/80 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h3 className="text-sm font-semibold text-slate-100">{topic.topic}</h3>
+        {topic.impact ? (
+          <Pill label={`Impact: ${capitalize(topic.impact)}`} variant={impactToVariant(topic.impact)} />
+        ) : null}
+      </div>
+      <dl className="grid gap-2 text-xs text-slate-300">
+        {topic.current ? <PlaybookMeta label="Current" value={topic.current} /> : null}
+        {topic.target ? <PlaybookMeta label="Target" value={topic.target} /> : null}
+        {topic.fallback ? <PlaybookMeta label="Fallback" value={topic.fallback} /> : null}
+      </dl>
+      {typeof topic.confidence === 'number' ? (
+        <p className="text-xs text-slate-500">Confidence {Math.round(topic.confidence * 100)}%</p>
+      ) : null}
+      <div className="space-y-2">
+        <div className="flex items-center justify-between gap-2">
+          <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">LLM negotiation prompt</h4>
+          <button
+            type="button"
+            onClick={handlePromptClick}
+            className="text-xs font-semibold text-amber-300 underline-offset-2 hover:text-amber-200 hover:underline"
+          >
+            {copied ? 'Copied!' : 'Copy prompt'}
+          </button>
+        </div>
+        <pre className="whitespace-pre-wrap rounded-lg border border-slate-800 bg-slate-950/70 p-3 text-[11px] leading-relaxed text-slate-200">
+          {prompt}
+        </pre>
+      </div>
+    </div>
   );
 }
 
