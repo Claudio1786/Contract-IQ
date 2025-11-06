@@ -78,10 +78,29 @@ export function ContractDetail({ contract }: ContractDetailProps) {
                 clauses detected in this agreement.
               </p>
             </div>
-            <div className="space-y-4">
-              {contract.payload.clauses.map((clause) => (
-                <ClauseCard key={clause.id} clause={clause} />
-              ))}
+            <div className="space-y-4" aria-live="polite">
+              {contract.payload.clauses.length ? (
+                contract.payload.clauses.map((clause) => <ClauseCard key={clause.id} clause={clause} />)
+              ) : (
+                <EmptyMessage
+                  title="No clause intelligence yet"
+                  description={
+                    <>
+                      We could not detect clause benchmarks for this dossier. Ensure the ingest payload includes
+                      clause metadata or{' '}
+                      <a
+                        href="https://docs.contractiq.ai/ingest-guides"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-amber-300 underline-offset-2 hover:text-amber-200 hover:underline"
+                      >
+                        review the ingest guide
+                      </a>{' '}
+                      for formatting tips.
+                    </>
+                  }
+                />
+              )}
             </div>
           </section>
         </section>
@@ -173,6 +192,16 @@ function Metric({ label, value, description }: MetricProps) {
 
 function ClauseCard({ clause }: { clause: ApiClause }) {
   const riskVariant = variantFromPosture(clause.riskPosture);
+  const playbook = clause.playbook as
+    | {
+        fallback?: unknown;
+        stakeholders?: unknown;
+      }
+    | undefined;
+  const fallback = typeof playbook?.fallback === 'string' ? playbook.fallback : undefined;
+  const stakeholders = Array.isArray(playbook?.stakeholders)
+    ? playbook.stakeholders.filter((value): value is string => typeof value === 'string')
+    : undefined;
 
   return (
     <article className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
@@ -190,14 +219,12 @@ function ClauseCard({ clause }: { clause: ApiClause }) {
         ) : null}
       </div>
       <p className="text-sm text-slate-200">{clause.text}</p>
-      {clause.playbook?.fallback ? (
+      {fallback ? (
         <div className="rounded-xl border border-amber-500/10 bg-amber-500/5 p-4">
           <h3 className="text-xs uppercase tracking-[0.2em] text-amber-300">Fallback</h3>
-          <p className="mt-1 text-sm text-amber-100/90">{clause.playbook.fallback}</p>
-          {Array.isArray(clause.playbook.stakeholders) ? (
-            <p className="mt-2 text-xs text-amber-200/80">
-              Stakeholders: {clause.playbook.stakeholders.join(', ')}
-            </p>
+          <p className="mt-1 text-sm text-amber-100/90">{fallback}</p>
+          {stakeholders?.length ? (
+            <p className="mt-2 text-xs text-amber-200/80">Stakeholders: {stakeholders.join(', ')}</p>
           ) : null}
         </div>
       ) : null}
@@ -206,29 +233,47 @@ function ClauseCard({ clause }: { clause: ApiClause }) {
 }
 
 function RiskPanel({ risks }: { risks: ApiRisk[] }) {
-  if (!risks.length) {
-    return null;
-  }
-
   return (
-    <section className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-5">
+    <section className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-5" aria-live="polite">
       <h2 className="text-lg font-semibold text-rose-100">Risk posture</h2>
       <p className="text-sm text-rose-200/80">
         Severity-scored alerts requiring escalation or playbook execution.
       </p>
       <div className="mt-4 space-y-4">
-        {risks.map((risk) => (
-          <div key={risk.id} className="rounded-xl border border-rose-500/20 bg-slate-950/40 p-4">
-            <div className="flex items-center justify-between">
-              <Pill label={`Severity ${risk.severity}/5`} variant={severityToVariant(risk.severity)} />
-              {risk.linkedClause ? (
-                <span className="text-xs text-rose-200/70">Clause: {risk.linkedClause}</span>
-              ) : null}
+        {risks.length ? (
+          risks.map((risk) => (
+            <div key={risk.id} className="rounded-xl border border-rose-500/20 bg-slate-950/40 p-4">
+              <div className="flex items-center justify-between">
+                <Pill label={`Severity ${risk.severity}/5`} variant={severityToVariant(risk.severity)} />
+                {risk.linkedClause ? (
+                  <span className="text-xs text-rose-200/70">Clause: {risk.linkedClause}</span>
+                ) : null}
+              </div>
+              <p className="mt-2 text-sm text-rose-50">{risk.signal}</p>
+              <p className="text-xs text-rose-200/80">{risk.recommendation}</p>
             </div>
-            <p className="mt-2 text-sm text-rose-50">{risk.signal}</p>
-            <p className="text-xs text-rose-200/80">{risk.recommendation}</p>
-          </div>
-        ))}
+          ))
+        ) : (
+          <EmptyMessage
+            title="No risks flagged"
+            description={
+              <>
+                We didn’t identify any risk alerts for this contract. Configure threshold rules in the ingestion
+                pipeline or{' '}
+                <a
+                  href="https://docs.contractiq.ai/risk-tuning"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-rose-200 underline-offset-2 hover:text-rose-100 hover:underline"
+                >
+                  review risk tuning guidance
+                </a>{' '}
+                to surface escalations.
+              </>
+            }
+            tone="rose"
+          />
+        )}
       </div>
     </section>
   );
@@ -243,64 +288,82 @@ interface PlaybookPanelProps {
 }
 
 function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType }: PlaybookPanelProps) {
-  const topics = negotiation?.playbook ?? [];
-  if (!topics.length) {
-    return null;
-  }
+  const topics = Array.isArray(negotiation?.playbook) ? (negotiation?.playbook as ApiPlaybookTopic[]) : [];
 
   return (
-    <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+    <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5" aria-live="polite">
       <h2 className="text-lg font-semibold text-slate-100">Negotiation playbook</h2>
       <p className="text-sm text-slate-400">
         Align counterparties on targets, fallbacks, and impact to accelerate approvals.
       </p>
       <div className="mt-4 space-y-4">
-        {topics.map((topic) => {
-          const clause = findClauseForTopic(topic, clauses);
-          const risk = clause ? risks.find((item) => item.linkedClause === clause.id) : undefined;
-          const stakeholdersCandidate = clause?.playbook?.stakeholders;
-          const stakeholders = Array.isArray(stakeholdersCandidate) ? (stakeholdersCandidate as string[]) : [];
-          const prompt = buildPlaybookPrompt({
-            contractName,
-            contractType,
-            topic: topic.topic,
-            currentPosition: topic.current,
-            targetPosition: topic.target ?? 'Not specified',
-            fallbackPosition: topic.fallback ?? (clause?.playbook?.fallback as string | undefined),
-            impactLevel: asImpactLevel(topic.impact),
-            stakeholders,
-            riskSignal: risk?.signal,
-            clauseSynopsis: clause?.text,
-            confidence: topic.confidence,
-          });
+        {topics.length ? (
+          topics.map((topic) => {
+            const clause = findClauseForTopic(topic, clauses);
+            const risk = clause ? risks.find((item) => item.linkedClause === clause.id) : undefined;
+            const stakeholdersCandidate = clause?.playbook?.stakeholders;
+            const stakeholders = Array.isArray(stakeholdersCandidate)
+              ? (stakeholdersCandidate as string[])
+              : [];
+            const prompt = buildPlaybookPrompt({
+              contractName,
+              contractType,
+              topic: topic.topic,
+              currentPosition: topic.current,
+              targetPosition: topic.target ?? 'Not specified',
+              fallbackPosition: topic.fallback ?? (clause?.playbook?.fallback as string | undefined),
+              impactLevel: asImpactLevel(topic.impact),
+              stakeholders,
+              riskSignal: risk?.signal,
+              clauseSynopsis: clause?.text,
+              confidence: topic.confidence,
+            });
 
-          return (
-            <div key={topic.topic} className="rounded-xl border border-slate-800 bg-slate-950/80 p-4">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-sm font-semibold text-slate-100">{topic.topic}</h3>
-                {topic.impact ? (
-                  <Pill label={`Impact: ${capitalize(topic.impact)}`} variant={impactToVariant(topic.impact)} />
+            return (
+              <div key={topic.topic} className="rounded-xl border border-slate-800 bg-slate-950/80 p-4">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold text-slate-100">{topic.topic}</h3>
+                  {topic.impact ? (
+                    <Pill label={`Impact: ${capitalize(topic.impact)}`} variant={impactToVariant(topic.impact)} />
+                  ) : null}
+                </div>
+                <dl className="mt-3 grid gap-2 text-xs text-slate-300">
+                  {topic.current ? <PlaybookMeta label="Current" value={topic.current} /> : null}
+                  {topic.target ? <PlaybookMeta label="Target" value={topic.target} /> : null}
+                  {topic.fallback ? <PlaybookMeta label="Fallback" value={topic.fallback} /> : null}
+                </dl>
+                {typeof topic.confidence === 'number' ? (
+                  <p className="mt-3 text-xs text-slate-500">Confidence {Math.round(topic.confidence * 100)}%</p>
                 ) : null}
+                <div className="mt-4 space-y-2">
+                  <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">LLM negotiation prompt</h4>
+                  <pre className="whitespace-pre-wrap rounded-lg border border-slate-800 bg-slate-950/70 p-3 text-[11px] leading-relaxed text-slate-200">
+                    {prompt}
+                  </pre>
+                </div>
               </div>
-              <dl className="mt-3 grid gap-2 text-xs text-slate-300">
-                {topic.current ? <PlaybookMeta label="Current" value={topic.current} /> : null}
-                {topic.target ? <PlaybookMeta label="Target" value={topic.target} /> : null}
-                {topic.fallback ? <PlaybookMeta label="Fallback" value={topic.fallback} /> : null}
-              </dl>
-              {typeof topic.confidence === 'number' ? (
-                <p className="mt-3 text-xs text-slate-500">
-                  Confidence {Math.round(topic.confidence * 100)}%
-                </p>
-              ) : null}
-              <div className="mt-4 space-y-2">
-                <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">LLM negotiation prompt</h4>
-                <pre className="whitespace-pre-wrap rounded-lg border border-slate-800 bg-slate-950/70 p-3 text-[11px] leading-relaxed text-slate-200">
-                  {prompt}
-                </pre>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <EmptyMessage
+            title="No negotiation topics"
+            description={
+              <>
+                We didn’t identify any negotiation playbook entries. Adjust extraction prompts in the fixtures or{' '}
+                <a
+                  href="https://docs.contractiq.ai/playbook-instrumentation"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-amber-300 underline-offset-2 hover:text-amber-200 hover:underline"
+                >
+                  review the playbook instrumentation guide
+                </a>{' '}
+                for setup instructions.
+              </>
+            }
+            tone="amber"
+          />
+        )}
       </div>
     </section>
   );
@@ -316,37 +379,101 @@ function PlaybookMeta({ label, value }: { label: string; value: string }) {
 }
 
 function ObligationsPanel({ obligations }: { obligations: ApiObligation[] }) {
-  if (!obligations.length) {
-    return null;
-  }
-
   return (
-    <section className="rounded-2xl border border-emerald-500/10 bg-emerald-500/5 p-5">
+    <section className="rounded-2xl border border-emerald-500/10 bg-emerald-500/5 p-5" aria-live="polite">
       <h2 className="text-lg font-semibold text-emerald-100">Operational obligations</h2>
       <p className="text-sm text-emerald-200/80">Keep teams aligned on action items and due dates.</p>
-      <ul className="mt-4 space-y-3">
-        {obligations.map((obligation) => (
-          <li key={`${obligation.owner}-${obligation.description}`} className="rounded-xl border border-emerald-500/20 bg-slate-950/40 p-4">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <Pill label={capitalize(obligation.owner)} variant="success" />
-              {obligation.kpi ? (
-                <span className="text-xs text-emerald-200/70">KPI: {capitalize(obligation.kpi)}</span>
+      {obligations.length ? (
+        <ul className="mt-4 space-y-3">
+          {obligations.map((obligation) => (
+            <li
+              key={`${obligation.owner}-${obligation.description}`}
+              className="rounded-xl border border-emerald-500/20 bg-slate-950/40 p-4"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <Pill label={capitalize(obligation.owner)} variant="success" />
+                {obligation.kpi ? (
+                  <span className="text-xs text-emerald-200/70">KPI: {capitalize(obligation.kpi)}</span>
+                ) : null}
+              </div>
+              <p className="mt-2 text-sm text-emerald-50">{obligation.description}</p>
+              {obligation.due ? (
+                <p className="text-xs text-emerald-200/70">
+                  Due {new Date(obligation.due).toLocaleDateString(undefined, {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}
+                </p>
               ) : null}
-            </div>
-            <p className="mt-2 text-sm text-emerald-50">{obligation.description}</p>
-            {obligation.due ? (
-              <p className="text-xs text-emerald-200/70">
-                Due {new Date(obligation.due).toLocaleDateString(undefined, {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric'
-                })}
-              </p>
-            ) : null}
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <EmptyMessage
+          title="No obligations surfaced"
+          description={
+            <>
+              We didn’t find follow-up tasks tied to this contract. Add obligation extraction to your ingest pipeline or{' '}
+              <a
+                href="https://docs.contractiq.ai/obligation-tracking"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-emerald-200 underline-offset-2 hover:text-emerald-100 hover:underline"
+              >
+                review obligation tracking tips
+              </a>{' '}
+              for configuration guidance.
+            </>
+          }
+          tone="emerald"
+        />
+      )}
     </section>
+  );
+}
+
+type EmptyTone = 'default' | 'rose' | 'amber' | 'emerald';
+
+function EmptyMessage({
+  title,
+  description,
+  tone = 'default'
+}: {
+  title: string;
+  description: React.ReactNode;
+  tone?: EmptyTone;
+}) {
+  const toneStyles: Record<EmptyTone, { container: string; heading: string; body: string }> = {
+    default: {
+      container: 'border-slate-800 bg-slate-900/40',
+      heading: 'text-slate-200',
+      body: 'text-slate-400'
+    },
+    rose: {
+      container: 'border-rose-500/30 bg-rose-500/10',
+      heading: 'text-rose-100',
+      body: 'text-rose-200/80'
+    },
+    amber: {
+      container: 'border-amber-500/30 bg-amber-500/10',
+      heading: 'text-amber-200',
+      body: 'text-amber-200/80'
+    },
+    emerald: {
+      container: 'border-emerald-500/30 bg-emerald-500/10',
+      heading: 'text-emerald-100',
+      body: 'text-emerald-200/80'
+    }
+  };
+
+  const styles = toneStyles[tone];
+
+  return (
+    <div className={`rounded-xl border ${styles.container} p-4`} role="region" aria-live="polite">
+      <p className={`text-sm font-semibold ${styles.heading}`}>{title}</p>
+      <p className={`text-sm ${styles.body}`}>{description}</p>
+    </div>
   );
 }
 

@@ -7,22 +7,24 @@ import { ContractDetail } from '../../../components/contract-detail';
 import { fetchContract } from '../../../lib/contracts';
 
 interface ContractPageProps {
-  params: {
+  params: Promise<{
     templateId: string;
-  };
+  }>;
 }
 
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: ContractPageProps): Promise<Metadata> {
+  const { templateId } = await params;
+
   return {
-    title: `Contract Intelligence • ${params.templateId}`,
+    title: `Contract Intelligence • ${templateId}`,
     description: 'AI-generated contract brief with clause intelligence, risk posture, and negotiation playbooks.'
   };
 }
 
 export default async function ContractPage({ params }: ContractPageProps) {
-  const { templateId } = params;
+  const { templateId } = await params;
 
   try {
     const contract = await fetchContract(templateId);

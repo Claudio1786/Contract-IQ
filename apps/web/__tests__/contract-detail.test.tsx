@@ -1,17 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import fixture from '../../../fixtures/contracts/saas-msa.json';
+import { createApiContractResponse } from '@contract-iq/fixtures';
 import { ContractDetail } from '../components/contract-detail';
 import { mapContractResponse, ApiContractProcessedResponse } from '../lib/contracts';
 
 describe('ContractDetail', () => {
-  const response: ApiContractProcessedResponse = {
-    contract_id: 'contract_123',
-    team_id: 'team_456',
-    processed_at: '2025-11-05T12:00:00Z',
-    payload: fixture
-  } as ApiContractProcessedResponse;
+  const response: ApiContractProcessedResponse = createApiContractResponse('saas-msa', {
+    contractId: 'contract_123',
+    teamId: 'team_456',
+    processedAt: '2025-11-05T12:00:00Z'
+  });
 
   it('renders clause intelligence and playbook content', () => {
     const contract = mapContractResponse(response);
@@ -39,5 +38,31 @@ describe('ContractDetail', () => {
 
     expect(screen.getByText(/Operational obligations/i)).toBeInTheDocument();
     expect(screen.getByText(/Provide annual SOC 2 Type II report/i)).toBeInTheDocument();
+  });
+
+  it('renders empty state messaging when no intelligence is available', () => {
+    const contract = mapContractResponse(response);
+    const emptyContract = {
+      ...contract,
+      payload: {
+        ...contract.payload,
+        clauses: [],
+        risks: [],
+        obligations: [],
+        negotiation: contract.payload.negotiation
+          ? {
+              ...contract.payload.negotiation,
+              playbook: []
+            }
+          : { summary: null, playbook: [] }
+      }
+    };
+
+    render(<ContractDetail contract={emptyContract} />);
+
+    expect(screen.getByText(/No clause intelligence yet/i)).toBeInTheDocument();
+    expect(screen.getByText(/No risks flagged/i)).toBeInTheDocument();
+    expect(screen.getByText(/No negotiation topics/i)).toBeInTheDocument();
+    expect(screen.getByText(/No obligations surfaced/i)).toBeInTheDocument();
   });
 });

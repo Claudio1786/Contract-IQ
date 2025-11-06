@@ -1,74 +1,27 @@
-export interface ApiContractProcessedResponse {
-  contract_id: string;
-  team_id: string;
-  processed_at: string;
-  payload: ApiContractPayload;
-}
+import type {
+  ApiClause,
+  ApiContractPayload,
+  ApiContractProcessedResponse,
+  ApiNegotiation,
+  ApiObligation,
+  ApiPlaybookTopic,
+  ApiRisk,
+  ContractPayload,
+  ContractRecord
+} from '@contract-iq/fixtures';
+// Re-exporting for backwards compatibility within web app modules
 
-export interface ApiContractPayload {
-  metadata: Record<string, unknown>;
-  financials?: Record<string, unknown> | null;
-  clauses: ApiClause[];
-  risks: ApiRisk[];
-  obligations: ApiObligation[];
-  negotiation?: ApiNegotiation | null;
-  audit?: Record<string, unknown> | null;
-}
-
-export interface ApiClause {
-  id: string;
-  category: string;
-  text: string;
-  benchmarkPercentile?: number;
-  riskPosture?: string;
-  source?: Record<string, unknown>;
-  playbook?: Record<string, unknown>;
-}
-
-export interface ApiRisk {
-  id: string;
-  severity: number;
-  signal: string;
-  recommendation: string;
-  linkedClause?: string;
-}
-
-export interface ApiObligation {
-  owner: string;
-  description: string;
-  kpi?: string;
-  due?: string | null;
-}
-
-export interface ApiNegotiation {
-  playbook: ApiPlaybookTopic[];
-}
-
-export interface ApiPlaybookTopic {
-  topic: string;
-  current?: string;
-  target?: string;
-  fallback?: string;
-  impact?: string;
-  confidence?: number;
-}
-
-export interface ContractPayload {
-  metadata: Record<string, unknown>;
-  financials?: Record<string, unknown> | null;
-  clauses: ApiClause[];
-  risks: ApiRisk[];
-  obligations: ApiObligation[];
-  negotiation?: ApiNegotiation | null;
-  audit?: Record<string, unknown> | null;
-}
-
-export interface ContractRecord {
-  contractId: string;
-  teamId: string;
-  processedAt: string;
-  payload: ContractPayload;
-}
+export type {
+  ApiClause,
+  ApiContractPayload,
+  ApiContractProcessedResponse,
+  ApiNegotiation,
+  ApiObligation,
+  ApiPlaybookTopic,
+  ApiRisk,
+  ContractPayload,
+  ContractRecord
+} from '@contract-iq/fixtures';
 
 export interface FetchContractOptions {
   teamId?: string;

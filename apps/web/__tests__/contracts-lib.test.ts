@@ -1,20 +1,22 @@
 import { describe, expect, it, vi } from 'vitest';
 
+import { createApiContractResponse } from '@contract-iq/fixtures';
+
 import { fetchContract, severityToVariant, ApiContractProcessedResponse } from '../lib/contracts';
 
 describe('lib/contracts', () => {
   it('fetches contract with expected payload and maps response', async () => {
-    const apiResponse: ApiContractProcessedResponse = {
-      contract_id: 'contract_789',
-      team_id: 'team_abc',
-      processed_at: '2025-11-05T12:00:00Z',
+    const apiResponse: ApiContractProcessedResponse = createApiContractResponse('saas-msa', {
+      contractId: 'contract_789',
+      teamId: 'team_abc',
+      processedAt: '2025-11-05T12:00:00Z',
       payload: {
         metadata: { template: 'test-template' },
         clauses: [],
         risks: [],
         obligations: []
       }
-    };
+    });
 
     const mockFetch = vi.fn().mockResolvedValue({
       ok: true,

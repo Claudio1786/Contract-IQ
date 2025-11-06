@@ -1,27 +1,40 @@
 ## Product Roadmap (0–12 Months)
 
-### Status Checkpoint — 2025-11-05
+### Status Checkpoint — 2025-11-06
 | Phase | What We Delivered | Status | Evidence |
 | --- | --- | --- | --- |
-| Foundation | Monorepo scaffolded (Next.js app, FastAPI API, shared packages, fixtures, Turbo workspace). | ✅ Complete | Commit `2c1dbea`, pnpm install/Poetry install passing. |
-| Core Intelligence MVP | Ingestion endpoint, clause intelligence UI, negotiation playbooks, portfolio dashboard with SaaS/NIL/Healthcare/Public Sector coverage. | ✅ Core slice live | Commit `ff9a47a`, Vitest + Pytest suites green. |
-| Portfolio Intelligence & Collaboration | Portfolio KPI dashboards available; alert scheduler and collaboration loops pending. | ⏳ In progress | Alerts UI shipped; API scheduler tracked in iteration plan. |
+| Foundation | Monorepo scaffolded (Next.js app, FastAPI API, shared packages, fixtures, Turbo workspace). | ✅ Complete | Commit `2c1dbea`, `pnpm install --frozen-lockfile`, `py -m poetry install --no-root`. |
+| Core Intelligence MVP | Ingestion endpoint, clause intelligence UI, negotiation playbooks, portfolio dashboard with SaaS/NIL/Healthcare/Public Sector coverage. | ✅ Core slice live | Commit `ff9a47a`; 2025-11-06 Vitest + Pytest validation run recorded in QA audit. |
+| Portfolio Intelligence & Collaboration | Portfolio KPI dashboards available; alert scheduler service shipped with tests; collaboration loops pending. | ⏳ In progress | `apps/api/contract_iq/services/alerts.py`, `apps/api/tests/test_alert_scheduler.py`; Slack/email transports + persistence outstanding. |
 | Growth & Defensibility | Pending future milestones. | ⬜ Not started | — |
 
-#### Backlog Ledger (as of 2025-11-05)
+#### Backlog Ledger (as of 2025-11-06)
 - ✅ Monorepo workspace established with lint/test/build tooling (`2c1dbea`).
 - ✅ Multi-vertical fixture ingestion and dashboard metrics (`ff9a47a`).
 - ✅ Demo seeding CLI (`pnpm demo:seed`) with snapshot output.
 - ✅ Updated demo/QA documentation (`docs/demo-environment-plan.md`, `docs/status/2025-11-05-qa-audit.md`).
-- ⏳ Outbound alerting + notification routing (tracked in iteration plan).
-- ⏳ Infrastructure deployment workflows (Terraform + CI runners).
+- ✅ Terraform Azure scaffold (Container App, Postgres, Key Vault) (`infra/terraform/**/*`).
+- ✅ Iteration validation sanity pass (2025-11-06) documented in QA audit (Vitest across packages/web + API pytest).
+- ✅ Next.js production build + landing page sanity check (2025-11-06) captured in QA audit (`.\\node_modules\\.bin\\next build`, `Invoke-WebRequest -Uri http://localhost:3000 -UseBasicParsing`).
+- ⏳ Contract Intelligence UI hardening for `/contracts/[templateId]` (DoR/DoD captured 2025-11-06 in QA audit & iteration plan).
+- ⏳ Outbound alerting delivery channels (Slack/email) and persistence (scheduler service complete).
+- ⏳ Infrastructure deployment workflows (Terraform plan/apply automation + CI runners).
 - ⏳ UX research backlog for portfolio/dashboard polish (captured in iteration plan).
 
 #### Upcoming Focus (Iteration 2025-11-05 → 2025-11-19)
+- Harden Contract Intelligence dossier (schema inventory, loading/error UX, analytics events, Vitest coverage, snapshot baselines).
 - Operationalize alert delivery (Slack/email) and background schedulers.
-- Stand up Terraform scaffolding + CI pipelines for API/Web deploys.
+- Apply Terraform scaffold & stand up CI pipelines for API/Web deploys.
 - Validate demo environment runbook end-to-end using `pnpm demo:seed` snapshot.
 - Launch structured UX evaluation: dashboard information architecture, dossier navigation flow, playbook usability tests.
+- Service hardening: migrate FastAPI lifecycle hooks to lifespan handlers and automate Vitest runner path for Windows/CI.
+
+#### Launch Readiness Checklist (Updated 2025-11-06)
+- **Definitions of Ready/Done** documented for Contract Intelligence UI (see QA audit & iteration plan) and referenced in sprint reviews.
+- **Analytics instrumentation plan** drafted — clause interactions, playbook prompt views, alert acknowledgements feed PostHog dashboards.
+- **Regression safety net**: Vitest suites, Next.js build, API pytest run nightly; dossier snapshot test pending.
+- **Documentation**: QA audit, iteration plan, and demo runbook updated with timestamps after each validation pass.
+- **Operational handoff**: Demo environment runbook aligns with Terraform + CI roadmap; outstanding items flagged in backlog ledger.
 
 ### Phase 0 — Foundation (Weeks 0–2)
 - Confirm vertical focus via founder-market fit scorecard and live pipeline validation.

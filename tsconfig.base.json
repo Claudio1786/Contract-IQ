@@ -18,7 +18,9 @@
       "@contract-iq/analytics": ["packages/analytics/src/index.ts"],
       "@contract-iq/analytics/*": ["packages/analytics/src/*"],
       "@contract-iq/prompts": ["packages/prompts/src/index.ts"],
-      "@contract-iq/prompts/*": ["packages/prompts/src/*"]
+      "@contract-iq/prompts/*": ["packages/prompts/src/*"],
+      "@contract-iq/fixtures": ["packages/fixtures/src/index.ts"],
+      "@contract-iq/fixtures/*": ["packages/fixtures/src/*"]
     }
   }
 }
