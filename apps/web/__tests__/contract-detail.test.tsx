@@ -1,17 +1,23 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
+import { afterEach, vi } from 'vitest';
 
 import { createApiContractResponse } from '@contract-iq/fixtures';
 import { ContractDetail } from '../components/contract-detail';
 import { mapContractResponse, ApiContractProcessedResponse } from '../lib/contracts';
+import * as ai from '../lib/ai';
 
 describe('ContractDetail', () => {
   const response: ApiContractProcessedResponse = createApiContractResponse('saas-msa', {
     contractId: 'contract_123',
     teamId: 'team_456',
     processedAt: '2025-11-05T12:00:00Z'
+  });
+  const requestGuidanceSpy = vi.spyOn(ai, 'requestNegotiationGuidance');
+
+  afterEach(() => {
+    requestGuidanceSpy.mockReset();
   });
 
   it('renders clause intelligence and playbook content', () => {
@@ -132,5 +138,47 @@ describe('ContractDetail', () => {
         value: originalClipboard
       });
     }
+  });
+
+  it('generates Gemini guidance for the selected topic', async () => {
+    const contract = mapContractResponse(response);
+    const user = userEvent.setup();
+
+    requestGuidanceSpy.mockResolvedValueOnce({
+      summary: 'Focus on net revenue retention safeguards.',
+      fallbackRecommendation: 'Counter with a liability cap pegged to 2x trailing twelve month fees.',
+      talkingPoints: ['Our standard is 2x trailing fees', 'Align with industry benchmarks for SaaS MSAs'],
+      riskCallouts: ['Current cap exposes us to disproportionate indemnity exposure.'],
+      confidence: 0.82,
+      cached: false,
+      model: 'gemini-1.5-flash',
+      latencyMs: 420,
+      documentationUrl: 'https://docs.contractiq.ai/liability-cap',
+      generatedPrompt: 'Explain the rationale for liability caps with 2x fees.'
+    });
+
+    render(<ContractDetail contract={contract} />);
+
+    const generateButton = screen.getByRole('button', { name: /Generate with Gemini/i });
+    expect(generateButton).toBeInTheDocument();
+    await user.click(generateButton);
+
+    expect(requestGuidanceSpy).toHaveBeenCalledTimes(1);
+    const payload = requestGuidanceSpy.mock.calls[0]?.[0];
+    expect(payload).toBeDefined();
+    expect(payload.topic).toBe('Liability Cap');
+    expect(payload.contract_id).toBe('contract_123');
+
+    expect(await screen.findByText(/Focus on net revenue retention safeguards/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Counter with a liability cap pegged to 2x trailing twelve month fees/i)
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Key talking points/i)).toBeInTheDocument();
+    expect(screen.getByText(/Risk callouts/i)).toBeInTheDocument();
+    expect(screen.getByText(/Model gemini-1.5-flash/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /View reference documentation/i })).toHaveAttribute(
+      'href',
+      'https://docs.contractiq.ai/liability-cap'
+    );
   });
 });

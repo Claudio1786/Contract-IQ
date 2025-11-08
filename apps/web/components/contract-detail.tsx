@@ -1,12 +1,19 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { buildPlaybookPrompt } from '@contract-iq/prompts';
 import { Pill } from '@contract-iq/ui';
 
 import { ContractRecord, ApiClause, severityToVariant, ApiRisk, ApiObligation, ApiPlaybookTopic } from '../lib/contracts';
 import { analytics } from '../lib/analytics';
+import {
+  requestNegotiationGuidance,
+  NegotiationGuidance,
+  NegotiationContextPayload,
+  NegotiationApiError,
+  NegotiationMetadataPayload
+} from '../lib/ai';
 
 interface ContractDetailProps {
   contract: ContractRecord;
@@ -185,8 +192,12 @@ export function ContractDetail({ contract }: ContractDetailProps) {
             negotiation={contract.payload.negotiation}
             clauses={contract.payload.clauses}
             risks={contract.payload.risks}
+            contractId={contract.contractId}
             contractName={contractTitle}
             contractType={metadata.vertical?.toString()}
+            templateId={templateId}
+            vertical={vertical}
+            metadata={metadata}
             onPromptGenerated={handlePromptGenerated}
           />
           <ObligationsPanel obligations={contract.payload.obligations} />
@@ -370,12 +381,27 @@ interface PlaybookPanelProps {
   negotiation: ContractRecord['payload']['negotiation'];
   clauses: ApiClause[];
   risks: ApiRisk[];
+  contractId: string;
   contractName: string;
   contractType?: string;
+  templateId?: string;
+  vertical?: string;
+  metadata: Metadata;
   onPromptGenerated: (payload: { topic: string; impact?: string; clauseId?: string }) => void;
 }
 
-function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType, onPromptGenerated }: PlaybookPanelProps) {
+function PlaybookPanel({
+  negotiation,
+  clauses,
+  risks,
+  contractId,
+  contractName,
+  contractType,
+  templateId,
+  vertical,
+  metadata,
+  onPromptGenerated
+}: PlaybookPanelProps) {
   const topics = Array.isArray(negotiation?.playbook) ? (negotiation?.playbook as ApiPlaybookTopic[]) : [];
 
   return (
@@ -384,9 +410,20 @@ function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType
       <p className="text-sm text-slate-400">
         Align counterparties on targets, fallbacks, and impact to accelerate approvals.
       </p>
-      <div className="mt-4 space-y-4">
-        {topics.length ? (
-          topics.map((topic) => {
+      {topics.length ? (
+        <div className="mt-4 space-y-4">
+          <GeminiGuidancePanel
+            topics={topics}
+            clauses={clauses}
+            risks={risks}
+            contractId={contractId}
+            templateId={templateId ?? 'generic-template'}
+            contractName={contractName}
+            contractType={contractType}
+            metadata={metadata}
+            vertical={vertical ?? contractType}
+          />
+          {topics.map((topic) => {
             const clause = findClauseForTopic(topic, clauses);
             const risk = clause ? risks.find((item) => item.linkedClause === clause.id) : undefined;
             return (
@@ -400,8 +437,10 @@ function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType
                 onPromptGenerated={onPromptGenerated}
               />
             );
-          })
-        ) : (
+          })}
+        </div>
+      ) : (
+        <div className="mt-4">
           <EmptyMessage
             title="No negotiation topics"
             description={
@@ -420,9 +459,318 @@ function PlaybookPanel({ negotiation, clauses, risks, contractName, contractType
             }
             tone="amber"
           />
-        )}
+        </div>
+      )}
+    </section>
+  );
+}
+
+interface GeminiGuidancePanelProps {
+  topics: ApiPlaybookTopic[];
+  clauses: ApiClause[];
+  risks: ApiRisk[];
+  contractId: string;
+  templateId: string;
+  contractName: string;
+  contractType?: string;
+  metadata: Metadata;
+  vertical?: string;
+}
+
+function GeminiGuidancePanel({
+  topics,
+  clauses,
+  risks,
+  contractId,
+  templateId,
+  contractName,
+  contractType,
+  metadata,
+  vertical
+}: GeminiGuidancePanelProps) {
+  const [selectedTopicId, setSelectedTopicId] = useState<string | undefined>(topics[0]?.topic);
+  const [guidanceByTopic, setGuidanceByTopic] = useState<Record<string, NegotiationGuidance>>({});
+  const [errorByTopic, setErrorByTopic] = useState<Record<string, string>>({});
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [lastLatencyMs, setLastLatencyMs] = useState<number | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => {
+    if (!topics.length) {
+      setSelectedTopicId(undefined);
+      return;
+    }
+
+    if (!selectedTopicId || !topics.some((topic) => topic.topic === selectedTopicId)) {
+      setSelectedTopicId(topics[0]?.topic);
+    }
+  }, [selectedTopicId, topics]);
+
+  useEffect(() => () => {
+    abortRef.current?.abort();
+  }, []);
+
+  const selectedTopic = selectedTopicId ? topics.find((topic) => topic.topic === selectedTopicId) : undefined;
+  const associatedClause = selectedTopic ? findClauseForTopic(selectedTopic, clauses) : undefined;
+  const associatedRisk = associatedClause
+    ? risks.find((item) => item.linkedClause === associatedClause.id)
+    : undefined;
+  const currentGuidance = selectedTopic ? guidanceByTopic[selectedTopic.topic] : undefined;
+  const currentError = selectedTopic ? errorByTopic[selectedTopic.topic] : undefined;
+
+  const handleGenerate = useCallback(async () => {
+    if (!selectedTopic) {
+      return;
+    }
+
+    const clause = associatedClause;
+    const risk = associatedRisk;
+
+    if (abortRef.current) {
+      abortRef.current.abort();
+    }
+
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    const cached = Boolean(guidanceByTopic[selectedTopic.topic]);
+    const payload = buildNegotiationContextPayload({
+      topic: selectedTopic,
+      clause,
+      risk,
+      contractId,
+      templateId,
+      contractName,
+      contractType,
+      metadata,
+      vertical
+    });
+
+    setIsGenerating(true);
+    setLastLatencyMs(null);
+    setErrorByTopic((previous) => {
+      const next = { ...previous };
+      delete next[selectedTopic.topic];
+      return next;
+    });
+
+    analytics.capture('playbook.gemini.requested', {
+      contractId,
+      templateId,
+      vertical: vertical ?? null,
+      topic: selectedTopic.topic,
+      cached,
+      stakeholdersCount: payload.stakeholders?.length ?? 0,
+      impact: selectedTopic.impact ?? null,
+      riskSignal: risk?.signal ?? null
+    });
+
+    const start = performance.now();
+
+    try {
+      const guidance = await requestNegotiationGuidance(payload, { signal: controller.signal });
+
+      setGuidanceByTopic((previous) => ({ ...previous, [selectedTopic.topic]: guidance }));
+      const measuredLatency = performance.now() - start;
+      const effectiveLatency = guidance.latencyMs ?? measuredLatency;
+      setLastLatencyMs(effectiveLatency);
+
+      analytics.capture('playbook.gemini.generated', {
+        contractId,
+        templateId,
+        vertical: vertical ?? null,
+        topic: selectedTopic.topic,
+        latencyMs: Math.round(effectiveLatency),
+        cached: guidance.cached,
+        model: guidance.model ?? null
+      });
+    } catch (error) {
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      const message = normalizeGeminiError(error);
+      setErrorByTopic((previous) => ({ ...previous, [selectedTopic.topic]: message }));
+
+      analytics.capture('playbook.gemini.errored', {
+        contractId,
+        templateId,
+        vertical: vertical ?? null,
+        topic: selectedTopic.topic,
+        message
+      });
+    } finally {
+      if (!controller.signal.aborted) {
+        setIsGenerating(false);
+      }
+      abortRef.current = null;
+    }
+  }, [associatedClause, associatedRisk, contractId, contractType, guidanceByTopic, metadata, selectedTopic, templateId, vertical]);
+
+  if (!selectedTopic) {
+    return null;
+  }
+
+  const hasError = Boolean(currentError);
+
+  return (
+    <section className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h3 className="text-sm font-semibold text-slate-100">Gemini negotiation guidance</h3>
+          <p className="text-xs text-slate-400">
+            Generate tailored counter positions using Google Gemini Flash with contextual playbook data.
+          </p>
+        </div>
+        <label className="flex flex-col text-xs text-slate-400 sm:w-60">
+          <span className="mb-1 font-semibold text-slate-300">Topic</span>
+          <select
+            className="rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2 text-sm text-slate-100 focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20"
+            value={selectedTopicId ?? ''}
+            onChange={(event) => setSelectedTopicId(event.target.value || topics[0]?.topic)}
+            disabled={isGenerating}
+          >
+            {topics.map((topic) => (
+              <option key={topic.topic} value={topic.topic}>
+                {topic.topic}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={handleGenerate}
+            disabled={isGenerating}
+            className="inline-flex items-center gap-2 rounded-lg border border-amber-400/40 bg-amber-400/10 px-3 py-2 text-sm font-semibold text-amber-200 transition hover:border-amber-300 hover:bg-amber-400/20 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-slate-900/40 disabled:text-slate-500"
+          >
+            {isGenerating ? 'Generating…' : 'Generate with Gemini'}
+          </button>
+          {lastLatencyMs !== null ? (
+            <span className="text-[11px] text-slate-400">Generated in {formatLatency(lastLatencyMs)}</span>
+          ) : null}
+        </div>
+        {currentGuidance?.model ? (
+          <span className="text-[11px] text-slate-500">Model: {currentGuidance.model}</span>
+        ) : null}
+      </div>
+
+      <div className="mt-4 space-y-3" aria-live="polite">
+        {isGenerating ? (
+          <div className="animate-pulse space-y-2 rounded-lg border border-slate-800 bg-slate-900/40 p-4">
+            <div className="h-4 w-2/3 rounded bg-slate-800/70" />
+            <div className="h-3 w-full rounded bg-slate-800/50" />
+            <div className="h-3 w-5/6 rounded bg-slate-800/40" />
+          </div>
+        ) : null}
+
+        {hasError ? (
+          <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-4 text-sm text-rose-100">
+            {currentError}
+          </div>
+        ) : null}
+
+        {!isGenerating && !hasError && !currentGuidance ? (
+          <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-4 text-sm text-slate-300">
+            Tap <span className="font-semibold text-amber-200">Generate with Gemini</span> to craft a counter position grounded in
+            your playbook, clause text, and risk posture.
+          </div>
+        ) : null}
+
+        {currentGuidance ? (
+          <GeminiGuidanceResult guidance={currentGuidance} />
+        ) : null}
       </div>
     </section>
+  );
+}
+
+function GeminiGuidanceResult({ guidance }: { guidance: NegotiationGuidance }) {
+  const talkingPoints = Array.isArray(guidance.talkingPoints) ? guidance.talkingPoints : [];
+  const riskCallouts = Array.isArray(guidance.riskCallouts) ? guidance.riskCallouts : [];
+  const fallbackRecommendation = guidance.fallbackRecommendation;
+  const prompt = guidance.generatedPrompt;
+  const documentationUrl = guidance.documentationUrl;
+
+  const confidencePercent = Number.isFinite(guidance.confidence)
+    ? Math.round(guidance.confidence * 100)
+    : null;
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400">
+        <span>{guidance.cached ? 'Served from cache' : 'Fresh generation'}</span>
+        {confidencePercent !== null ? <span>Confidence {confidencePercent}%</span> : null}
+        <span>Latency {formatLatency(guidance.latencyMs)}</span>
+        {guidance.model ? <span>Model {guidance.model}</span> : null}
+      </div>
+
+      {guidance.summary ? (
+        <section className="rounded-lg border border-slate-800 bg-slate-950/70 p-4">
+          <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">Summary</h4>
+          <p className="mt-2 text-sm text-slate-200">{guidance.summary}</p>
+        </section>
+      ) : null}
+
+      {talkingPoints.length ? (
+        <section className="rounded-lg border border-slate-800 bg-slate-950/70 p-4">
+          <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">Key talking points</h4>
+          <ul className="mt-2 space-y-2 text-sm text-slate-200">
+            {talkingPoints.map((point) => (
+              <li key={point} className="flex items-start gap-2">
+                <span className="mt-1 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-amber-300" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {fallbackRecommendation ? (
+        <section className="rounded-lg border border-slate-800 bg-slate-950/70 p-4">
+          <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">Fallback recommendation</h4>
+          <pre className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-200">
+            {fallbackRecommendation}
+          </pre>
+        </section>
+      ) : null}
+
+      {riskCallouts.length ? (
+        <section className="rounded-lg border border-slate-800 bg-slate-950/70 p-4">
+          <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">Risk callouts</h4>
+          <ul className="mt-2 space-y-2 text-sm text-slate-200">
+            {riskCallouts.map((callout) => (
+              <li key={callout} className="flex items-start gap-2">
+                <span className="mt-1 inline-flex h-1.5 w-1.5 flex-none rounded-full bg-rose-300" />
+                <span>{callout}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {documentationUrl ? (
+        <a
+          href={documentationUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-amber-200 underline-offset-2 hover:text-amber-100 hover:underline"
+        >
+          View reference documentation
+        </a>
+      ) : null}
+
+      {prompt ? (
+        <details className="rounded-lg border border-slate-800 bg-slate-950/70 p-4">
+          <summary className="cursor-pointer text-xs font-semibold text-slate-200">
+            View generated prompt
+          </summary>
+          <pre className="mt-2 whitespace-pre-wrap text-[11px] leading-relaxed text-slate-200">{prompt}</pre>
+        </details>
+      ) : null}
+    </div>
   );
 }
 
@@ -664,6 +1012,209 @@ function EmptyMessage({
       <p className={`text-sm ${styles.body}`}>{description}</p>
     </div>
   );
+}
+
+interface BuildNegotiationContextOptions {
+  topic: ApiPlaybookTopic;
+  clause?: ApiClause;
+  risk?: ApiRisk;
+  contractId: string;
+  templateId: string;
+  contractName: string;
+  contractType?: string;
+  metadata: Metadata;
+  vertical?: string;
+}
+
+interface BuildMetadataPayloadOptions {
+  contractName: string;
+  contractType?: string;
+  metadata: Metadata;
+  vertical?: string;
+  risk?: ApiRisk;
+  topicConfidence?: number;
+}
+
+function buildNegotiationContextPayload(options: BuildNegotiationContextOptions): NegotiationContextPayload {
+  const { topic, clause, risk, contractId, templateId, contractName, contractType, metadata, vertical } = options;
+
+  const clausePlaybook = clause?.playbook as { fallback?: unknown; stakeholders?: unknown } | null | undefined;
+  const fallbackCandidates = [compactString(topic.fallback), compactString(clausePlaybook?.fallback)];
+  const fallbackPosition = fallbackCandidates.find((value): value is string => Boolean(value)) ?? null;
+
+  const stakeholders = gatherStakeholders(topic, clausePlaybook);
+
+  const currentPosition = compactString(topic.current) ?? compactString(clause?.text) ?? 'Current position not provided.';
+  const targetPosition = compactString(topic.target) ?? currentPosition;
+  const impact = compactString(topic.impact);
+
+  const metadataPayload = buildMetadataPayload({
+    contractName,
+    contractType,
+    metadata,
+    vertical,
+    risk,
+    topicConfidence: typeof topic.confidence === 'number' ? topic.confidence : undefined
+  });
+
+  const context: NegotiationContextPayload = {
+    topic: topic.topic,
+    contract_id: contractId,
+    template_id: templateId,
+    vertical: vertical ?? null,
+    current_position: currentPosition,
+    target_position: targetPosition,
+    impact: impact ?? null,
+    risk_signal: risk?.signal ?? null,
+    ...(fallbackPosition ? { fallback_position: fallbackPosition } : {}),
+    ...(stakeholders.length ? { stakeholders } : {}),
+    ...(metadataPayload ? { metadata: metadataPayload } : {})
+  };
+
+  return context;
+}
+
+function buildMetadataPayload(options: BuildMetadataPayloadOptions): NegotiationMetadataPayload | undefined {
+  const { contractName, contractType, metadata, vertical, risk, topicConfidence } = options;
+  const payload: NegotiationMetadataPayload = {};
+
+  const normalizedContractName = compactString(contractName);
+  if (normalizedContractName) {
+    payload.contract_name = normalizedContractName;
+  }
+
+  const normalizedContractType = compactString(contractType);
+  if (normalizedContractType) {
+    payload.contract_type = normalizedContractType;
+  }
+
+  const counterparty = getPrimaryCounterparty(metadata);
+  if (counterparty) {
+    payload.counterparty = counterparty;
+  }
+
+  const jurisdiction = compactString(metadata.jurisdiction);
+  if (jurisdiction) {
+    payload.jurisdiction = jurisdiction;
+  }
+
+  const additionalContext: Record<string, unknown> = {};
+
+  if (metadata.version) {
+    additionalContext.version = metadata.version;
+  }
+
+  if (metadata.renewal) {
+    additionalContext.renewal = metadata.renewal;
+  }
+
+  if (vertical) {
+    additionalContext.vertical = vertical;
+  }
+
+  if (risk?.id) {
+    additionalContext.riskId = risk.id;
+  }
+
+  if (typeof topicConfidence === 'number') {
+    additionalContext.topicConfidence = topicConfidence;
+  }
+
+  if (Object.keys(additionalContext).length > 0) {
+    payload.additional_context = additionalContext;
+  }
+
+  return Object.keys(payload).length > 0 ? payload : undefined;
+}
+
+function gatherStakeholders(
+  topic: ApiPlaybookTopic,
+  clausePlaybook: { stakeholders?: unknown } | null | undefined
+): string[] {
+  const stakeholders = new Set<string>();
+
+  const clauseStakeholders = clausePlaybook?.stakeholders;
+  if (Array.isArray(clauseStakeholders)) {
+    clauseStakeholders.forEach((stakeholder) => {
+      const normalized = compactString(stakeholder);
+      if (normalized) {
+        stakeholders.add(normalized);
+      }
+    });
+  }
+
+  const topicStakeholders = (topic as unknown as { stakeholders?: unknown }).stakeholders;
+  if (Array.isArray(topicStakeholders)) {
+    topicStakeholders.forEach((stakeholder) => {
+      const normalized = compactString(stakeholder);
+      if (normalized) {
+        stakeholders.add(normalized);
+      }
+    });
+  }
+
+  return Array.from(stakeholders);
+}
+
+function normalizeGeminiError(error: unknown): string {
+  if (error instanceof NegotiationApiError) {
+    if (error.status === 429) {
+      return 'Gemini rate limit reached. Please retry shortly.';
+    }
+
+    if ((error.status ?? 0) >= 500) {
+      return 'Gemini service is unavailable right now. Try again in a few moments.';
+    }
+
+    return error.message;
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return 'Unexpected error while generating Gemini guidance. Please retry.';
+}
+
+function formatLatency(value: number): string {
+  if (!Number.isFinite(value) || value < 0) {
+    return '—';
+  }
+
+  if (value < 1000) {
+    return `${Math.max(0, Math.round(value))}ms`;
+  }
+
+  const seconds = value / 1000;
+  if (seconds >= 10) {
+    return `${Math.round(seconds)}s`;
+  }
+
+  return `${seconds.toFixed(1)}s`;
+}
+
+function compactString(value: unknown): string | null {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const trimmed = value.trim();
+  return trimmed.length ? trimmed : null;
+}
+
+function getPrimaryCounterparty(metadata: Metadata): string | null {
+  if (!Array.isArray(metadata.counterparties)) {
+    return null;
+  }
+
+  for (const counterparty of metadata.counterparties) {
+    const name = compactString(counterparty?.name);
+    if (name) {
+      return name;
+    }
+  }
+
+  return null;
 }
 
 function variantFromPosture(posture?: string): 'default' | 'success' | 'warning' | 'danger' {
