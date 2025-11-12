@@ -1,4 +1,3 @@
-import React from 'react';
 import { describe, expect, it, beforeAll, afterAll, vi } from 'vitest';
 
 import saasMsa from '../../../fixtures/contracts/saas-msa.json';

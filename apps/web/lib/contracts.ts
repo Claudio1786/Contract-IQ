@@ -1,14 +1,4 @@
-import type {
-  ApiClause,
-  ApiContractPayload,
-  ApiContractProcessedResponse,
-  ApiNegotiation,
-  ApiObligation,
-  ApiPlaybookTopic,
-  ApiRisk,
-  ContractPayload,
-  ContractRecord
-} from '@contract-iq/fixtures';
+import type { ApiContractProcessedResponse, ContractRecord } from '@contract-iq/fixtures';
 // Re-exporting for backwards compatibility within web app modules
 
 export type {

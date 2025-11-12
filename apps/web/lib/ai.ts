@@ -28,6 +28,11 @@ export interface NegotiationRequestPayload {
 }
 
 export interface NegotiationGuidanceResponsePayload {
+  guidance_id: string;
+  contract_id: string;
+  template_id: string;
+  topic: string;
+  generated_at: string;
   summary: string;
   fallback_recommendation: string;
   talking_points?: string[];
@@ -41,6 +46,11 @@ export interface NegotiationGuidanceResponsePayload {
 }
 
 export interface NegotiationGuidance {
+  guidanceId: string;
+  contractId: string;
+  templateId: string;
+  topic: string;
+  generatedAt: string;
   summary: string;
   fallbackRecommendation: string;
   talkingPoints: string[];
@@ -51,6 +61,34 @@ export interface NegotiationGuidance {
   latencyMs: number;
   documentationUrl?: string | null;
   generatedPrompt?: string | null;
+}
+
+export interface NegotiationHistoryEntryPayload {
+  guidance_id: string;
+  contract_id: string;
+  template_id: string;
+  topic: string;
+  generated_at: string;
+  summary: string;
+  fallback_recommendation: string;
+  talking_points?: string[];
+  risk_callouts?: string[];
+  confidence: number;
+  cached: boolean;
+  model: string;
+  latency_ms: number;
+  documentation_url?: string | null;
+  generated_prompt?: string | null;
+  context: NegotiationContextPayload;
+}
+
+export interface NegotiationHistoryResponsePayload {
+  items: NegotiationHistoryEntryPayload[];
+}
+
+export interface NegotiationHistoryEntry {
+  guidance: NegotiationGuidance;
+  context: NegotiationContextPayload;
 }
 
 export class NegotiationApiError extends Error {
@@ -82,6 +120,11 @@ function resolveApiBaseUrl(): string | undefined {
 
 function normaliseGuidance(payload: NegotiationGuidanceResponsePayload): NegotiationGuidance {
   return {
+    guidanceId: payload.guidance_id,
+    contractId: payload.contract_id,
+    templateId: payload.template_id,
+    topic: payload.topic,
+    generatedAt: payload.generated_at,
     summary: payload.summary,
     fallbackRecommendation: payload.fallback_recommendation,
     talkingPoints: Array.isArray(payload.talking_points) ? payload.talking_points : [],
@@ -95,6 +138,29 @@ function normaliseGuidance(payload: NegotiationGuidanceResponsePayload): Negotia
   };
 }
 
+function normaliseHistoryEntry(payload: NegotiationHistoryEntryPayload): NegotiationHistoryEntry {
+  return {
+    guidance: {
+      guidanceId: payload.guidance_id,
+      contractId: payload.contract_id,
+      templateId: payload.template_id,
+      topic: payload.topic,
+      generatedAt: payload.generated_at,
+      summary: payload.summary,
+      fallbackRecommendation: payload.fallback_recommendation,
+      talkingPoints: Array.isArray(payload.talking_points) ? payload.talking_points : [],
+      riskCallouts: Array.isArray(payload.risk_callouts) ? payload.risk_callouts : [],
+      confidence: payload.confidence,
+      cached: Boolean(payload.cached),
+      model: payload.model,
+      latencyMs: payload.latency_ms,
+      documentationUrl: payload.documentation_url ?? null,
+      generatedPrompt: payload.generated_prompt ?? null
+    },
+    context: payload.context
+  };
+}
+
 async function parseErrorBody(response: Response): Promise<unknown> {
   const text = await response.text();
   if (!text) {
@@ -103,7 +169,7 @@ async function parseErrorBody(response: Response): Promise<unknown> {
 
   try {
     return JSON.parse(text);
-  } catch (error) {
+  } catch {
     return text;
   }
 }
@@ -150,4 +216,54 @@ export async function requestNegotiationGuidance(
 
   const payload = (await response.json()) as NegotiationGuidanceResponsePayload;
   return normaliseGuidance(payload);
+}
+
+export interface ListNegotiationHistoryOptions {
+  apiUrl?: string;
+  signal?: AbortSignal;
+  fetchFn?: typeof fetch;
+  contractId?: string;
+  limit?: number;
+}
+
+export async function listNegotiationHistory(
+  options: ListNegotiationHistoryOptions = {}
+): Promise<NegotiationHistoryEntry[]> {
+  const fetchImpl = options.fetchFn ?? fetch;
+  const apiBase = options.apiUrl ?? resolveApiBaseUrl() ?? 'http://localhost:8000';
+
+  const params = new URLSearchParams();
+  if (options.contractId) {
+    params.set('contract_id', options.contractId);
+  }
+  if (typeof options.limit === 'number') {
+    params.set('limit', String(options.limit));
+  }
+
+  const url = `${apiBase}/ai/negotiation/history${params.size ? `?${params.toString()}` : ''}`;
+  const response = await fetchImpl(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    signal: options.signal,
+    cache: 'no-store'
+  } as RequestInit);
+
+  if (!response.ok) {
+    const errorBody = await parseErrorBody(response);
+    throw new NegotiationApiError(
+      typeof errorBody === 'string' && errorBody.length > 0
+        ? errorBody
+        : `History request failed with status ${response.status}`,
+      { status: response.status, body: errorBody }
+    );
+  }
+
+  const payload = (await response.json()) as NegotiationHistoryResponsePayload;
+  if (!Array.isArray(payload.items)) {
+    return [];
+  }
+
+  return payload.items.map(normaliseHistoryEntry);
 }

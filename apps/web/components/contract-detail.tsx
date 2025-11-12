@@ -9,7 +9,9 @@ import { ContractRecord, ApiClause, severityToVariant, ApiRisk, ApiObligation, A
 import { analytics } from '../lib/analytics';
 import {
   requestNegotiationGuidance,
+  listNegotiationHistory,
   NegotiationGuidance,
+  NegotiationHistoryEntry,
   NegotiationContextPayload,
   NegotiationApiError,
   NegotiationMetadataPayload
@@ -493,7 +495,12 @@ function GeminiGuidancePanel({
   const [errorByTopic, setErrorByTopic] = useState<Record<string, string>>({});
   const [isGenerating, setIsGenerating] = useState(false);
   const [lastLatencyMs, setLastLatencyMs] = useState<number | null>(null);
+  const [historyEntries, setHistoryEntries] = useState<NegotiationHistoryEntry[]>([]);
+  const [isHistoryLoading, setIsHistoryLoading] = useState(false);
+  const [historyError, setHistoryError] = useState<string | null>(null);
+  const [selectedHistoryId, setSelectedHistoryId] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const historyAbortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     if (!topics.length) {
@@ -506,9 +513,112 @@ function GeminiGuidancePanel({
     }
   }, [selectedTopicId, topics]);
 
-  useEffect(() => () => {
-    abortRef.current?.abort();
-  }, []);
+  useEffect(
+    () => () => {
+      abortRef.current?.abort();
+      historyAbortRef.current?.abort();
+    },
+    []
+  );
+
+  const fetchHistory = useCallback(async () => {
+    if (historyAbortRef.current) {
+      historyAbortRef.current.abort();
+    }
+
+    const controller = new AbortController();
+    historyAbortRef.current = controller;
+
+    setIsHistoryLoading(true);
+    setHistoryError(null);
+
+    try {
+      const entries = await listNegotiationHistory({
+        contractId,
+        limit: 10,
+        signal: controller.signal
+      });
+
+      if (controller.signal.aborted) {
+        return;
+      }
+
+      setHistoryEntries(entries);
+      setSelectedHistoryId((previous) => {
+        if (previous && entries.some((entry) => entry.guidance.guidanceId === previous)) {
+          return previous;
+        }
+        return entries[0]?.guidance.guidanceId ?? null;
+      });
+
+      analytics.capture('playbook.gemini.history.loaded', {
+        contractId,
+        templateId,
+        vertical: vertical ?? null,
+        count: entries.length
+      });
+    } catch (error) {
+      if (!controller.signal.aborted) {
+        setHistoryError(normalizeGeminiError(error));
+      }
+    } finally {
+      if (!controller.signal.aborted) {
+        setIsHistoryLoading(false);
+      }
+
+      if (historyAbortRef.current === controller) {
+        historyAbortRef.current = null;
+      }
+    }
+  }, [contractId, templateId, vertical]);
+
+  useEffect(() => {
+    fetchHistory();
+    return () => {
+      historyAbortRef.current?.abort();
+    };
+  }, [fetchHistory]);
+
+  useEffect(() => {
+    if (!historyEntries.length) {
+      return;
+    }
+
+    setGuidanceByTopic((previous) => {
+      const next = { ...previous };
+      let changed = false;
+
+      for (const entry of historyEntries) {
+        const topicId = entry.guidance.topic;
+        if (!topics.some((topic) => topic.topic === topicId)) {
+          continue;
+        }
+
+        const existing = next[topicId];
+        if (!existing || existing.guidanceId !== entry.guidance.guidanceId) {
+          next[topicId] = entry.guidance;
+          changed = true;
+        }
+      }
+
+      return changed ? next : previous;
+    });
+  }, [historyEntries, topics]);
+
+  useEffect(() => {
+    if (!selectedTopicId) {
+      return;
+    }
+
+    if (selectedHistoryId && historyEntries.some((entry) => entry.guidance.guidanceId === selectedHistoryId)) {
+      return;
+    }
+
+    const matchingEntry = historyEntries.find((entry) => entry.guidance.topic === selectedTopicId);
+    if (matchingEntry) {
+      setSelectedHistoryId(matchingEntry.guidance.guidanceId);
+    }
+  }, [historyEntries, selectedHistoryId, selectedTopicId]);
 
   const selectedTopic = selectedTopicId ? topics.find((topic) => topic.topic === selectedTopicId) : undefined;
   const associatedClause = selectedTopic ? findClauseForTopic(selectedTopic, clauses) : undefined;
@@ -517,6 +627,62 @@ function GeminiGuidancePanel({
     : undefined;
   const currentGuidance = selectedTopic ? guidanceByTopic[selectedTopic.topic] : undefined;
   const currentError = selectedTopic ? errorByTopic[selectedTopic.topic] : undefined;
+
+  const handleHistoryRefresh = useCallback(() => {
+    analytics.capture('playbook.gemini.history.refresh', {
+      contractId,
+      templateId,
+      vertical: vertical ?? null
+    });
+
+    fetchHistory();
+  }, [contractId, fetchHistory, templateId, vertical]);
+
+  const handleHistorySelect = useCallback(
+    (entry: NegotiationHistoryEntry) => {
+      if (abortRef.current) {
+        abortRef.current.abort();
+        abortRef.current = null;
+        setIsGenerating(false);
+      }
+
+      const topicId = entry.guidance.topic;
+      const topicExists = topics.some((topic) => topic.topic === topicId);
+
+      if (topicExists) {
+        setSelectedTopicId(topicId);
+        setGuidanceByTopic((previous) => {
+          const existing = previous[topicId];
+          if (existing && existing.guidanceId === entry.guidance.guidanceId) {
+            return previous;
+          }
+          return { ...previous, [topicId]: entry.guidance };
+        });
+        setErrorByTopic((previous) => {
+          if (!previous[topicId]) {
+            return previous;
+          }
+          const next = { ...previous };
+          delete next[topicId];
+          return next;
+        });
+      }
+
+      setLastLatencyMs(entry.guidance.latencyMs);
+      setSelectedHistoryId(entry.guidance.guidanceId);
+      setHistoryError(null);
+
+      analytics.capture('playbook.gemini.history.selected', {
+        contractId,
+        templateId,
+        vertical: vertical ?? null,
+        topic: topicId,
+        guidanceId: entry.guidance.guidanceId,
+        topicAvailable: topicExists
+      });
+    },
+    [contractId, templateId, topics, vertical]
+  );
 
   const handleGenerate = useCallback(async () => {
     if (!selectedTopic) {
@@ -571,6 +737,13 @@ function GeminiGuidancePanel({
       const guidance = await requestNegotiationGuidance(payload, { signal: controller.signal });
 
       setGuidanceByTopic((previous) => ({ ...previous, [selectedTopic.topic]: guidance }));
+      setHistoryEntries((previous) => {
+        const entry: NegotiationHistoryEntry = { guidance, context: payload };
+        const filtered = previous.filter((item) => item.guidance.guidanceId !== entry.guidance.guidanceId);
+        return [entry, ...filtered].slice(0, 20);
+      });
+      setSelectedHistoryId(guidance.guidanceId);
+      setHistoryError(null);
       const measuredLatency = performance.now() - start;
       const effectiveLatency = guidance.latencyMs ?? measuredLatency;
       setLastLatencyMs(effectiveLatency);
@@ -683,6 +856,92 @@ function GeminiGuidancePanel({
           <GeminiGuidanceResult guidance={currentGuidance} />
         ) : null}
       </div>
+
+      <div className="mt-6 space-y-3" aria-live="polite">
+        <div className="flex items-center justify-between gap-2">
+          <h4 className="text-xs uppercase tracking-[0.2em] text-slate-500">Recent Gemini guidance</h4>
+          <button
+            type="button"
+            onClick={handleHistoryRefresh}
+            disabled={isHistoryLoading}
+            className="inline-flex items-center rounded-md border border-slate-800 bg-slate-900/40 px-3 py-1.5 text-[11px] font-semibold text-slate-300 transition hover:border-amber-400/40 hover:text-amber-200 disabled:cursor-not-allowed disabled:border-slate-900 disabled:text-slate-600"
+          >
+            {isHistoryLoading ? 'Refreshing…' : 'Refresh'}
+          </button>
+        </div>
+
+        {historyError ? (
+          <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 p-3 text-xs text-rose-100">
+            {historyError}
+          </div>
+        ) : null}
+
+        {isHistoryLoading && !historyEntries.length ? (
+          <div className="animate-pulse rounded-lg border border-slate-800 bg-slate-900/40 p-4 text-xs text-slate-400">
+            Loading guidance history…
+          </div>
+        ) : null}
+
+        {historyEntries.length ? (
+          <ul className="space-y-2">
+            {historyEntries.map((entry) => {
+              const topicExists = topics.some((topic) => topic.topic === entry.guidance.topic);
+              const confidencePercent = Number.isFinite(entry.guidance.confidence)
+                ? Math.round(entry.guidance.confidence * 100)
+                : null;
+              const isSelected = entry.guidance.guidanceId === selectedHistoryId;
+
+              return (
+                <li
+                  key={entry.guidance.guidanceId}
+                  className={`rounded-lg border p-4 transition ${
+                    isSelected
+                      ? 'border-amber-400/60 bg-amber-500/10'
+                      : 'border-slate-800 bg-slate-900/40 hover:border-amber-400/40 hover:bg-slate-900/60'
+                  }`}
+                >
+                  <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-100">
+                        <span>{entry.guidance.topic}</span>
+                        <span className="text-[11px] font-normal text-slate-500">
+                          {formatTimestamp(entry.guidance.generatedAt)}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-300">{entry.guidance.summary}</p>
+                      <div className="flex flex-wrap gap-3 text-[11px] text-slate-500">
+                        <span>{entry.guidance.cached ? 'Cached result' : 'Fresh generation'}</span>
+                        <span>Latency {formatLatency(entry.guidance.latencyMs)}</span>
+                        {confidencePercent !== null ? <span>Confidence {confidencePercent}%</span> : null}
+                        {entry.guidance.model ? <span>{entry.guidance.model}</span> : null}
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-end gap-2 md:items-center md:justify-between">
+                      <button
+                        type="button"
+                        onClick={() => handleHistorySelect(entry)}
+                        disabled={!topicExists}
+                        className="inline-flex items-center rounded-md border border-amber-400/40 bg-amber-400/10 px-3 py-1.5 text-xs font-semibold text-amber-200 transition hover:border-amber-300 hover:bg-amber-400/20 disabled:cursor-not-allowed disabled:border-slate-800 disabled:bg-slate-900/40 disabled:text-slate-500"
+                      >
+                        Review
+                      </button>
+                      {!topicExists ? (
+                        <span className="text-[11px] text-slate-500">Topic not in current dossier</span>
+                      ) : null}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
+
+        {!historyEntries.length && !isHistoryLoading ? (
+          <div className="rounded-lg border border-slate-800 bg-slate-900/40 p-4 text-xs text-slate-400">
+            No persisted Gemini guidance for this contract yet. Generate new direction to build your history.
+          </div>
+        ) : null}
+      </div>
     </section>
   );
 }
@@ -705,6 +964,7 @@ function GeminiGuidanceResult({ guidance }: { guidance: NegotiationGuidance }) {
         {confidencePercent !== null ? <span>Confidence {confidencePercent}%</span> : null}
         <span>Latency {formatLatency(guidance.latencyMs)}</span>
         {guidance.model ? <span>Model {guidance.model}</span> : null}
+        {guidance.generatedAt ? <span>Generated {formatTimestamp(guidance.generatedAt)}</span> : null}
       </div>
 
       {guidance.summary ? (
@@ -866,7 +1126,7 @@ function PlaybookTopicCard({
       }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
+    } catch {
       setCopied(false);
     }
   }, [clause?.id, onPromptGenerated, prompt, topic.impact, topic.topic]);
@@ -1191,6 +1451,20 @@ function formatLatency(value: number): string {
   }
 
   return `${seconds.toFixed(1)}s`;
+}
+
+function formatTimestamp(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return 'Unknown';
+  }
+
+  return date.toLocaleString(undefined, {
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 }
 
 function compactString(value: unknown): string | null {
