@@ -75,10 +75,10 @@ export default function Home() {
             Healthcare BAA briefing
           </Link>
           <Link
-            href="/contracts/nil-athlete-agreement"
+            href="/contracts/aws-enterprise"
             className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-slate-500"
           >
-            NIL athlete agreement
+            AWS Enterprise Agreement
           </Link>
           <Link
             href="/contracts/public-sector-sow"

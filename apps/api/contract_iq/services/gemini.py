@@ -16,7 +16,7 @@ from contract_iq.schemas import NegotiationContext
 
 logger = logging.getLogger("contract_iq.gemini")
 
-DEFAULT_MODEL = "gemini-1.5-flash-latest"
+DEFAULT_MODEL = "gemini-1.5-pro-latest"
 
 
 class GeminiServiceError(RuntimeError):
@@ -29,10 +29,10 @@ class GeminiConfig:
 
     api_key: str | None = None
     model: str = DEFAULT_MODEL
-    temperature: float = 0.35
-    top_p: float = 0.95
+    temperature: float = 0.2
+    top_p: float = 0.9
     top_k: int = 40
-    max_output_tokens: int = 768
+    max_output_tokens: int = 1024
     enable_cache: bool = True
 
     @classmethod
