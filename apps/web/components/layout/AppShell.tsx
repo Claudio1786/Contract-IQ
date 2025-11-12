@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '../ui';
 
@@ -10,18 +10,53 @@ export interface AppShellProps {
 
 export const AppShell: React.FC<AppShellProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Handle mobile detection and responsive behavior
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setSidebarOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const toggleSidebar = useCallback(() => {
     setSidebarOpen(prev => !prev);
   }, []);
 
+  // Close sidebar on mobile when clicking outside
+  const closeMobileSidebar = () => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex relative">
+      {/* Mobile Overlay */}
+      {isMobile && sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden"
+          onClick={closeMobileSidebar}
+        />
+      )}
+
       {/* Sidebar */}
       <div 
         className={`
           bg-white border-r border-gray-200 transition-all duration-300 ease-in-out
-          ${sidebarOpen ? 'w-64' : 'w-16'}
+          ${isMobile ? (
+            sidebarOpen ? 'fixed left-0 top-0 bottom-0 w-64 z-20' : 'fixed -left-64 w-64 z-20'
+          ) : (
+            sidebarOpen ? 'w-64' : 'w-16'
+          )}
           flex flex-col
         `}
       >
@@ -138,6 +173,30 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
+        {/* Mobile Header */}
+        {isMobile && (
+          <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between md:hidden">
+            <div className="flex items-center space-x-3">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleSidebar}
+                className="h-8 w-8 p-0"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </Button>
+              <div className="flex items-center">
+                <div className="w-7 h-7 bg-blue-600 rounded-md flex items-center justify-center">
+                  <span className="text-white font-bold text-xs">CIQ</span>
+                </div>
+                <h1 className="ml-2 text-lg font-semibold text-gray-900">Contract IQ</h1>
+              </div>
+            </div>
+          </header>
+        )}
+        
         {children}
       </div>
     </div>
