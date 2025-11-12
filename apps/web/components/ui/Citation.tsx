@@ -85,18 +85,38 @@ const Citation = React.forwardRef<HTMLSpanElement, CitationProps>(
         
         {/* Preview tooltip */}
         {showPreview && (
-          <div className="absolute z-10 w-64 p-3 mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
-            <div className="text-xs text-gray-500 mb-1">
-              {source}{page && ` • Page ${page}`}{section && ` • Section ${section}`}
-            </div>
-            <div className="text-sm text-gray-900">
-              {content.length > 150 ? `${content.slice(0, 150)}...` : content}
-            </div>
-            {confidence && (
-              <div className="text-xs text-gray-400 mt-2">
-                Confidence: {Math.round(confidence * 100)}%
+          <div className="absolute z-20 w-80 p-4 mt-1 bg-white border border-gray-200 rounded-lg shadow-xl">
+            <div className="flex justify-between items-start mb-2">
+              <div className="text-xs font-medium text-gray-700">
+                📄 {source}
               </div>
-            )}
+              {confidence && (
+                <div className={`text-xs px-2 py-1 rounded ${
+                  confidence > 0.8 
+                    ? 'bg-green-100 text-green-700' 
+                    : confidence > 0.6 
+                    ? 'bg-yellow-100 text-yellow-700' 
+                    : 'bg-red-100 text-red-700'
+                }`}>
+                  {Math.round(confidence * 100)}% confident
+                </div>
+              )}
+            </div>
+            
+            <div className="text-xs text-gray-500 mb-2">
+              {page && `Page ${page}`}
+              {section && ` • Section ${section}`}
+            </div>
+            
+            <div className="text-sm text-gray-900 leading-relaxed">
+              {content.length > 200 ? `${content.slice(0, 200)}...` : content}
+            </div>
+            
+            <div className="mt-3 pt-2 border-t border-gray-100">
+              <div className="text-xs text-gray-400">
+                💡 Click to view full context
+              </div>
+            </div>
           </div>
         )}
       </span>
