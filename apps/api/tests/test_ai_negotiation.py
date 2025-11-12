@@ -7,6 +7,7 @@ from httpx import ASGITransport, AsyncClient
 
 from contract_iq.main import create_app
 from contract_iq.schemas import NegotiationContext
+from contract_iq.repositories import NegotiationGuidanceRepository, get_negotiation_repository
 from contract_iq.services.gemini import (
     GeminiConfig,
     GeminiFlashClient,
@@ -43,6 +44,7 @@ def test_gemini_client_caches_stub_guidance() -> None:
 @pytest.mark.asyncio
 async def test_negotiation_endpoint_returns_guidance() -> None:
     app = create_app()
+    repository = NegotiationGuidanceRepository(storage_path=None)
 
     class _FakeGemini:
         def __init__(self) -> None:
@@ -63,13 +65,14 @@ async def test_negotiation_endpoint_returns_guidance() -> None:
                 confidence=0.82,
                 generated_prompt="stub-prompt",
                 cached=False,
-                model="gemini-1.5-flash",
+                model="gemini-1.5-flash-latest",
                 latency_ms=128,
                 documentation_url="https://example.com/guidance",
             )
 
     fake_client = _FakeGemini()
     app.dependency_overrides[get_gemini_client] = lambda: fake_client
+    app.dependency_overrides[get_negotiation_repository] = lambda: repository
 
     transport = ASGITransport(app=app)
     payload: dict[str, Any] = {
@@ -94,6 +97,10 @@ async def test_negotiation_endpoint_returns_guidance() -> None:
     try:
         async with AsyncClient(transport=transport, base_url="http://testserver") as client:
             response = await client.post("/ai/negotiation", json=payload)
+            history_response = await client.get(
+                "/ai/negotiation/history",
+                params={"contract_id": "contract_456", "limit": 5},
+            )
 
         assert response.status_code == 200
         body = response.json()
@@ -102,8 +109,23 @@ async def test_negotiation_endpoint_returns_guidance() -> None:
         assert body["fallback_recommendation"] == "Offer 60-day notice with mutual termination"
         assert body["confidence"] == pytest.approx(0.82)
         assert body["cached"] is False
-        assert body["model"] == "gemini-1.5-flash"
+        assert body["model"] == "gemini-1.5-flash-latest"
         assert body["documentation_url"] == "https://example.com/guidance"
+        assert body["guidance_id"]
+        assert body["contract_id"] == "contract_456"
+        assert body["template_id"] == "saas-msa"
+        assert body["topic"] == "Termination for convenience"
+        assert body["generated_at"]
         assert fake_client.calls == 1
+
+        assert history_response.status_code == 200
+        history_body = history_response.json()
+        items = history_body["items"]
+        assert len(items) == 1
+        history_item = items[0]
+        assert history_item["guidance_id"] == body["guidance_id"]
+        assert history_item["context"]["contract_id"] == "contract_456"
+        assert history_item["summary"].startswith("Align on Termination")
     finally:
         app.dependency_overrides.pop(get_gemini_client, None)
+        app.dependency_overrides.pop(get_negotiation_repository, None)

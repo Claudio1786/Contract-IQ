@@ -63,7 +63,7 @@ export interface ApiContractProcessedResponse {
   payload: ApiContractPayload;
 }
 
-export interface ContractPayload extends ApiContractPayload {}
+export type ContractPayload = ApiContractPayload;
 
 export interface ContractRecord {
   contractId: string;

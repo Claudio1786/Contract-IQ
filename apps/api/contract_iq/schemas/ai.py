@@ -87,8 +87,8 @@ class NegotiationRequest(BaseModel):
     )
 
 
-class NegotiationGuidanceResponse(BaseModel):
-    """AI-generated negotiation guidance returned to the caller."""
+class NegotiationGuidancePayload(BaseModel):
+    """Shared payload fields for Gemini negotiation guidance."""
 
     model_config = ConfigDict(extra="forbid")
 
@@ -131,3 +131,30 @@ class NegotiationGuidanceResponse(BaseModel):
     @classmethod
     def _prune_empty_entries(cls, value: list[str]) -> list[str]:
         return [item.strip() for item in value if item and item.strip()]
+
+
+class NegotiationGuidanceResponse(NegotiationGuidancePayload):
+    """AI-generated negotiation guidance returned to the caller."""
+
+    guidance_id: str = Field(..., min_length=1, description="Unique identifier for the guidance record.")
+    contract_id: str = Field(..., min_length=1, description="Identifier for the related contract.")
+    template_id: str = Field(..., min_length=1, description="Template reference for the guidance.")
+    topic: str = Field(..., min_length=1, description="Topic for which the guidance was generated.")
+    generated_at: datetime = Field(..., description="Timestamp when the guidance was generated.")
+
+
+class NegotiationHistoryEntry(NegotiationGuidancePayload):
+    """Stored negotiation guidance entry with contextual metadata."""
+
+    guidance_id: str = Field(..., min_length=1, description="Unique identifier for the guidance record.")
+    contract_id: str = Field(..., min_length=1, description="Identifier for the related contract.")
+    template_id: str = Field(..., min_length=1, description="Template reference for the guidance.")
+    topic: str = Field(..., min_length=1, description="Topic for which the guidance was generated.")
+    generated_at: datetime = Field(..., description="Timestamp when the guidance was generated.")
+    context: NegotiationContext = Field(..., description="Original negotiation context payload.")
+
+
+class NegotiationHistoryResponse(BaseModel):
+    """Collection of stored negotiation guidance entries."""
+
+    items: list[NegotiationHistoryEntry] = Field(default_factory=list)
