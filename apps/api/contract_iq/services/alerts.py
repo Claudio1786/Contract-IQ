@@ -68,11 +68,24 @@ class AlertSchedulerConfig:
     @classmethod
     def from_env(cls) -> "AlertSchedulerConfig":
         fixtures_env = os.getenv("CONTRACT_IQ_ALERT_FIXTURES_DIR")
-        fixtures_dir = (
-            Path(fixtures_env)
-            if fixtures_env
-            else Path(__file__).resolve().parents[4] / "fixtures" / "contracts"
-        )
+        if fixtures_env:
+            fixtures_dir = Path(fixtures_env)
+        else:
+            # Try to find fixtures directory starting from current file
+            current_path = Path(__file__).resolve()
+            fixtures_dir = None
+            
+            # Look up the directory tree for fixtures/contracts
+            for parent in current_path.parents:
+                potential_dir = parent / "fixtures" / "contracts"
+                if potential_dir.exists():
+                    fixtures_dir = potential_dir
+                    break
+            
+            # Fallback to a default path if not found
+            if fixtures_dir is None:
+                fixtures_dir = Path("/app/fixtures/contracts")
+                fixtures_dir.mkdir(parents=True, exist_ok=True)
 
         templates_env = os.getenv("CONTRACT_IQ_ALERT_TEMPLATE_IDS")
         if templates_env:
