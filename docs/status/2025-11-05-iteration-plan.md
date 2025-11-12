@@ -1,12 +1,14 @@
 ## Iteration Plan — 2025-11-05 → 2025-11-19
 
 ### Mission
-Deliver the first usable AI wrapper increment by wiring ingestion, intelligence surfaces, and negotiation guidance end-to-end for SaaS, NIL, Healthcare HIPAA, and Public Sector procurement fixtures.
+Deliver the first usable AI wrapper increment by wiring ingestion, intelligence surfaces, negotiation guidance, and SaaS/vendor MSA research end-to-end, while maintaining future hooks for NIL, Healthcare HIPAA, and Public Sector procurement fixtures.
 
 ### Sprint Goals
 1. Process a contract fixture through FastAPI, map it to structured schema, and emit analytics event. **Status: ✅ (2025-11-05)**
 2. Display clause cards, risk badges, and negotiation prompts in the web app using real processed data. **Status: ✅ (2025-11-05)**
 3. Capture at least one alert/notification flow (renewal or compliance) triggered from processed data. **Status: ✅ (2025-11-05)** — Alert scheduler service now evaluates portfolio fixtures and exposes manual trigger/status APIs with pytest coverage.
+4. Publish SaaS/Vendor MSA excellence backlog (taxonomy, benchmarks, expansion path) with investor narrative alignment. **Status: ⏳ In progress** — Draft in `docs/vendor-msa-market.md`; clause coverage + pricing research underway.
+5. Establish sports contract research backlog (HS → college → pro) with taxonomy + data requirements documented for Stage 1 execution. **Status: ⏳ In progress** — Initial synthesis captured in `docs/sports-contract-market.md`; stakeholder interviews + dataset intake scheduled this sprint.
 
 ### Workstreams & Epics
 
@@ -46,6 +48,19 @@ Deliver the first usable AI wrapper increment by wiring ingestion, intelligence 
 - Draft GitHub Actions workflows for API (build→pytest→deploy) and web (Vercel CLI stub).
 - Add scripts for loading fixtures to Azure Blob Storage (local CLI placeholder). **Update:** Local demo seeding script (`pnpm demo:seed`) now available to populate fixtures + metrics snapshot.
 
+#### 6. SaaS/Vendor MSA Intelligence — **Primary Stage 1 Workstream**
+- Finalize MSA clause taxonomy (renewals, liability, data security, SLAs, termination) and align prompt templates with playbook copy (see `docs/vendor-msa-market.md`).
+- ✅ Stage 1 Assisted Operations landed (2025-11-10): negotiation guidance persisted via disk-backed repository, Gemini upgraded to `gemini-1.5-flash-latest`, `/ai/negotiation/history` API exposed, and Contract Detail UI now surfaces refreshable history entries.
+- Map data model deltas for MSAs, SOWs, DPAs (compensation tables, service levels, data handling obligations) and open schema tasks in backlog.
+- Complete founder interviews with 5 SaaS GTM leaders + 5 procurement/legal buyers to validate readiness and price sensitivity.
+- Build clause benchmark workbook (ARR tiering, liability caps, renewal notice lead time) feeding investor TAM narrative.
+
+#### 7. Sports Contract Intelligence Research — **Parallel Track**
+- Publish market synthesis and taxonomy (HS → college → pro) detailing contract types, schema needs, and risk heuristics (see `docs/sports-contract-market.md`).
+- Define schema deltas (new enums, compensation structures, compliance flags) and socialize with API/UI owners for Stage 1 backlog grooming.
+- Launch stakeholder research plan: schedule interviews with ≥5 NIL athletes/parents, ≥5 compliance directors, ≥5 agents/scouts to validate problem framing and pricing.
+- Source 50 anonymized NIL contracts + 15 rookie pro contract templates for annotation and clause training in upcoming sprints.
+
 ### Sprint Cadence
 - **Daily**: run package QA suite (lint/test/build) + API pytest.
 - **Twice weekly**: demo progress using fixtures; update burndown in docs.
@@ -64,6 +79,8 @@ Deliver the first usable AI wrapper increment by wiring ingestion, intelligence 
 | Monorepo scaffold (web, API, shared packages, fixtures) | ✅ Done | Commit `2c1dbea`; `pnpm install --frozen-lockfile`, `py -m poetry install --no-root`. |
 | Contract ingestion + intelligence surfaces (SaaS/NIL/Healthcare/Public Sector) | ✅ Done | Commit `ff9a47a`; `node ../../node_modules/.pnpm/vitest@2.1.9_@types+node@22.19.0/node_modules/vitest/vitest.mjs run`, `py -m poetry run pytest`. |
 | Demo seeding CLI + documentation refresh | ✅ Done | `pnpm demo:seed`, `docs/demo-environment-plan.md`, `docs/status/2025-11-05-qa-audit.md`. |
+| SaaS/Vendor MSA excellence pack | ⏳ In progress | `docs/vendor-msa-market.md` drafting; clause taxonomy + benchmark workbook in progress. |
+| Sports contract research + taxonomy (HS → pro) | ⏳ In progress | `docs/sports-contract-market.md` published 2025-11-07; interviews + dataset sourcing scheduled. |
 | Outbound alerting orchestration | ⏳ Open | Scheduler service merged; Slack/email transports and persistence still outstanding. |
 | Deployment workflows (Terraform + CI) | ⏳ Open | Terraform modules ready; GitHub Actions plan/apply and app deploy workflows still outstanding. |
 | UX research & IA improvements for dashboard/dossier | ⏳ Open | See UX discovery plan below. |
@@ -102,10 +119,12 @@ Deliver the first usable AI wrapper increment by wiring ingestion, intelligence 
 ### Path to QA & Demo Readiness (Next Iteration)
 1. **Contract Intelligence UI Hardening** – Complete scope above to unlock sprint goal #2 and demo readiness.
 2. **Alerts & Notifications** – Extend scheduler with Slack/email delivery, persist alert dispatch history, and monitor health endpoints.
-3. **Infrastructure & CI** – Apply Terraform stack, wire GitHub Actions for plan/apply plus API & web deploy pipelines with smoke tests.
-4. **Demo Runbook Validation** – Execute `pnpm demo:seed` against deployed API, capture portfolio snapshot, and rehearse demo script end-to-end.
-5. **Regression Automation** – Add Turbo targets for `test`, `lint`, `build`; integrate into CI to block regressions before QA sign-off.
-6. **Service Hardening** – Migrate FastAPI lifecycle hooks to lifespan handlers; replace ad-hoc Vitest binary path with scripted runner for Windows CI.
+3. **SaaS/Vendor MSA Excellence** – Land taxonomy, benchmark workbook, and investor-ready narrative; thread outputs into AI schemas and frontend copy.
+4. **Sports Contract Research Lift-Off** – Execute interviews, collect sample contracts, and translate findings into schema updates for Stage 1 backlog.
+5. **Infrastructure & CI** – Apply Terraform stack, wire GitHub Actions for plan/apply plus API & web deploy pipelines with smoke tests.
+6. **Demo Runbook Validation** – Execute `pnpm demo:seed` against deployed API, capture portfolio snapshot, and rehearse demo script end-to-end.
+7. **Regression Automation** – Add Turbo targets for `test`, `lint`, `build`; integrate into CI to block regressions before QA sign-off.
+8. **Service Hardening** – Migrate FastAPI lifecycle hooks to lifespan handlers; replace ad-hoc Vitest binary path with scripted runner for Windows CI.
 
 ### Validation Notes — 2025-11-06
 - Run UI/prompts/analytics/web Vitest suites via `node ../../node_modules/.pnpm/vitest@2.1.9_@types+node@22.19.0/node_modules/vitest/vitest.mjs run` from each package root (CJS API warning persists).
@@ -155,3 +174,5 @@ Deliver the first usable AI wrapper increment by wiring ingestion, intelligence 
 - **Windows vitest path issues** – continue using direct pnpm-installed binary (`node ../../node_modules/.pnpm/.../vitest.mjs run`) until a scripted alias is added to tooling.
 - **FastAPI event lifecycle** – replace `@app.on_event` startup/shutdown hooks with lifespan implementation to remove deprecation warnings.
 - **Data persistence** – start with in-memory repositories; design with interface to swap for Postgres when infra ready.
+- **SaaS MSA data sourcing** – secure anonymized MSA samples (SaaS ARR tiers $10M–$200M) with redaction workflow to fuel benchmarks before investor conversations.
+- **Sports research resourcing** – dedicate Research Ops support for interviews/contract sourcing; establish consent/redaction workflow before ingesting third-party agreements.
