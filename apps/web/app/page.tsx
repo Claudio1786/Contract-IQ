@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
   const router = useRouter();
+  // Force Vercel redeploy with latest commit
 
   useEffect(() => {
     // Redirect to chat interface for the new UX v3.0
