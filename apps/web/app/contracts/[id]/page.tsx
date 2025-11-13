@@ -8,12 +8,18 @@ import { Button } from '../../../components/ui';
 import { useChat } from '../../../hooks/useChat';
 
 interface ContractViewPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function ContractViewPage({ params }: ContractViewPageProps) {
+export default async function ContractViewPage({ params }: ContractViewPageProps) {
+  const resolvedParams = await params;
+  
+  return <ContractViewClient contractId={resolvedParams.id} />;
+}
+
+function ContractViewClient({ contractId }: { contractId: string }) {
   const [showChat, setShowChat] = useState(true);
   const [contractData, setContractData] = useState<{
     title: string;
@@ -58,14 +64,14 @@ export default function ContractViewPage({ params }: ContractViewPageProps) {
       ];
 
       setContractData({
-        title: getContractTitle(params.id),
+        title: getContractTitle(contractId),
         highlights: mockHighlights,
         // Note: In production, you'd have actual PDF URLs or file data
       });
     };
 
     loadContract();
-  }, [params.id]);
+  }, [contractId]);
 
   const getContractTitle = (id: string): string => {
     const titles: Record<string, string> = {
