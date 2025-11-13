@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { AppShell } from '../../components/layout/AppShell';
+import AppLayout from '../../components/layout/AppLayout';
 import { ChatInterface } from '../../components/chat/ChatInterface';
 import { useChat } from '../../hooks/useChat';
 
@@ -19,7 +19,7 @@ export default function ChatPage() {
   });
 
   return (
-    <AppShell>
+    <AppLayout>
       <ChatInterface 
         messages={messages}
         isLoading={isLoading}
@@ -31,6 +31,6 @@ export default function ChatPage() {
           <span className="block sm:inline">{error}</span>
         </div>
       )}
-    </AppShell>
+    </AppLayout>
   );
 }
