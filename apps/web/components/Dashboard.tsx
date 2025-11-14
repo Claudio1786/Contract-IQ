@@ -74,7 +74,10 @@ export default function Dashboard() {
     <div>
       {/* Page Header */}
       <div style={{ marginBottom: 'var(--space-8)' }}>
-        <h1 className="text-h1">Dashboard Overview</h1>
+        <h1 className="text-h1">Vendor Agreement Dashboard</h1>
+        <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
+          🏢 Manage your organization's supplier contracts and renewal pipeline
+        </p>
       </div>
 
       {/* Stats Row (3 cards) */}
@@ -136,28 +139,42 @@ export default function Dashboard() {
       {/* Spending Analysis Card */}
       <div className="card card-accent card-accent-primary" style={{ marginBottom: 'var(--space-6)' }}>
         <div className="card-header">
-          <h2 className="text-h2">📊 Spending by Category</h2>
+          <h2 className="text-h2">📊 Vendor Spending by Category</h2>
+          <p className="text-sm text-secondary">
+            Breakdown of your organization's $400K annual contract portfolio
+          </p>
         </div>
         <div className="card-body">
-          {/* CRM Category */}
+          {/* CRM & Sales Category */}
           <div style={{ marginBottom: 'var(--space-4)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-              <span className="text-base font-medium">CRM</span>
-              <span className="text-base">35% · $840K</span>
+              <span className="text-base font-medium">CRM & Sales</span>
+              <span className="text-base">45% · $180K</span>
             </div>
             <div className="progress">
-              <div className="progress-bar" style={{ width: '35%' }}></div>
+              <div className="progress-bar" style={{ width: '45%' }}></div>
             </div>
           </div>
 
-          {/* Infrastructure Category */}
+          {/* Software Development Category */}
           <div style={{ marginBottom: 'var(--space-4)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-              <span className="text-base font-medium">Infrastructure</span>
-              <span className="text-base">28% · $672K</span>
+              <span className="text-base font-medium">Software Development</span>
+              <span className="text-base">24% · $95K</span>
             </div>
             <div className="progress">
-              <div className="progress-bar" style={{ width: '28%' }}></div>
+              <div className="progress-bar" style={{ width: '24%' }}></div>
+            </div>
+          </div>
+
+          {/* Marketing Category */}
+          <div style={{ marginBottom: 'var(--space-4)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
+              <span className="text-base font-medium">Marketing</span>
+              <span className="text-base">18% · $72K</span>
+            </div>
+            <div className="progress">
+              <div className="progress-bar" style={{ width: '18%' }}></div>
             </div>
           </div>
 
@@ -165,10 +182,10 @@ export default function Dashboard() {
           <div style={{ marginBottom: 'var(--space-4)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
               <span className="text-base font-medium">Productivity</span>
-              <span className="text-base">22% · $528K</span>
+              <span className="text-base">13% · $53K</span>
             </div>
             <div className="progress">
-              <div className="progress-bar" style={{ width: '22%' }}></div>
+              <div className="progress-bar" style={{ width: '13%' }}></div>
             </div>
           </div>
         </div>

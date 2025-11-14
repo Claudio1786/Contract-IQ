@@ -15,6 +15,28 @@ export default function UploadPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadStatus, setUploadStatus] = useState<UploadStatus>({ status: 'idle' });
   const [dragActive, setDragActive] = useState(false);
+  const [selectedObjectives, setSelectedObjectives] = useState<string[]>([]);
+  const [customObjective, setCustomObjective] = useState('');
+
+  // Key objectives for uploaded contracts
+  const contractObjectives = [
+    { id: 'risk_assessment', label: 'Risk Assessment & Liability Review' },
+    { id: 'pricing_analysis', label: 'Pricing & Cost Optimization' },
+    { id: 'sla_review', label: 'Service Level Agreement Review' },
+    { id: 'termination_rights', label: 'Termination Rights & Exit Clauses' },
+    { id: 'data_protection', label: 'Data Protection & Privacy Compliance' },
+    { id: 'renewal_terms', label: 'Renewal & Auto-Renewal Analysis' },
+    { id: 'ip_rights', label: 'Intellectual Property Rights' },
+    { id: 'limitation_liability', label: 'Limitation of Liability Assessment' }
+  ];
+
+  const toggleObjective = (objectiveId: string) => {
+    setSelectedObjectives(prev => 
+      prev.includes(objectiveId)
+        ? prev.filter(id => id !== objectiveId)
+        : [...prev, objectiveId]
+    );
+  };
 
   const handleFileUpload = async (file: File) => {
     // Validate file
@@ -72,11 +94,14 @@ export default function UploadPage() {
         uploadedAt: new Date().toISOString(),
         analysisComplete: true,
         fileType: file.type,
-        fileSize: file.size
+        fileSize: file.size,
+        objectives: selectedObjectives,
+        customObjective: selectedObjectives.includes('custom') ? customObjective : undefined
       };
       
       if (typeof window !== 'undefined') {
         sessionStorage.setItem(`contract-${contractId}`, JSON.stringify(contractData));
+        sessionStorage.setItem('last-uploaded-contract', contractId);
       }
 
       // Redirect to contract analysis after brief success display
@@ -258,6 +283,105 @@ export default function UploadPage() {
             </div>
           </div>
         </div>
+
+        {/* Analysis Objectives Section */}
+        {uploadStatus.status === 'idle' && (
+          <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
+            <div className="card-header">
+              <h2 className="text-h2">🎯 Analysis Objectives</h2>
+              <p className="text-sm text-secondary">
+                Select what you want to focus on when analyzing your contract (optional)
+              </p>
+            </div>
+            <div className="card-body">
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+                gap: 'var(--space-3)' 
+              }}>
+                {contractObjectives.map((objective) => (
+                  <div key={objective.id}>
+                    <label style={{ 
+                      display: 'flex', 
+                      alignItems: 'flex-start', 
+                      gap: 'var(--space-3)',
+                      cursor: 'pointer',
+                      padding: 'var(--space-3)',
+                      borderRadius: 'var(--radius-md)',
+                      border: '1px solid var(--color-border)',
+                      transition: 'all var(--transition-fast)',
+                      backgroundColor: selectedObjectives.includes(objective.id) ? 'var(--primary-50)' : 'transparent',
+                      borderColor: selectedObjectives.includes(objective.id) ? 'var(--primary-300)' : 'var(--color-border)'
+                    }}>
+                      <input
+                        type="checkbox"
+                        checked={selectedObjectives.includes(objective.id)}
+                        onChange={() => toggleObjective(objective.id)}
+                        style={{ marginTop: '2px' }}
+                      />
+                      <span className="text-sm font-medium">{objective.label}</span>
+                    </label>
+                  </div>
+                ))}
+                
+                {/* Custom objective option */}
+                <div>
+                  <label style={{ 
+                    display: 'flex', 
+                    alignItems: 'flex-start', 
+                    gap: 'var(--space-3)',
+                    cursor: 'pointer',
+                    padding: 'var(--space-3)',
+                    borderRadius: 'var(--radius-md)',
+                    border: '1px solid var(--color-border)',
+                    transition: 'all var(--transition-fast)',
+                    backgroundColor: selectedObjectives.includes('custom') ? 'var(--primary-50)' : 'transparent',
+                    borderColor: selectedObjectives.includes('custom') ? 'var(--primary-300)' : 'var(--color-border)'
+                  }}>
+                    <input
+                      type="checkbox"
+                      checked={selectedObjectives.includes('custom')}
+                      onChange={() => toggleObjective('custom')}
+                      style={{ marginTop: '2px' }}
+                    />
+                    <div style={{ flex: 1 }}>
+                      <span className="text-sm font-medium">✏️ Other (specify below)</span>
+                      {selectedObjectives.includes('custom') && (
+                        <textarea
+                          value={customObjective}
+                          onChange={(e) => setCustomObjective(e.target.value)}
+                          placeholder="Describe your custom analysis objective..."
+                          className="input"
+                          rows={2}
+                          style={{ 
+                            marginTop: 'var(--space-2)',
+                            width: '100%',
+                            fontSize: '0.875rem'
+                          }}
+                        />
+                      )}
+                    </div>
+                  </label>
+                </div>
+              </div>
+              
+              {selectedObjectives.length > 0 && (
+                <div style={{ 
+                  marginTop: 'var(--space-4)', 
+                  padding: 'var(--space-3)', 
+                  backgroundColor: 'var(--success-50)', 
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--success-200)'
+                }}>
+                  <p className="text-sm text-success-dark">
+                    ✓ {selectedObjectives.length} objective{selectedObjectives.length !== 1 ? 's' : ''} selected. 
+                    Analysis will focus on these areas.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Features Preview */}
         <div style={{ 

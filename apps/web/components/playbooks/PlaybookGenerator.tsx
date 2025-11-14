@@ -315,7 +315,7 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
       {/* Quick Templates */}
       <Card className="p-4">
         <h3 className="text-sm font-medium text-gray-900 mb-3">📚 Quick Templates</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           <button
             onClick={() => {
               setFormData({
@@ -362,6 +362,54 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
           >
             <div className="font-medium text-sm text-gray-900">🔒 GDPR DPA</div>
             <div className="text-xs text-gray-600">Data protection compliance</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setFormData({
+                contractType: 'Master Service Agreement',
+                scenario: 'liability_cap_negotiation',
+                objectives: ['cap_unlimited_liability', 'mutual_indemnification', 'consequential_damages'],
+                currentTerms: 'Unlimited liability, one-sided indemnification',
+                desiredOutcome: '12 months fee cap, mutual liability protection'
+              });
+            }}
+            className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
+          >
+            <div className="font-medium text-sm text-gray-900">⚖️ Liability Caps</div>
+            <div className="text-xs text-gray-600">Risk limitation & protection</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setFormData({
+                contractType: 'Professional Services',
+                scenario: 'termination_flexibility',
+                objectives: ['termination_for_convenience', 'notice_period', 'work_product_retention'],
+                currentTerms: 'Locked 3-year term, 90-day notice',
+                desiredOutcome: '30-day convenience termination, immediate work product'
+              });
+            }}
+            className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
+          >
+            <div className="font-medium text-sm text-gray-900">🚪 Exit Rights</div>
+            <div className="text-xs text-gray-600">Termination flexibility</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setFormData({
+                contractType: 'Equipment Lease',
+                scenario: 'payment_terms_optimization',
+                objectives: ['payment_schedule', 'early_payment_discounts', 'late_payment_penalties'],
+                currentTerms: 'Monthly upfront, 2% late fees',
+                desiredOutcome: 'Quarterly payment, 1.5% early discount'
+              });
+            }}
+            className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
+          >
+            <div className="font-medium text-sm text-gray-900">💰 Payment Terms</div>
+            <div className="text-xs text-gray-600">Cash flow optimization</div>
           </button>
         </div>
       </Card>

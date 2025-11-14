@@ -112,7 +112,12 @@ export default function AnalyticsPage() {
           alignItems: 'center',
           marginBottom: 'var(--space-8)' 
         }}>
-          <h1 className="text-h1">Analytics Dashboard</h1>
+          <div>
+            <h1 className="text-h1">Client Agreement Portfolio</h1>
+            <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
+              📊 Manage your organization's vendor agreements and contract performance
+            </p>
+          </div>
           
           <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
             <select 
@@ -158,7 +163,10 @@ export default function AnalyticsPage() {
         {/* SaaS Portfolio Breakdown */}
         <div className="card card-accent card-accent-primary" style={{ marginBottom: 'var(--space-6)' }}>
           <div className="card-header">
-            <h2 className="text-h2">📊 Your SaaS Portfolio: $2.4M Annual Spend</h2>
+            <h2 className="text-h2">📊 Vendor Agreement Portfolio: $400K Annual Spend</h2>
+            <p className="text-sm text-secondary">
+              Track spending across your organization's key supplier contracts
+            </p>
           </div>
           <div className="card-body">
             {categoryData.map((category) => (
