@@ -24,10 +24,10 @@ class ChatService {
   }
 
   async sendMessage(request: ChatRequest): Promise<AsyncGenerator<ChatStreamResponse, void, unknown>> {
-    // Use mock API for development
-    const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NEXT_PUBLIC_API_URL;
+    // Always use mock API for MVP demo until backend is integrated
+    const useMockAPI = true; // Force mock API for now
     
-    if (isDevelopment) {
+    if (useMockAPI) {
       return mockStreamingResponse({
         ...request,
         sessionId: this.sessionId || this.generateSessionId(),
@@ -98,10 +98,10 @@ class ChatService {
   }
 
   async uploadContract(file: File): Promise<{ contractId: string; fileName: string }> {
-    // Use mock API for development
-    const isDevelopment = process.env.NODE_ENV === 'development' || !process.env.NEXT_PUBLIC_API_URL;
+    // Always use mock API for MVP demo until backend is integrated
+    const useMockAPI = true; // Force mock API for now
     
-    if (isDevelopment) {
+    if (useMockAPI) {
       return mockUploadContract(file);
     }
 
