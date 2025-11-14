@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AppLayout from '../../components/layout/AppLayout';
 
@@ -155,8 +155,40 @@ export default function ContractsPage() {
     }
   ];
 
-  // Hidden 6th slot for uploaded documents (will be dynamically populated)
-  const uploadedContract = null; // This would be populated from sessionStorage/API
+  // Hidden 6th slot for uploaded documents (dynamically populated from sessionStorage)
+  const [uploadedContract, setUploadedContract] = useState<ContractCardProps | null>(null);
+
+  useEffect(() => {
+    // Check for uploaded contracts in sessionStorage
+    if (typeof window !== 'undefined') {
+      const keys = Object.keys(sessionStorage);
+      const contractKeys = keys.filter(key => key.startsWith('contract-uploaded-'));
+      
+      if (contractKeys.length > 0) {
+        // Get the most recent uploaded contract
+        const latestKey = contractKeys.sort().reverse()[0];
+        const storedData = sessionStorage.getItem(latestKey);
+        
+        if (storedData) {
+          try {
+            const contractData = JSON.parse(storedData);
+            setUploadedContract({
+              id: contractData.id,
+              name: contractData.fileName || 'Uploaded Document',
+              vendor: 'Uploaded Contract',
+              renewalDate: 'Analysis Complete',
+              annualValue: 'TBD',
+              keyTerm: 'Recently uploaded',
+              risk: 'medium',
+              riskLabel: 'M'
+            });
+          } catch (error) {
+            console.error('Error parsing uploaded contract data:', error);
+          }
+        }
+      }
+    }
+  }, []);
 
   const router = useRouter();
 
@@ -234,6 +266,27 @@ export default function ContractsPage() {
 
         {/* Contracts List */}
         <div style={{ marginBottom: 'var(--space-8)' }}>
+          {/* Show uploaded contract first if available */}
+          {uploadedContract && (
+            <div style={{ marginBottom: 'var(--space-4)' }}>
+              <div className="card card-accent card-accent-success" style={{ padding: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
+                <div className="card-body">
+                  <p className="text-sm text-success">
+                    ✨ Recently Uploaded Contract
+                  </p>
+                </div>
+              </div>
+              <ContractCard 
+                key={uploadedContract.id} 
+                {...uploadedContract}
+                onView={() => handleViewContract(uploadedContract.id)}
+                onAnalyze={() => handleAnalyzeContract(uploadedContract.id)}
+                onGeneratePlaybook={() => handleGeneratePlaybook(uploadedContract.id)}
+              />
+            </div>
+          )}
+
+          {/* Show regular contracts */}
           {contracts.map((contract) => (
             <ContractCard 
               key={contract.id} 

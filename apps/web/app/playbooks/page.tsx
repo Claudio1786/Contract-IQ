@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { AppShell } from '../../components/layout/AppShell';
+import AppLayout from '../../components/layout/AppLayout';
 import { PlaybookGenerator, NegotiationPlaybook } from '../../components/playbooks/PlaybookGenerator';
 import { PlaybookView } from '../../components/playbooks/PlaybookView';
 import { Button } from '../../components/ui';
@@ -83,45 +83,46 @@ ${generatedPlaybook.successMetrics.map(metric => `• ${metric}`).join('\n')}
   };
 
   return (
-    <AppShell>
-      <div className="max-w-4xl mx-auto p-4 space-y-6">
-        {/* Header */}
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">
-            🎯 Negotiation Playbook Generator
+    <AppLayout>
+      <div>
+        {/* Page Header */}
+        <div style={{ marginBottom: 'var(--space-8)', textAlign: 'center' }}>
+          <h1 className="text-h1" style={{ marginBottom: 'var(--space-3)' }}>
+            🎯 AI-Powered Negotiation Playbooks
           </h1>
-          <p className="text-gray-600">
-            Generate AI-powered negotiation strategies for your contract discussions
+          <p className="text-lg text-secondary">
+            Generate strategic negotiation plans tailored to your contract scenarios with AI insights
           </p>
         </div>
 
         {/* Mode Toggle */}
-        <div className="flex justify-center">
-          <div className="flex space-x-2">
-            <Button
-              variant={showGenerator ? 'primary' : 'secondary'}
-              size="sm"
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          marginBottom: 'var(--space-8)' 
+        }}>
+          <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+            <button
+              className={showGenerator ? 'btn-primary' : 'btn-secondary'}
               onClick={() => setShowGenerator(true)}
             >
-              📝 Generator
-            </Button>
+              📝 Create Playbook
+            </button>
             {generatedPlaybook && (
-              <Button
-                variant={!showGenerator ? 'primary' : 'secondary'}
-                size="sm"
+              <button
+                className={!showGenerator ? 'btn-primary' : 'btn-secondary'}
                 onClick={() => setShowGenerator(false)}
               >
                 📋 View Playbook
-              </Button>
+              </button>
             )}
             {generatedPlaybook && (
-              <Button
-                variant="secondary"
-                size="sm"
+              <button
+                className="btn-secondary"
                 onClick={handleCreateNew}
               >
                 ✨ New Playbook
-              </Button>
+              </button>
             )}
           </div>
         </div>
@@ -141,41 +142,103 @@ ${generatedPlaybook.successMetrics.map(metric => `• ${metric}`).join('\n')}
 
         {/* Help Section */}
         {showGenerator && (
-          <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <h3 className="text-sm font-medium text-blue-900 mb-2">💡 How it works</h3>
-            <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Select your contract type and negotiation scenario</li>
-              <li>• Define your key objectives and desired outcomes</li>
-              <li>• Get a comprehensive strategy with talking points, tactics, and timeline</li>
-              <li>• Export your playbook for easy reference during negotiations</li>
-            </ul>
+          <div className="card card-accent card-accent-primary" style={{ marginTop: 'var(--space-8)' }}>
+            <div className="card-header">
+              <h3 className="text-h3">💡 How Negotiation Playbooks Work</h3>
+            </div>
+            <div className="card-body">
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+                gap: 'var(--space-4)' 
+              }}>
+                <div>
+                  <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-2)' }}>
+                    🎯 Strategic Input
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    Define your contract type, scenario, and negotiation objectives
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-2)' }}>
+                    🧠 AI Analysis
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    Get AI-powered insights on tactics, talking points, and risks
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-2)' }}>
+                    📋 Action Plan
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    Receive a detailed playbook with timeline and success metrics
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-2)' }}>
+                    📤 Export Ready
+                  </h4>
+                  <p className="text-sm text-secondary">
+                    Download your playbook for easy reference during negotiations
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
         {/* Sample Playbooks */}
         {showGenerator && !generatedPlaybook && (
-          <div className="mt-8 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-            <h3 className="text-sm font-medium text-gray-900 mb-3">🔥 Popular Playbooks</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="p-3 bg-white border border-gray-200 rounded text-center">
-                <div className="text-2xl mb-1">📊</div>
-                <div className="text-sm font-medium text-gray-900">SaaS Renewals</div>
-                <div className="text-xs text-gray-600">Price negotiation strategies</div>
-              </div>
-              <div className="p-3 bg-white border border-gray-200 rounded text-center">
-                <div className="text-2xl mb-1">🔒</div>
-                <div className="text-sm font-medium text-gray-900">Risk Reduction</div>
-                <div className="text-xs text-gray-600">Liability and compliance</div>
-              </div>
-              <div className="p-3 bg-white border border-gray-200 rounded text-center">
-                <div className="text-2xl mb-1">⚡</div>
-                <div className="text-sm font-medium text-gray-900">SLA Enhancement</div>
-                <div className="text-xs text-gray-600">Service level improvements</div>
+          <div className="card" style={{ marginTop: 'var(--space-6)' }}>
+            <div className="card-header">
+              <h3 className="text-h3">🔥 Popular Negotiation Scenarios</h3>
+            </div>
+            <div className="card-body">
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+                gap: 'var(--space-4)' 
+              }}>
+                <div className="card card-interactive" style={{ cursor: 'pointer' }}>
+                  <div className="card-body" style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '32px', marginBottom: 'var(--space-2)' }}>📊</div>
+                    <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
+                      SaaS Contract Renewals
+                    </h4>
+                    <p className="text-sm text-secondary">
+                      Price negotiations, usage optimization, and multi-year commitments
+                    </p>
+                  </div>
+                </div>
+                <div className="card card-interactive" style={{ cursor: 'pointer' }}>
+                  <div className="card-body" style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '32px', marginBottom: 'var(--space-2)' }}>🔒</div>
+                    <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
+                      Risk & Liability Reduction
+                    </h4>
+                    <p className="text-sm text-secondary">
+                      Liability caps, indemnification, and compliance requirements
+                    </p>
+                  </div>
+                </div>
+                <div className="card card-interactive" style={{ cursor: 'pointer' }}>
+                  <div className="card-body" style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '32px', marginBottom: 'var(--space-2)' }}>⚡</div>
+                    <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
+                      Service Level Agreements
+                    </h4>
+                    <p className="text-sm text-secondary">
+                      Performance metrics, penalties, and service guarantees
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         )}
       </div>
-    </AppShell>
+    </AppLayout>
   );
 }

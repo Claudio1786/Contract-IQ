@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { AppShell } from '../../../components/layout/AppShell';
+import AppLayout from '../../../components/layout/AppLayout';
 import { PDFViewer, PDFHighlight } from '../../../components/pdf/PDFViewer';
 import { ChatInterface, ChatMessage } from '../../../components/chat/ChatInterface';
 import { Button } from '../../../components/ui';
@@ -225,20 +225,33 @@ function ContractViewClient({ contractId }: { contractId: string }) {
 
   if (!contractData) {
     return (
-      <AppShell>
-        <div className="flex items-center justify-center h-full">
-          <div className="text-center">
-            <div className="animate-spin w-8 h-8 border-2 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading contract...</p>
+      <AppLayout>
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          height: '100%' 
+        }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{
+              width: '32px',
+              height: '32px',
+              border: '3px solid var(--primary-600)',
+              borderTop: '3px solid transparent',
+              borderRadius: '50%',
+              margin: '0 auto var(--space-4)',
+              animation: 'spin 1s linear infinite'
+            }}></div>
+            <p className="text-base text-secondary">Loading contract...</p>
           </div>
         </div>
-      </AppShell>
+      </AppLayout>
     );
   }
 
   return (
-    <AppShell>
-      <div className="flex h-full">
+    <AppLayout>
+      <div style={{ display: 'flex', height: 'calc(100vh - 200px)' }}>
         {/* PDF Viewer Panel */}
         <div className={`${showChat ? 'w-1/2' : 'w-full'} transition-all duration-300`}>
           <div className="h-full flex flex-col">
@@ -361,6 +374,6 @@ function ContractViewClient({ contractId }: { contractId: string }) {
           </div>
         )}
       </div>
-    </AppShell>
+    </AppLayout>
   );
 }

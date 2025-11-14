@@ -23,18 +23,21 @@ export interface CitationData {
 export interface ChatInterfaceProps {
   messages?: ChatMessage[];
   onSendMessage?: (message: string) => void;
+  onUploadContract?: (file: File) => void;
   isLoading?: boolean;
 }
 
 export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   messages = [],
   onSendMessage,
+  onUploadContract,
   isLoading = false
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [selectedCitation, setSelectedCitation] = useState<CitationData | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -66,25 +69,69 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     }
   };
 
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file && onUploadContract) {
+      onUploadContract(file);
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full">
-      {/* Chat Header - Hidden on mobile when in sidebar */}
-      <div className="bg-white border-b border-gray-200 p-3 sm:p-4 flex-shrink-0">
-        <div className="flex items-center justify-between">
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: '100%',
+      backgroundColor: 'var(--color-background)'
+    }}>
+      {/* Chat Header - Using our design system */}
+      <div style={{ 
+        padding: 'var(--space-6)', 
+        borderBottom: '1px solid var(--color-border)',
+        backgroundColor: 'var(--color-surface)'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center' 
+        }}>
           <div>
-            <h2 className="text-base sm:text-lg font-semibold text-gray-900">Contract Analysis</h2>
-            <p className="text-xs sm:text-sm text-gray-500">Ask questions about your contracts</p>
+            <h1 className="text-h1">💬 Contract Intelligence Chat</h1>
+            <p className="text-base text-secondary">
+              Ask questions about your contracts, upload documents, or get negotiation insights
+            </p>
           </div>
-          <Button variant="secondary" size="sm" className="text-xs sm:text-sm">
-            📤 Upload
-          </Button>
+          <button 
+            className="btn-primary"
+            onClick={handleUploadClick}
+            disabled={isLoading}
+          >
+            📄 Upload Contract
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,.doc,.docx,.txt"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
         </div>
       </div>
 
-      {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
+      {/* Messages Area - Using our design system */}
+      <div style={{ 
+        flex: 1, 
+        overflowY: 'auto', 
+        padding: 'var(--space-6)', 
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'var(--space-4)'
+      }}>
         {messages.length === 0 ? (
-          <WelcomeScreen />
+          <WelcomeScreen onUploadClick={handleUploadClick} />
         ) : (
           messages.map((message) => (
             <MessageBubble
@@ -96,54 +143,86 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         )}
         
         {isLoading && (
-          <div className="flex justify-start">
-            <Card className="max-w-full sm:max-w-2xl bg-gray-50">
-              <div className="flex items-center space-x-2 p-3">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <div className="card" style={{ maxWidth: '400px' }}>
+              <div className="card-body">
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+                  <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      backgroundColor: 'var(--primary-600)',
+                      borderRadius: '50%',
+                      animation: 'bounce 1.4s ease-in-out infinite both'
+                    }} />
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      backgroundColor: 'var(--primary-600)',
+                      borderRadius: '50%',
+                      animation: 'bounce 1.4s ease-in-out 0.16s infinite both'
+                    }} />
+                    <div style={{
+                      width: '8px',
+                      height: '8px',
+                      backgroundColor: 'var(--primary-600)',
+                      borderRadius: '50%',
+                      animation: 'bounce 1.4s ease-in-out 0.32s infinite both'
+                    }} />
+                  </div>
+                  <span className="text-base text-secondary">Contract IQ is analyzing...</span>
                 </div>
-                <span className="text-sm text-gray-600">Analyzing...</span>
               </div>
-            </Card>
+            </div>
           </div>
         )}
         
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area - Mobile optimized */}
-      <div className="bg-white border-t border-gray-200 p-3 sm:p-4 flex-shrink-0">
-        <div className="flex items-end space-x-2">
-          <div className="flex-1 min-w-0">
+      {/* Input Area - Using our design system */}
+      <div style={{ 
+        backgroundColor: 'var(--color-surface)',
+        borderTop: '1px solid var(--color-border)',
+        padding: 'var(--space-6)'
+      }}>
+        <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'flex-end' }}>
+          <div style={{ flex: 1 }}>
             <textarea
               ref={textareaRef}
+              className="input"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyPress}
-              placeholder="Ask about contract terms, risks, or negotiation strategies..."
+              placeholder="💬 Ask about contract terms, risks, negotiation strategies..."
               disabled={isLoading}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-sm sm:text-base"
               rows={1}
-              style={{ maxHeight: '120px' }}
+              style={{ 
+                resize: 'none',
+                maxHeight: '120px',
+                minHeight: '44px'
+              }}
             />
           </div>
-          <Button
+          <button
+            className="btn-primary"
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isLoading}
-            loading={isLoading}
-            size="sm"
-            className="flex-shrink-0"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-            </svg>
-          </Button>
+            {isLoading ? '...' : '📤'}
+          </button>
         </div>
-        <p className="text-xs text-gray-500 mt-2 hidden sm:block">
-          💡 Try: "What are the key risks in this contract?" or "Suggest negotiation points for liability terms"
-        </p>
+        
+        <div style={{ 
+          marginTop: 'var(--space-3)',
+          display: 'flex',
+          gap: 'var(--space-4)',
+          flexWrap: 'wrap'
+        }}>
+          <span className="text-sm text-tertiary">
+            💡 Try asking: "What are the key risks?" • "Suggest negotiation points" • "Compare to market standards"
+          </span>
+        </div>
       </div>
 
       {/* Citation Preview Modal */}
@@ -208,41 +287,85 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, onCitationClick 
   );
 };
 
-const WelcomeScreen: React.FC = () => (
-  <div className="flex flex-col items-center justify-center h-full text-center space-y-4 sm:space-y-6 px-4">
-    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center">
-      <span className="text-xl sm:text-2xl">🤝</span>
+interface WelcomeScreenProps {
+  onUploadClick: () => void;
+}
+
+const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onUploadClick }) => (
+  <div style={{ 
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    height: '100%', 
+    textAlign: 'center',
+    padding: 'var(--space-8)'
+  }}>
+    {/* Hero Icon */}
+    <div style={{
+      width: '80px',
+      height: '80px',
+      backgroundColor: 'var(--primary-100)',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 'var(--space-6)'
+    }}>
+      <span style={{ fontSize: '36px' }}>💬</span>
     </div>
     
-    <div className="space-y-2">
-      <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-        Welcome to Contract IQ Chat
-      </h3>
-      <p className="text-sm sm:text-base text-gray-600 max-w-md">
-        Upload a contract or ask me questions about contract terms, risks, and negotiation strategies.
+    {/* Welcome Content */}
+    <div style={{ marginBottom: 'var(--space-8)', maxWidth: '600px' }}>
+      <h2 className="text-h2" style={{ marginBottom: 'var(--space-3)' }}>
+        Contract Intelligence at Your Fingertips
+      </h2>
+      <p className="text-lg text-secondary">
+        Upload contracts to analyze risks, negotiate better terms, and compare against industry standards. 
+        Get instant insights powered by AI.
       </p>
     </div>
     
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl">
+    {/* Quick Upload CTA */}
+    <div className="card card-accent card-accent-primary" style={{ marginBottom: 'var(--space-6)', maxWidth: '500px' }}>
+      <div className="card-body" style={{ textAlign: 'center' }}>
+        <h3 className="text-h3" style={{ marginBottom: 'var(--space-2)' }}>📄 Ready to Get Started?</h3>
+        <p className="text-base text-secondary" style={{ marginBottom: 'var(--space-4)' }}>
+          Upload your contract document to begin instant analysis
+        </p>
+        <button className="btn-primary btn-lg" onClick={onUploadClick}>
+          📤 Upload Your Contract Now
+        </button>
+      </div>
+    </div>
+    
+    {/* Feature Cards Grid */}
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+      gap: 'var(--space-4)', 
+      width: '100%', 
+      maxWidth: '900px'
+    }}>
       <SuggestionCard
         icon="⚖️"
-        title="Risk Analysis"
-        description="Identify potential risks and liability issues"
+        title="Contract Risk Assessment"
+        description="AI-powered analysis identifies liability issues, compliance gaps, and financial exposure risks in seconds"
       />
       <SuggestionCard
         icon="💰"
-        title="Cost Optimization"
-        description="Find opportunities to reduce costs"
+        title="Cost & Terms Optimization"
+        description="Discover hidden fees, unfavorable terms, and negotiation opportunities to save money"
       />
       <SuggestionCard
         icon="🎯"
-        title="Negotiation Points"
-        description="Get strategic talking points"
+        title="Strategic Negotiation Playbooks"
+        description="Get customized talking points, counterproposals, and leverage strategies for your specific contract"
       />
       <SuggestionCard
         icon="📊"
-        title="Benchmarking"
-        description="Compare against industry standards"
+        title="Industry Benchmarking"
+        description="Compare pricing, terms, and conditions against market standards and similar agreements"
       />
     </div>
   </div>
@@ -255,15 +378,28 @@ interface SuggestionCardProps {
 }
 
 const SuggestionCard: React.FC<SuggestionCardProps> = ({ icon, title, description }) => (
-  <Card variant="interactive" className="p-3 sm:p-4 cursor-pointer">
-    <div className="flex items-start space-x-3">
-      <span className="text-lg sm:text-xl">{icon}</span>
-      <div className="min-w-0 flex-1">
-        <h4 className="font-medium text-gray-900 text-sm sm:text-base">{title}</h4>
-        <p className="text-xs sm:text-sm text-gray-600">{description}</p>
+  <div className="card card-interactive" style={{ cursor: 'pointer', height: '100%' }}>
+    <div className="card-body">
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-3)', height: '100%' }}>
+        <div style={{ 
+          fontSize: '28px',
+          flexShrink: 0,
+          width: '40px',
+          textAlign: 'center'
+        }}>
+          {icon}
+        </div>
+        <div style={{ flex: 1 }}>
+          <h4 className="text-base font-medium" style={{ marginBottom: 'var(--space-2)' }}>
+            {title}
+          </h4>
+          <p className="text-sm text-secondary" style={{ lineHeight: '1.4' }}>
+            {description}
+          </p>
+        </div>
       </div>
     </div>
-  </Card>
+  </div>
 );
 
 interface CitationPreviewProps {

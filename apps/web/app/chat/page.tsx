@@ -24,6 +24,7 @@ export default function ChatPage() {
         messages={messages}
         isLoading={isLoading}
         onSendMessage={sendMessage}
+        onUploadContract={uploadContract}
       />
       {error && (
         <div className="fixed bottom-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded max-w-sm">
