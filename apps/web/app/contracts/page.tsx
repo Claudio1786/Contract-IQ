@@ -214,6 +214,9 @@ export default function ContractsPage() {
         {/* Page Header */}
         <div style={{ marginBottom: 'var(--space-6)' }}>
           <h1 className="text-h1">Contracts Library</h1>
+          <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
+            📄 Manage your organization's contract portfolio and track renewal pipeline
+          </p>
         </div>
 
         {/* Search and Filters */}

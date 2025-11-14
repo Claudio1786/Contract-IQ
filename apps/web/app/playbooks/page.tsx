@@ -86,11 +86,9 @@ ${generatedPlaybook.successMetrics.map(metric => `• ${metric}`).join('\n')}
     <AppLayout>
       <div>
         {/* Page Header */}
-        <div style={{ marginBottom: 'var(--space-8)', textAlign: 'center' }}>
-          <h1 className="text-h1" style={{ marginBottom: 'var(--space-3)' }}>
-            🎯 AI-Powered Negotiation Playbooks
-          </h1>
-          <p className="text-lg text-secondary">
+        <div style={{ marginBottom: 'var(--space-8)' }}>
+          <h1 className="text-h1">🎯 AI-Powered Negotiation Playbooks</h1>
+          <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
             Generate strategic negotiation plans tailored to your contract scenarios with AI insights
           </p>
         </div>
