@@ -125,6 +125,7 @@ export const useChat = (options: UseChatOptions = {}): UseChatReturn => {
       setError(null);
       setIsLoading(true);
       
+      // Process upload using same logic as upload page
       const result = await chatService.uploadContract(file);
       setContractId(result.contractId);
       
@@ -132,11 +133,19 @@ export const useChat = (options: UseChatOptions = {}): UseChatReturn => {
       const systemMessage: ChatMessage = {
         id: generateMessageId(),
         type: 'assistant',
-        content: `✅ Successfully uploaded "${result.fileName}". You can now ask me questions about this contract!`,
+        content: `✅ Successfully uploaded "${result.fileName}" and completed AI analysis! Redirecting to detailed contract view...`,
         timestamp: new Date(),
       };
       
       setMessages(prev => [...prev, systemMessage]);
+      
+      // Redirect to contract analysis after brief success display (same as upload page)
+      setTimeout(() => {
+        if (typeof window !== 'undefined') {
+          window.location.href = `/contracts/${result.contractId}?analysis=complete`;
+        }
+      }, 1500);
+      
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Upload failed';
       setError(errorMessage);

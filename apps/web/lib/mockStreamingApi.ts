@@ -154,13 +154,33 @@ export async function* mockStreamingResponse(request: ChatRequest): AsyncGenerat
   };
 }
 
-// Mock upload function
+// Mock upload function that matches the upload page logic
 export async function mockUploadContract(file: File): Promise<{ contractId: string; fileName: string }> {
   // Simulate upload delay
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  // Simulate AI analysis processing
+  await new Promise(resolve => setTimeout(resolve, 2500));
+  
+  // Create a contract ID from the file name and timestamp (same format as upload page)
+  const contractId = `uploaded-${file.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
+  
+  // Store the contract data in sessionStorage (same as upload page)
+  const contractData = {
+    id: contractId,
+    fileName: file.name,
+    uploadedAt: new Date().toISOString(),
+    analysisComplete: true,
+    fileType: file.type,
+    fileSize: file.size
+  };
+  
+  if (typeof window !== 'undefined') {
+    sessionStorage.setItem(`contract-${contractId}`, JSON.stringify(contractData));
+  }
   
   return {
-    contractId: `contract_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    contractId,
     fileName: file.name
   };
 }

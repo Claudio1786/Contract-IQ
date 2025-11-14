@@ -339,13 +339,14 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onUploadClick }) => (
       </div>
     </div>
     
-    {/* Feature Cards Grid */}
+    {/* Feature Cards Grid - Perfect 2x2 Layout */}
     <div style={{ 
       display: 'grid', 
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+      gridTemplateColumns: 'repeat(2, 1fr)', 
+      gridTemplateRows: 'repeat(2, 1fr)',
       gap: 'var(--space-4)', 
       width: '100%', 
-      maxWidth: '900px'
+      maxWidth: '600px'
     }}>
       <SuggestionCard
         icon="⚖️"

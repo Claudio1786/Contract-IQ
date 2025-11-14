@@ -32,63 +32,75 @@ export const PlaybookView: React.FC<PlaybookViewProps> = ({
     setExpandedSection(expandedSection === sectionId ? null : sectionId);
   };
 
-  const getPriorityColor = (priority: 'high' | 'medium' | 'low') => {
+  const getPriorityBadge = (priority: 'high' | 'medium' | 'low') => {
     switch (priority) {
-      case 'high': return 'bg-red-100 text-red-800 border-red-200';
-      case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'low': return 'bg-green-100 text-green-800 border-green-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 'high': return 'badge-danger';
+      case 'medium': return 'badge-warning';
+      case 'low': return 'badge-success';
+      default: return 'badge';
     }
   };
 
   return (
-    <div className={`space-y-4 ${className}`}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
       {/* Header */}
-      <Card className="p-6">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <h1 className="text-xl font-bold text-gray-900 mb-2">
-              {playbook.title}
-            </h1>
-            <div className="flex items-center space-x-4 text-sm text-gray-600">
-              <span className="flex items-center">
-                <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                {playbook.contractType}
-              </span>
-              <span>•</span>
-              <span>Created {playbook.createdAt.toLocaleDateString()}</span>
+      <div className="card">
+        <div className="card-body">
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'flex-start' 
+          }}>
+            <div style={{ flex: 1 }}>
+              <h1 className="text-h1" style={{ marginBottom: 'var(--space-3)' }}>
+                {playbook.title}
+              </h1>
+              <div style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 'var(--space-4)',
+                marginBottom: 'var(--space-4)'
+              }}>
+                <span className="badge badge-primary">{playbook.contractType}</span>
+                <span className="text-separator">•</span>
+                <span className="text-base text-tertiary">
+                  Created {playbook.createdAt.toLocaleDateString()}
+                </span>
+              </div>
+              <div>
+                <h3 className="text-base font-medium text-secondary" style={{ marginBottom: 'var(--space-2)' }}>
+                  Scenario:
+                </h3>
+                <p className="text-base text-secondary">{playbook.scenario}</p>
+              </div>
             </div>
-            <div className="mt-3">
-              <div className="text-sm font-medium text-gray-700">Scenario:</div>
-              <div className="text-sm text-gray-600">{playbook.scenario}</div>
+            <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+              {onEdit && (
+                <button className="btn-secondary" onClick={onEdit}>
+                  ✏️ Edit
+                </button>
+              )}
+              {onExport && (
+                <button className="btn-primary" onClick={onExport}>
+                  📤 Export
+                </button>
+              )}
             </div>
-          </div>
-          <div className="flex space-x-2">
-            {onEdit && (
-              <Button variant="secondary" size="sm" onClick={onEdit}>
-                ✏️ Edit
-              </Button>
-            )}
-            {onExport && (
-              <Button variant="secondary" size="sm" onClick={onExport}>
-                📤 Export
-              </Button>
-            )}
           </div>
         </div>
-      </Card>
+      </div>
 
       {/* Navigation */}
-      <div className="flex flex-wrap gap-2">
+      <div style={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: 'var(--space-3)' 
+      }}>
         {sections.map((section) => (
           <button
             key={section.id}
             onClick={() => toggleSection(section.id)}
-            className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-              expandedSection === section.id
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+            className={expandedSection === section.id ? 'btn-primary' : 'btn-secondary'}
           >
             {section.icon} {section.title}
           </button>
@@ -99,77 +111,107 @@ export const PlaybookView: React.FC<PlaybookViewProps> = ({
       
       {/* Overview */}
       {expandedSection === 'overview' && (
-        <Card className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">📋 Overview</h2>
-          <div className="space-y-4">
+        <div className="card">
+          <div className="card-header">
+            <h2 className="text-h2">📋 Overview</h2>
+          </div>
+          <div className="card-body">
             <div>
-              <h3 className="text-sm font-medium text-gray-700 mb-2">Key Objectives</h3>
-              <ul className="space-y-1">
+              <h3 className="text-lg font-medium text-secondary" style={{ marginBottom: 'var(--space-3)' }}>
+                Key Objectives
+              </h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
                 {playbook.objectives.map((objective, index) => (
-                  <li key={index} className="flex items-start text-sm text-gray-600">
-                    <span className="text-green-600 mr-2">✓</span>
-                    {objective}
-                  </li>
+                  <div key={index} style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)' }}>
+                    <span className="text-success" style={{ marginTop: '2px' }}>✓</span>
+                    <span className="text-base text-secondary">{objective}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
-        </Card>
+        </div>
       )}
 
       {/* Talking Points */}
       {expandedSection === 'talkingPoints' && (
-        <Card className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">💬 Talking Points</h2>
-          <div className="space-y-4">
-            {playbook.talkingPoints.map((point, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
-                <div className="font-medium text-gray-900 mb-2">{point.topic}</div>
-                
-                <div className="space-y-3">
-                  <div>
-                    <div className="text-sm font-medium text-green-700 mb-1">Position:</div>
-                    <div className="text-sm text-gray-600">{point.position}</div>
-                  </div>
-                  
-                  <div>
-                    <div className="text-sm font-medium text-blue-700 mb-1">Rationale:</div>
-                    <div className="text-sm text-gray-600">{point.rationale}</div>
-                  </div>
-                  
-                  {point.fallback && (
-                    <div>
-                      <div className="text-sm font-medium text-orange-700 mb-1">Fallback:</div>
-                      <div className="text-sm text-gray-600">{point.fallback}</div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
+        <div className="card">
+          <div className="card-header">
+            <h2 className="text-h2">💬 Talking Points</h2>
           </div>
-        </Card>
+          <div className="card-body">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+              {playbook.talkingPoints.map((point, index) => (
+                <div key={index} className="card card-interactive">
+                  <div className="card-body">
+                    <h3 className="text-lg font-medium" style={{ marginBottom: 'var(--space-3)' }}>
+                      {point.topic}
+                    </h3>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+                      <div>
+                        <h4 className="text-base font-medium text-success" style={{ marginBottom: 'var(--space-1)' }}>
+                          Position:
+                        </h4>
+                        <p className="text-base text-secondary">{point.position}</p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="text-base font-medium text-primary" style={{ marginBottom: 'var(--space-1)' }}>
+                          Rationale:
+                        </h4>
+                        <p className="text-base text-secondary">{point.rationale}</p>
+                      </div>
+                      
+                      {point.fallback && (
+                        <div>
+                          <h4 className="text-base font-medium text-warning" style={{ marginBottom: 'var(--space-1)' }}>
+                            Fallback:
+                          </h4>
+                          <p className="text-base text-secondary">{point.fallback}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Risk Mitigation */}
       {expandedSection === 'riskMitigation' && (
-        <Card className="p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">⚠️ Risk Mitigation</h2>
-          <div className="space-y-3">
-            {playbook.riskMitigation.map((risk, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="font-medium text-gray-900">{risk.risk}</div>
-                  <span className={`px-2 py-1 text-xs font-medium rounded border ${getPriorityColor(risk.priority)}`}>
-                    {risk.priority}
-                  </span>
-                </div>
-                <div className="text-sm text-gray-600">
-                  <span className="font-medium">Mitigation:</span> {risk.mitigation}
-                </div>
-              </div>
-            ))}
+        <div className="card">
+          <div className="card-header">
+            <h2 className="text-h2">⚠️ Risk Mitigation</h2>
           </div>
-        </Card>
+          <div className="card-body">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+              {playbook.riskMitigation.map((risk, index) => (
+                <div key={index} className="card card-interactive">
+                  <div className="card-body">
+                    <div style={{ 
+                      display: 'flex', 
+                      justifyContent: 'space-between', 
+                      alignItems: 'flex-start',
+                      marginBottom: 'var(--space-3)'
+                    }}>
+                      <h3 className="text-lg font-medium text-primary">{risk.risk}</h3>
+                      <span className={`badge ${getPriorityBadge(risk.priority)}`}>
+                        {risk.priority}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-base font-medium text-secondary">Mitigation: </span>
+                      <span className="text-base text-secondary">{risk.mitigation}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Tactics */}
