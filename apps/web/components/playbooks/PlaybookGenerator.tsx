@@ -2,6 +2,12 @@
 
 import React, { useState } from 'react';
 import { Button, Card, Input } from '../ui';
+import { 
+  enhancedScenarios, 
+  negotiationIntelligenceDB, 
+  buildEnhancedPrompt,
+  type ObjectiveIntelligence 
+} from '../../lib/negotiation-intelligence';
 
 export interface NegotiationPlaybook {
   id: string;
@@ -47,7 +53,7 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
   const [formData, setFormData] = useState({
     contractType: '',
     scenario: '',
-    objectives: '',
+    objectives: [] as string[],
     currentTerms: '',
     desiredOutcome: ''
   });
@@ -63,152 +69,85 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
     'Licensing Agreement'
   ];
 
-  const commonScenarios = [
-    'Renewal negotiation with price increase',
-    'Adding new services to existing contract',
-    'Reducing liability exposure',
-    'Improving service level agreements',
-    'Negotiating better payment terms',
-    'Adding termination flexibility',
-    'Data protection compliance updates',
-    'Multi-year commitment discussions'
-  ];
+  // Get available objectives for selected scenario
+  const getAvailableObjectives = () => {
+    const intelligence = negotiationIntelligenceDB[formData.scenario as keyof typeof negotiationIntelligenceDB];
+    return intelligence?.objectives || [];
+  };
 
-  const handleInputChange = (field: keyof typeof formData, value: string) => {
+  // Get scenario context for display
+  const getScenarioContext = () => {
+    const intelligence = negotiationIntelligenceDB[formData.scenario as keyof typeof negotiationIntelligenceDB];
+    if (!intelligence) return null;
+    
+    return {
+      trends: intelligence.marketContext.trends,
+      successRate: intelligence.marketContext.successRate,
+      timing: intelligence.marketContext.timing
+    };
+  };
+
+  const handleInputChange = (field: keyof typeof formData, value: any) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
 
+  const toggleObjective = (objectiveId: string) => {
+    setFormData(prev => ({
+      ...prev,
+      objectives: prev.objectives.includes(objectiveId)
+        ? prev.objectives.filter(id => id !== objectiveId)
+        : [...prev.objectives, objectiveId]
+    }));
+  };
+
   const generatePlaybook = async () => {
     setIsGenerating(true);
     
-    // Simulate API call to generate playbook
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    const mockPlaybook: NegotiationPlaybook = {
-      id: `playbook_${Date.now()}`,
-      title: `${formData.contractType} Negotiation Strategy`,
-      contractType: formData.contractType,
-      scenario: formData.scenario,
-      objectives: formData.objectives.split('\n').filter(obj => obj.trim()),
-      talkingPoints: [
-        {
-          topic: 'Pricing Structure',
-          position: 'Request volume-based discounts for multi-year commitment',
-          rationale: 'Long-term partnership reduces vendor acquisition costs',
-          fallback: 'Accept current pricing with annual escalation cap at 3%'
+    try {
+      // Call the API to generate playbook with Gemini
+      const response = await fetch('/api/generate-playbook', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        {
-          topic: 'Service Level Agreement',
-          position: 'Demand 99.9% uptime with service credits',
-          rationale: 'Business criticality requires high availability',
-          fallback: '99.5% uptime with proportional credits'
-        },
-        {
-          topic: 'Data Protection',
-          position: 'Full GDPR compliance with breach notification within 24h',
-          rationale: 'Regulatory requirements and reputational risk',
-        },
-        {
-          topic: 'Termination Rights',
-          position: '30-day termination for convenience with data return',
-          rationale: 'Business flexibility and exit strategy protection',
-          fallback: '60-day notice with structured wind-down'
-        }
-      ],
-      riskMitigation: [
-        {
-          risk: 'Vendor lock-in through proprietary data formats',
-          mitigation: 'Negotiate standard export formats and API access',
-          priority: 'high'
-        },
-        {
-          risk: 'Unlimited liability exposure',
-          mitigation: 'Cap liability at 12 months of fees paid',
-          priority: 'high'
-        },
-        {
-          risk: 'Automatic renewal with price increases',
-          mitigation: 'Require explicit approval for renewals over 5% increase',
-          priority: 'medium'
-        }
-      ],
-      tactics: [
-        {
-          tactic: 'Competitive Leverage',
-          description: 'Reference alternative solutions and pricing',
-          whenToUse: 'When discussing pricing or terms that seem non-negotiable'
-        },
-        {
-          tactic: 'Value Demonstration',
-          description: 'Quantify business impact and ROI of partnership',
-          whenToUse: 'To justify requests for better terms or pricing'
-        },
-        {
-          tactic: 'Phased Implementation',
-          description: 'Propose trial periods or gradual rollouts',
-          whenToUse: 'When vendor is hesitant about concessions'
-        }
-      ],
-      timeline: [
-        {
-          phase: 'Preparation',
-          duration: '1-2 weeks',
-          activities: [
-            'Gather usage data and performance metrics',
-            'Research competitive alternatives',
-            'Define negotiation objectives and priorities',
-            'Assemble negotiation team'
-          ]
-        },
-        {
-          phase: 'Initial Discussions',
-          duration: '2-3 weeks',
-          activities: [
-            'Present renewal requirements',
-            'Exchange initial proposals',
-            'Identify key negotiation points',
-            'Schedule follow-up meetings'
-          ]
-        },
-        {
-          phase: 'Active Negotiation',
-          duration: '3-4 weeks',
-          activities: [
-            'Negotiate pricing and terms',
-            'Address legal and compliance requirements',
-            'Finalize service level agreements',
-            'Document agreed changes'
-          ]
-        },
-        {
-          phase: 'Finalization',
-          duration: '1-2 weeks',
-          activities: [
-            'Legal review of final terms',
-            'Executive approvals',
-            'Contract execution',
-            'Implementation planning'
-          ]
-        }
-      ],
-      successMetrics: [
-        'Achieve target pricing within 5% of budget',
-        'Secure improved SLAs with financial penalties',
-        'Maintain or improve contract flexibility',
-        'Complete negotiation within 8-week timeline',
-        'Establish framework for future negotiations'
-      ],
-      createdAt: new Date()
-    };
-    
-    setIsGenerating(false);
-    onPlaybookGenerated?.(mockPlaybook);
+        body: JSON.stringify({
+          contractType: formData.contractType,
+          scenario: formData.scenario,
+          objectives: formData.objectives,
+          currentTerms: formData.currentTerms,
+          desiredOutcome: formData.desiredOutcome,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to generate playbook');
+      }
+
+      console.log('✅ Playbook generated successfully!');
+      console.log('Metadata:', data.metadata);
+      
+      setIsGenerating(false);
+      onPlaybookGenerated?.(data.playbook);
+      
+    } catch (error: any) {
+      console.error('❌ Error generating playbook:', error);
+      setIsGenerating(false);
+      
+      // Show error to user - you could add a toast notification here
+      alert(`Failed to generate playbook: ${error.message}`);
+    }
   };
 
-  const isFormValid = formData.contractType && formData.scenario && formData.objectives;
+  const isFormValid = formData.contractType && formData.scenario && formData.objectives.length > 0;
 
   return (
     <div className={`space-y-6 ${className}`}>
@@ -246,24 +185,88 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
             >
               <option value="">Select scenario...</option>
-              {commonScenarios.map(scenario => (
-                <option key={scenario} value={scenario}>{scenario}</option>
+              {enhancedScenarios.map(scenario => (
+                <option key={scenario.id} value={scenario.id}>{scenario.label}</option>
               ))}
             </select>
+            {getScenarioContext() && (
+              <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                <div className="text-sm text-blue-800">
+                  <strong>📊 Market Context:</strong> {getScenarioContext()?.successRate}
+                </div>
+                <div className="text-sm text-blue-600 mt-1">
+                  {getScenarioContext()?.timing}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Objectives */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Key Objectives *
-            </label>
-            <textarea
-              value={formData.objectives}
-              onChange={(e) => handleInputChange('objectives', e.target.value)}
-              placeholder="Enter your negotiation objectives (one per line)&#10;Example:&#10;- Reduce costs by 15%&#10;- Improve service levels&#10;- Add termination flexibility"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 h-24 resize-none"
-            />
-          </div>
+          {/* Enhanced Objectives */}
+          {formData.scenario && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Key Objectives * <span className="text-xs text-gray-500">(Select multiple)</span>
+              </label>
+              <div className="space-y-2 max-h-80 overflow-y-auto border border-gray-200 rounded-md p-3">
+                {getAvailableObjectives().map((objective) => (
+                  <div key={objective.id} className="flex items-start space-x-3">
+                    <input
+                      type="checkbox"
+                      id={objective.id}
+                      checked={formData.objectives.includes(objective.id)}
+                      onChange={() => toggleObjective(objective.id)}
+                      className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <label 
+                        htmlFor={objective.id}
+                        className="text-sm font-medium text-gray-900 cursor-pointer"
+                      >
+                        {objective.title}
+                      </label>
+                      <p className="text-xs text-gray-600 mt-1">
+                        {objective.description}
+                      </p>
+                      <div className="text-xs text-blue-600 mt-1">
+                        💪 Success Rate: {objective.successRate} | 📊 {objective.benchmark}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Custom objective option */}
+                <div className="pt-2 border-t border-gray-200">
+                  <div className="flex items-start space-x-3">
+                    <input
+                      type="checkbox"
+                      id="custom_objective"
+                      checked={formData.objectives.includes('custom')}
+                      onChange={() => toggleObjective('custom')}
+                      className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <div className="flex-1">
+                      <label htmlFor="custom_objective" className="text-sm font-medium text-gray-900 cursor-pointer">
+                        ✏️ Custom Objective (specify below)
+                      </label>
+                      {formData.objectives.includes('custom') && (
+                        <textarea
+                          placeholder="Describe your custom negotiation objective..."
+                          className="mt-2 w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+                          rows={2}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {formData.objectives.length > 0 && (
+                <div className="mt-2 text-sm text-gray-600">
+                  Selected: {formData.objectives.length} objective{formData.objectives.length !== 1 ? 's' : ''}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Current Terms */}
           <div>
@@ -317,15 +320,15 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
             onClick={() => {
               setFormData({
                 contractType: 'SaaS Agreement',
-                scenario: 'Renewal negotiation with price increase',
-                objectives: '- Minimize price increase to 5% or less\n- Extend contract term for better rates\n- Improve support SLAs',
-                currentTerms: '$50K annual, 99.5% uptime SLA',
-                desiredOutcome: 'Multi-year deal with capped increases'
+                scenario: 'saas_renewal_price_increase',
+                objectives: ['cap_increase', 'right_size', 'multi_year_protection'],
+                currentTerms: '$50K annual, 10% increase proposed, 99.5% uptime SLA',
+                desiredOutcome: 'Cap increase at 5%, multi-year price protection'
               });
             }}
             className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
           >
-            <div className="font-medium text-sm text-gray-900">SaaS Renewal</div>
+            <div className="font-medium text-sm text-gray-900">🔄 SaaS Renewal</div>
             <div className="text-xs text-gray-600">Price increase mitigation</div>
           </button>
           
@@ -333,16 +336,32 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
             onClick={() => {
               setFormData({
                 contractType: 'Service Contract',
-                scenario: 'Improving service level agreements',
-                objectives: '- Increase uptime guarantee to 99.9%\n- Add financial penalties for SLA breaches\n- Improve response times',
-                currentTerms: 'Basic SLAs with no penalties',
-                desiredOutcome: 'Guaranteed service levels with accountability'
+                scenario: 'sla_enhancement',
+                objectives: ['uptime_guarantee', 'response_times', 'financial_penalties'],
+                currentTerms: '99% uptime, 4hr P1 response, no service credits',
+                desiredOutcome: '99.9% uptime with financial accountability'
               });
             }}
             className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
           >
-            <div className="font-medium text-sm text-gray-900">SLA Enhancement</div>
+            <div className="font-medium text-sm text-gray-900">⚡ SLA Enhancement</div>
             <div className="text-xs text-gray-600">Service level improvements</div>
+          </button>
+          
+          <button
+            onClick={() => {
+              setFormData({
+                contractType: 'Data Processing Agreement',
+                scenario: 'gdpr_dpa_compliance',
+                objectives: ['article_28_compliance', 'breach_notification', 'data_residency'],
+                currentTerms: 'Basic DPA, unclear breach procedures',
+                desiredOutcome: 'Full GDPR Article 28 compliance, 24hr notification'
+              });
+            }}
+            className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
+          >
+            <div className="font-medium text-sm text-gray-900">🔒 GDPR DPA</div>
+            <div className="text-xs text-gray-600">Data protection compliance</div>
           </button>
         </div>
       </Card>
