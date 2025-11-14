@@ -86,44 +86,44 @@ export default function Dashboard() {
       }}>
         <StatCard
           title="Total Contracts"
-          value="47"
-          trend="↑ 12% YoY"
+          value="5"
+          trend="Demo Portfolio"
         />
         <StatCard
           title="Annual Spend"
-          value="$2.4M"
-          trend="↑ 18% YoY"
+          value="$400K"
+          trend="5 Active Contracts"
         />
         <StatCard
           title="Renewals This Q"
-          value="12"
-          trend="3 High Risk"
+          value="5"
+          trend="2 High Risk"
         />
       </div>
 
       {/* Urgent Alerts Card */}
       <div className="card card-accent card-accent-danger" style={{ marginBottom: 'var(--space-6)' }}>
         <div className="card-header">
-          <h2 className="text-h2">⚠️ URGENT: 3 Contracts Need Attention</h2>
+          <h2 className="text-h2">⚠️ URGENT: 2 High Risk Contracts Need Attention</h2>
         </div>
         <div className="card-body">
           <RiskItem
-            title="SaaS Master Agreement"
+            title="Salesforce Enterprise Agreement"
             renewalDate="January 15, 2026 (30 days)"
             risk="Auto-renewal clause"
-            onViewDetails={() => handleViewDetails('saas-msa')}
+            onViewDetails={() => handleViewDetails('salesforce-ea')}
           />
           <RiskItem
-            title="SaaS Data Processing Addendum"
+            title="Acme Corp Software License Agreement"
+            renewalDate="February 15, 2026 (60 days)"
+            risk="Liability cap limitation"
+            onViewDetails={() => handleViewDetails('acme-saas')}
+          />
+          <RiskItem
+            title="HubSpot Marketing Hub Order Form"
             renewalDate="January 22, 2026 (37 days)"
-            risk="Data handling terms"
-            onViewDetails={() => handleViewDetails('saas-dpa')}
-          />
-          <RiskItem
-            title="NIL Athlete Agreement"
-            renewalDate="February 1, 2026 (47 days)"
-            risk="Compensation structure"
-            onViewDetails={() => handleViewDetails('nil-athlete-agreement')}
+            risk="Price increase clause"
+            onViewDetails={() => handleViewDetails('hubspot-mh')}
           />
         </div>
         <div className="card-footer">

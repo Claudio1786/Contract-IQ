@@ -101,7 +101,7 @@ export default function ContractsPage() {
   const [filterValue, setFilterValue] = useState('all');
   const [sortValue, setSortValue] = useState('recent');
 
-  // Mock contract data
+  // Demo contract data - 5 visible + 1 hidden slot for uploaded docs
   const contracts: ContractCardProps[] = [
     {
       id: 'salesforce-ea',
@@ -132,8 +132,31 @@ export default function ContractsPage() {
       keyTerm: 'Standard terms',
       risk: 'low',
       riskLabel: 'L'
+    },
+    {
+      id: 'acme-saas',
+      name: 'Acme Corp Software License Agreement',
+      vendor: 'Acme Corp',
+      renewalDate: 'Feb 15, 2026',
+      annualValue: '$95,000',
+      keyTerm: 'Liability cap limitation',
+      risk: 'high',
+      riskLabel: 'H'
+    },
+    {
+      id: 'techstart-msa',
+      name: 'TechStart Inc Master Service Agreement',
+      vendor: 'TechStart Inc',
+      renewalDate: 'Mar 1, 2026',
+      annualValue: '$45,000',
+      keyTerm: 'Payment terms extended',
+      risk: 'medium',
+      riskLabel: 'M'
     }
   ];
+
+  // Hidden 6th slot for uploaded documents (will be dynamically populated)
+  const uploadedContract = null; // This would be populated from sessionStorage/API
 
   const router = useRouter();
 

@@ -62,28 +62,28 @@ export default function AnalyticsPage() {
 
   const categoryData: CategoryBarProps[] = [
     {
-      name: 'CRM',
-      percentage: 35,
-      value: '$840K',
-      vendors: ['Salesforce [1]', 'HubSpot [2]', 'Intercom [3]']
+      name: 'CRM & Sales',
+      percentage: 45,
+      value: '$180K',
+      vendors: ['Salesforce Enterprise Agreement']
     },
     {
-      name: 'Infrastructure',
-      percentage: 28,
-      value: '$672K',
-      vendors: ['AWS [4]', 'Azure [5]', 'MongoDB [6]', 'Datadog [7]']
+      name: 'Marketing',
+      percentage: 18,
+      value: '$72K',
+      vendors: ['HubSpot Marketing Hub']
+    },
+    {
+      name: 'Software Development',
+      percentage: 24,
+      value: '$95K',
+      vendors: ['Acme Corp Software License']
     },
     {
       name: 'Productivity',
-      percentage: 22,
-      value: '$528K',
-      vendors: ['Google Workspace [8]', 'Slack [9]', 'Notion [10]']
-    },
-    {
-      name: 'Security',
-      percentage: 15,
-      value: '$360K',
-      vendors: ['Okta [11]', '1Password [12]', 'Snyk [13]']
+      percentage: 13,
+      value: '$53K',
+      vendors: ['Notion Team Plan', 'TechStart MSA']
     }
   ];
 
@@ -140,18 +140,18 @@ export default function AnalyticsPage() {
         }}>
           <StatCard
             title="Total Spend"
-            value="$2.4M"
-            trend="↑ 18% YoY"
+            value="$400K"
+            trend="Demo Portfolio"
           />
           <StatCard
             title="Contracts"
-            value="47"
-            trend="↑ 12% YoY"
+            value="5"
+            trend="Active Agreements"
           />
           <StatCard
             title="Avg Contract"
-            value="$51K"
-            trend="↑ 5% YoY"
+            value="$80K"
+            trend="2 High Risk"
           />
         </div>
 

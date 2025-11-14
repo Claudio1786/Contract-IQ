@@ -44,11 +44,11 @@ export default function NotificationsModal({ isOpen, onClose }: NotificationsMod
       id: '3',
       type: 'success',
       title: 'Contract Analysis Complete',
-      message: 'NIL Athlete Agreement has been successfully analyzed with 3 key insights.',
+      message: 'Enterprise Cloud Services Agreement has been successfully analyzed with 3 key insights.',
       timestamp: '2 days ago',
       read: true,
       actionText: 'View Results',
-      actionUrl: '/contracts/nil-athlete-agreement'
+      actionUrl: '/contracts/enterprise-cloud-services'
     },
     {
       id: '4',
