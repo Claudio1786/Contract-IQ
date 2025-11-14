@@ -190,11 +190,11 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
               ))}
             </select>
             {getScenarioContext() && (
-              <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-md">
-                <div className="text-sm text-blue-800">
+              <div className="mt-3 p-4 bg-blue-50 border border-blue-200 rounded-md">
+                <div className="text-sm text-blue-800 leading-relaxed mb-2">
                   <strong>📊 Market Context:</strong> {getScenarioContext()?.successRate}
                 </div>
-                <div className="text-sm text-blue-600 mt-1">
+                <div className="text-sm text-blue-600 leading-relaxed">
                   {getScenarioContext()?.timing}
                 </div>
               </div>
@@ -207,9 +207,9 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Key Objectives * <span className="text-xs text-gray-500">(Select multiple)</span>
               </label>
-              <div className="space-y-2 max-h-80 overflow-y-auto border border-gray-200 rounded-md p-3">
+              <div className="space-y-4 max-h-80 overflow-y-auto border border-gray-200 rounded-md p-4">
                 {getAvailableObjectives().map((objective) => (
-                  <div key={objective.id} className="flex items-start space-x-3">
+                  <div key={objective.id} className="flex items-start space-x-3 py-2">
                     <input
                       type="checkbox"
                       id={objective.id}
@@ -220,23 +220,26 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
                     <div className="flex-1 min-w-0">
                       <label 
                         htmlFor={objective.id}
-                        className="text-sm font-medium text-gray-900 cursor-pointer"
+                        className="text-sm font-medium text-gray-900 cursor-pointer block mb-2"
                       >
                         {objective.title}
                       </label>
-                      <p className="text-xs text-gray-600 mt-1">
+                      <p className="text-xs text-gray-600 mb-2 leading-relaxed">
                         {objective.description}
                       </p>
-                      <div className="text-xs text-blue-600 mt-1">
-                        💪 Success Rate: {objective.successRate} | 📊 {objective.benchmark}
+                      <div className="text-xs text-blue-600 leading-relaxed">
+                        💪 Success Rate: {objective.successRate}
+                      </div>
+                      <div className="text-xs text-blue-600 mt-1 leading-relaxed">
+                        📊 {objective.benchmark}
                       </div>
                     </div>
                   </div>
                 ))}
                 
                 {/* Custom objective option */}
-                <div className="pt-2 border-t border-gray-200">
-                  <div className="flex items-start space-x-3">
+                <div className="pt-4 border-t border-gray-200">
+                  <div className="flex items-start space-x-3 py-2">
                     <input
                       type="checkbox"
                       id="custom_objective"
@@ -245,14 +248,14 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
                       className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                     />
                     <div className="flex-1">
-                      <label htmlFor="custom_objective" className="text-sm font-medium text-gray-900 cursor-pointer">
+                      <label htmlFor="custom_objective" className="text-sm font-medium text-gray-900 cursor-pointer block mb-2">
                         ✏️ Custom Objective (specify below)
                       </label>
                       {formData.objectives.includes('custom') && (
                         <textarea
                           placeholder="Describe your custom negotiation objective..."
                           className="mt-2 w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
-                          rows={2}
+                          rows={3}
                         />
                       )}
                     </div>
