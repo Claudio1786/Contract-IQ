@@ -45,27 +45,44 @@ export default function UploadPage() {
       });
 
       // Simulate upload delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
       setUploadStatus({ 
         status: 'processing', 
         fileName: file.name,
-        message: 'Processing contract with AI...' 
+        message: 'Analyzing contract with AI...' 
       });
 
-      // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      // Simulate AI analysis processing
+      await new Promise(resolve => setTimeout(resolve, 2500));
 
       setUploadStatus({ 
         status: 'success', 
         fileName: file.name,
-        message: 'Contract processed successfully!' 
+        message: 'Contract analysis complete!' 
       });
 
-      // After success, redirect to contract view or chat
+      // Create a contract ID from the file name and timestamp
+      const contractId = `uploaded-${file.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${Date.now()}`;
+      
+      // Store the contract data in sessionStorage for the analysis page
+      const contractData = {
+        id: contractId,
+        fileName: file.name,
+        uploadedAt: new Date().toISOString(),
+        analysisComplete: true,
+        fileType: file.type,
+        fileSize: file.size
+      };
+      
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem(`contract-${contractId}`, JSON.stringify(contractData));
+      }
+
+      // Redirect to contract analysis after brief success display
       setTimeout(() => {
-        router.push(`/contracts/uploaded-${Date.now()}?new=true`);
-      }, 2000);
+        router.push(`/contracts/${contractId}?analysis=complete`);
+      }, 1500);
 
     } catch (error) {
       setUploadStatus({ 
