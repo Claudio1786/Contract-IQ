@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AppLayout from '../../components/layout/AppLayout';
 
@@ -8,6 +8,8 @@ interface UploadStatus {
   status: 'idle' | 'uploading' | 'processing' | 'success' | 'error';
   message?: string;
   fileName?: string;
+  redirectTimer?: NodeJS.Timeout;
+  contractId?: string;
 }
 
 export default function UploadPage() {
@@ -37,6 +39,15 @@ export default function UploadPage() {
         : [...prev, objectiveId]
     );
   };
+
+  // Cleanup redirect timer on unmount
+  useEffect(() => {
+    return () => {
+      if (uploadStatus.redirectTimer) {
+        clearTimeout(uploadStatus.redirectTimer);
+      }
+    };
+  }, [uploadStatus.redirectTimer]);
 
   const handleFileUpload = async (file: File) => {
     // Validate file
@@ -104,10 +115,17 @@ export default function UploadPage() {
         sessionStorage.setItem('last-uploaded-contract', contractId);
       }
 
-      // Redirect to contract analysis after brief success display
-      setTimeout(() => {
+      // Attempt automatic redirect after brief success display
+      const redirectTimer = setTimeout(() => {
         router.push(`/contracts/${contractId}?analysis=complete`);
-      }, 1500);
+      }, 2000);
+
+      // Store the redirect timer and contract ID for cleanup and manual navigation
+      setUploadStatus(prev => ({ 
+        ...prev, 
+        redirectTimer,
+        contractId 
+      }));
 
     } catch (error) {
       setUploadStatus({ 
@@ -247,9 +265,50 @@ export default function UploadPage() {
                     <h3 className="text-lg font-medium text-success" style={{ marginBottom: 'var(--space-2)' }}>
                       {uploadStatus.message}
                     </h3>
-                    <p className="text-base text-secondary">
+                    <p className="text-base text-secondary" style={{ marginBottom: 'var(--space-4)' }}>
                       Redirecting to contract analysis...
                     </p>
+                    
+                    {/* Manual Navigation Fallback */}
+                    <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'center', flexWrap: 'wrap' }}>
+                      <button 
+                        className="btn-primary"
+                        onClick={() => {
+                          if (uploadStatus.redirectTimer) {
+                            clearTimeout(uploadStatus.redirectTimer);
+                          }
+                          if (uploadStatus.contractId) {
+                            router.push(`/contracts/${uploadStatus.contractId}?analysis=complete`);
+                          }
+                        }}
+                      >
+                        📊 View Analysis Results
+                      </button>
+                      <button 
+                        className="btn-secondary"
+                        onClick={() => {
+                          if (uploadStatus.redirectTimer) {
+                            clearTimeout(uploadStatus.redirectTimer);
+                          }
+                          router.push('/contracts');
+                        }}
+                      >
+                        📚 Go to Contracts Library
+                      </button>
+                      <button 
+                        className="btn-secondary"
+                        onClick={() => {
+                          if (uploadStatus.redirectTimer) {
+                            clearTimeout(uploadStatus.redirectTimer);
+                          }
+                          if (uploadStatus.contractId) {
+                            router.push(`/playbooks?contract=${uploadStatus.contractId}`);
+                          }
+                        }}
+                      >
+                        🎯 Create Negotiation Playbook
+                      </button>
+                    </div>
                   </>
                 )}
 
