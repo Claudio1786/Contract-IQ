@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import AppLayout from '../../components/layout/AppLayout';
 
 interface ContractCardProps {
@@ -22,8 +23,15 @@ function ContractCard({
   annualValue, 
   keyTerm, 
   risk, 
-  riskLabel 
-}: ContractCardProps) {
+  riskLabel,
+  onView,
+  onAnalyze,
+  onGeneratePlaybook
+}: ContractCardProps & {
+  onView: () => void;
+  onAnalyze: () => void;
+  onGeneratePlaybook: () => void;
+}) {
   const accentClass = risk === 'high' ? 'card-accent-danger' : 
                      risk === 'medium' ? 'card-accent-warning' : 
                      'card-accent-success';
@@ -76,9 +84,9 @@ function ContractCard({
 
         {/* Actions Row */}
         <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
-          <button className="btn-ghost btn-sm">View</button>
-          <button className="btn-ghost btn-sm">Analyze</button>
-          <button className="btn-primary btn-sm">Generate Playbook</button>
+          <button className="btn-ghost btn-sm" onClick={onView}>View</button>
+          <button className="btn-ghost btn-sm" onClick={onAnalyze}>Analyze</button>
+          <button className="btn-primary btn-sm" onClick={onGeneratePlaybook}>Generate Playbook</button>
         </div>
       </div>
     </div>
@@ -127,9 +135,22 @@ export default function ContractsPage() {
     }
   ];
 
+  const router = useRouter();
+
   const handleUploadContracts = () => {
-    // TODO: Implement upload functionality
-    alert('Upload contracts functionality coming soon!');
+    router.push('/upload');
+  };
+
+  const handleViewContract = (contractId: string) => {
+    router.push(`/contracts/${contractId}`);
+  };
+
+  const handleAnalyzeContract = (contractId: string) => {
+    router.push(`/chat?contract=${contractId}&q=Analyze this contract for risks and opportunities`);
+  };
+
+  const handleGeneratePlaybook = (contractId: string) => {
+    router.push(`/playbooks?contract=${contractId}`);
   };
 
   return (
@@ -191,7 +212,13 @@ export default function ContractsPage() {
         {/* Contracts List */}
         <div style={{ marginBottom: 'var(--space-8)' }}>
           {contracts.map((contract) => (
-            <ContractCard key={contract.id} {...contract} />
+            <ContractCard 
+              key={contract.id} 
+              {...contract}
+              onView={() => handleViewContract(contract.id)}
+              onAnalyze={() => handleAnalyzeContract(contract.id)}
+              onGeneratePlaybook={() => handleGeneratePlaybook(contract.id)}
+            />
           ))}
 
           {/* Load More */}

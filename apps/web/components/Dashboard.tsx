@@ -108,22 +108,22 @@ export default function Dashboard() {
         </div>
         <div className="card-body">
           <RiskItem
-            title="Salesforce Enterprise Agreement"
+            title="SaaS Master Agreement"
             renewalDate="January 15, 2026 (30 days)"
             risk="Auto-renewal clause"
-            onViewDetails={() => handleViewDetails('salesforce-ea')}
+            onViewDetails={() => handleViewDetails('saas-msa')}
           />
           <RiskItem
-            title="HubSpot Marketing Hub"
+            title="SaaS Data Processing Addendum"
             renewalDate="January 22, 2026 (37 days)"
-            risk="Price increase clause"
-            onViewDetails={() => handleViewDetails('hubspot-mh')}
+            risk="Data handling terms"
+            onViewDetails={() => handleViewDetails('saas-dpa')}
           />
           <RiskItem
-            title="Azure Enterprise Agreement"
+            title="NIL Athlete Agreement"
             renewalDate="February 1, 2026 (47 days)"
-            risk="Uncapped liability"
-            onViewDetails={() => handleViewDetails('azure-ea')}
+            risk="Compensation structure"
+            onViewDetails={() => handleViewDetails('nil-athlete-agreement')}
           />
         </div>
         <div className="card-footer">

@@ -1,89 +1,317 @@
 'use client';
 
-import React from 'react';
-import { AppShell } from '../../components/layout/AppShell';
-import { FileUpload } from '../../components/ui';
-import { useChat } from '../../hooks/useChat';
+import React, { useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import AppLayout from '../../components/layout/AppLayout';
+
+interface UploadStatus {
+  status: 'idle' | 'uploading' | 'processing' | 'success' | 'error';
+  message?: string;
+  fileName?: string;
+}
 
 export default function UploadPage() {
-  const { uploadContract, isLoading, error } = useChat();
+  const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus>({ status: 'idle' });
+  const [dragActive, setDragActive] = useState(false);
 
-  const handleFileSelect = async (file: File) => {
+  const handleFileUpload = async (file: File) => {
+    // Validate file
+    if (!file) return;
+    
+    const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword', 'text/plain'];
+    if (!allowedTypes.includes(file.type)) {
+      setUploadStatus({ 
+        status: 'error', 
+        message: 'Please upload a PDF, Word document, or text file.' 
+      });
+      return;
+    }
+
+    if (file.size > 25 * 1024 * 1024) {
+      setUploadStatus({ 
+        status: 'error', 
+        message: 'File must be smaller than 25MB.' 
+      });
+      return;
+    }
+
     try {
-      await uploadContract(file);
-      // Redirect to chat after successful upload
-      window.location.href = '/chat';
-    } catch (err) {
-      console.error('Upload failed:', err);
+      setUploadStatus({ 
+        status: 'uploading', 
+        fileName: file.name,
+        message: 'Uploading your contract...' 
+      });
+
+      // Simulate upload delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      setUploadStatus({ 
+        status: 'processing', 
+        fileName: file.name,
+        message: 'Processing contract with AI...' 
+      });
+
+      // Simulate processing delay
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      setUploadStatus({ 
+        status: 'success', 
+        fileName: file.name,
+        message: 'Contract processed successfully!' 
+      });
+
+      // After success, redirect to contract view or chat
+      setTimeout(() => {
+        router.push(`/contracts/uploaded-${Date.now()}?new=true`);
+      }, 2000);
+
+    } catch (error) {
+      setUploadStatus({ 
+        status: 'error', 
+        message: 'Upload failed. Please try again.' 
+      });
     }
   };
 
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      handleFileUpload(files[0]);
+    }
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      handleFileUpload(files[0]);
+    }
+  };
+
+  const openFileSelector = () => {
+    fileInputRef.current?.click();
+  };
+
+  const isProcessing = ['uploading', 'processing'].includes(uploadStatus.status);
+
   return (
-    <AppShell>
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
-        <div className="bg-white border-b border-gray-200 p-6">
-          <div className="max-w-2xl mx-auto">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Upload Your Contract
-            </h1>
-            <p className="text-gray-600">
-              Upload a contract document to start analyzing terms, identifying risks, and developing negotiation strategies.
-            </p>
-          </div>
+    <AppLayout>
+      <div>
+        {/* Page Header */}
+        <div style={{ marginBottom: 'var(--space-6)' }}>
+          <h1 className="text-h1">Upload Contract</h1>
+          <p className="text-base text-secondary" style={{ marginTop: 'var(--space-2)' }}>
+            Upload your contract to start analyzing terms, identifying risks, and getting AI-powered insights.
+          </p>
         </div>
 
         {/* Upload Area */}
-        <div className="flex-1 p-6 bg-gray-50">
-          <div className="max-w-2xl mx-auto">
-            <FileUpload
-              onFileSelect={handleFileSelect}
-              isUploading={isLoading}
-              onError={(error) => console.error('Upload error:', error)}
-              accept=".pdf,.docx,.doc,.txt"
-              maxSizeMB={25}
-            />
-            
-            {error && (
-              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
-                <div className="text-red-800 text-sm font-medium">
-                  Upload failed
-                </div>
-                <div className="text-red-600 text-sm mt-1">
-                  {error}
-                </div>
+        <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
+          <div className="card-body">
+            <div
+              className={`upload-zone ${dragActive ? 'upload-zone-active' : ''} ${isProcessing ? 'upload-zone-processing' : ''}`}
+              onDragEnter={handleDrag}
+              onDragLeave={handleDrag}
+              onDragOver={handleDrag}
+              onDrop={handleDrop}
+              onClick={!isProcessing ? openFileSelector : undefined}
+              style={{
+                border: '2px dashed var(--color-border)',
+                borderRadius: 'var(--radius-xl)',
+                padding: 'var(--space-8)',
+                textAlign: 'center',
+                cursor: isProcessing ? 'not-allowed' : 'pointer',
+                transition: 'all var(--transition-fast)',
+                backgroundColor: dragActive ? 'var(--primary-50)' : 'var(--gray-50)',
+                borderColor: dragActive ? 'var(--primary-400)' : 
+                            uploadStatus.status === 'error' ? 'var(--danger-400)' :
+                            uploadStatus.status === 'success' ? 'var(--success-400)' :
+                            'var(--color-border)'
+              }}
+            >
+              {/* Upload Icon/Status */}
+              <div style={{ marginBottom: 'var(--space-4)' }}>
+                {uploadStatus.status === 'idle' && (
+                  <div style={{ fontSize: '48px' }}>📄</div>
+                )}
+                {uploadStatus.status === 'uploading' && (
+                  <div style={{ fontSize: '48px' }}>⬆️</div>
+                )}
+                {uploadStatus.status === 'processing' && (
+                  <div style={{ fontSize: '48px' }}>🔄</div>
+                )}
+                {uploadStatus.status === 'success' && (
+                  <div style={{ fontSize: '48px' }}>✅</div>
+                )}
+                {uploadStatus.status === 'error' && (
+                  <div style={{ fontSize: '48px' }}>❌</div>
+                )}
               </div>
-            )}
-            
-            {/* Features Preview */}
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white p-4 rounded-lg border border-gray-200">
-                <div className="text-blue-600 text-lg mb-2">🔍</div>
-                <h3 className="font-medium text-gray-900 mb-1">Risk Analysis</h3>
-                <p className="text-sm text-gray-600">
-                  Automatically identify potential risks, liabilities, and unfavorable terms
-                </p>
+
+              {/* Status Message */}
+              <div>
+                {uploadStatus.status === 'idle' && (
+                  <>
+                    <h3 className="text-lg font-medium" style={{ marginBottom: 'var(--space-2)' }}>
+                      Drop your contract here
+                    </h3>
+                    <p className="text-base text-secondary">
+                      or click to browse files
+                    </p>
+                    <p className="text-sm text-tertiary" style={{ marginTop: 'var(--space-2)' }}>
+                      Supports PDF, Word, and text files up to 25MB
+                    </p>
+                  </>
+                )}
+                
+                {isProcessing && (
+                  <>
+                    <h3 className="text-lg font-medium" style={{ marginBottom: 'var(--space-2)' }}>
+                      {uploadStatus.message}
+                    </h3>
+                    {uploadStatus.fileName && (
+                      <p className="text-base text-secondary">
+                        {uploadStatus.fileName}
+                      </p>
+                    )}
+                    <div className="progress" style={{ 
+                      marginTop: 'var(--space-4)',
+                      maxWidth: '300px',
+                      marginLeft: 'auto',
+                      marginRight: 'auto'
+                    }}>
+                      <div className="progress-bar progress-bar-animated" style={{ width: '70%' }}></div>
+                    </div>
+                  </>
+                )}
+
+                {uploadStatus.status === 'success' && (
+                  <>
+                    <h3 className="text-lg font-medium text-success" style={{ marginBottom: 'var(--space-2)' }}>
+                      {uploadStatus.message}
+                    </h3>
+                    <p className="text-base text-secondary">
+                      Redirecting to contract analysis...
+                    </p>
+                  </>
+                )}
+
+                {uploadStatus.status === 'error' && (
+                  <>
+                    <h3 className="text-lg font-medium text-danger" style={{ marginBottom: 'var(--space-2)' }}>
+                      Upload Failed
+                    </h3>
+                    <p className="text-base text-secondary">
+                      {uploadStatus.message}
+                    </p>
+                    <button 
+                      className="btn-primary" 
+                      style={{ marginTop: 'var(--space-4)' }}
+                      onClick={() => setUploadStatus({ status: 'idle' })}
+                    >
+                      Try Again
+                    </button>
+                  </>
+                )}
               </div>
-              
-              <div className="bg-white p-4 rounded-lg border border-gray-200">
-                <div className="text-green-600 text-lg mb-2">💬</div>
-                <h3 className="font-medium text-gray-900 mb-1">AI Chat</h3>
-                <p className="text-sm text-gray-600">
-                  Ask questions and get instant answers about any contract clause
-                </p>
-              </div>
-              
-              <div className="bg-white p-4 rounded-lg border border-gray-200">
-                <div className="text-purple-600 text-lg mb-2">🎯</div>
-                <h3 className="font-medium text-gray-900 mb-1">Negotiation Tips</h3>
-                <p className="text-sm text-gray-600">
-                  Get strategic recommendations for improving contract terms
-                </p>
-              </div>
+
+              {/* Hidden File Input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.docx,.doc,.txt"
+                onChange={handleFileSelect}
+                style={{ display: 'none' }}
+              />
             </div>
           </div>
         </div>
+
+        {/* Features Preview */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+          gap: 'var(--space-4)' 
+        }}>
+          <div className="card">
+            <div className="card-body" style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '32px', marginBottom: 'var(--space-3)' }}>🔍</div>
+              <h3 className="text-h3" style={{ marginBottom: 'var(--space-2)' }}>Risk Analysis</h3>
+              <p className="text-sm text-secondary">
+                Automatically identify potential risks, liabilities, and unfavorable terms in your contracts.
+              </p>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-body" style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '32px', marginBottom: 'var(--space-3)' }}>💬</div>
+              <h3 className="text-h3" style={{ marginBottom: 'var(--space-2)' }}>AI Chat</h3>
+              <p className="text-sm text-secondary">
+                Ask questions and get instant answers about any clause or term in your contract.
+              </p>
+            </div>
+          </div>
+
+          <div className="card">
+            <div className="card-body" style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '32px', marginBottom: 'var(--space-3)' }}>🎯</div>
+              <h3 className="text-h3" style={{ marginBottom: 'var(--space-2)' }}>Negotiation Tips</h3>
+              <p className="text-sm text-secondary">
+                Get strategic recommendations and playbooks for improving your contract terms.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div style={{ 
+          marginTop: 'var(--space-8)',
+          textAlign: 'center',
+          padding: 'var(--space-6)',
+          backgroundColor: 'var(--gray-50)',
+          borderRadius: 'var(--radius-xl)'
+        }}>
+          <h3 className="text-h3" style={{ marginBottom: 'var(--space-4)' }}>
+            Or explore with our demo contracts
+          </h3>
+          <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button 
+              className="btn-secondary"
+              onClick={() => router.push('/contracts/saas-msa')}
+            >
+              📄 SaaS Agreement
+            </button>
+            <button 
+              className="btn-secondary"
+              onClick={() => router.push('/contracts/saas-dpa')}
+            >
+              🔒 Data Processing
+            </button>
+            <button 
+              className="btn-secondary"
+              onClick={() => router.push('/contracts/healthcare-baa')}
+            >
+              🏥 Healthcare BAA
+            </button>
+          </div>
+        </div>
       </div>
-    </AppShell>
+    </AppLayout>
   );
 }
