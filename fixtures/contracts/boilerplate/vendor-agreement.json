@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "template": "vendor-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "Vendor_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "COMPANY",
+        "role": "party-1"
+      },
+      {
+        "name": "Company",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "obligation",
+      "section": "1. SCOPE OF WORK",
+      "text": "1.1 Products and Services. Vendor shall provide the products and/or services described in the attached Purchase Order or Statement of Work (\"Products\").\n1.2 Quality Standards. All Products shall meet the specifications set forth in this Agreement and conform to industry standards.\n1.3 Delivery. Vendor shall deliver Products by the dates specified in the Purchase Order. Time is of the essence.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. PRICING AND PAYMENT",
+      "text": "2.1 Pricing. Vendor shall provide Products at the prices specified in the Price Schedule attached as Exhibit A.\n2.2 Payment Terms. Invoices are due net thirty (30) days from receipt. Late payments accrue interest at 1.5% per month.\n2.3 Price Changes. Vendor may not increase prices without ninety (90) days' prior written notice.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. WARRANTIES",
+      "text": "3.1 Product Warranty. Vendor warrants that all Products shall: (a) conform to specifications; (b) be free from defects in materials and workmanship; (c) be fit for their intended purpose; and (d) comply with all applicable laws and regulations.\n3.2 Warranty Period. The warranty period is [Number] months from delivery.\n3.3 Remedies. For breach of warranty, Vendor shall, at Company's option: (a) repair or replace defective Products; (b) refund the purchase price; or (c) provide a credit for future",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "termination",
+      "section": "4. INTELLECTUAL PROPERTY",
+      "text": "4.1 Ownership. Vendor retains ownership of all pre-existing intellectual property. Company owns all custom work product created specifically for Company.\n4.2 License. Vendor grants Company a non-exclusive license to use any Vendor intellectual property incorporated into the Products.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. CONFIDENTIALITY",
+      "text": "5.1 Protection. Each party shall protect the other's confidential information with the same degree of care used to protect its own confidential information.\n5.2 Non-Disclosure. Neither party shall disclose the other's confidential information to third parties without prior written consent.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. PERFORMANCE STANDARDS",
+      "text": "6.1 Key Performance Indicators. Vendor shall meet the following KPIs: (a) On-time delivery: 95%; (b) Quality acceptance rate: 98%; (c) Response time: 24 hours for critical issues.\n6.2 Performance Reviews. Company shall conduct quarterly performance reviews. Failure to meet KPIs may result in termination.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "termination",
+      "section": "7. TERMINATION",
+      "text": "7.1 Termination for Convenience. Either party may terminate upon sixty (60) days' written notice.\n7.2 Termination for Cause. Either party may terminate immediately for material breach, insolvency, or failure to deliver.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "obligation",
+      "section": "8. INDEMNIFICATION",
+      "text": "Vendor shall indemnify Company from claims arising from: (a) product defects; (b) intellectual property infringement; (c) violation of law; or (d) Vendor's negligence or willful misconduct.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. LIMITATION OF LIABILITY",
+      "text": "VENDOR'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNTS PAID BY COMPANY IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "obligation",
+      "section": "10. GENERAL PROVISIONS",
+      "text": "10.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n10.2 Governing Law. This Agreement shall be governed by the laws of [State].\n10.3 Assignment. Neither party may assign without prior written consent.\nIN WITNESS WHEREOF, the parties have executed this Agreement.\nCOMPANY:\t\t\t\tVENDOR:\nBy: _________________________\t\tBy: _________________________\nName: [Name]\t\t\t\tName: [Name]\nDate: _______________\t\t\tDate: _______________",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "VENDOR AGREEMENT\n\nThis Vendor Agreement (\"Agreement\") is entered into as of [Date] (\"Effective Date\") by and between [Company Name], a [State] corporation (\"Company\"), and [Vendor Name], a [State] corporation (\"Vendor\").\n\n1. SCOPE OF WORK\n\n1.1 Products and Services. Vendor shall provide the products and/or services described in the attached Purchase Order or Statement of Work (\"Products\").\n\n1.2 Quality Standards. All Products shall meet the specifications set forth in this Agreement and conform to industry standards.\n\n1.3 Delivery. Vendor shall deliver Products by the dates specified in the Purchase Order. Time is of the essence.\n\n2. PRICING AND PAYMENT\n\n2.1 Pricing. Vendor shall provide Products at the prices specified in the Price Schedule attached as Exhibit A.\n\n2.2 Payment Terms. Invoices are due net thirty (30) days from receipt. Late payments accrue interest at 1.5% per month.\n\n2.3 Price Changes. Vendor may not increase prices without ninety (90) days' prior written notice.\n\n3. WARRANTIES\n\n3.1 Product Warranty. Vendor warrants that all Products shall: (a) conform to specifications; (b) be free from defects in materials and workmanship; (c) be fit for their intended purpose; and (d) comply with all applicable laws and regulations.\n\n3.2 Warranty Period. The warranty period is [Number] months from delivery.\n\n3.3 Remedies. For breach of warranty, Vendor shall, at Company's option: (a) repair or replace defective Products; (b) refund the purchase price; or (c) provide a credit for future purchases.\n\n4. INTELLECTUAL PROPERTY\n\n4.1 Ownership. Vendor retains ownership of all pre-existing intellectual property. Company owns all custom work product created specifically for Company.\n\n4.2 License. Vendor grants Company a non-exclusive license to use any Vendor intellectual property incorporated into the Products.\n\n5. CONFIDENTIALITY\n\n5.1 Protection. Each party shall protect the other's confidential information with the same degree of care used to protect its own confidential information.\n\n5.2 Non-Disclosure. Neither party shall disclose the other's confidential information to third parties without prior written consent.\n\n6. PERFORMANCE STANDARDS\n\n6.1 Key Performance Indicators. Vendor shall meet the following KPIs: (a) On-time delivery: 95%; (b) Quality acceptance rate: 98%; (c) Response time: 24 hours for critical issues.\n\n6.2 Performance Reviews. Company shall conduct quarterly performance reviews. Failure to meet KPIs may result in termination.\n\n7. TERMINATION\n\n7.1 Termination for Convenience. Either party may terminate upon sixty (60) days' written notice.\n\n7.2 Termination for Cause. Either party may terminate immediately for material breach, insolvency, or failure to deliver.\n\n8. INDEMNIFICATION\n\nVendor shall indemnify Company from claims arising from: (a) product defects; (b) intellectual property infringement; (c) violation of law; or (d) Vendor's negligence or willful misconduct.\n\n9. LIMITATION OF LIABILITY\n\nVENDOR'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNTS PAID BY COMPANY IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES.\n\n10. GENERAL PROVISIONS\n\n10.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n\n10.2 Governing Law. This Agreement shall be governed by the laws of [State].\n\n10.3 Assignment. Neither party may assign without prior written consent.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement.\n\nCOMPANY:\t\t\t\tVENDOR:\n\nBy: _________________________\t\tBy: _________________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nDate: _______________\t\t\tDate: _______________",
+    "sections": [
+      {
+        "title": "1. SCOPE OF WORK",
+        "text": "1.1 Products and Services. Vendor shall provide the products and/or services described in the attached Purchase Order or Statement of Work (\"Products\").\n1.2 Quality Standards. All Products shall meet the specifications set forth in this Agreement and conform to industry standards.\n1.3 Delivery. Vendor shall deliver Products by the dates specified in the Purchase Order. Time is of the essence."
+      },
+      {
+        "title": "2. PRICING AND PAYMENT",
+        "text": "2.1 Pricing. Vendor shall provide Products at the prices specified in the Price Schedule attached as Exhibit A.\n2.2 Payment Terms. Invoices are due net thirty (30) days from receipt. Late payments accrue interest at 1.5% per month.\n2.3 Price Changes. Vendor may not increase prices without ninety (90) days' prior written notice."
+      },
+      {
+        "title": "3. WARRANTIES",
+        "text": "3.1 Product Warranty. Vendor warrants that all Products shall: (a) conform to specifications; (b) be free from defects in materials and workmanship; (c) be fit for their intended purpose; and (d) comply with all applicable laws and regulations.\n3.2 Warranty Period. The warranty period is [Number] months from delivery.\n3.3 Remedies. For breach of warranty, Vendor shall, at Company's option: (a) repair or replace defective Products; (b) refund the purchase price; or (c) provide a credit for future purchases."
+      },
+      {
+        "title": "4. INTELLECTUAL PROPERTY",
+        "text": "4.1 Ownership. Vendor retains ownership of all pre-existing intellectual property. Company owns all custom work product created specifically for Company.\n4.2 License. Vendor grants Company a non-exclusive license to use any Vendor intellectual property incorporated into the Products."
+      },
+      {
+        "title": "5. CONFIDENTIALITY",
+        "text": "5.1 Protection. Each party shall protect the other's confidential information with the same degree of care used to protect its own confidential information.\n5.2 Non-Disclosure. Neither party shall disclose the other's confidential information to third parties without prior written consent."
+      },
+      {
+        "title": "6. PERFORMANCE STANDARDS",
+        "text": "6.1 Key Performance Indicators. Vendor shall meet the following KPIs: (a) On-time delivery: 95%; (b) Quality acceptance rate: 98%; (c) Response time: 24 hours for critical issues.\n6.2 Performance Reviews. Company shall conduct quarterly performance reviews. Failure to meet KPIs may result in termination."
+      },
+      {
+        "title": "7. TERMINATION",
+        "text": "7.1 Termination for Convenience. Either party may terminate upon sixty (60) days' written notice.\n7.2 Termination for Cause. Either party may terminate immediately for material breach, insolvency, or failure to deliver."
+      },
+      {
+        "title": "8. INDEMNIFICATION",
+        "text": "Vendor shall indemnify Company from claims arising from: (a) product defects; (b) intellectual property infringement; (c) violation of law; or (d) Vendor's negligence or willful misconduct."
+      },
+      {
+        "title": "9. LIMITATION OF LIABILITY",
+        "text": "VENDOR'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNTS PAID BY COMPANY IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES."
+      },
+      {
+        "title": "10. GENERAL PROVISIONS",
+        "text": "10.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n10.2 Governing Law. This Agreement shall be governed by the laws of [State].\n10.3 Assignment. Neither party may assign without prior written consent.\nIN WITNESS WHEREOF, the parties have executed this Agreement.\nCOMPANY:\t\t\t\tVENDOR:\nBy: _________________________\t\tBy: _________________________\nName: [Name]\t\t\t\tName: [Name]\nDate: _______________\t\t\tDate: _______________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.068219Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

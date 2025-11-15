@@ -1,0 +1,175 @@
+{
+  "metadata": {
+    "template": "reseller-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "Reseller_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "Customer",
+        "role": "party-1"
+      },
+      {
+        "name": "SELLER",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "general",
+      "section": "1. APPOINTMENT",
+      "text": "1.1 Grant of Rights. Supplier appoints Reseller as a [exclusive/non-exclusive] reseller of the Products in the Territory.\n1.2 Territory. \"Territory\" means [Geographic Region].\n1.3 Products. \"Products\" means the products and services described in Exhibit A.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. PRICING AND PAYMENT",
+      "text": "2.1 Reseller Pricing. Supplier shall sell Products to Reseller at the wholesale prices listed in Exhibit B, representing a [Percentage]% discount from retail prices.\n2.2 Payment Terms. Reseller shall pay invoices within thirty (30) days. Late payments accrue interest at 1.5% per month.\n2.3 Minimum Purchase Requirements. Reseller shall purchase minimum quantities of $[Amount] per [month/quarter/year].",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. RESELLER OBLIGATIONS",
+      "text": "3.1 Marketing and Sales. Reseller shall actively market and promote the Products within the Territory using commercially reasonable efforts.\n3.2 Sales Targets. Reseller shall meet the annual sales targets set forth in Exhibit C. Failure to meet targets may result in termination.\n3.3 Customer Support. Reseller shall provide first-level customer support. Supplier shall provide technical support as needed.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "4. BRANDING AND MARKETING",
+      "text": "4.1 Use of Trademarks. Reseller may use Supplier's trademarks solely to market the Products in accordance with Supplier's brand guidelines.\n4.2 Marketing Materials. Supplier shall provide marketing materials. All marketing materials must be pre-approved by Supplier.\n4.3 No Modifications. Reseller shall not modify, rebrand, or relabel the Products without prior written consent.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "ip",
+      "section": "5. INTELLECTUAL PROPERTY",
+      "text": "5.1 Ownership. Supplier retains all intellectual property rights in the Products. No rights are transferred except as expressly granted.\n5.2 License. Supplier grants Reseller a limited, non-exclusive license to use Supplier's trademarks for authorized resale purposes only.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. TERM AND TERMINATION",
+      "text": "6.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration], automatically renewing unless terminated.\n6.2 Termination. Either party may terminate upon ninety (90) days' written notice or immediately for material breach.\n6.3 Effect of Termination. Upon termination, Reseller shall: (a) cease using Supplier's trademarks; (b) return all marketing materials; (c) sell remaining inventory within [Number] days.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "obligation",
+      "section": "7. WARRANTIES AND LIMITATIONS",
+      "text": "7.1 Product Warranty. Supplier warrants that Products conform to specifications. Reseller shall not modify or extend warranties.\n7.2 LIMITATION OF LIABILITY. SUPPLIER'S LIABILITY SHALL NOT EXCEED AMOUNTS PAID BY RESELLER IN THE PRECEDING TWELVE MONTHS.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "general",
+      "section": "8. GENERAL PROVISIONS",
+      "text": "8.1 Entire Agreement. This Agreement constitutes the entire agreement.\n8.2 Governing Law. Governed by the laws of [State].\n8.3 Assignment. Neither party may assign without prior written consent.\nIN WITNESS WHEREOF, the parties have executed this Agreement.\nSUPPLIER:\t\t\t\tRESELLER:\nBy: _____________________\t\tBy: _____________________\nName: [Name]\t\t\t\tName: [Name]\nDate: _____________\t\t\tDate: _____________",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "RESELLER AGREEMENT\n\nThis Reseller Agreement (\"Agreement\") is entered into as of [Date] by and between [Supplier Name] (\"Supplier\") and [Reseller Name] (\"Reseller\").\n\n1. APPOINTMENT\n\n1.1 Grant of Rights. Supplier appoints Reseller as a [exclusive/non-exclusive] reseller of the Products in the Territory.\n\n1.2 Territory. \"Territory\" means [Geographic Region].\n\n1.3 Products. \"Products\" means the products and services described in Exhibit A.\n\n2. PRICING AND PAYMENT\n\n2.1 Reseller Pricing. Supplier shall sell Products to Reseller at the wholesale prices listed in Exhibit B, representing a [Percentage]% discount from retail prices.\n\n2.2 Payment Terms. Reseller shall pay invoices within thirty (30) days. Late payments accrue interest at 1.5% per month.\n\n2.3 Minimum Purchase Requirements. Reseller shall purchase minimum quantities of $[Amount] per [month/quarter/year].\n\n3. RESELLER OBLIGATIONS\n\n3.1 Marketing and Sales. Reseller shall actively market and promote the Products within the Territory using commercially reasonable efforts.\n\n3.2 Sales Targets. Reseller shall meet the annual sales targets set forth in Exhibit C. Failure to meet targets may result in termination.\n\n3.3 Customer Support. Reseller shall provide first-level customer support. Supplier shall provide technical support as needed.\n\n4. BRANDING AND MARKETING\n\n4.1 Use of Trademarks. Reseller may use Supplier's trademarks solely to market the Products in accordance with Supplier's brand guidelines.\n\n4.2 Marketing Materials. Supplier shall provide marketing materials. All marketing materials must be pre-approved by Supplier.\n\n4.3 No Modifications. Reseller shall not modify, rebrand, or relabel the Products without prior written consent.\n\n5. INTELLECTUAL PROPERTY\n\n5.1 Ownership. Supplier retains all intellectual property rights in the Products. No rights are transferred except as expressly granted.\n\n5.2 License. Supplier grants Reseller a limited, non-exclusive license to use Supplier's trademarks for authorized resale purposes only.\n\n6. TERM AND TERMINATION\n\n6.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration], automatically renewing unless terminated.\n\n6.2 Termination. Either party may terminate upon ninety (90) days' written notice or immediately for material breach.\n\n6.3 Effect of Termination. Upon termination, Reseller shall: (a) cease using Supplier's trademarks; (b) return all marketing materials; (c) sell remaining inventory within [Number] days.\n\n7. WARRANTIES AND LIMITATIONS\n\n7.1 Product Warranty. Supplier warrants that Products conform to specifications. Reseller shall not modify or extend warranties.\n\n7.2 LIMITATION OF LIABILITY. SUPPLIER'S LIABILITY SHALL NOT EXCEED AMOUNTS PAID BY RESELLER IN THE PRECEDING TWELVE MONTHS.\n\n8. GENERAL PROVISIONS\n\n8.1 Entire Agreement. This Agreement constitutes the entire agreement.\n\n8.2 Governing Law. Governed by the laws of [State].\n\n8.3 Assignment. Neither party may assign without prior written consent.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement.\n\nSUPPLIER:\t\t\t\tRESELLER:\n\nBy: _____________________\t\tBy: _____________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nDate: _____________\t\t\tDate: _____________",
+    "sections": [
+      {
+        "title": "1. APPOINTMENT",
+        "text": "1.1 Grant of Rights. Supplier appoints Reseller as a [exclusive/non-exclusive] reseller of the Products in the Territory.\n1.2 Territory. \"Territory\" means [Geographic Region].\n1.3 Products. \"Products\" means the products and services described in Exhibit A."
+      },
+      {
+        "title": "2. PRICING AND PAYMENT",
+        "text": "2.1 Reseller Pricing. Supplier shall sell Products to Reseller at the wholesale prices listed in Exhibit B, representing a [Percentage]% discount from retail prices.\n2.2 Payment Terms. Reseller shall pay invoices within thirty (30) days. Late payments accrue interest at 1.5% per month.\n2.3 Minimum Purchase Requirements. Reseller shall purchase minimum quantities of $[Amount] per [month/quarter/year]."
+      },
+      {
+        "title": "3. RESELLER OBLIGATIONS",
+        "text": "3.1 Marketing and Sales. Reseller shall actively market and promote the Products within the Territory using commercially reasonable efforts.\n3.2 Sales Targets. Reseller shall meet the annual sales targets set forth in Exhibit C. Failure to meet targets may result in termination.\n3.3 Customer Support. Reseller shall provide first-level customer support. Supplier shall provide technical support as needed."
+      },
+      {
+        "title": "4. BRANDING AND MARKETING",
+        "text": "4.1 Use of Trademarks. Reseller may use Supplier's trademarks solely to market the Products in accordance with Supplier's brand guidelines.\n4.2 Marketing Materials. Supplier shall provide marketing materials. All marketing materials must be pre-approved by Supplier.\n4.3 No Modifications. Reseller shall not modify, rebrand, or relabel the Products without prior written consent."
+      },
+      {
+        "title": "5. INTELLECTUAL PROPERTY",
+        "text": "5.1 Ownership. Supplier retains all intellectual property rights in the Products. No rights are transferred except as expressly granted.\n5.2 License. Supplier grants Reseller a limited, non-exclusive license to use Supplier's trademarks for authorized resale purposes only."
+      },
+      {
+        "title": "6. TERM AND TERMINATION",
+        "text": "6.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration], automatically renewing unless terminated.\n6.2 Termination. Either party may terminate upon ninety (90) days' written notice or immediately for material breach.\n6.3 Effect of Termination. Upon termination, Reseller shall: (a) cease using Supplier's trademarks; (b) return all marketing materials; (c) sell remaining inventory within [Number] days."
+      },
+      {
+        "title": "7. WARRANTIES AND LIMITATIONS",
+        "text": "7.1 Product Warranty. Supplier warrants that Products conform to specifications. Reseller shall not modify or extend warranties.\n7.2 LIMITATION OF LIABILITY. SUPPLIER'S LIABILITY SHALL NOT EXCEED AMOUNTS PAID BY RESELLER IN THE PRECEDING TWELVE MONTHS."
+      },
+      {
+        "title": "8. GENERAL PROVISIONS",
+        "text": "8.1 Entire Agreement. This Agreement constitutes the entire agreement.\n8.2 Governing Law. Governed by the laws of [State].\n8.3 Assignment. Neither party may assign without prior written consent.\nIN WITNESS WHEREOF, the parties have executed this Agreement.\nSUPPLIER:\t\t\t\tRESELLER:\nBy: _____________________\t\tBy: _____________________\nName: [Name]\t\t\t\tName: [Name]\nDate: _____________\t\t\tDate: _____________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.025220Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

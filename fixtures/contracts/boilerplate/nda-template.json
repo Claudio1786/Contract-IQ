@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "template": "nda-template",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "NDA_Template.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "DISCLOSING PARTY",
+        "role": "party-1"
+      },
+      {
+        "name": "Disclosing Party",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "confidentiality",
+      "section": "RECITALS",
+      "text": "WHEREAS, the Parties wish to explore a business relationship relating to [DESCRIBE PURPOSE] (the \"Purpose\");\nWHEREAS, in connection with the Purpose, Disclosing Party may disclose certain confidential and proprietary information to Receiving Party; and\nWHEREAS, the Parties desire to protect the confidentiality of such information on the terms and conditions set forth herein.\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein and other good and valuable consi",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "AGREEMENT",
+      "text": "DEFINITION OF CONFIDENTIAL INFORMATION\nFor purposes of this Agreement, \"Confidential Information\" means any and all information or material that has or could have commercial value or other utility in the business in which Disclosing Party is engaged, whether in written, oral, electronic, or other tangible or intangible form. Confidential Information includes, but is not limited to:\n(a) Technical information, including but not limited to inventions, discoveries, concepts, ideas, research, develop",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "NON-DISCLOSURE AGREEMENT\n\n(Mutual / Unilateral)\n\nThis Non-Disclosure Agreement (\"Agreement\") is entered into as of [DATE] (\"Effective Date\"), by and between:\n\nDisclosing Party: [DISCLOSING PARTY NAME], a [STATE/COUNTRY] [ENTITY TYPE], with principal offices at [ADDRESS] (\"Disclosing Party\");\n\nReceiving Party: [RECEIVING PARTY NAME], a [STATE/COUNTRY] [ENTITY TYPE], with principal offices at [ADDRESS] (\"Receiving Party\").\n\nDisclosing Party and Receiving Party are individually referred to as a \"Party\" and collectively as the \"Parties.\"\n\nRECITALS\n\nWHEREAS, the Parties wish to explore a business relationship relating to [DESCRIBE PURPOSE] (the \"Purpose\");\n\nWHEREAS, in connection with the Purpose, Disclosing Party may disclose certain confidential and proprietary information to Receiving Party; and\n\nWHEREAS, the Parties desire to protect the confidentiality of such information on the terms and conditions set forth herein.\n\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein and other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the Parties agree as follows:\n\nAGREEMENT\n\nDEFINITION OF CONFIDENTIAL INFORMATION\n\nFor purposes of this Agreement, \"Confidential Information\" means any and all information or material that has or could have commercial value or other utility in the business in which Disclosing Party is engaged, whether in written, oral, electronic, or other tangible or intangible form. Confidential Information includes, but is not limited to:\n\n(a) Technical information, including but not limited to inventions, discoveries, concepts, ideas, research, development, processes, procedures, formulas, know-how, designs, drawings, specifications, product roadmaps, and data;\n\n(b) Business information, including but not limited to business plans, strategies, methods, customer lists, supplier lists, financial information, sales and marketing plans, pricing information, cost data, and market research;\n\n(c) Computer software, source code, object code, databases, and related documentation;\n\n(d) Information relating to employees, consultants, or contractors of Disclosing Party.\n\nIf Confidential Information is in written or tangible form, Disclosing Party shall mark or label such materials as \"Confidential\" or with a similar designation. If Confidential Information is disclosed orally or visually, Disclosing Party shall provide written notice to Receiving Party within thirty (30) days after such disclosure identifying the information as confidential.\n\nEXCLUSIONS FROM CONFIDENTIAL INFORMATION\n\nConfidential Information shall not include information that:\n\n(a) Is or becomes generally available to the public through no breach of this Agreement by Receiving Party;\n\n(b) Was in Receiving Party's possession prior to disclosure by Disclosing Party, as evidenced by Receiving Party's written records;\n\n(c) Is independently developed by Receiving Party without use of or reference to Disclosing Party's Confidential Information, as evidenced by Receiving Party's written records;\n\n(d) Is rightfully received by Receiving Party from a third party without breach of any confidentiality obligation.\n\nOBLIGATIONS OF RECEIVING PARTY\n\nReceiving Party agrees to:\n\n(a) Hold and maintain the Confidential Information in strict confidence using at least the same degree of care that it uses to protect its own confidential information, but in no event less than reasonable care;\n\n(b) Not disclose the Confidential Information to any third parties except to Receiving Party's employees, contractors, and advisors who have a legitimate need to know and who have been informed of the confidential nature of such information and are bound by confidentiality obligations at least as restrictive as those contained herein;\n\n(c) Not use the Confidential Information for any purpose other than the Purpose without the prior written consent of Disclosing Party;\n\n(d) Remain responsible for any breach of this Agreement by its employees, contractors, or advisors.\n\nCOMPELLED DISCLOSURE\n\nIf Receiving Party is required by law, regulation, or court order to disclose any Confidential Information, Receiving Party shall, to the extent legally permitted, promptly notify Disclosing Party in writing prior to such disclosure and cooperate with Disclosing Party in seeking a protective order or other appropriate remedy. If such protective order or remedy is not obtained, Receiving Party shall disclose only that portion of the Confidential Information which it is legally required to disclose and shall use commercially reasonable efforts to ensure that confidential treatment is accorded to such information.\n\nNO LICENSE OR OWNERSHIP RIGHTS\n\nNothing in this Agreement grants Receiving Party any rights, licenses, or ownership in or to the Confidential Information, except as expressly set forth herein. All Confidential Information remains the sole and exclusive property of Disclosing Party or its licensors.\n\nRETURN OR DESTRUCTION OF CONFIDENTIAL INFORMATION\n\nUpon the written request of Disclosing Party or upon termination of this Agreement, Receiving Party shall promptly return or destroy all Confidential Information in its possession or control, including all copies thereof, and certify in writing to Disclosing Party that such return or destruction has been completed. Notwithstanding the foregoing, Receiving Party may retain one archival copy of the Confidential Information solely for purposes of monitoring compliance with this Agreement, provided such copy remains subject to the confidentiality obligations herein.\n\nTERM AND TERMINATION\n\nThis Agreement shall commence on the Effective Date and continue for a period of [NUMBER] years unless earlier terminated by either Party upon thirty (30) days' prior written notice to the other Party. Notwithstanding any termination of this Agreement, Receiving Party's obligations with respect to Confidential Information disclosed during the term of this Agreement shall survive for a period of [NUMBER] years from the date of disclosure or until such information no longer qualifies as Confidential Information under Section 2, whichever occurs first.\n\nREMEDIES\n\nReceiving Party acknowledges that any breach or threatened breach of this Agreement may cause irreparable harm to Disclosing Party for which monetary damages would be an inadequate remedy. Accordingly, Disclosing Party shall be entitled to seek equitable relief, including injunction and specific performance, in addition to all other remedies available at law or in equity, without the necessity of posting bond or proving actual damages.\n\nNO OBLIGATION\n\nThis Agreement does not obligate either Party to disclose any Confidential Information to the other Party or to enter into any further agreement. Each Party retains the right to refuse to disclose any Confidential Information to the other Party for any reason or no reason.\n\nNO WARRANTY\n\nALL CONFIDENTIAL INFORMATION IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. DISCLOSING PARTY MAKES NO REPRESENTATIONS OR WARRANTIES REGARDING THE ACCURACY OR COMPLETENESS OF ANY CONFIDENTIAL INFORMATION.\n\nGOVERNING LAW\n\nThis Agreement shall be governed by and construed in accordance with the laws of [STATE/COUNTRY], without regard to its conflict of laws principles.\n\nENTIRE AGREEMENT\n\nThis Agreement constitutes the entire agreement between the Parties with respect to the subject matter hereof and supersedes all prior or contemporaneous agreements, understandings, and communications, whether written or oral. This Agreement may not be amended or modified except by a written instrument signed by both Parties.\n\nSEVERABILITY\n\nIf any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall continue in full force and effect, and such invalid or unenforceable provision shall be reformed only to the extent necessary to make it enforceable.\n\nCOUNTERPARTS\n\nThis Agreement may be executed in one or more counterparts, each of which shall be deemed an original and all of which together shall constitute one and the same instrument. Electronic signatures shall have the same force and effect as original signatures.\n\nIN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.\n\nDISCLOSING PARTY:\n\n__________________________________________________\n\nName: _________________________________\n\nTitle: _________________________________\n\nDate: _________________________________\n\nRECEIVING PARTY:\n\n__________________________________________________\n\nName: _________________________________\n\nTitle: _________________________________\n\nDate: _________________________________",
+    "sections": [
+      {
+        "title": "RECITALS",
+        "text": "WHEREAS, the Parties wish to explore a business relationship relating to [DESCRIBE PURPOSE] (the \"Purpose\");\nWHEREAS, in connection with the Purpose, Disclosing Party may disclose certain confidential and proprietary information to Receiving Party; and\nWHEREAS, the Parties desire to protect the confidentiality of such information on the terms and conditions set forth herein.\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein and other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the Parties agree as follows:"
+      },
+      {
+        "title": "AGREEMENT",
+        "text": "DEFINITION OF CONFIDENTIAL INFORMATION\nFor purposes of this Agreement, \"Confidential Information\" means any and all information or material that has or could have commercial value or other utility in the business in which Disclosing Party is engaged, whether in written, oral, electronic, or other tangible or intangible form. Confidential Information includes, but is not limited to:\n(a) Technical information, including but not limited to inventions, discoveries, concepts, ideas, research, development, processes, procedures, formulas, know-how, designs, drawings, specifications, product roadmaps, and data;\n(b) Business information, including but not limited to business plans, strategies, methods, customer lists, supplier lists, financial information, sales and marketing plans, pricing information, cost data, and market research;\n(c) Computer software, source code, object code, databases, and related documentation;\n(d) Information relating to employees, consultants, or contractors of Disclosing Party.\nIf Confidential Information is in written or tangible form, Disclosing Party shall mark or label such materials as \"Confidential\" or with a similar designation. If Confidential Information is disclosed orally or visually, Disclosing Party shall provide written notice to Receiving Party within thirty (30) days after such disclosure identifying the information as confidential.\nEXCLUSIONS FROM CONFIDENTIAL INFORMATION\nConfidential Information shall not include information that:\n(a) Is or becomes generally available to the public through no breach of this Agreement by Receiving Party;\n(b) Was in Receiving Party's possession prior to disclosure by Disclosing Party, as evidenced by Receiving Party's written records;\n(c) Is independently developed by Receiving Party without use of or reference to Disclosing Party's Confidential Information, as evidenced by Receiving Party's written records;\n(d) Is rightfully received by Receiving Party from a third party without breach of any confidentiality obligation.\nOBLIGATIONS OF RECEIVING PARTY\nReceiving Party agrees to:\n(a) Hold and maintain the Confidential Information in strict confidence using at least the same degree of care that it uses to protect its own confidential information, but in no event less than reasonable care;\n(b) Not disclose the Confidential Information to any third parties except to Receiving Party's employees, contractors, and advisors who have a legitimate need to know and who have been informed of the confidential nature of such information and are bound by confidentiality obligations at least as restrictive as those contained herein;\n(c) Not use the Confidential Information for any purpose other than the Purpose without the prior written consent of Disclosing Party;\n(d) Remain responsible for any breach of this Agreement by its employees, contractors, or advisors.\nCOMPELLED DISCLOSURE\nIf Receiving Party is required by law, regulation, or court order to disclose any Confidential Information, Receiving Party shall, to the extent legally permitted, promptly notify Disclosing Party in writing prior to such disclosure and cooperate with Disclosing Party in seeking a protective order or other appropriate remedy. If such protective order or remedy is not obtained, Receiving Party shall disclose only that portion of the Confidential Information which it is legally required to disclose and shall use commercially reasonable efforts to ensure that confidential treatment is accorded to such information.\nNO LICENSE OR OWNERSHIP RIGHTS\nNothing in this Agreement grants Receiving Party any rights, licenses, or ownership in or to the Confidential Information, except as expressly set forth herein. All Confidential Information remains the sole and exclusive property of Disclosing Party or its licensors.\nRETURN OR DESTRUCTION OF CONFIDENTIAL INFORMATION\nUpon the written request of Disclosing Party or upon termination of this Agreement, Receiving Party shall promptly return or destroy all Confidential Information in its possession or control, including all copies thereof, and certify in writing to Disclosing Party that such return or destruction has been completed. Notwithstanding the foregoing, Receiving Party may retain one archival copy of the Confidential Information solely for purposes of monitoring compliance with this Agreement, provided such copy remains subject to the confidentiality obligations herein.\nTERM AND TERMINATION\nThis Agreement shall commence on the Effective Date and continue for a period of [NUMBER] years unless earlier terminated by either Party upon thirty (30) days' prior written notice to the other Party. Notwithstanding any termination of this Agreement, Receiving Party's obligations with respect to Confidential Information disclosed during the term of this Agreement shall survive for a period of [NUMBER] years from the date of disclosure or until such information no longer qualifies as Confidential Information under Section 2, whichever occurs first.\nREMEDIES\nReceiving Party acknowledges that any breach or threatened breach of this Agreement may cause irreparable harm to Disclosing Party for which monetary damages would be an inadequate remedy. Accordingly, Disclosing Party shall be entitled to seek equitable relief, including injunction and specific performance, in addition to all other remedies available at law or in equity, without the necessity of posting bond or proving actual damages.\nNO OBLIGATION\nThis Agreement does not obligate either Party to disclose any Confidential Information to the other Party or to enter into any further agreement. Each Party retains the right to refuse to disclose any Confidential Information to the other Party for any reason or no reason.\nNO WARRANTY\nALL CONFIDENTIAL INFORMATION IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. DISCLOSING PARTY MAKES NO REPRESENTATIONS OR WARRANTIES REGARDING THE ACCURACY OR COMPLETENESS OF ANY CONFIDENTIAL INFORMATION.\nGOVERNING LAW\nThis Agreement shall be governed by and construed in accordance with the laws of [STATE/COUNTRY], without regard to its conflict of laws principles.\nENTIRE AGREEMENT\nThis Agreement constitutes the entire agreement between the Parties with respect to the subject matter hereof and supersedes all prior or contemporaneous agreements, understandings, and communications, whether written or oral. This Agreement may not be amended or modified except by a written instrument signed by both Parties.\nSEVERABILITY\nIf any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall continue in full force and effect, and such invalid or unenforceable provision shall be reformed only to the extent necessary to make it enforceable.\nCOUNTERPARTS\nThis Agreement may be executed in one or more counterparts, each of which shall be deemed an original and all of which together shall constitute one and the same instrument. Electronic signatures shall have the same force and effect as original signatures.\nIN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.\nDISCLOSING PARTY:\n__________________________________________________\nName: _________________________________\nTitle: _________________________________\nDate: _________________________________\nRECEIVING PARTY:\n__________________________________________________\nName: _________________________________\nTitle: _________________________________\nDate: _________________________________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.009220Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

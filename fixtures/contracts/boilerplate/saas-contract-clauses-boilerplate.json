@@ -1,0 +1,259 @@
+{
+  "metadata": {
+    "template": "saas-contract-clauses-boilerplate",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "SaaS_Contract_Clauses_Boilerplate.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "COMPANY",
+        "role": "party-1"
+      },
+      {
+        "name": "CUSTOMER",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "1.1 Standard Renewal with Price Protection",
+      "text": "Renewal Term. This Agreement shall automatically renew for successive [1-year] periods (each, a \"Renewal Term\") unless either Party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current Term. The per-unit pricing during any Renewal Term shall be the same as that during the prior Term unless Company has given Customer written notice of a pricing increase at least ninety (90) days before the end of such prior Term. Any such pricing increase shall not",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "1.2 CPI-Based Price Adjustments",
+      "text": "Annual Price Adjustments. Company reserves the right to increase the Subscription Fees annually at renewal in accordance with increases in the Consumer Price Index (CPI) as published by the Bureau of Labor Statistics. Any such increase shall be capped at a maximum of five percent (5%) per year. Company shall provide Customer with written notice of any price increase at least sixty (60) days prior to the renewal date. Customer may terminate this Agreement within thirty (30) days of receiving such",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "1.3 Multi-Year Lock with Future Escalations",
+      "text": "Pricing Lock. For the Initial Term of [3 years], the Subscription Fees shall remain fixed at the rates set forth in the applicable Order Form. For Renewal Terms following the Initial Term, Company may increase pricing annually by up to three percent (3%) per year, calculated on a non-compounding basis from the original pricing in Year 1 of the Initial Term. Any price increases shall be communicated to Customer in writing at least ninety (90) days prior to the effective date of such increase.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "2.1 Uptime Guarantees with Tiered Service Credits",
+      "text": "Service Level Commitment. Company shall use commercially reasonable efforts to make the Services available with an uptime of at least 99.9% during each calendar month (\"Service Level\"), measured as the percentage of minutes during the month that the Services are available, excluding Scheduled Maintenance and Excluded Downtime. \"Monthly Uptime Percentage\" means total number of minutes in a calendar month minus the number of minutes of Downtime, divided by the total number of minutes in a calendar",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "obligation",
+      "section": "2.2 Support Response Time SLAs",
+      "text": "Support Levels. Company shall respond to support requests according to the following service levels based on severity: Critical (P1): 1 hour response, 4 hour resolution target; High (P2): 4 hour response, 24 hour resolution target; Medium (P3): 1 business day response, 5 business day resolution target; Low (P4): 2 business day response, best effort resolution. Response times apply 24/7 for Critical issues and during Business Hours (9AM-5PM local time, Monday-Friday) for all other severity levels",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "3.1 Standard Liability Cap",
+      "text": "Cap on Liability. EXCEPT FOR THE EXCLUDED CLAIMS LISTED IN SECTION 3.2, EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT, WHETHER IN CONTRACT, TORT, OR UNDER ANY OTHER THEORY OF LIABILITY, SHALL NOT EXCEED THE TOTAL FEES PAID BY CUSTOMER TO COMPANY DURING THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.\nExclusion of Consequential Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "obligation",
+      "section": "3.2 Exceptions to Liability Cap",
+      "text": "Excluded Claims. The limitations set forth in Section 3.1 shall not apply to: (a) either Party's indemnification obligations; (b) breaches of confidentiality obligations; (c) violations of intellectual property rights; (d) gross negligence or willful misconduct; (e) fraud or fraudulent misrepresentation; or (f) data breaches resulting from Company's failure to implement required security measures, for which liability shall be capped at the greater of (i) $[1,000,000] or (ii) three times the Fees",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "SaaS CONTRACT BOILERPLATE CLAUSES\n\nComprehensive Reference Guide for Vendor Agreement Negotiations\n\n1. 🔄 SaaS RENEWAL & PRICE INCREASE MITIGATION\n\n1.1 Standard Renewal with Price Protection\n\nRenewal Term. This Agreement shall automatically renew for successive [1-year] periods (each, a \"Renewal Term\") unless either Party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current Term. The per-unit pricing during any Renewal Term shall be the same as that during the prior Term unless Company has given Customer written notice of a pricing increase at least ninety (90) days before the end of such prior Term. Any such pricing increase shall not exceed five percent (5%) of the pricing for the relevant Services in the immediately prior Term, unless the pricing in such prior Term was designated as promotional or one-time. Such price increase shall be calculated as a one-time uplift, not as a compounding per-year rate.\n\n1.2 CPI-Based Price Adjustments\n\nAnnual Price Adjustments. Company reserves the right to increase the Subscription Fees annually at renewal in accordance with increases in the Consumer Price Index (CPI) as published by the Bureau of Labor Statistics. Any such increase shall be capped at a maximum of five percent (5%) per year. Company shall provide Customer with written notice of any price increase at least sixty (60) days prior to the renewal date. Customer may terminate this Agreement within thirty (30) days of receiving such notice if Customer does not wish to accept the increased pricing.\n\n1.3 Multi-Year Lock with Future Escalations\n\nPricing Lock. For the Initial Term of [3 years], the Subscription Fees shall remain fixed at the rates set forth in the applicable Order Form. For Renewal Terms following the Initial Term, Company may increase pricing annually by up to three percent (3%) per year, calculated on a non-compounding basis from the original pricing in Year 1 of the Initial Term. Any price increases shall be communicated to Customer in writing at least ninety (90) days prior to the effective date of such increase.\n\n2. ⚡ SLA ENHANCEMENT & SERVICE LEVEL IMPROVEMENTS\n\n2.1 Uptime Guarantees with Tiered Service Credits\n\nService Level Commitment. Company shall use commercially reasonable efforts to make the Services available with an uptime of at least 99.9% during each calendar month (\"Service Level\"), measured as the percentage of minutes during the month that the Services are available, excluding Scheduled Maintenance and Excluded Downtime. \"Monthly Uptime Percentage\" means total number of minutes in a calendar month minus the number of minutes of Downtime, divided by the total number of minutes in a calendar month.\n\nService Credits. If Company fails to meet the Service Level in a given month, Customer shall be eligible for Service Credits as follows:\n\n• 99.0% to 99.8% uptime: 10% of monthly fees\n\n• 95.0% to 98.9% uptime: 25% of monthly fees\n\n• Below 95.0% uptime: 50% of monthly fees\n\nService Credit Claim. To receive Service Credits, Customer must submit a claim within thirty (30) days of the end of the month in which the Service Level failure occurred. Service Credits represent Customer's sole remedy for failure to meet Service Levels and shall be applied to Customer's next invoice. The aggregate maximum Service Credits for all downtime in a single month shall not exceed 50% of that month's fees.\n\n2.2 Support Response Time SLAs\n\nSupport Levels. Company shall respond to support requests according to the following service levels based on severity: Critical (P1): 1 hour response, 4 hour resolution target; High (P2): 4 hour response, 24 hour resolution target; Medium (P3): 1 business day response, 5 business day resolution target; Low (P4): 2 business day response, best effort resolution. Response times apply 24/7 for Critical issues and during Business Hours (9AM-5PM local time, Monday-Friday) for all other severity levels.\n\n3. 🛡️ LIABILITY CAPS & RISK LIMITATION\n\n3.1 Standard Liability Cap\n\nCap on Liability. EXCEPT FOR THE EXCLUDED CLAIMS LISTED IN SECTION 3.2, EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT, WHETHER IN CONTRACT, TORT, OR UNDER ANY OTHER THEORY OF LIABILITY, SHALL NOT EXCEED THE TOTAL FEES PAID BY CUSTOMER TO COMPANY DURING THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.\n\nExclusion of Consequential Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION LOST PROFITS, LOSS OF DATA, LOSS OF USE, LOSS OF GOODWILL, OR BUSINESS INTERRUPTION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\n\n3.2 Exceptions to Liability Cap\n\nExcluded Claims. The limitations set forth in Section 3.1 shall not apply to: (a) either Party's indemnification obligations; (b) breaches of confidentiality obligations; (c) violations of intellectual property rights; (d) gross negligence or willful misconduct; (e) fraud or fraudulent misrepresentation; or (f) data breaches resulting from Company's failure to implement required security measures, for which liability shall be capped at the greater of (i) $[1,000,000] or (ii) three times the Fees paid during the twelve months prior to the breach.\n\n4. 🚪 EXIT RIGHTS & TERMINATION FLEXIBILITY\n\n4.1 Termination for Convenience\n\nEither Party may terminate this Agreement for convenience upon ninety (90) days' prior written notice to the other Party. If Customer terminates for convenience prior to the end of the Initial Term, Customer shall remain liable for all unpaid Fees for the remainder of the Initial Term. If Company terminates for convenience, Customer shall receive a pro-rata refund of any prepaid Fees for the period following the effective termination date.\n\n4.2 Termination for Cause\n\nEither Party may terminate this Agreement immediately upon written notice if: (a) the other Party materially breaches this Agreement and fails to cure such breach within thirty (30) days after receipt of written notice specifying the breach; (b) the other Party becomes insolvent, files for bankruptcy, or makes an assignment for the benefit of creditors; or (c) the other Party ceases to conduct business in the ordinary course.\n\n4.3 Data Export and Transition Assistance\n\nData Export Rights. Upon termination or expiration of this Agreement, Customer shall have sixty (60) days to export all Customer Data from the Services using Company's standard export tools. Company shall provide reasonable cooperation to assist Customer with data migration to an alternative solution. Company may charge Customer for transition assistance services at Company's then-current professional services rates. Within thirty (30) days after the data export period, Company shall delete or destroy all Customer Data in its possession unless legally required to retain such data.\n\n5. 🏦 PAYMENT TERMS & CASH FLOW OPTIMIZATION\n\n5.1 Standard Payment Terms\n\nFees and Payment. Customer shall pay Company the fees (\"Fees\") as set forth in the applicable Order Form. Unless otherwise specified, all Fees are quoted and payable in U.S. Dollars. Company shall invoice Customer [monthly/quarterly/annually] in advance. All invoices are due and payable within thirty (30) days of the invoice date. Late payments shall accrue interest at the rate of 1.5% per month (or the maximum rate permitted by law, whichever is less) from the date due until paid in full.\n\n5.2 Annual Prepayment Discount\n\nPrepayment Incentive. Customer may elect to prepay the annual Subscription Fees at the beginning of each annual period and receive a discount of [10-15]% off the standard monthly rate. Prepaid Fees are non-refundable except as expressly provided in this Agreement. If Customer terminates this Agreement prior to the end of a prepaid period (other than for Company's material breach), Customer shall not be entitled to a refund of prepaid Fees.\n\n5.3 Taxes and Expenses\n\nTaxes. All Fees are exclusive of all sales, use, value-added, and other taxes or duties imposed by governmental authorities (\"Taxes\"). Customer shall be responsible for all Taxes associated with its purchase hereunder, excluding only taxes based on Company's net income. If Company is required to pay or collect Taxes for which Customer is responsible, Customer shall reimburse Company for such amounts. Customer shall provide Company with valid tax exemption certificates if applicable.\n\n6. 🏛️ INTELLECTUAL PROPERTY RIGHTS & PROTECTION\n\n6.1 Company Intellectual Property\n\nOwnership. Company retains all right, title, and interest in and to: (a) the Services and all software, technology, and documentation related thereto; (b) all modifications, enhancements, and derivative works of the foregoing; (c) all Company trademarks, service marks, logos, and trade names; and (d) all intellectual property rights in any of the foregoing. Customer acknowledges that this Agreement does not convey to Customer any ownership rights in the Services.\n\n6.2 Customer Data and Content\n\nCustomer Ownership. Customer retains all right, title, and interest in and to all data, content, and materials provided by Customer or its users (\"Customer Data\"). Customer grants Company a non-exclusive, worldwide, royalty-free license to use, reproduce, and display Customer Data solely as necessary to provide the Services and as otherwise authorized by this Agreement.\n\n6.3 License Grant to Customer\n\nLimited License. Subject to the terms and conditions of this Agreement and Customer's payment of applicable Fees, Company grants Customer a non-exclusive, non-transferable, non-sublicensable, revocable license during the Term to: (a) access and use the Services solely for Customer's internal business purposes; and (b) permit its authorized users to access and use the Services, provided that Customer ensures such users comply with the terms of this Agreement.\n\n6.4 IP Indemnification\n\nCompany Indemnity. Company shall defend Customer against any claim brought by a third party alleging that Customer's authorized use of the Services infringes or misappropriates such third party's intellectual property rights, and shall indemnify Customer from any damages, costs, and attorneys' fees finally awarded against Customer or agreed to in settlement by Company. This indemnity does not apply to claims arising from: (a) modification of the Services by anyone other than Company; (b) use of the Services in combination with non-Company products or services; (c) Customer's breach of this Agreement; or (d) use of the Services in a manner not authorized by this Agreement.\n\n7. 📈 VOLUME DISCOUNTS & SCALE-BASED PRICING\n\n7.1 User-Based Volume Pricing\n\nVolume Tiers. Customer shall receive the following discounts based on the total number of authorized users:\n\n• 1-25 users: $[X] per user per month (list price)\n\n• 26-100 users: $[Y] per user per month (10% discount)\n\n• 101-500 users: $[Z] per user per month (20% discount)\n\n• 500+ users: Custom pricing (contact sales)\n\nDiscount adjustments shall take effect at the beginning of the next billing cycle following the change in user count that triggers a new tier.\n\n7.2 Consumption-Based Volume Discounts\n\nUsage Credits. For consumption-based pricing models, Customer shall receive volume discounts based on total monthly consumption as follows: (a) $0-$5,000 consumption: standard rates; (b) $5,001-$25,000 consumption: 5% discount on all usage; (c) $25,001-$100,000 consumption: 10% discount on all usage; (d) $100,000+ consumption: 15% discount on all usage. Discounts apply retroactively to all usage in the billing period once the threshold is reached.\n\n7.3 Multi-Year Commitment Discount\n\nTerm Discount. Customer may receive additional discounts for longer term commitments as follows: (a) 1-year term: standard pricing; (b) 2-year term: 10% discount off standard annual pricing; (c) 3-year term: 15% discount off standard annual pricing. These discounts are applied in addition to volume-based discounts and require annual prepayment to receive the full discount benefit.\n\n---\n\nIMPORTANT NOTES\n\n1. All bracketed items [like this] should be customized for your specific agreement.\n\n2. These clauses are provided as templates and should be reviewed by legal counsel before use.\n\n3. Specific percentages, timeframes, and monetary amounts should be negotiated based on your business needs.\n\n4. Consider combining multiple clauses as appropriate for your SaaS contract structure.",
+    "sections": [
+      {
+        "title": "1. 🔄 SaaS RENEWAL & PRICE INCREASE MITIGATION",
+        "text": ""
+      },
+      {
+        "title": "1.1 Standard Renewal with Price Protection",
+        "text": "Renewal Term. This Agreement shall automatically renew for successive [1-year] periods (each, a \"Renewal Term\") unless either Party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current Term. The per-unit pricing during any Renewal Term shall be the same as that during the prior Term unless Company has given Customer written notice of a pricing increase at least ninety (90) days before the end of such prior Term. Any such pricing increase shall not exceed five percent (5%) of the pricing for the relevant Services in the immediately prior Term, unless the pricing in such prior Term was designated as promotional or one-time. Such price increase shall be calculated as a one-time uplift, not as a compounding per-year rate."
+      },
+      {
+        "title": "1.2 CPI-Based Price Adjustments",
+        "text": "Annual Price Adjustments. Company reserves the right to increase the Subscription Fees annually at renewal in accordance with increases in the Consumer Price Index (CPI) as published by the Bureau of Labor Statistics. Any such increase shall be capped at a maximum of five percent (5%) per year. Company shall provide Customer with written notice of any price increase at least sixty (60) days prior to the renewal date. Customer may terminate this Agreement within thirty (30) days of receiving such notice if Customer does not wish to accept the increased pricing."
+      },
+      {
+        "title": "1.3 Multi-Year Lock with Future Escalations",
+        "text": "Pricing Lock. For the Initial Term of [3 years], the Subscription Fees shall remain fixed at the rates set forth in the applicable Order Form. For Renewal Terms following the Initial Term, Company may increase pricing annually by up to three percent (3%) per year, calculated on a non-compounding basis from the original pricing in Year 1 of the Initial Term. Any price increases shall be communicated to Customer in writing at least ninety (90) days prior to the effective date of such increase."
+      },
+      {
+        "title": "2. ⚡ SLA ENHANCEMENT & SERVICE LEVEL IMPROVEMENTS",
+        "text": ""
+      },
+      {
+        "title": "2.1 Uptime Guarantees with Tiered Service Credits",
+        "text": "Service Level Commitment. Company shall use commercially reasonable efforts to make the Services available with an uptime of at least 99.9% during each calendar month (\"Service Level\"), measured as the percentage of minutes during the month that the Services are available, excluding Scheduled Maintenance and Excluded Downtime. \"Monthly Uptime Percentage\" means total number of minutes in a calendar month minus the number of minutes of Downtime, divided by the total number of minutes in a calendar month.\nService Credits. If Company fails to meet the Service Level in a given month, Customer shall be eligible for Service Credits as follows:\n• 99.0% to 99.8% uptime: 10% of monthly fees\n• 95.0% to 98.9% uptime: 25% of monthly fees\n• Below 95.0% uptime: 50% of monthly fees\nService Credit Claim. To receive Service Credits, Customer must submit a claim within thirty (30) days of the end of the month in which the Service Level failure occurred. Service Credits represent Customer's sole remedy for failure to meet Service Levels and shall be applied to Customer's next invoice. The aggregate maximum Service Credits for all downtime in a single month shall not exceed 50% of that month's fees."
+      },
+      {
+        "title": "2.2 Support Response Time SLAs",
+        "text": "Support Levels. Company shall respond to support requests according to the following service levels based on severity: Critical (P1): 1 hour response, 4 hour resolution target; High (P2): 4 hour response, 24 hour resolution target; Medium (P3): 1 business day response, 5 business day resolution target; Low (P4): 2 business day response, best effort resolution. Response times apply 24/7 for Critical issues and during Business Hours (9AM-5PM local time, Monday-Friday) for all other severity levels."
+      },
+      {
+        "title": "3. 🛡️ LIABILITY CAPS & RISK LIMITATION",
+        "text": ""
+      },
+      {
+        "title": "3.1 Standard Liability Cap",
+        "text": "Cap on Liability. EXCEPT FOR THE EXCLUDED CLAIMS LISTED IN SECTION 3.2, EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT, WHETHER IN CONTRACT, TORT, OR UNDER ANY OTHER THEORY OF LIABILITY, SHALL NOT EXCEED THE TOTAL FEES PAID BY CUSTOMER TO COMPANY DURING THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.\nExclusion of Consequential Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION LOST PROFITS, LOSS OF DATA, LOSS OF USE, LOSS OF GOODWILL, OR BUSINESS INTERRUPTION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES."
+      },
+      {
+        "title": "3.2 Exceptions to Liability Cap",
+        "text": "Excluded Claims. The limitations set forth in Section 3.1 shall not apply to: (a) either Party's indemnification obligations; (b) breaches of confidentiality obligations; (c) violations of intellectual property rights; (d) gross negligence or willful misconduct; (e) fraud or fraudulent misrepresentation; or (f) data breaches resulting from Company's failure to implement required security measures, for which liability shall be capped at the greater of (i) $[1,000,000] or (ii) three times the Fees paid during the twelve months prior to the breach."
+      },
+      {
+        "title": "4. 🚪 EXIT RIGHTS & TERMINATION FLEXIBILITY",
+        "text": ""
+      },
+      {
+        "title": "4.1 Termination for Convenience",
+        "text": "Either Party may terminate this Agreement for convenience upon ninety (90) days' prior written notice to the other Party. If Customer terminates for convenience prior to the end of the Initial Term, Customer shall remain liable for all unpaid Fees for the remainder of the Initial Term. If Company terminates for convenience, Customer shall receive a pro-rata refund of any prepaid Fees for the period following the effective termination date."
+      },
+      {
+        "title": "4.2 Termination for Cause",
+        "text": "Either Party may terminate this Agreement immediately upon written notice if: (a) the other Party materially breaches this Agreement and fails to cure such breach within thirty (30) days after receipt of written notice specifying the breach; (b) the other Party becomes insolvent, files for bankruptcy, or makes an assignment for the benefit of creditors; or (c) the other Party ceases to conduct business in the ordinary course."
+      },
+      {
+        "title": "4.3 Data Export and Transition Assistance",
+        "text": "Data Export Rights. Upon termination or expiration of this Agreement, Customer shall have sixty (60) days to export all Customer Data from the Services using Company's standard export tools. Company shall provide reasonable cooperation to assist Customer with data migration to an alternative solution. Company may charge Customer for transition assistance services at Company's then-current professional services rates. Within thirty (30) days after the data export period, Company shall delete or destroy all Customer Data in its possession unless legally required to retain such data."
+      },
+      {
+        "title": "5. 🏦 PAYMENT TERMS & CASH FLOW OPTIMIZATION",
+        "text": ""
+      },
+      {
+        "title": "5.1 Standard Payment Terms",
+        "text": "Fees and Payment. Customer shall pay Company the fees (\"Fees\") as set forth in the applicable Order Form. Unless otherwise specified, all Fees are quoted and payable in U.S. Dollars. Company shall invoice Customer [monthly/quarterly/annually] in advance. All invoices are due and payable within thirty (30) days of the invoice date. Late payments shall accrue interest at the rate of 1.5% per month (or the maximum rate permitted by law, whichever is less) from the date due until paid in full."
+      },
+      {
+        "title": "5.2 Annual Prepayment Discount",
+        "text": "Prepayment Incentive. Customer may elect to prepay the annual Subscription Fees at the beginning of each annual period and receive a discount of [10-15]% off the standard monthly rate. Prepaid Fees are non-refundable except as expressly provided in this Agreement. If Customer terminates this Agreement prior to the end of a prepaid period (other than for Company's material breach), Customer shall not be entitled to a refund of prepaid Fees."
+      },
+      {
+        "title": "5.3 Taxes and Expenses",
+        "text": "Taxes. All Fees are exclusive of all sales, use, value-added, and other taxes or duties imposed by governmental authorities (\"Taxes\"). Customer shall be responsible for all Taxes associated with its purchase hereunder, excluding only taxes based on Company's net income. If Company is required to pay or collect Taxes for which Customer is responsible, Customer shall reimburse Company for such amounts. Customer shall provide Company with valid tax exemption certificates if applicable."
+      },
+      {
+        "title": "6. 🏛️ INTELLECTUAL PROPERTY RIGHTS & PROTECTION",
+        "text": ""
+      },
+      {
+        "title": "6.1 Company Intellectual Property",
+        "text": "Ownership. Company retains all right, title, and interest in and to: (a) the Services and all software, technology, and documentation related thereto; (b) all modifications, enhancements, and derivative works of the foregoing; (c) all Company trademarks, service marks, logos, and trade names; and (d) all intellectual property rights in any of the foregoing. Customer acknowledges that this Agreement does not convey to Customer any ownership rights in the Services."
+      },
+      {
+        "title": "6.2 Customer Data and Content",
+        "text": "Customer Ownership. Customer retains all right, title, and interest in and to all data, content, and materials provided by Customer or its users (\"Customer Data\"). Customer grants Company a non-exclusive, worldwide, royalty-free license to use, reproduce, and display Customer Data solely as necessary to provide the Services and as otherwise authorized by this Agreement."
+      },
+      {
+        "title": "6.3 License Grant to Customer",
+        "text": "Limited License. Subject to the terms and conditions of this Agreement and Customer's payment of applicable Fees, Company grants Customer a non-exclusive, non-transferable, non-sublicensable, revocable license during the Term to: (a) access and use the Services solely for Customer's internal business purposes; and (b) permit its authorized users to access and use the Services, provided that Customer ensures such users comply with the terms of this Agreement."
+      },
+      {
+        "title": "6.4 IP Indemnification",
+        "text": "Company Indemnity. Company shall defend Customer against any claim brought by a third party alleging that Customer's authorized use of the Services infringes or misappropriates such third party's intellectual property rights, and shall indemnify Customer from any damages, costs, and attorneys' fees finally awarded against Customer or agreed to in settlement by Company. This indemnity does not apply to claims arising from: (a) modification of the Services by anyone other than Company; (b) use of the Services in combination with non-Company products or services; (c) Customer's breach of this Agreement; or (d) use of the Services in a manner not authorized by this Agreement."
+      },
+      {
+        "title": "7. 📈 VOLUME DISCOUNTS & SCALE-BASED PRICING",
+        "text": ""
+      },
+      {
+        "title": "7.1 User-Based Volume Pricing",
+        "text": "Volume Tiers. Customer shall receive the following discounts based on the total number of authorized users:\n• 1-25 users: $[X] per user per month (list price)\n• 26-100 users: $[Y] per user per month (10% discount)\n• 101-500 users: $[Z] per user per month (20% discount)\n• 500+ users: Custom pricing (contact sales)\nDiscount adjustments shall take effect at the beginning of the next billing cycle following the change in user count that triggers a new tier."
+      },
+      {
+        "title": "7.2 Consumption-Based Volume Discounts",
+        "text": "Usage Credits. For consumption-based pricing models, Customer shall receive volume discounts based on total monthly consumption as follows: (a) $0-$5,000 consumption: standard rates; (b) $5,001-$25,000 consumption: 5% discount on all usage; (c) $25,001-$100,000 consumption: 10% discount on all usage; (d) $100,000+ consumption: 15% discount on all usage. Discounts apply retroactively to all usage in the billing period once the threshold is reached."
+      },
+      {
+        "title": "7.3 Multi-Year Commitment Discount",
+        "text": "Term Discount. Customer may receive additional discounts for longer term commitments as follows: (a) 1-year term: standard pricing; (b) 2-year term: 10% discount off standard annual pricing; (c) 3-year term: 15% discount off standard annual pricing. These discounts are applied in addition to volume-based discounts and require annual prepayment to receive the full discount benefit.\n---\nIMPORTANT NOTES"
+      },
+      {
+        "title": "1. All bracketed items [like this] should be customized for your specific agreement.",
+        "text": ""
+      },
+      {
+        "title": "2. These clauses are provided as templates and should be reviewed by legal counsel before use.",
+        "text": ""
+      },
+      {
+        "title": "3. Specific percentages, timeframes, and monetary amounts should be negotiated based on your business needs.",
+        "text": ""
+      },
+      {
+        "title": "4. Consider combining multiple clauses as appropriate for your SaaS contract structure.",
+        "text": ""
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.034222Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

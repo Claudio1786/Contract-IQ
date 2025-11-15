@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "template": "professional-services-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "Professional_Services_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "COMPANY",
+        "role": "party-1"
+      },
+      {
+        "name": "Company",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "obligation",
+      "section": "1. SERVICES",
+      "text": "1.1 Scope of Services. Service Provider shall perform the professional services described in the attached Statement of Work (\"SOW\") or as otherwise mutually agreed upon in writing (\"Services\").\n1.2 Standard of Performance. Service Provider shall perform all Services in a professional and workmanlike manner, consistent with industry standards and best practices.\n1.3 Personnel. Service Provider shall assign qualified personnel to perform the Services. Company may request replacement of any personn",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. COMPENSATION AND PAYMENT",
+      "text": "2.1 Fees. Company shall pay Service Provider the fees specified in the applicable SOW. Fees may be structured as: (a) fixed fee; (b) time and materials at the hourly rates specified; or (c) milestone-based payments.\n2.2 Expenses. Service Provider may be reimbursed for pre-approved, documented, reasonable expenses incurred in connection with the Services, including travel, lodging, and materials. All expenses exceeding $500 require prior written approval.\n2.3 Invoicing. Service Provider shall sub",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. TERM AND TERMINATION",
+      "text": "3.1 Term. This Agreement shall commence on the Effective Date and continue until the Services are completed or until terminated as provided herein.\n3.2 Termination for Convenience. Either party may terminate this Agreement or any SOW upon thirty (30) days' prior written notice. Company shall pay for all Services performed and expenses incurred prior to the effective date of termination.\n3.3 Termination for Cause. Either party may terminate this Agreement immediately upon written notice if the ot",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "4. INTELLECTUAL PROPERTY",
+      "text": "4.1 Work Product. All deliverables, work product, inventions, and materials created by Service Provider in the course of performing the Services (\"Work Product\") shall be the sole and exclusive property of Company. Service Provider hereby assigns all right, title, and interest in the Work Product to Company.\n4.2 Pre-Existing Materials. Service Provider retains ownership of any pre-existing materials, methodologies, or tools used in performing the Services. Company is granted a perpetual, non-exc",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. CONFIDENTIALITY",
+      "text": "5.1 Confidential Information. Service Provider acknowledges that it will have access to Company's proprietary and confidential information, including business plans, financial data, customer information, and trade secrets (\"Confidential Information\").\n5.2 Obligations. Service Provider shall: (a) hold Confidential Information in strict confidence; (b) use Confidential Information only to perform the Services; (c) not disclose Confidential Information to third parties without prior written consent",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. REPRESENTATIONS AND WARRANTIES",
+      "text": "6.1 Service Provider Representations. Service Provider represents and warrants that: (a) it has the requisite skill, experience, and qualifications to perform the Services; (b) the Services shall be performed in a professional manner; (c) the Work Product will not infringe any third-party intellectual property rights; and (d) it has all necessary licenses and permits to perform the Services.\n6.2 Company Representations. Company represents that it has the authority to enter into this Agreement an",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "obligation",
+      "section": "7. INDEMNIFICATION",
+      "text": "7.1 Service Provider Indemnity. Service Provider shall defend, indemnify, and hold harmless Company from any third-party claims arising from: (a) Service Provider's breach of this Agreement; (b) Service Provider's negligence or willful misconduct; (c) infringement of intellectual property rights; or (d) violation of applicable law.\n7.2 Company Indemnity. Company shall defend, indemnify, and hold harmless Service Provider from claims arising from Company's use of the Work Product in a manner not ",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "obligation",
+      "section": "8. LIMITATION OF LIABILITY",
+      "text": "8.1 Cap on Liability. EXCEPT FOR EXCLUDED CLAIMS, EACH PARTY'S TOTAL LIABILITY SHALL NOT EXCEED THE TOTAL FEES PAID OR PAYABLE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.\n8.2 Excluded Damages. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS.\n8.3 Excluded Claims. The limitations do not apply to: (a) indemnification obligations; (b) breaches of confidentiality; (c) intellectual property infringement",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. INDEPENDENT CONTRACTOR",
+      "text": "9.1 Relationship. Service Provider is an independent contractor, not an employee, agent, or partner of Company. Service Provider shall not represent itself as an employee or agent of Company.\n9.2 Taxes and Benefits. Service Provider is responsible for all taxes, insurance, and benefits. Company shall not withhold taxes or provide employee benefits.\n9.3 Control. Service Provider retains control over how Services are performed, subject to Company's right to specify desired results.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "obligation",
+      "section": "10. GENERAL PROVISIONS",
+      "text": "10.1 Entire Agreement. This Agreement, including all SOWs, constitutes the entire agreement between the parties and supersedes all prior agreements.\n10.2 Amendment. This Agreement may be amended only by a written agreement signed by both parties.\n10.3 Governing Law. This Agreement shall be governed by the laws of [State], without regard to conflicts of law principles.\n10.4 Dispute Resolution. Disputes shall be resolved through good faith negotiation, followed by mediation if necessary, and final",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "PROFESSIONAL SERVICES AGREEMENT\n\nThis Professional Services Agreement (\"Agreement\") is made and entered into as of [Date] (\"Effective Date\") by and between [Company Name], a [State] corporation (\"Company\"), and [Service Provider Name] (\"Service Provider\").\n\n1. SERVICES\n\n1.1 Scope of Services. Service Provider shall perform the professional services described in the attached Statement of Work (\"SOW\") or as otherwise mutually agreed upon in writing (\"Services\").\n\n1.2 Standard of Performance. Service Provider shall perform all Services in a professional and workmanlike manner, consistent with industry standards and best practices.\n\n1.3 Personnel. Service Provider shall assign qualified personnel to perform the Services. Company may request replacement of any personnel if performance is unsatisfactory.\n\n1.4 Subcontractors. Service Provider may engage subcontractors only with Company's prior written approval and shall remain fully responsible for all work performed by subcontractors.\n\n2. COMPENSATION AND PAYMENT\n\n2.1 Fees. Company shall pay Service Provider the fees specified in the applicable SOW. Fees may be structured as: (a) fixed fee; (b) time and materials at the hourly rates specified; or (c) milestone-based payments.\n\n2.2 Expenses. Service Provider may be reimbursed for pre-approved, documented, reasonable expenses incurred in connection with the Services, including travel, lodging, and materials. All expenses exceeding $500 require prior written approval.\n\n2.3 Invoicing. Service Provider shall submit invoices monthly or as specified in the SOW, detailing services performed, hours worked, and expenses incurred. Invoices are due and payable within thirty (30) days of receipt.\n\n2.4 Late Payment. Late payments shall accrue interest at 1.5% per month or the maximum rate permitted by law, whichever is less.\n\n3. TERM AND TERMINATION\n\n3.1 Term. This Agreement shall commence on the Effective Date and continue until the Services are completed or until terminated as provided herein.\n\n3.2 Termination for Convenience. Either party may terminate this Agreement or any SOW upon thirty (30) days' prior written notice. Company shall pay for all Services performed and expenses incurred prior to the effective date of termination.\n\n3.3 Termination for Cause. Either party may terminate this Agreement immediately upon written notice if the other party materially breaches and fails to cure within fifteen (15) days of written notice.\n\n3.4 Effect of Termination. Upon termination, Service Provider shall: (a) immediately cease performing Services; (b) deliver all work product and Company materials to Company; and (c) submit a final invoice for Services rendered.\n\n4. INTELLECTUAL PROPERTY\n\n4.1 Work Product. All deliverables, work product, inventions, and materials created by Service Provider in the course of performing the Services (\"Work Product\") shall be the sole and exclusive property of Company. Service Provider hereby assigns all right, title, and interest in the Work Product to Company.\n\n4.2 Pre-Existing Materials. Service Provider retains ownership of any pre-existing materials, methodologies, or tools used in performing the Services. Company is granted a perpetual, non-exclusive license to use such materials as incorporated into the Work Product.\n\n4.3 Further Assurances. Service Provider shall execute any documents and take any actions necessary to perfect Company's ownership rights in the Work Product.\n\n5. CONFIDENTIALITY\n\n5.1 Confidential Information. Service Provider acknowledges that it will have access to Company's proprietary and confidential information, including business plans, financial data, customer information, and trade secrets (\"Confidential Information\").\n\n5.2 Obligations. Service Provider shall: (a) hold Confidential Information in strict confidence; (b) use Confidential Information only to perform the Services; (c) not disclose Confidential Information to third parties without prior written consent; and (d) protect Confidential Information with the same degree of care used to protect its own confidential information.\n\n5.3 Exclusions. Confidential Information does not include information that: (a) is publicly available; (b) was known prior to disclosure; (c) was independently developed; or (d) was received from a third party without restriction.\n\n5.4 Duration. Confidentiality obligations shall survive termination of this Agreement for a period of three (3) years.\n\n6. REPRESENTATIONS AND WARRANTIES\n\n6.1 Service Provider Representations. Service Provider represents and warrants that: (a) it has the requisite skill, experience, and qualifications to perform the Services; (b) the Services shall be performed in a professional manner; (c) the Work Product will not infringe any third-party intellectual property rights; and (d) it has all necessary licenses and permits to perform the Services.\n\n6.2 Company Representations. Company represents that it has the authority to enter into this Agreement and grant the rights granted herein.\n\n7. INDEMNIFICATION\n\n7.1 Service Provider Indemnity. Service Provider shall defend, indemnify, and hold harmless Company from any third-party claims arising from: (a) Service Provider's breach of this Agreement; (b) Service Provider's negligence or willful misconduct; (c) infringement of intellectual property rights; or (d) violation of applicable law.\n\n7.2 Company Indemnity. Company shall defend, indemnify, and hold harmless Service Provider from claims arising from Company's use of the Work Product in a manner not contemplated by this Agreement.\n\n8. LIMITATION OF LIABILITY\n\n8.1 Cap on Liability. EXCEPT FOR EXCLUDED CLAIMS, EACH PARTY'S TOTAL LIABILITY SHALL NOT EXCEED THE TOTAL FEES PAID OR PAYABLE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.\n\n8.2 Excluded Damages. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS.\n\n8.3 Excluded Claims. The limitations do not apply to: (a) indemnification obligations; (b) breaches of confidentiality; (c) intellectual property infringement; or (d) gross negligence or willful misconduct.\n\n9. INDEPENDENT CONTRACTOR\n\n9.1 Relationship. Service Provider is an independent contractor, not an employee, agent, or partner of Company. Service Provider shall not represent itself as an employee or agent of Company.\n\n9.2 Taxes and Benefits. Service Provider is responsible for all taxes, insurance, and benefits. Company shall not withhold taxes or provide employee benefits.\n\n9.3 Control. Service Provider retains control over how Services are performed, subject to Company's right to specify desired results.\n\n10. GENERAL PROVISIONS\n\n10.1 Entire Agreement. This Agreement, including all SOWs, constitutes the entire agreement between the parties and supersedes all prior agreements.\n\n10.2 Amendment. This Agreement may be amended only by a written agreement signed by both parties.\n\n10.3 Governing Law. This Agreement shall be governed by the laws of [State], without regard to conflicts of law principles.\n\n10.4 Dispute Resolution. Disputes shall be resolved through good faith negotiation, followed by mediation if necessary, and finally by binding arbitration.\n\n10.5 Notices. All notices shall be in writing and delivered to the addresses specified below or as subsequently updated.\n\n10.6 Severability. If any provision is found unenforceable, the remaining provisions shall remain in full force and effect.\n\n10.7 Waiver. No waiver of any provision shall be deemed a waiver of any other provision or subsequent breach.\n\n10.8 Assignment. Neither party may assign this Agreement without prior written consent, except to a successor in connection with a merger or acquisition.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\n\nCOMPANY:\t\t\t\tSERVICE PROVIDER:\n\nBy: _________________________\t\tBy: _________________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nTitle: [Title]\t\t\t\tTitle: [Title]\n\nDate: _______________\t\t\tDate: _______________",
+    "sections": [
+      {
+        "title": "1. SERVICES",
+        "text": "1.1 Scope of Services. Service Provider shall perform the professional services described in the attached Statement of Work (\"SOW\") or as otherwise mutually agreed upon in writing (\"Services\").\n1.2 Standard of Performance. Service Provider shall perform all Services in a professional and workmanlike manner, consistent with industry standards and best practices.\n1.3 Personnel. Service Provider shall assign qualified personnel to perform the Services. Company may request replacement of any personnel if performance is unsatisfactory.\n1.4 Subcontractors. Service Provider may engage subcontractors only with Company's prior written approval and shall remain fully responsible for all work performed by subcontractors."
+      },
+      {
+        "title": "2. COMPENSATION AND PAYMENT",
+        "text": "2.1 Fees. Company shall pay Service Provider the fees specified in the applicable SOW. Fees may be structured as: (a) fixed fee; (b) time and materials at the hourly rates specified; or (c) milestone-based payments.\n2.2 Expenses. Service Provider may be reimbursed for pre-approved, documented, reasonable expenses incurred in connection with the Services, including travel, lodging, and materials. All expenses exceeding $500 require prior written approval.\n2.3 Invoicing. Service Provider shall submit invoices monthly or as specified in the SOW, detailing services performed, hours worked, and expenses incurred. Invoices are due and payable within thirty (30) days of receipt.\n2.4 Late Payment. Late payments shall accrue interest at 1.5% per month or the maximum rate permitted by law, whichever is less."
+      },
+      {
+        "title": "3. TERM AND TERMINATION",
+        "text": "3.1 Term. This Agreement shall commence on the Effective Date and continue until the Services are completed or until terminated as provided herein.\n3.2 Termination for Convenience. Either party may terminate this Agreement or any SOW upon thirty (30) days' prior written notice. Company shall pay for all Services performed and expenses incurred prior to the effective date of termination.\n3.3 Termination for Cause. Either party may terminate this Agreement immediately upon written notice if the other party materially breaches and fails to cure within fifteen (15) days of written notice.\n3.4 Effect of Termination. Upon termination, Service Provider shall: (a) immediately cease performing Services; (b) deliver all work product and Company materials to Company; and (c) submit a final invoice for Services rendered."
+      },
+      {
+        "title": "4. INTELLECTUAL PROPERTY",
+        "text": "4.1 Work Product. All deliverables, work product, inventions, and materials created by Service Provider in the course of performing the Services (\"Work Product\") shall be the sole and exclusive property of Company. Service Provider hereby assigns all right, title, and interest in the Work Product to Company.\n4.2 Pre-Existing Materials. Service Provider retains ownership of any pre-existing materials, methodologies, or tools used in performing the Services. Company is granted a perpetual, non-exclusive license to use such materials as incorporated into the Work Product.\n4.3 Further Assurances. Service Provider shall execute any documents and take any actions necessary to perfect Company's ownership rights in the Work Product."
+      },
+      {
+        "title": "5. CONFIDENTIALITY",
+        "text": "5.1 Confidential Information. Service Provider acknowledges that it will have access to Company's proprietary and confidential information, including business plans, financial data, customer information, and trade secrets (\"Confidential Information\").\n5.2 Obligations. Service Provider shall: (a) hold Confidential Information in strict confidence; (b) use Confidential Information only to perform the Services; (c) not disclose Confidential Information to third parties without prior written consent; and (d) protect Confidential Information with the same degree of care used to protect its own confidential information.\n5.3 Exclusions. Confidential Information does not include information that: (a) is publicly available; (b) was known prior to disclosure; (c) was independently developed; or (d) was received from a third party without restriction.\n5.4 Duration. Confidentiality obligations shall survive termination of this Agreement for a period of three (3) years."
+      },
+      {
+        "title": "6. REPRESENTATIONS AND WARRANTIES",
+        "text": "6.1 Service Provider Representations. Service Provider represents and warrants that: (a) it has the requisite skill, experience, and qualifications to perform the Services; (b) the Services shall be performed in a professional manner; (c) the Work Product will not infringe any third-party intellectual property rights; and (d) it has all necessary licenses and permits to perform the Services.\n6.2 Company Representations. Company represents that it has the authority to enter into this Agreement and grant the rights granted herein."
+      },
+      {
+        "title": "7. INDEMNIFICATION",
+        "text": "7.1 Service Provider Indemnity. Service Provider shall defend, indemnify, and hold harmless Company from any third-party claims arising from: (a) Service Provider's breach of this Agreement; (b) Service Provider's negligence or willful misconduct; (c) infringement of intellectual property rights; or (d) violation of applicable law.\n7.2 Company Indemnity. Company shall defend, indemnify, and hold harmless Service Provider from claims arising from Company's use of the Work Product in a manner not contemplated by this Agreement."
+      },
+      {
+        "title": "8. LIMITATION OF LIABILITY",
+        "text": "8.1 Cap on Liability. EXCEPT FOR EXCLUDED CLAIMS, EACH PARTY'S TOTAL LIABILITY SHALL NOT EXCEED THE TOTAL FEES PAID OR PAYABLE UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.\n8.2 Excluded Damages. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS.\n8.3 Excluded Claims. The limitations do not apply to: (a) indemnification obligations; (b) breaches of confidentiality; (c) intellectual property infringement; or (d) gross negligence or willful misconduct."
+      },
+      {
+        "title": "9. INDEPENDENT CONTRACTOR",
+        "text": "9.1 Relationship. Service Provider is an independent contractor, not an employee, agent, or partner of Company. Service Provider shall not represent itself as an employee or agent of Company.\n9.2 Taxes and Benefits. Service Provider is responsible for all taxes, insurance, and benefits. Company shall not withhold taxes or provide employee benefits.\n9.3 Control. Service Provider retains control over how Services are performed, subject to Company's right to specify desired results."
+      },
+      {
+        "title": "10. GENERAL PROVISIONS",
+        "text": "10.1 Entire Agreement. This Agreement, including all SOWs, constitutes the entire agreement between the parties and supersedes all prior agreements.\n10.2 Amendment. This Agreement may be amended only by a written agreement signed by both parties.\n10.3 Governing Law. This Agreement shall be governed by the laws of [State], without regard to conflicts of law principles.\n10.4 Dispute Resolution. Disputes shall be resolved through good faith negotiation, followed by mediation if necessary, and finally by binding arbitration.\n10.5 Notices. All notices shall be in writing and delivered to the addresses specified below or as subsequently updated.\n10.6 Severability. If any provision is found unenforceable, the remaining provisions shall remain in full force and effect.\n10.7 Waiver. No waiver of any provision shall be deemed a waiver of any other provision or subsequent breach.\n10.8 Assignment. Neither party may assign this Agreement without prior written consent, except to a successor in connection with a merger or acquisition.\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\nCOMPANY:\t\t\t\tSERVICE PROVIDER:\nBy: _________________________\t\tBy: _________________________\nName: [Name]\t\t\t\tName: [Name]\nTitle: [Title]\t\t\t\tTitle: [Title]\nDate: _______________\t\t\tDate: _______________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.020219Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

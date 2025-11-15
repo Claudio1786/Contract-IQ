@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "template": "license-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "License_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "LICENSEE",
+        "role": "party-1"
+      },
+      {
+        "name": "LICENSOR",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "ip",
+      "section": "1. DEFINITIONS",
+      "text": "1.1 \"Licensed Property\" means the intellectual property described in Exhibit A, including patents, trademarks, copyrights, and trade secrets.\n1.2 \"Field of Use\" means [Description of Permitted Uses].\n1.3 \"Territory\" means [Geographic Area].",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "general",
+      "section": "2. GRANT OF LICENSE",
+      "text": "2.1 License Grant. Licensor grants Licensee a [exclusive/non-exclusive], [perpetual/term-limited] license to use the Licensed Property in the Field of Use within the Territory.\n2.2 Scope. This license includes the right to: (a) use; (b) reproduce; (c) distribute; (d) display; and (e) create derivative works, subject to the restrictions herein.\n2.3 Sublicensing. Licensee [may/may not] sublicense the Licensed Property with Licensor's prior written approval.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. ROYALTIES AND FEES",
+      "text": "3.1 License Fee. Licensee shall pay a one-time license fee of $[Amount] upon execution of this Agreement.\n3.2 Royalties. Licensee shall pay royalties equal to [Percentage]% of Net Sales, calculated quarterly. Net Sales means gross revenue less returns, discounts, and taxes.\n3.3 Minimum Royalties. Licensee shall pay minimum annual royalties of $[Amount], credited against actual royalties earned.\n3.4 Royalty Reports. Licensee shall submit quarterly royalty reports within thirty (30) days after eac",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "4. INTELLECTUAL PROPERTY OWNERSHIP",
+      "text": "4.1 Licensor Ownership. Licensor retains all right, title, and interest in the Licensed Property. This license grants no ownership rights.\n4.2 Improvements. All improvements, modifications, or enhancements to the Licensed Property shall be owned by Licensor. Licensee hereby assigns all rights to such improvements.\n4.3 Enforcement. Licensee shall promptly notify Licensor of any infringement. Licensor shall have the exclusive right to enforce intellectual property rights.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. QUALITY CONTROL AND BRANDING",
+      "text": "5.1 Quality Standards. Licensee shall maintain quality standards consistent with Licensor's specifications and brand guidelines.\n5.2 Trademark Usage. Licensee shall use Licensor's trademarks in accordance with Licensor's trademark usage guidelines. All uses must be pre-approved.\n5.3 Inspection Rights. Licensor may inspect Licensee's facilities and products to ensure compliance with quality standards.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. CONFIDENTIALITY",
+      "text": "6.1 Protection. Licensee shall treat all Licensed Property and related information as confidential and proprietary.\n6.2 Non-Disclosure. Licensee shall not disclose confidential information to third parties without prior written consent.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "obligation",
+      "section": "7. TERM AND TERMINATION",
+      "text": "7.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration] unless earlier terminated.\n7.2 Termination. Either party may terminate for material breach uncured within thirty (30) days of written notice.\n7.3 Effect of Termination. Upon termination, Licensee shall: (a) cease all use of Licensed Property; (b) destroy or return all materials; (c) pay all accrued royalties.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "general",
+      "section": "8. WARRANTIES AND DISCLAIMERS",
+      "text": "8.1 Licensor Warranty. Licensor warrants it has the right to grant this license and that the Licensed Property does not infringe third-party rights.\n8.2 DISCLAIMER. EXCEPT AS EXPRESSLY PROVIDED, THE LICENSED PROPERTY IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. LIMITATION OF LIABILITY",
+      "text": "LICENSOR'S TOTAL LIABILITY SHALL NOT EXCEED THE LICENSE FEES PAID BY LICENSEE. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "general",
+      "section": "10. GENERAL PROVISIONS",
+      "text": "10.1 Entire Agreement. This Agreement constitutes the entire agreement.\n10.2 Governing Law. Governed by the laws of [State].\n10.3 Assignment. Licensee may not assign without prior written consent.\nIN WITNESS WHEREOF, the parties have executed this Agreement.\nLICENSOR:\t\t\t\tLICENSEE:\nBy: _____________________\t\tBy: _____________________\nName: [Name]\t\t\t\tName: [Name]\nDate: _____________\t\t\tDate: _____________",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "LICENSE AGREEMENT\n\nThis License Agreement (\"Agreement\") is entered into as of [Date] by and between [Licensor Name] (\"Licensor\") and [Licensee Name] (\"Licensee\").\n\n1. DEFINITIONS\n\n1.1 \"Licensed Property\" means the intellectual property described in Exhibit A, including patents, trademarks, copyrights, and trade secrets.\n\n1.2 \"Field of Use\" means [Description of Permitted Uses].\n\n1.3 \"Territory\" means [Geographic Area].\n\n2. GRANT OF LICENSE\n\n2.1 License Grant. Licensor grants Licensee a [exclusive/non-exclusive], [perpetual/term-limited] license to use the Licensed Property in the Field of Use within the Territory.\n\n2.2 Scope. This license includes the right to: (a) use; (b) reproduce; (c) distribute; (d) display; and (e) create derivative works, subject to the restrictions herein.\n\n2.3 Sublicensing. Licensee [may/may not] sublicense the Licensed Property with Licensor's prior written approval.\n\n3. ROYALTIES AND FEES\n\n3.1 License Fee. Licensee shall pay a one-time license fee of $[Amount] upon execution of this Agreement.\n\n3.2 Royalties. Licensee shall pay royalties equal to [Percentage]% of Net Sales, calculated quarterly. Net Sales means gross revenue less returns, discounts, and taxes.\n\n3.3 Minimum Royalties. Licensee shall pay minimum annual royalties of $[Amount], credited against actual royalties earned.\n\n3.4 Royalty Reports. Licensee shall submit quarterly royalty reports within thirty (30) days after each quarter end.\n\n4. INTELLECTUAL PROPERTY OWNERSHIP\n\n4.1 Licensor Ownership. Licensor retains all right, title, and interest in the Licensed Property. This license grants no ownership rights.\n\n4.2 Improvements. All improvements, modifications, or enhancements to the Licensed Property shall be owned by Licensor. Licensee hereby assigns all rights to such improvements.\n\n4.3 Enforcement. Licensee shall promptly notify Licensor of any infringement. Licensor shall have the exclusive right to enforce intellectual property rights.\n\n5. QUALITY CONTROL AND BRANDING\n\n5.1 Quality Standards. Licensee shall maintain quality standards consistent with Licensor's specifications and brand guidelines.\n\n5.2 Trademark Usage. Licensee shall use Licensor's trademarks in accordance with Licensor's trademark usage guidelines. All uses must be pre-approved.\n\n5.3 Inspection Rights. Licensor may inspect Licensee's facilities and products to ensure compliance with quality standards.\n\n6. CONFIDENTIALITY\n\n6.1 Protection. Licensee shall treat all Licensed Property and related information as confidential and proprietary.\n\n6.2 Non-Disclosure. Licensee shall not disclose confidential information to third parties without prior written consent.\n\n7. TERM AND TERMINATION\n\n7.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration] unless earlier terminated.\n\n7.2 Termination. Either party may terminate for material breach uncured within thirty (30) days of written notice.\n\n7.3 Effect of Termination. Upon termination, Licensee shall: (a) cease all use of Licensed Property; (b) destroy or return all materials; (c) pay all accrued royalties.\n\n8. WARRANTIES AND DISCLAIMERS\n\n8.1 Licensor Warranty. Licensor warrants it has the right to grant this license and that the Licensed Property does not infringe third-party rights.\n\n8.2 DISCLAIMER. EXCEPT AS EXPRESSLY PROVIDED, THE LICENSED PROPERTY IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND.\n\n9. LIMITATION OF LIABILITY\n\nLICENSOR'S TOTAL LIABILITY SHALL NOT EXCEED THE LICENSE FEES PAID BY LICENSEE. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES.\n\n10. GENERAL PROVISIONS\n\n10.1 Entire Agreement. This Agreement constitutes the entire agreement.\n\n10.2 Governing Law. Governed by the laws of [State].\n\n10.3 Assignment. Licensee may not assign without prior written consent.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement.\n\nLICENSOR:\t\t\t\tLICENSEE:\n\nBy: _____________________\t\tBy: _____________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nDate: _____________\t\t\tDate: _____________",
+    "sections": [
+      {
+        "title": "1. DEFINITIONS",
+        "text": "1.1 \"Licensed Property\" means the intellectual property described in Exhibit A, including patents, trademarks, copyrights, and trade secrets.\n1.2 \"Field of Use\" means [Description of Permitted Uses].\n1.3 \"Territory\" means [Geographic Area]."
+      },
+      {
+        "title": "2. GRANT OF LICENSE",
+        "text": "2.1 License Grant. Licensor grants Licensee a [exclusive/non-exclusive], [perpetual/term-limited] license to use the Licensed Property in the Field of Use within the Territory.\n2.2 Scope. This license includes the right to: (a) use; (b) reproduce; (c) distribute; (d) display; and (e) create derivative works, subject to the restrictions herein.\n2.3 Sublicensing. Licensee [may/may not] sublicense the Licensed Property with Licensor's prior written approval."
+      },
+      {
+        "title": "3. ROYALTIES AND FEES",
+        "text": "3.1 License Fee. Licensee shall pay a one-time license fee of $[Amount] upon execution of this Agreement.\n3.2 Royalties. Licensee shall pay royalties equal to [Percentage]% of Net Sales, calculated quarterly. Net Sales means gross revenue less returns, discounts, and taxes.\n3.3 Minimum Royalties. Licensee shall pay minimum annual royalties of $[Amount], credited against actual royalties earned.\n3.4 Royalty Reports. Licensee shall submit quarterly royalty reports within thirty (30) days after each quarter end."
+      },
+      {
+        "title": "4. INTELLECTUAL PROPERTY OWNERSHIP",
+        "text": "4.1 Licensor Ownership. Licensor retains all right, title, and interest in the Licensed Property. This license grants no ownership rights.\n4.2 Improvements. All improvements, modifications, or enhancements to the Licensed Property shall be owned by Licensor. Licensee hereby assigns all rights to such improvements.\n4.3 Enforcement. Licensee shall promptly notify Licensor of any infringement. Licensor shall have the exclusive right to enforce intellectual property rights."
+      },
+      {
+        "title": "5. QUALITY CONTROL AND BRANDING",
+        "text": "5.1 Quality Standards. Licensee shall maintain quality standards consistent with Licensor's specifications and brand guidelines.\n5.2 Trademark Usage. Licensee shall use Licensor's trademarks in accordance with Licensor's trademark usage guidelines. All uses must be pre-approved.\n5.3 Inspection Rights. Licensor may inspect Licensee's facilities and products to ensure compliance with quality standards."
+      },
+      {
+        "title": "6. CONFIDENTIALITY",
+        "text": "6.1 Protection. Licensee shall treat all Licensed Property and related information as confidential and proprietary.\n6.2 Non-Disclosure. Licensee shall not disclose confidential information to third parties without prior written consent."
+      },
+      {
+        "title": "7. TERM AND TERMINATION",
+        "text": "7.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration] unless earlier terminated.\n7.2 Termination. Either party may terminate for material breach uncured within thirty (30) days of written notice.\n7.3 Effect of Termination. Upon termination, Licensee shall: (a) cease all use of Licensed Property; (b) destroy or return all materials; (c) pay all accrued royalties."
+      },
+      {
+        "title": "8. WARRANTIES AND DISCLAIMERS",
+        "text": "8.1 Licensor Warranty. Licensor warrants it has the right to grant this license and that the Licensed Property does not infringe third-party rights.\n8.2 DISCLAIMER. EXCEPT AS EXPRESSLY PROVIDED, THE LICENSED PROPERTY IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND."
+      },
+      {
+        "title": "9. LIMITATION OF LIABILITY",
+        "text": "LICENSOR'S TOTAL LIABILITY SHALL NOT EXCEED THE LICENSE FEES PAID BY LICENSEE. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT OR CONSEQUENTIAL DAMAGES."
+      },
+      {
+        "title": "10. GENERAL PROVISIONS",
+        "text": "10.1 Entire Agreement. This Agreement constitutes the entire agreement.\n10.2 Governing Law. Governed by the laws of [State].\n10.3 Assignment. Licensee may not assign without prior written consent.\nIN WITNESS WHEREOF, the parties have executed this Agreement.\nLICENSOR:\t\t\t\tLICENSEE:\nBy: _____________________\t\tBy: _____________________\nName: [Name]\t\t\t\tName: [Name]\nDate: _____________\t\t\tDate: _____________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:55.994220Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "template": "dpa-template",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "DPA_Template.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "Customer",
+        "role": "party-1"
+      },
+      {
+        "name": "Provider",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "obligation",
+      "section": "RECITALS",
+      "text": "WHEREAS, Controller wishes to engage Processor to process personal data on Controller's behalf; and WHEREAS, the Parties seek to comply with the General Data Protection Regulation (EU) 2016/679 (\"GDPR\") and other applicable data protection laws; NOW, THEREFORE, the Parties agree as follows:\nDEFINITIONS\nTerms used in this DPA shall have the meanings set forth in the GDPR. \"Personal Data\", \"Data Subject\", \"Processing\", \"Controller\", and \"Processor\" shall have the meanings assigned to them in the G",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "DATA PROCESSING AGREEMENT\n\nThis Data Processing Agreement (\"DPA\") forms part of the Master Service Agreement dated [DATE] between:\n\nData Controller: [CONTROLLER NAME] (\"Controller\" or \"Customer\");\n\nData Processor: [PROCESSOR NAME] (\"Processor\" or \"Service Provider\").\n\nRECITALS\n\nWHEREAS, Controller wishes to engage Processor to process personal data on Controller's behalf; and WHEREAS, the Parties seek to comply with the General Data Protection Regulation (EU) 2016/679 (\"GDPR\") and other applicable data protection laws; NOW, THEREFORE, the Parties agree as follows:\n\nDEFINITIONS\n\nTerms used in this DPA shall have the meanings set forth in the GDPR. \"Personal Data\", \"Data Subject\", \"Processing\", \"Controller\", and \"Processor\" shall have the meanings assigned to them in the GDPR.\n\nSCOPE AND NATURE OF PROCESSING\n\n2.1. Subject Matter: Processing of Personal Data in connection with the Services.\n\n2.2. Duration: For the term of the Master Service Agreement.\n\n2.3. Nature and Purpose: Processing necessary to provide the Services as described in the Master Service Agreement.\n\n2.4. Types of Personal Data: Names, email addresses, contact information, and other data as specified in Annex A.\n\nPROCESSOR OBLIGATIONS\n\n3.1. Instructions. Processor shall process Personal Data only on documented instructions from Controller, unless required to do so by EU or Member State law.\n\n3.2. Confidentiality. Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality.\n\n3.3. Security. Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including: (a) pseudonymization and encryption; (b) ensuring ongoing confidentiality, integrity, availability and resilience; (c) restoring availability and access to Personal Data in a timely manner; and (d) regular testing and evaluation of effectiveness.\n\nSUB-PROCESSORS\n\n4.1. General Authorization. Controller provides general written authorization for Processor to engage sub-processors. Processor shall inform Controller of any intended changes concerning addition or replacement of sub-processors, giving Controller opportunity to object to such changes.\n\nDATA SUBJECT RIGHTS\n\n5.1. Assistance. Processor shall, taking into account the nature of processing, assist Controller by appropriate technical and organizational measures for fulfillment of Controller's obligation to respond to requests for exercising Data Subject rights under the GDPR.\n\nDATA BREACH NOTIFICATION\n\n6.1. Notification. Processor shall notify Controller without undue delay (and in any event within 48 hours) after becoming aware of a personal data breach affecting Controller's Personal Data.\n\nDELETION OR RETURN OF DATA\n\n7.1. At the choice of Controller, Processor shall delete or return all Personal Data to Controller after the end of provision of Services, and delete existing copies unless EU or Member State law requires storage of the Personal Data.\n\nAUDIT RIGHTS\n\n8.1. Processor shall make available to Controller all information necessary to demonstrate compliance with obligations under this DPA and allow for audits, including inspections, by Controller or an auditor authorized by Controller, upon reasonable notice and during business hours.\n\nINTERNATIONAL TRANSFERS\n\n9.1. Processor shall not transfer Personal Data outside the EU/EEA without Controller's prior written consent. Where transfers occur, Processor shall ensure appropriate safeguards are in place, such as Standard Contractual Clauses approved by the European Commission.\n\nCONTROLLER:\n\n__________________________________________________\n\nName: _________________ Title: _________________ Date: _________________\n\nPROCESSOR:\n\n__________________________________________________\n\nName: _________________ Title: _________________ Date: _________________",
+    "sections": [
+      {
+        "title": "RECITALS",
+        "text": "WHEREAS, Controller wishes to engage Processor to process personal data on Controller's behalf; and WHEREAS, the Parties seek to comply with the General Data Protection Regulation (EU) 2016/679 (\"GDPR\") and other applicable data protection laws; NOW, THEREFORE, the Parties agree as follows:\nDEFINITIONS\nTerms used in this DPA shall have the meanings set forth in the GDPR. \"Personal Data\", \"Data Subject\", \"Processing\", \"Controller\", and \"Processor\" shall have the meanings assigned to them in the GDPR.\nSCOPE AND NATURE OF PROCESSING\n2.1. Subject Matter: Processing of Personal Data in connection with the Services.\n2.2. Duration: For the term of the Master Service Agreement.\n2.3. Nature and Purpose: Processing necessary to provide the Services as described in the Master Service Agreement.\n2.4. Types of Personal Data: Names, email addresses, contact information, and other data as specified in Annex A.\nPROCESSOR OBLIGATIONS\n3.1. Instructions. Processor shall process Personal Data only on documented instructions from Controller, unless required to do so by EU or Member State law.\n3.2. Confidentiality. Processor shall ensure that persons authorized to process Personal Data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality.\n3.3. Security. Processor shall implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk, including: (a) pseudonymization and encryption; (b) ensuring ongoing confidentiality, integrity, availability and resilience; (c) restoring availability and access to Personal Data in a timely manner; and (d) regular testing and evaluation of effectiveness.\nSUB-PROCESSORS\n4.1. General Authorization. Controller provides general written authorization for Processor to engage sub-processors. Processor shall inform Controller of any intended changes concerning addition or replacement of sub-processors, giving Controller opportunity to object to such changes.\nDATA SUBJECT RIGHTS\n5.1. Assistance. Processor shall, taking into account the nature of processing, assist Controller by appropriate technical and organizational measures for fulfillment of Controller's obligation to respond to requests for exercising Data Subject rights under the GDPR.\nDATA BREACH NOTIFICATION\n6.1. Notification. Processor shall notify Controller without undue delay (and in any event within 48 hours) after becoming aware of a personal data breach affecting Controller's Personal Data.\nDELETION OR RETURN OF DATA\n7.1. At the choice of Controller, Processor shall delete or return all Personal Data to Controller after the end of provision of Services, and delete existing copies unless EU or Member State law requires storage of the Personal Data.\nAUDIT RIGHTS\n8.1. Processor shall make available to Controller all information necessary to demonstrate compliance with obligations under this DPA and allow for audits, including inspections, by Controller or an auditor authorized by Controller, upon reasonable notice and during business hours.\nINTERNATIONAL TRANSFERS\n9.1. Processor shall not transfer Personal Data outside the EU/EEA without Controller's prior written consent. Where transfers occur, Processor shall ensure appropriate safeguards are in place, such as Standard Contractual Clauses approved by the European Commission.\nCONTROLLER:\n__________________________________________________\nName: _________________ Title: _________________ Date: _________________\nPROCESSOR:\n__________________________________________________\nName: _________________ Title: _________________ Date: _________________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:55.982713Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}
