@@ -1,1 +1,422 @@
-import { NextRequest, NextResponse } from 'next/server';\nimport { MultiLLMClient } from '../../../lib/agents/multi-llm-orchestrator';\nimport { buildEnhancedPrompt } from '../../../lib/negotiation-intelligence';\n\n// Initialize Multi-LLM Client\nconst multiLLMClient = new MultiLLMClient(\n  process.env.GEMINI_API_KEY || '',\n  process.env.OPENAI_API_KEY || ''\n);\n\nexport async function POST(request: NextRequest) {\n  try {\n    const body = await request.json();\n    const { contractType, scenario, objectives, currentTerms, desiredOutcome, modelPreference } = body;\n\n    // Validate required fields\n    if (!contractType || !scenario || !objectives || objectives.length === 0) {\n      return NextResponse.json(\n        { error: 'Contract type, scenario, and objectives are required' },\n        { status: 400 }\n      );\n    }\n\n    // Build enhanced prompt with market intelligence\n    const enhancedPrompt = buildEnhancedPrompt(\n      contractType,\n      scenario,\n      objectives,\n      currentTerms,\n      desiredOutcome\n    );\n\n    console.log('🤖 Generating playbook with Multi-LLM approach...');\n    console.log('Enhanced Prompt Length:', enhancedPrompt.length);\n    console.log('Model Preference:', modelPreference || 'auto-select');\n\n    // Determine optimal model strategy for playbook generation\n    const strategy = determineOptimalStrategy(scenario, objectives, modelPreference);\n    \n    console.log('🎯 Selected Strategy:', {\n      primary: `${strategy.primary.provider}:${strategy.primary.model}`,\n      reason: strategy.primary.reason\n    });\n\n    // Generate playbook with primary model\n    const primaryResult = await generateWithModel(\n      strategy.primary.provider,\n      strategy.primary.model,\n      enhancedPrompt,\n      `contract_${Date.now()}`\n    );\n\n    let result = primaryResult;\n    let crossValidation = null;\n\n    // Cross-validate with secondary model for critical scenarios or low confidence\n    if (shouldCrossValidate(scenario, primaryResult.confidence, modelPreference)) {\n      console.log('🔍 Cross-validating with fallback model...');\n      \n      try {\n        const fallbackResult = await generateWithModel(\n          strategy.fallback.provider,\n          strategy.fallback.model,\n          enhancedPrompt,\n          `contract_${Date.now()}_validation`\n        );\n        \n        crossValidation = {\n          fallbackModel: `${strategy.fallback.provider}:${strategy.fallback.model}`,\n          agreement: calculateContentAgreement(primaryResult.content, fallbackResult.content),\n          recommendedApproach: selectBetterResult(primaryResult, fallbackResult)\n        };\n        \n        // Use better result if cross-validation suggests it\n        if (crossValidation.recommendedApproach === 'fallback') {\n          result = fallbackResult;\n        }\n        \n      } catch (error) {\n        console.warn('Cross-validation failed, using primary result:', error);\n      }\n    }\n\n    console.log('✅ Playbook generated successfully');\n    console.log('Final Model Used:', `${result.provider}:${result.model}`);\n    console.log('Total Cost:', `$${(result.cost + (crossValidation ? 0.01 : 0)).toFixed(4)}`);\n\n    // Parse the generated content into structured format\n    const playbook = parsePlaybookResponse(result.content, {\n      contractType,\n      scenario,\n      objectives,\n      currentTerms,\n      desiredOutcome\n    });\n\n    return NextResponse.json({ \n      success: true, \n      playbook,\n      metadata: {\n        promptLength: enhancedPrompt.length,\n        responseLength: result.content.length,\n        primaryModel: `${strategy.primary.provider}:${strategy.primary.model}`,\n        modelUsed: `${result.provider}:${result.model}`,\n        cost: result.cost,\n        crossValidation,\n        confidence: result.confidence,\n        processingTime: result.processingTime\n      }\n    });\n\n  } catch (error: any) {\n    console.error('❌ Error generating multi-LLM playbook:', error);\n    \n    return NextResponse.json(\n      { \n        error: 'Failed to generate playbook with multi-LLM approach',\n        details: error.message,\n        type: error.name\n      },\n      { status: 500 }\n    );\n  }\n}\n\n// Determine optimal model strategy based on scenario and objectives\nfunction determineOptimalStrategy(scenario: string, objectives: string[], modelPreference?: string) {\n  // High-level strategy mapping based on our competitive analysis\n  const scenarioStrategies: Record<string, any> = {\n    // Financial optimization scenarios: OpenAI excels at financial reasoning\n    'saas_renewal_price_increase': {\n      primary: {\n        provider: 'openai',\n        model: 'gpt-4o',\n        reason: 'Superior financial analysis and cost optimization reasoning'\n      },\n      fallback: {\n        provider: 'gemini',\n        model: 'gemini-1.5-pro',\n        reason: 'Strong analytical backup for negotiation tactics'\n      }\n    },\n    \n    // Legal compliance scenarios: Gemini Pro for document understanding\n    'gdpr_dpa_compliance': {\n      primary: {\n        provider: 'gemini',\n        model: 'gemini-1.5-pro',\n        reason: 'Excellent legal document understanding and compliance analysis'\n      },\n      fallback: {\n        provider: 'openai',\n        model: 'gpt-4o',\n        reason: 'Creative problem-solving for complex compliance challenges'\n      }\n    },\n    \n    // Service level scenarios: Balance of technical and negotiation analysis\n    'sla_enhancement': {\n      primary: {\n        provider: 'openai',\n        model: 'gpt-4o',\n        reason: 'Strategic thinking for service level negotiations'\n      },\n      fallback: {\n        provider: 'gemini',\n        model: 'gemini-1.5-pro',\n        reason: 'Technical accuracy for SLA metrics and benchmarking'\n      }\n    }\n  };\n\n  // Override with user preference if specified\n  if (modelPreference) {\n    const baseStrategy = scenarioStrategies[scenario] || scenarioStrategies['sla_enhancement'];\n    \n    if (modelPreference === 'openai') {\n      return {\n        primary: {\n          provider: 'openai',\n          model: 'gpt-4o',\n          reason: 'User preference: OpenAI for creative reasoning'\n        },\n        fallback: baseStrategy.fallback\n      };\n    } else if (modelPreference === 'gemini') {\n      return {\n        primary: {\n          provider: 'gemini',\n          model: 'gemini-1.5-pro',\n          reason: 'User preference: Gemini for structured analysis'\n        },\n        fallback: baseStrategy.fallback\n      };\n    }\n  }\n\n  return scenarioStrategies[scenario] || scenarioStrategies['sla_enhancement'];\n}\n\n// Generate content with specified model\nasync function generateWithModel(\n  provider: 'gemini' | 'openai',\n  model: string,\n  prompt: string,\n  contractId: string\n) {\n  const startTime = Date.now();\n  \n  const config = {\n    temperature: 0.7,\n    maxTokens: 4000,\n    systemMessage: `You are a specialized contract negotiation strategist. Generate comprehensive, actionable negotiation playbooks based on market intelligence and proven tactics.`\n  };\n\n  try {\n    const result = await multiLLMClient.callModel(\n      provider,\n      model as any,\n      config,\n      prompt,\n      contractId\n    );\n    \n    const processingTime = Date.now() - startTime;\n    const confidence = calculateConfidence(result.content, provider);\n    \n    return {\n      content: result.content,\n      cost: result.cost,\n      provider,\n      model,\n      processingTime,\n      confidence\n    };\n  } catch (error) {\n    console.error(`Failed to generate with ${provider}:${model}:`, error);\n    throw error;\n  }\n}\n\n// Calculate confidence score based on content quality and provider\nfunction calculateConfidence(content: string, provider: string): number {\n  let score = 0.5;\n  \n  // Length and structure indicators\n  if (content.length > 2000) score += 0.1;\n  if (content.length > 4000) score += 0.1;\n  \n  // Structure indicators\n  if (content.includes('EXECUTIVE SUMMARY')) score += 0.1;\n  if (content.includes('TALKING POINTS')) score += 0.1;\n  if (content.includes('SUCCESS METRICS')) score += 0.1;\n  \n  // Model-specific confidence adjustments\n  if (provider === 'openai' && content.includes('$') && content.includes('%')) {\n    score += 0.05; // OpenAI tends to be better with financial analysis\n  }\n  \n  if (provider === 'gemini' && content.includes('compliance') && content.includes('GDPR')) {\n    score += 0.05; // Gemini tends to be better with legal/compliance content\n  }\n  \n  return Math.min(score, 1.0);\n}\n\n// Determine if cross-validation is needed\nfunction shouldCrossValidate(\n  scenario: string, \n  confidence: number, \n  modelPreference?: string\n): boolean {\n  // Always cross-validate for financial scenarios (high stakes)\n  if (scenario.includes('price') || scenario.includes('cost')) {\n    return true;\n  }\n  \n  // Cross-validate if confidence is low\n  if (confidence < 0.8) {\n    return true;\n  }\n  \n  // Cross-validate if user explicitly requests it\n  if (modelPreference === 'cross-validate') {\n    return true;\n  }\n  \n  return false;\n}\n\n// Calculate agreement between two content pieces\nfunction calculateContentAgreement(content1: string, content2: string): number {\n  // Simple similarity calculation based on key phrases\n  const extractKeyPhrases = (text: string) => {\n    return text.toLowerCase()\n      .split(/[.!?\\n]/)                    // Split by sentences\n      .map(s => s.trim())                  // Trim whitespace\n      .filter(s => s.length > 20)         // Filter short sentences\n      .slice(0, 10);                      // Take first 10 key sentences\n  };\n  \n  const phrases1 = extractKeyPhrases(content1);\n  const phrases2 = extractKeyPhrases(content2);\n  \n  let matches = 0;\n  for (const phrase1 of phrases1) {\n    for (const phrase2 of phrases2) {\n      // Calculate simple word overlap\n      const words1 = new Set(phrase1.split(' ').filter(w => w.length > 3));\n      const words2 = new Set(phrase2.split(' ').filter(w => w.length > 3));\n      \n      const intersection = new Set([...words1].filter(x => words2.has(x)));\n      const union = new Set([...words1, ...words2]);\n      \n      const similarity = intersection.size / union.size;\n      if (similarity > 0.3) {\n        matches++;\n        break;\n      }\n    }\n  }\n  \n  return matches / Math.max(phrases1.length, phrases2.length);\n}\n\n// Select better result between primary and fallback\nfunction selectBetterResult(\n  primary: { content: string; confidence: number; provider: string },\n  fallback: { content: string; confidence: number; provider: string }\n): 'primary' | 'fallback' {\n  // If confidence difference is significant, choose higher confidence\n  if (Math.abs(primary.confidence - fallback.confidence) > 0.15) {\n    return primary.confidence > fallback.confidence ? 'primary' : 'fallback';\n  }\n  \n  // If confidence is similar, prefer based on content length (more comprehensive)\n  if (Math.abs(primary.content.length - fallback.content.length) > 500) {\n    return primary.content.length > fallback.content.length ? 'primary' : 'fallback';\n  }\n  \n  // Default to primary if no clear winner\n  return 'primary';\n}\n\n// Parse response into structured playbook format (reuse from original route)\nfunction parsePlaybookResponse(text: string, metadata: any) {\n  const playbook = {\n    id: `multi_llm_playbook_${Date.now()}`,\n    title: `${metadata.contractType} - ${getScenarioDisplayName(metadata.scenario)}`,\n    contractType: metadata.contractType,\n    scenario: metadata.scenario,\n    objectives: metadata.objectives,\n    content: text,\n    createdAt: new Date(),\n    \n    // Parse structured sections from the text\n    sections: parseStructuredSections(text)\n  };\n\n  return playbook;\n}\n\nfunction getScenarioDisplayName(scenarioId: string): string {\n  const scenarioNames: Record<string, string> = {\n    'saas_renewal_price_increase': 'SaaS Renewal Price Increase Mitigation',\n    'sla_enhancement': 'Service Level Agreement Enhancement',\n    'gdpr_dpa_compliance': 'GDPR Data Processing Agreement Compliance',\n    'liability_cap_negotiation': 'Liability Cap Negotiation',\n    'ip_rights_protection': 'IP Rights Protection',\n    'termination_exit_rights': 'Termination & Exit Rights',\n    'payment_terms_optimization': 'Payment Terms Optimization',\n    'volume_discount_optimization': 'Volume Discount Optimization'\n  };\n  \n  return scenarioNames[scenarioId] || scenarioId;\n}\n\nfunction parseStructuredSections(text: string) {\n  const sections: Record<string, string> = {};\n  \n  // Enhanced section parsing for multi-LLM generated content\n  const sectionPatterns = [\n    { key: 'executiveSummary', patterns: [\n      /EXECUTIVE SUMMARY[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|\\nTALKING|\\nRISK|$)/is, \n      /Executive Summary[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|\\nTalking|\\nRisk|$)/is,\n      /## Executive Summary\\n+(.*?)(?=\\n##|$)/is\n    ]},\n    { key: 'talkingPoints', patterns: [\n      /BATTLE-TESTED TALKING POINTS[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|\\nRISK|\\nTACTICS|$)/is,\n      /TALKING POINTS[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|\\nRisk|\\nTactics|$)/is,\n      /## Talking Points\\n+(.*?)(?=\\n##|$)/is\n    ]},\n    { key: 'riskMitigation', patterns: [\n      /RISK MITIGATION[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|\\nTACTICS|\\nTIMELINE|$)/is,\n      /## Risk Mitigation\\n+(.*?)(?=\\n##|$)/is\n    ]},\n    { key: 'tactics', patterns: [\n      /NEGOTIATION TACTICS[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|\\nTIMELINE|\\nSUCCESS|$)/is,\n      /## Negotiation Tactics\\n+(.*?)(?=\\n##|$)/is\n    ]},\n    { key: 'timeline', patterns: [\n      /TIMELINE & PHASES[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|\\nSUCCESS|$)/is,\n      /## Timeline\\n+(.*?)(?=\\n##|$)/is\n    ]},\n    { key: 'successMetrics', patterns: [\n      /SUCCESS METRICS[:\\n]+(.*?)(?=\\n##|\\n\\*\\*|$)/is,\n      /## Success Metrics\\n+(.*?)(?=\\n##|$)/is\n    ]}\n  ];\n\n  for (const section of sectionPatterns) {\n    for (const pattern of section.patterns) {\n      const match = text.match(pattern);\n      if (match && match[1]) {\n        sections[section.key] = match[1].trim();\n        break;\n      }\n    }\n  }\n\n  return sections;\n}\n"
+import { NextRequest, NextResponse } from 'next/server';
+import { MultiLLMClient } from '../../../lib/agents/multi-llm-orchestrator';
+import { buildEnhancedPrompt } from '../../../lib/negotiation-intelligence';
+
+// Initialize Multi-LLM Client
+const multiLLMClient = new MultiLLMClient(
+  process.env.GEMINI_API_KEY || '',
+  process.env.OPENAI_API_KEY || ''
+);
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { contractType, scenario, objectives, currentTerms, desiredOutcome, modelPreference } = body;
+
+    // Validate required fields
+    if (!contractType || !scenario || !objectives || objectives.length === 0) {
+      return NextResponse.json(
+        { error: 'Contract type, scenario, and objectives are required' },
+        { status: 400 }
+      );
+    }
+
+    // Build enhanced prompt with market intelligence
+    const enhancedPrompt = buildEnhancedPrompt(
+      contractType,
+      scenario,
+      objectives,
+      currentTerms,
+      desiredOutcome
+    );
+
+    console.log('🤖 Generating playbook with Multi-LLM approach...');
+    console.log('Enhanced Prompt Length:', enhancedPrompt.length);
+    console.log('Model Preference:', modelPreference || 'auto-select');
+
+    // Determine optimal model strategy for playbook generation
+    const strategy = determineOptimalStrategy(scenario, objectives, modelPreference);
+    
+    console.log('🎯 Selected Strategy:', {
+      primary: `${strategy.primary.provider}:${strategy.primary.model}`,
+      reason: strategy.primary.reason
+    });
+
+    // Generate playbook with primary model
+    const primaryResult = await generateWithModel(
+      strategy.primary.provider,
+      strategy.primary.model,
+      enhancedPrompt,
+      `contract_${Date.now()}`
+    );
+
+    let result = primaryResult;
+    let crossValidation = null;
+
+    // Cross-validate with secondary model for critical scenarios or low confidence
+    if (shouldCrossValidate(scenario, primaryResult.confidence, modelPreference)) {
+      console.log('🔍 Cross-validating with fallback model...');
+      
+      try {
+        const fallbackResult = await generateWithModel(
+          strategy.fallback.provider,
+          strategy.fallback.model,
+          enhancedPrompt,
+          `contract_${Date.now()}_validation`
+        );
+        
+        crossValidation = {
+          fallbackModel: `${strategy.fallback.provider}:${strategy.fallback.model}`,
+          agreement: calculateContentAgreement(primaryResult.content, fallbackResult.content),
+          recommendedApproach: selectBetterResult(primaryResult, fallbackResult)
+        };
+        
+        // Use better result if cross-validation suggests it
+        if (crossValidation.recommendedApproach === 'fallback') {
+          result = fallbackResult;
+        }
+        
+      } catch (error) {
+        console.warn('Cross-validation failed, using primary result:', error);
+      }
+    }
+
+    console.log('✅ Playbook generated successfully');
+    console.log('Final Model Used:', `${result.provider}:${result.model}`);
+    console.log('Total Cost:', `$${(result.cost + (crossValidation ? 0.01 : 0)).toFixed(4)}`);
+
+    // Parse the generated content into structured format
+    const playbook = parsePlaybookResponse(result.content, {
+      contractType,
+      scenario,
+      objectives,
+      currentTerms,
+      desiredOutcome
+    });
+
+    return NextResponse.json({ 
+      success: true, 
+      playbook,
+      metadata: {
+        promptLength: enhancedPrompt.length,
+        responseLength: result.content.length,
+        primaryModel: `${strategy.primary.provider}:${strategy.primary.model}`,
+        modelUsed: `${result.provider}:${result.model}`,
+        cost: result.cost,
+        crossValidation,
+        confidence: result.confidence,
+        processingTime: result.processingTime
+      }
+    });
+
+  } catch (error: any) {
+    console.error('❌ Error generating multi-LLM playbook:', error);
+    
+    return NextResponse.json(
+      { 
+        error: 'Failed to generate playbook with multi-LLM approach',
+        details: error.message,
+        type: error.name
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// Determine optimal model strategy based on scenario and objectives
+function determineOptimalStrategy(scenario: string, objectives: string[], modelPreference?: string) {
+  // High-level strategy mapping based on our competitive analysis
+  const scenarioStrategies: Record<string, any> = {
+    // Financial optimization scenarios: OpenAI excels at financial reasoning
+    'saas_renewal_price_increase': {
+      primary: {
+        provider: 'openai',
+        model: 'gpt-4o',
+        reason: 'Superior financial analysis and cost optimization reasoning'
+      },
+      fallback: {
+        provider: 'gemini',
+        model: 'gemini-1.5-pro',
+        reason: 'Strong analytical backup for negotiation tactics'
+      }
+    },
+    
+    // Legal compliance scenarios: Gemini Pro for document understanding
+    'gdpr_dpa_compliance': {
+      primary: {
+        provider: 'gemini',
+        model: 'gemini-1.5-pro',
+        reason: 'Excellent legal document understanding and compliance analysis'
+      },
+      fallback: {
+        provider: 'openai',
+        model: 'gpt-4o',
+        reason: 'Creative problem-solving for complex compliance challenges'
+      }
+    },
+    
+    // Service level scenarios: Balance of technical and negotiation analysis
+    'sla_enhancement': {
+      primary: {
+        provider: 'openai',
+        model: 'gpt-4o',
+        reason: 'Strategic thinking for service level negotiations'
+      },
+      fallback: {
+        provider: 'gemini',
+        model: 'gemini-1.5-pro',
+        reason: 'Technical accuracy for SLA metrics and benchmarking'
+      }
+    }
+  };
+
+  // Override with user preference if specified
+  if (modelPreference) {
+    const baseStrategy = scenarioStrategies[scenario] || scenarioStrategies['sla_enhancement'];
+    
+    if (modelPreference === 'openai') {
+      return {
+        primary: {
+          provider: 'openai',
+          model: 'gpt-4o',
+          reason: 'User preference: OpenAI for creative reasoning'
+        },
+        fallback: baseStrategy.fallback
+      };
+    } else if (modelPreference === 'gemini') {
+      return {
+        primary: {
+          provider: 'gemini',
+          model: 'gemini-1.5-pro',
+          reason: 'User preference: Gemini for structured analysis'
+        },
+        fallback: baseStrategy.fallback
+      };
+    }
+  }
+
+  return scenarioStrategies[scenario] || scenarioStrategies['sla_enhancement'];
+}
+
+// Generate content with specified model
+async function generateWithModel(
+  provider: 'gemini' | 'openai',
+  model: string,
+  prompt: string,
+  contractId: string
+) {
+  const startTime = Date.now();
+  
+  const config = {
+    temperature: 0.7,
+    maxTokens: 4000,
+    systemMessage: `You are a specialized contract negotiation strategist. Generate comprehensive, actionable negotiation playbooks based on market intelligence and proven tactics.`
+  };
+
+  try {
+    const result = await multiLLMClient.callModel(
+      provider,
+      model as any,
+      config,
+      prompt,
+      contractId
+    );
+    
+    const processingTime = Date.now() - startTime;
+    const confidence = calculateConfidence(result.content, provider);
+    
+    return {
+      content: result.content,
+      cost: result.cost,
+      provider,
+      model,
+      processingTime,
+      confidence
+    };
+  } catch (error) {
+    console.error(`Failed to generate with ${provider}:${model}:`, error);
+    throw error;
+  }
+}
+
+// Calculate confidence score based on content quality and provider
+function calculateConfidence(content: string, provider: string): number {
+  let score = 0.5;
+  
+  // Length and structure indicators
+  if (content.length > 2000) score += 0.1;
+  if (content.length > 4000) score += 0.1;
+  
+  // Structure indicators
+  if (content.includes('EXECUTIVE SUMMARY')) score += 0.1;
+  if (content.includes('TALKING POINTS')) score += 0.1;
+  if (content.includes('SUCCESS METRICS')) score += 0.1;
+  
+  // Model-specific confidence adjustments
+  if (provider === 'openai' && content.includes('$') && content.includes('%')) {
+    score += 0.05; // OpenAI tends to be better with financial analysis
+  }
+  
+  if (provider === 'gemini' && content.includes('compliance') && content.includes('GDPR')) {
+    score += 0.05; // Gemini tends to be better with legal/compliance content
+  }
+  
+  return Math.min(score, 1.0);
+}
+
+// Determine if cross-validation is needed
+function shouldCrossValidate(
+  scenario: string, 
+  confidence: number, 
+  modelPreference?: string
+): boolean {
+  // Always cross-validate for financial scenarios (high stakes)
+  if (scenario.includes('price') || scenario.includes('cost')) {
+    return true;
+  }
+  
+  // Cross-validate if confidence is low
+  if (confidence < 0.8) {
+    return true;
+  }
+  
+  // Cross-validate if user explicitly requests it
+  if (modelPreference === 'cross-validate') {
+    return true;
+  }
+  
+  return false;
+}
+
+// Calculate agreement between two content pieces
+function calculateContentAgreement(content1: string, content2: string): number {
+  // Simple similarity calculation based on key phrases
+  const extractKeyPhrases = (text: string) => {
+    return text.toLowerCase()
+      .split(/[.!?\n]/)                    // Split by sentences
+      .map(s => s.trim())                  // Trim whitespace
+      .filter(s => s.length > 20)         // Filter short sentences
+      .slice(0, 10);                      // Take first 10 key sentences
+  };
+  
+  const phrases1 = extractKeyPhrases(content1);
+  const phrases2 = extractKeyPhrases(content2);
+  
+  let matches = 0;
+  for (const phrase1 of phrases1) {
+    for (const phrase2 of phrases2) {
+      // Calculate simple word overlap
+      const words1 = new Set(phrase1.split(' ').filter(w => w.length > 3));
+      const words2 = new Set(phrase2.split(' ').filter(w => w.length > 3));
+      
+      const intersection = new Set([...words1].filter(x => words2.has(x)));
+      const union = new Set([...words1, ...words2]);
+      
+      const similarity = intersection.size / union.size;
+      if (similarity > 0.3) {
+        matches++;
+        break;
+      }
+    }
+  }
+  
+  return matches / Math.max(phrases1.length, phrases2.length);
+}
+
+// Select better result between primary and fallback
+function selectBetterResult(
+  primary: { content: string; confidence: number; provider: string },
+  fallback: { content: string; confidence: number; provider: string }
+): 'primary' | 'fallback' {
+  // If confidence difference is significant, choose higher confidence
+  if (Math.abs(primary.confidence - fallback.confidence) > 0.15) {
+    return primary.confidence > fallback.confidence ? 'primary' : 'fallback';
+  }
+  
+  // If confidence is similar, prefer based on content length (more comprehensive)
+  if (Math.abs(primary.content.length - fallback.content.length) > 500) {
+    return primary.content.length > fallback.content.length ? 'primary' : 'fallback';
+  }
+  
+  // Default to primary if no clear winner
+  return 'primary';
+}
+
+// Parse response into structured playbook format (reuse from original route)
+function parsePlaybookResponse(text: string, metadata: any) {
+  const playbook = {
+    id: `multi_llm_playbook_${Date.now()}`,
+    title: `${metadata.contractType} - ${getScenarioDisplayName(metadata.scenario)}`,
+    contractType: metadata.contractType,
+    scenario: metadata.scenario,
+    objectives: metadata.objectives,
+    content: text,
+    createdAt: new Date(),
+    
+    // Parse structured sections from the text
+    sections: parseStructuredSections(text)
+  };
+
+  return playbook;
+}
+
+function getScenarioDisplayName(scenarioId: string): string {
+  const scenarioNames: Record<string, string> = {
+    'saas_renewal_price_increase': 'SaaS Renewal Price Increase Mitigation',
+    'sla_enhancement': 'Service Level Agreement Enhancement',
+    'gdpr_dpa_compliance': 'GDPR Data Processing Agreement Compliance',
+    'liability_cap_negotiation': 'Liability Cap Negotiation',
+    'ip_rights_protection': 'IP Rights Protection',
+    'termination_exit_rights': 'Termination & Exit Rights',
+    'payment_terms_optimization': 'Payment Terms Optimization',
+    'volume_discount_optimization': 'Volume Discount Optimization'
+  };
+  
+  return scenarioNames[scenarioId] || scenarioId;
+}
+
+function parseStructuredSections(text: string) {
+  const sections: Record<string, string> = {};
+  
+  // Enhanced section parsing for multi-LLM generated content
+  const sectionPatterns = [
+    { key: 'executiveSummary', patterns: [
+      /EXECUTIVE SUMMARY[:\n]+(.*?)(?=\n##|\n\*\*|\nTALKING|\nRISK|$)/is, 
+      /Executive Summary[:\n]+(.*?)(?=\n##|\n\*\*|\nTalking|\nRisk|$)/is,
+      /## Executive Summary\n+(.*?)(?=\n##|$)/is
+    ]},
+    { key: 'talkingPoints', patterns: [
+      /BATTLE-TESTED TALKING POINTS[:\n]+(.*?)(?=\n##|\n\*\*|\nRISK|\nTACTICS|$)/is,
+      /TALKING POINTS[:\n]+(.*?)(?=\n##|\n\*\*|\nRisk|\nTactics|$)/is,
+      /## Talking Points\n+(.*?)(?=\n##|$)/is
+    ]},
+    { key: 'riskMitigation', patterns: [
+      /RISK MITIGATION[:\n]+(.*?)(?=\n##|\n\*\*|\nTACTICS|\nTIMELINE|$)/is,
+      /## Risk Mitigation\n+(.*?)(?=\n##|$)/is
+    ]},
+    { key: 'tactics', patterns: [
+      /NEGOTIATION TACTICS[:\n]+(.*?)(?=\n##|\n\*\*|\nTIMELINE|\nSUCCESS|$)/is,
+      /## Negotiation Tactics\n+(.*?)(?=\n##|$)/is
+    ]},
+    { key: 'timeline', patterns: [
+      /TIMELINE & PHASES[:\n]+(.*?)(?=\n##|\n\*\*|\nSUCCESS|$)/is,
+      /## Timeline\n+(.*?)(?=\n##|$)/is
+    ]},
+    { key: 'successMetrics', patterns: [
+      /SUCCESS METRICS[:\n]+(.*?)(?=\n##|\n\*\*|$)/is,
+      /## Success Metrics\n+(.*?)(?=\n##|$)/is
+    ]}
+  ];
+
+  for (const section of sectionPatterns) {
+    for (const pattern of section.patterns) {
+      const match = text.match(pattern);
+      if (match && match[1]) {
+        sections[section.key] = match[1].trim();
+        break;
+      }
+    }
+  }
+
+  return sections;
+}
