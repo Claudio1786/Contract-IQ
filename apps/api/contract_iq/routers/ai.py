@@ -14,7 +14,7 @@ from contract_iq.schemas import (
     NegotiationHistoryResponse,
     NegotiationRequest,
 )
-from contract_iq.services.gemini import GeminiFlashClient, GeminiServiceError, get_gemini_client
+from contract_iq.services.multi_ai_orchestrator import MultiAIOrchestrator, get_multi_ai_orchestrator
 
 router = APIRouter(prefix="/ai", tags=["ai"])
 
@@ -24,21 +24,29 @@ logger = logging.getLogger("contract_iq.api.ai")
 @router.post("/negotiation", response_model=NegotiationGuidanceResponse)
 async def generate_negotiation_guidance(
     payload: NegotiationRequest,
-    client: GeminiFlashClient = Depends(get_gemini_client),
+    orchestrator: MultiAIOrchestrator = Depends(get_multi_ai_orchestrator),
     repository: NegotiationGuidanceRepository = Depends(get_negotiation_repository),
 ) -> NegotiationGuidanceResponse:
-    """Generate Gemini-backed negotiation guidance for a clause or topic."""
+    """Generate AI-backed negotiation guidance with automatic failover (Gemini -> ChatGPT -> Stub)."""
 
     try:
-        guidance = client.generate_guidance(
+        guidance = orchestrator.generate_guidance(
             context=payload.context,
             prompt_override=payload.prompt_override,
         )
-    except GeminiServiceError as exc:
-        logger.exception("Gemini guidance generation failed", extra={"topic": payload.context.topic})
+    except ValueError as exc:
+        # Input validation failed
+        logger.warning("Invalid input for negotiation guidance", extra={"error": str(exc)})
         raise HTTPException(
-            status_code=status.HTTP_502_BAD_GATEWAY,
-            detail="Gemini service unavailable",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid input: {str(exc)}",
+        ) from exc
+    except Exception as exc:
+        # This should never happen due to orchestrator's failover logic
+        logger.exception("Unexpected error in negotiation guidance", extra={"topic": payload.context.topic})
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Internal server error - all AI providers failed",
         ) from exc
 
     logger.info(
@@ -107,6 +115,17 @@ async def list_negotiation_history(
         records = repository.list_recent(limit=limit)
 
     return NegotiationHistoryResponse(items=[_record_to_history_entry(record) for record in records])
+
+
+@router.get("/health/providers")
+async def get_provider_health(
+    orchestrator: MultiAIOrchestrator = Depends(get_multi_ai_orchestrator),
+):
+    """Get health status of all AI providers (circuit breaker states)."""
+    return {
+        "status": "ok",
+        "providers": orchestrator.get_provider_health_status(),
+    }
 
 
 def _record_to_history_entry(record: GuidanceRecord) -> NegotiationHistoryEntry:
