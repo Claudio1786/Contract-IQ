@@ -128,7 +128,7 @@ export interface Source {
 export const AGENT_MODEL_CONFIG = {
   // Clause Extraction: Fast, structured output
   clause_extraction: {
-    model: 'gemini-1.5-flash',
+    model: 'gemini-2.5-flash',
     temperature: 0.1,
     topP: 0.8,
     maxOutputTokens: 4096,
@@ -138,7 +138,7 @@ export const AGENT_MODEL_CONFIG = {
   
   // Risk Scoring: Analytical, conservative
   risk_scoring: {
-    model: 'gemini-1.5-pro',
+    model: 'gemini-2.5-flash',
     temperature: 0.2,
     topP: 0.9,
     maxOutputTokens: 2048,
@@ -148,7 +148,7 @@ export const AGENT_MODEL_CONFIG = {
   
   // Benchmarking: Data-driven analysis
   benchmarking: {
-    model: 'gemini-1.5-pro',
+    model: 'gemini-2.5-flash',
     temperature: 0.1,
     topP: 0.8,
     maxOutputTokens: 3072,
@@ -158,7 +158,7 @@ export const AGENT_MODEL_CONFIG = {
   
   // Strategy: Creative, strategic thinking
   negotiation_strategy: {
-    model: 'gemini-1.5-pro',
+    model: 'gemini-2.5-flash',
     temperature: 0.4,
     topP: 0.9,
     maxOutputTokens: 4096,
@@ -168,7 +168,7 @@ export const AGENT_MODEL_CONFIG = {
   
   // Simulation: Complex scenario modeling
   simulation: {
-    model: 'gemini-1.5-pro',
+    model: 'gemini-2.5-flash',
     temperature: 0.3,
     topP: 0.9,
     maxOutputTokens: 3072,
@@ -178,7 +178,7 @@ export const AGENT_MODEL_CONFIG = {
   
   // Reporting: Clear, executive communication
   reporting: {
-    model: 'gemini-1.5-pro',
+    model: 'gemini-2.5-flash',
     temperature: 0.2,
     topP: 0.8,
     maxOutputTokens: 6144,
@@ -350,7 +350,7 @@ export class AgentOrchestrator {
       benchmarkData: job.results.get('benchmarking')?.result,
       metadata: {
         version: '1.0',
-        modelVersion: 'gemini-1.5-pro',
+        modelVersion: 'gemini-2.5-flash',
         processingNode: process.env.RAILWAY_SERVICE_NAME || 'local',
         retryCount: 0,
         dependencies: [],
