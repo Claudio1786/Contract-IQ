@@ -411,8 +411,8 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid var(--gray-300);
-  border-top-color: var(--primary-600);
+  border: 2px solid rgba(156, 163, 175, 0.3);
+  border-top-color: var(--primary-500);
   border-radius: var(--radius-full);
   animation: spinner-rotate 0.6s linear infinite;
 }
@@ -457,6 +457,9 @@
    ======================================== */
 
 .text-separator {
+  color: var(--color-text-tertiary);
+  user-select: none;
+}rator {
   color: var(--color-text-tertiary);
   user-select: none;
 }

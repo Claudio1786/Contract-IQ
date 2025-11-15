@@ -104,20 +104,21 @@
   --gray-800: #1f2937;
   --gray-900: #111827;
   
-  /* Semantic Color Aliases */
-  --color-background: var(--gray-50);
-  --color-surface: #ffffff;
-  --color-border: var(--gray-200);
-  --color-border-hover: var(--gray-300);
+  /* Semantic Color Aliases - Flow AI Dark Theme */
+  --color-background: #0A0E1A;
+  --color-surface: #111827;
+  --color-surface-elevated: #1F2937;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
   
-  --color-text-primary: var(--gray-900);
-  --color-text-secondary: var(--gray-700);
-  --color-text-tertiary: var(--gray-500);
-  --color-text-disabled: var(--gray-400);
-  --color-text-inverse: #ffffff;
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #E5E7EB;
+  --color-text-tertiary: #9CA3AF;
+  --color-text-disabled: #6B7280;
+  --color-text-inverse: #111827;
   
-  --color-link: var(--primary-600);
-  --color-link-hover: var(--primary-700);
+  --color-link: var(--primary-500);
+  --color-link-hover: var(--primary-400);
   
   /* ========================================
      SPACING SYSTEM
