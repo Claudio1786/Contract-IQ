@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "template": "nda-simple",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "California, USA",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 24,
+      "noticeDays": null
+    },
+    "counterparties": [
+      { "name": "TechVentures LLC", "role": "disclosing-party" },
+      { "name": "InnovateCorp Inc.", "role": "receiving-party" }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "confidentiality-obligation",
+      "category": "obligation",
+      "text": "Receiving Party shall maintain confidential information in strict confidence and not disclose to any third party without prior written consent.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "permitted-disclosures",
+      "category": "carveout",
+      "text": "Permitted disclosures include: legally compelled disclosure, disclosure to employees/contractors with need-to-know, and pre-existing knowledge.",
+      "benchmarkPercentile": 60,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "return-of-materials",
+      "category": "obligation",
+      "text": "Upon termination, Receiving Party shall return or destroy all confidential materials within 30 days.",
+      "benchmarkPercentile": 55,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Standard Confidentiality Terms",
+      "description": "Terms are industry-standard with reasonable carveouts for legally compelled disclosures.",
+      "mitigation": "No action required - terms are balanced.",
+      "confidence": 0.92
+    }
+  ],
+  "obligations": [
+    {
+      "party": "receiving-party",
+      "action": "maintain-confidentiality",
+      "deadline": null,
+      "recurring": true,
+      "condition": "while agreement is in effect"
+    },
+    {
+      "party": "receiving-party",
+      "action": "return-materials",
+      "deadline": "30 days after termination",
+      "recurring": false,
+      "condition": "upon termination"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Confidentiality Term Extension",
+        "current": "2 years",
+        "target": "3 years",
+        "fallback": "2.5 years",
+        "impact": "medium",
+        "confidence": 0.85,
+        "talking_points": [
+          "Extended term provides better IP protection",
+          "Industry standard for tech sector is 3-5 years",
+          "Protects trade secrets during product development cycle"
+        ],
+        "risk_callouts": [
+          "Ensure return-of-materials clause is enforced at termination"
+        ]
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.88,
+    "extractedAt": "2025-11-15T08:00:00Z",
+    "model": "gemini-2.5-flash",
+    "reviewRequired": false
+  }
+}

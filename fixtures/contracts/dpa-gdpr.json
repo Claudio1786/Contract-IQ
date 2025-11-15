@@ -1,0 +1,190 @@
+{
+  "metadata": {
+    "template": "dpa-gdpr",
+    "version": "2025.11",
+    "vertical": "data-privacy",
+    "jurisdiction": "EU (GDPR)",
+    "renewal": {
+      "type": "coterminous",
+      "termMonths": null,
+      "noticeDays": null
+    },
+    "counterparties": [
+      { "name": "DataFlow Analytics SaaS", "role": "processor" },
+      { "name": "EuroRetail Brands GmbH", "role": "controller" }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "processing-instructions",
+      "category": "compliance",
+      "text": "Processor shall process personal data only on documented instructions from Controller, including transfers to third countries.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "sub-processor-consent",
+      "category": "compliance",
+      "text": "Processor may engage sub-processors with prior written notice to Controller. Controller may object within 30 days.",
+      "benchmarkPercentile": 40,
+      "riskPosture": "elevated"
+    },
+    {
+      "id": "security-measures",
+      "category": "security",
+      "text": "Processor implements encryption, pseudonymization, regular security testing, and access controls per GDPR Article 32.",
+      "benchmarkPercentile": 65,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "breach-notification",
+      "category": "incident-response",
+      "text": "Processor shall notify Controller of personal data breaches within 24 hours of discovery.",
+      "benchmarkPercentile": 75,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "data-subject-rights",
+      "category": "compliance",
+      "text": "Processor shall assist Controller in responding to data subject requests (access, deletion, portability) within 10 business days.",
+      "benchmarkPercentile": 60,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "audit-rights",
+      "category": "oversight",
+      "text": "Controller may audit Processor's compliance annually, with 30 days notice. Additional audits allowed if breach suspected.",
+      "benchmarkPercentile": 55,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "data-deletion",
+      "category": "exit",
+      "text": "Upon termination, Processor shall delete or return all personal data within 30 days, with certification of deletion.",
+      "benchmarkPercentile": 70,
+      "riskPosture": "favorable"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "medium",
+      "title": "Sub-Processor Objection Period Too Short",
+      "description": "30-day objection period may be insufficient for legal/security review of new sub-processors.",
+      "mitigation": "Negotiate 45-60 day objection window or pre-approved sub-processor list.",
+      "confidence": 0.84
+    },
+    {
+      "id": "risk-002",
+      "severity": "high",
+      "title": "No International Transfer Mechanisms Specified",
+      "description": "DPA doesn't specify Standard Contractual Clauses (SCCs) or other transfer mechanisms for non-EU sub-processors.",
+      "mitigation": "Require explicit SCCs or adequacy decision documentation for all international transfers.",
+      "confidence": 0.91
+    },
+    {
+      "id": "risk-003",
+      "severity": "low",
+      "title": "Audit Frequency Limited to Annual",
+      "description": "Single annual audit may miss interim compliance issues.",
+      "mitigation": "Acceptable for most use cases; request SOC 2 reports as interim assurance.",
+      "confidence": 0.76
+    }
+  ],
+  "obligations": [
+    {
+      "party": "processor",
+      "action": "process-per-instructions",
+      "deadline": null,
+      "recurring": true,
+      "condition": "throughout processing relationship"
+    },
+    {
+      "party": "processor",
+      "action": "notify-breach",
+      "deadline": "24 hours from discovery",
+      "recurring": false,
+      "condition": "upon breach discovery"
+    },
+    {
+      "party": "processor",
+      "action": "assist-dsr",
+      "deadline": "10 business days",
+      "recurring": false,
+      "condition": "per data subject request"
+    },
+    {
+      "party": "processor",
+      "action": "delete-data",
+      "deadline": "30 days from termination",
+      "recurring": false,
+      "condition": "upon termination"
+    },
+    {
+      "party": "controller",
+      "action": "provide-processing-instructions",
+      "deadline": null,
+      "recurring": true,
+      "condition": "as needed"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "International Transfer Safeguards",
+        "current": "Not specified",
+        "target": "Explicit SCCs + UK Addendum",
+        "fallback": "SCCs only",
+        "impact": "high",
+        "confidence": 0.88,
+        "talking_points": [
+          "GDPR Article 46 requires appropriate safeguards for transfers outside EU",
+          "Standard Contractual Clauses are mandatory for non-adequacy jurisdictions",
+          "UK Addendum needed post-Brexit for UK data subjects"
+        ],
+        "risk_callouts": [
+          "Schrems II decision requires transfer impact assessment",
+          "US sub-processors may trigger Data Privacy Framework requirements"
+        ]
+      },
+      {
+        "topic": "Sub-Processor Objection Period",
+        "current": "30 days",
+        "target": "60 days",
+        "fallback": "45 days",
+        "impact": "medium",
+        "confidence": 0.79,
+        "talking_points": [
+          "Legal and infosec review requires adequate time",
+          "Comparable DPAs offer 45-60 day objection windows",
+          "Complex sub-processor security postures need thorough vetting"
+        ],
+        "risk_callouts": []
+      },
+      {
+        "topic": "Breach Notification Enhancement",
+        "current": "24 hours",
+        "target": "12 hours",
+        "fallback": "24 hours with preliminary notice within 12 hours",
+        "impact": "high",
+        "confidence": 0.68,
+        "talking_points": [
+          "GDPR requires controller notification within 72 hours",
+          "Faster processor notification enables timely controller response",
+          "Preliminary notification allows proactive incident management"
+        ],
+        "risk_callouts": [
+          "Ensure notification includes scope, affected data categories, recommended actions"
+        ]
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.91,
+    "extractedAt": "2025-11-15T08:30:00Z",
+    "model": "gemini-2.5-flash",
+    "reviewRequired": true,
+    "reviewReason": "International transfer mechanisms require legal validation"
+  }
+}
