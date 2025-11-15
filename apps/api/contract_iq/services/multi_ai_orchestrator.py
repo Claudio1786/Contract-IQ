@@ -124,7 +124,7 @@ class MultiAIOrchestrator:
                 
                 return validated_guidance
                 
-            except (GeminiServiceError, OpenAIServiceError, ValidationError) as exc:
+            except (GeminiServiceError, OpenAIServiceError, OutputValidationError) as exc:
                 logger.warning(
                     f"Provider {provider.value} failed: {exc}",
                     extra={"provider": provider.value, "error": str(exc)},
@@ -361,5 +361,6 @@ __all__ = [
     "MultiAIOrchestrator",
     "AIProvider",
     "CircuitBreakerState",
+    "OutputValidationError",
     "get_multi_ai_orchestrator",
 ]

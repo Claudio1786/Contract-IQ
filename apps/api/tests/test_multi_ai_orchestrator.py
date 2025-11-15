@@ -44,21 +44,21 @@ class TestMultiAIOrchestrator:
         """Test that empty topic fails validation."""
         invalid_context = valid_context.model_copy(update={"topic": ""})
         
-        with pytest.raises(ValueError, match="Topic cannot be empty"):
+        with pytest.raises(ValueError, match="Invalid negotiation context"):
             orchestrator._validate_input(invalid_context)
 
     def test_whitespace_only_topic_fails(self, orchestrator, valid_context):
         """Test that whitespace-only topic fails validation."""
         invalid_context = valid_context.model_copy(update={"topic": "   "})
         
-        with pytest.raises(ValueError, match="Topic cannot be empty"):
+        with pytest.raises(ValueError, match="Invalid negotiation context"):
             orchestrator._validate_input(invalid_context)
 
     def test_empty_current_position_fails(self, orchestrator, valid_context):
         """Test that empty current position fails validation."""
         invalid_context = valid_context.model_copy(update={"current_position": ""})
         
-        with pytest.raises(ValueError, match="Current position cannot be empty"):
+        with pytest.raises(ValueError, match="Invalid negotiation context"):
             orchestrator._validate_input(invalid_context)
 
     def test_empty_target_position_fails(self, orchestrator, valid_context):
@@ -103,7 +103,7 @@ class TestMultiAIOrchestrator:
             latency_ms=100,
         )
         
-        with pytest.raises(ValidationError, match="Summary is too short"):
+        with pytest.raises(OutputValidationError, match="Summary is too short"):
             orchestrator._validate_output(invalid_guidance)
 
     def test_output_validation_requires_talking_points(self, orchestrator):
@@ -122,7 +122,7 @@ class TestMultiAIOrchestrator:
             latency_ms=100,
         )
         
-        with pytest.raises(ValidationError, match="No talking points"):
+        with pytest.raises(OutputValidationError, match="No talking points"):
             orchestrator._validate_output(invalid_guidance)
 
     def test_output_validation_checks_confidence_range(self, orchestrator):
@@ -141,7 +141,7 @@ class TestMultiAIOrchestrator:
             latency_ms=100,
         )
         
-        with pytest.raises(ValidationError, match="Invalid confidence"):
+        with pytest.raises(OutputValidationError, match="Invalid confidence"):
             orchestrator._validate_output(invalid_guidance)
 
     def test_provider_order_defaults_to_gemini_first(self, orchestrator):
