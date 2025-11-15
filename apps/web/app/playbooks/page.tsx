@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { PlaybookGenerator } from '../../components/playbooks/PlaybookGenerator';
 import { PlaybookView } from '../../components/playbooks/PlaybookView';
 import { Button } from '../../components/ui';
@@ -18,35 +17,10 @@ interface BasicPlaybook {
 }
 
 export default function PlaybooksPage() {
-  const searchParams = useSearchParams();
-  const contractId = searchParams.get('contract');
-  
   const [generatedPlaybook, setGeneratedPlaybook] = useState<BasicPlaybook | null>(null);
   const [playbookMetadata, setPlaybookMetadata] = useState<any>(null);
   const [showGenerator, setShowGenerator] = useState(true);
-  const [contractInfo, setContractInfo] = useState<any>(null);
-  const [showContractGuide, setShowContractGuide] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Load contract information if contractId is provided
-  useEffect(() => {
-    if (contractId) {
-      setShowContractGuide(true);
-      // In a real implementation, we'd fetch contract data from an API
-      // For now, simulate contract info
-      setContractInfo({
-        id: contractId,
-        type: 'Unknown Contract Type',
-        uploadedAt: new Date().toLocaleDateString(),
-        status: 'Processed',
-        extractedTerms: [
-          'Payment terms not clearly defined',
-          'Service level agreements missing',
-          'Liability caps need review'
-        ]
-      });
-    }
-  }, [contractId]);
 
   const handlePlaybookGenerated = (playbook: BasicPlaybook, metadata?: any) => {
     setGeneratedPlaybook(playbook);
@@ -62,9 +36,7 @@ export default function PlaybooksPage() {
     setError(null);
   };
 
-  const handleContractGuideDismiss = () => {
-    setShowContractGuide(false);
-  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -92,132 +64,7 @@ export default function PlaybooksPage() {
               )}
             </div>
 
-            {/* Contract Upload Guide */}
-            {showContractGuide && contractInfo && (
-              <div className="mb-8 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="bg-green-100 rounded-full p-2">
-                      <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900">
-                        🎯 Contract Uploaded Successfully!
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        Generate a strategic negotiation playbook based on your contract
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={handleContractGuideDismiss}
-                    className="text-gray-400 hover:text-gray-600"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-2">📋 Contract Information</h4>
-                    <div className="bg-white rounded-lg p-4 space-y-2">
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Contract ID:</span>
-                        <span className="text-sm font-medium text-gray-900">{contractInfo.id}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Type:</span>
-                        <span className="text-sm font-medium text-gray-900">{contractInfo.type}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Uploaded:</span>
-                        <span className="text-sm font-medium text-gray-900">{contractInfo.uploadedAt}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Status:</span>
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          {contractInfo.status}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h4 className="font-medium text-gray-900 mb-2">⚠️ Next Steps & Guidance</h4>
-                    <div className="bg-white rounded-lg p-4 space-y-3">
-                      <div className="flex items-start space-x-2">
-                        <span className="text-blue-600 text-sm font-bold">1.</span>
-                        <div>
-                          <p className="text-sm text-gray-900 font-medium">Choose the right contract type</p>
-                          <p className="text-xs text-gray-600">Select the template that matches your uploaded contract</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start space-x-2">
-                        <span className="text-blue-600 text-sm font-bold">2.</span>
-                        <div>
-                          <p className="text-sm text-gray-900 font-medium">Select relevant objectives</p>
-                          <p className="text-xs text-gray-600">Pick 2-4 key negotiation goals for best results</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start space-x-2">
-                        <span className="text-blue-600 text-sm font-bold">3.</span>
-                        <div>
-                          <p className="text-sm text-gray-900 font-medium">Review extracted terms</p>
-                          <p className="text-xs text-gray-600">Check if AI correctly identified key contract elements</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Contract Terms Preview */}
-                {contractInfo.extractedTerms && contractInfo.extractedTerms.length > 0 && (
-                  <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                    <h5 className="text-sm font-medium text-yellow-900 mb-2">
-                      🔍 AI-Extracted Key Issues (Review for Accuracy)
-                    </h5>
-                    <div className="flex flex-wrap gap-2">
-                      {contractInfo.extractedTerms.map((term: string, index: number) => (
-                        <span 
-                          key={index} 
-                          className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
-                        >
-                          {term}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-xs text-yellow-700 mt-2">
-                      💡 <strong>Not seeing the right issues?</strong> Choose a different contract type template below or adjust your negotiation objectives.
-                    </p>
-                  </div>
-                )}
-
-                {/* Template Suggestion */}
-                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <h5 className="text-sm font-medium text-blue-900 mb-2">
-                    🎯 Recommended Templates Based on Your Contract
-                  </h5>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <button className="text-left p-3 bg-white border border-blue-200 rounded-lg hover:bg-blue-25 transition-colors">
-                      <div className="text-sm font-medium text-blue-900">SaaS Agreement</div>
-                      <div className="text-xs text-blue-600">If this is software/cloud services</div>
-                    </button>
-                    <button className="text-left p-3 bg-white border border-blue-200 rounded-lg hover:bg-blue-25 transition-colors">
-                      <div className="text-sm font-medium text-blue-900">Professional Services</div>
-                      <div className="text-xs text-blue-600">If this is consulting/services work</div>
-                    </button>
-                    <button className="text-left p-3 bg-white border border-blue-200 rounded-lg hover:bg-blue-25 transition-colors">
-                      <div className="text-sm font-medium text-blue-900">Supply/Manufacturing</div>
-                      <div className="text-xs text-blue-600">If this is for goods/materials</div>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
 
             <div className="space-y-8">
               {showGenerator ? (
