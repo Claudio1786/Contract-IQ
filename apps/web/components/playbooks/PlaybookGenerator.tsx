@@ -72,9 +72,17 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
   ];
 
   // Get available objectives for selected scenario
-  const getAvailableObjectives = () => {
+  const getAvailableObjectives = (): ObjectiveIntelligence[] => {
+    if (!formData.scenario) return [];
+    
     const intelligence = negotiationIntelligenceDB[formData.scenario as keyof typeof negotiationIntelligenceDB];
-    return intelligence?.objectives || [];
+    
+    if (!intelligence || !intelligence.objectives) {
+      console.warn(`No objectives found for scenario: ${formData.scenario}`);
+      return [];
+    }
+    
+    return intelligence.objectives || [];
   };
 
   // Get scenario context for display
@@ -97,11 +105,23 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
   };
 
   const toggleObjective = (objectiveId: string) => {
+    // Clear any errors when user changes objectives
+    setError(null);
+    
     setFormData(prev => ({
       ...prev,
       objectives: prev.objectives.includes(objectiveId)
         ? prev.objectives.filter(id => id !== objectiveId)
         : [...prev.objectives, objectiveId]
+    }));
+  };
+  
+  // Helper to safely set form data with validation
+  const safeSetFormData = (newData: Partial<typeof formData>) => {
+    setError(null); // Clear any existing errors
+    setFormData(prev => ({
+      ...prev,
+      ...newData
     }));
   };
 
@@ -238,34 +258,41 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
                 Key Objectives * <span className="text-xs text-gray-500">(Select multiple)</span>
               </label>
               <div className="space-y-4 max-h-80 overflow-y-auto border border-gray-200 rounded-md p-4">
-                {getAvailableObjectives().map((objective) => (
-                  <div key={objective.id} className="flex items-start space-x-3 py-2">
-                    <input
-                      type="checkbox"
-                      id={objective.id}
-                      checked={formData.objectives.includes(objective.id)}
-                      onChange={() => toggleObjective(objective.id)}
-                      className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <label 
-                        htmlFor={objective.id}
-                        className="text-sm font-medium text-gray-900 cursor-pointer block mb-2"
-                      >
-                        {objective.title}
-                      </label>
-                      <p className="text-xs text-gray-600 mb-2 leading-relaxed">
-                        {objective.description}
-                      </p>
-                      <div className="text-xs text-blue-600 leading-relaxed">
-                        💪 Success Rate: {objective.successRate}
-                      </div>
-                      <div className="text-xs text-blue-600 mt-1 leading-relaxed">
-                        📊 {objective.benchmark}
+                {getAvailableObjectives().length > 0 ? (
+                  getAvailableObjectives().map((objective) => (
+                    <div key={objective.id} className="flex items-start space-x-3 py-2">
+                      <input
+                        type="checkbox"
+                        id={objective.id}
+                        checked={formData.objectives.includes(objective.id)}
+                        onChange={() => toggleObjective(objective.id)}
+                        className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <label 
+                          htmlFor={objective.id}
+                          className="text-sm font-medium text-gray-900 cursor-pointer block mb-2"
+                        >
+                          {objective.title}
+                        </label>
+                        <p className="text-xs text-gray-600 mb-2 leading-relaxed">
+                          {objective.description}
+                        </p>
+                        <div className="text-xs text-blue-600 leading-relaxed">
+                          💪 Success Rate: {objective.successRate}
+                        </div>
+                        <div className="text-xs text-blue-600 mt-1 leading-relaxed">
+                          📊 {objective.benchmark}
+                        </div>
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="text-center py-8 text-gray-500">
+                    <p className="text-sm">No objectives available for this scenario.</p>
+                    <p className="text-xs mt-2">Please select a different scenario or use the custom objective option below.</p>
                   </div>
-                ))}
+                )}
                 
                 {/* Custom objective option */}
                 <div className="pt-4 border-t border-gray-200">
