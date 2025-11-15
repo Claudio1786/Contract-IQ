@@ -1,0 +1,22 @@
+{
+  "name": "contract-iq",
+  "version": "1.0.0",
+  "description": "AI-powered contract intelligence platform",
+  "main": "start.sh",
+  "scripts": {
+    "start": "bash start.sh",
+    "build": "cd apps/web && npm ci && npm run build && cd ../api && pip install -r requirements.txt",
+    "dev": "concurrently \"cd apps/api && python -m uvicorn contract_iq.main:app --reload --port 8000\" \"cd apps/web && npm run dev\"",
+    "install-deps": "cd apps/web && npm ci && cd ../api && pip install -r requirements.txt"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.11.0"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": ["contract", "ai", "negotiation", "legal"],
+  "author": "Contract IQ Team",
+  "license": "MIT"
+}

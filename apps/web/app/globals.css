@@ -1,0 +1,15 @@
+/**
+ * Contract IQ Design System v3.0
+ * Main application styles - imports complete design system
+ */
+
+/* Import complete design system */
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/components.css';
+@import '../styles/layout.css';
+
+/* Tailwind CSS (for any utility classes we need) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
