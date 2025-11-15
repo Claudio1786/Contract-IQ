@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import AppLayout from '../../components/layout/AppLayout';
-import { PlaybookGenerator, NegotiationPlaybook } from '../../components/playbooks/PlaybookGenerator';
+import { EnhancedPlaybookGenerator, NegotiationPlaybook } from '../../components/playbooks/EnhancedPlaybookGenerator';
 import { PlaybookView } from '../../components/playbooks/PlaybookView';
 import { Button } from '../../components/ui';
 
 export default function PlaybooksPage() {
-  const [generatedPlaybook, setGeneratedPlaybook] = useState<NegotiationPlaybook | null>(null);
+  const [generatedPlaybook, setGeneratedPlaybook] = useState<NegotiationPlaybook | null>(null);\r\n  const [playbookMetadata, setPlaybookMetadata] = useState<any>(null);
   const [showGenerator, setShowGenerator] = useState(true);
 
   const handlePlaybookGenerated = (playbook: NegotiationPlaybook) => {
@@ -127,7 +127,7 @@ ${generatedPlaybook.successMetrics.map(metric => `• ${metric}`).join('\n')}
 
         {/* Content */}
         {showGenerator ? (
-          <PlaybookGenerator
+          <EnhancedPlaybookGenerator
             onPlaybookGenerated={handlePlaybookGenerated}
           />
         ) : generatedPlaybook ? (
