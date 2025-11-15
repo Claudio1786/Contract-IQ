@@ -108,6 +108,8 @@ export interface RequestNegotiationGuidanceOptions {
   promptOverride?: string | null;
   signal?: AbortSignal;
   fetchFn?: typeof fetch;
+  maxRetries?: number;
+  retryDelay?: number;
 }
 
 function resolveApiBaseUrl(): string | undefined {
@@ -181,48 +183,108 @@ async function parseErrorBody(response: Response): Promise<unknown> {
   }
 }
 
+/**
+ * Sleep helper for retry delays
+ */
+async function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+/**
+ * Check if an error is retryable (502, 503, 504, network errors)
+ */
+function isRetryableError(error: unknown): boolean {
+  if (error instanceof NegotiationApiError) {
+    const status = error.status;
+    // Retry on 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout
+    return status === 502 || status === 503 || status === 504 || status === 429;
+  }
+  
+  // Retry on network errors
+  if (error instanceof TypeError && error.message.includes('fetch')) {
+    return true;
+  }
+  
+  return false;
+}
+
 export async function requestNegotiationGuidance(
   context: NegotiationContextPayload,
   options: RequestNegotiationGuidanceOptions = {}
 ): Promise<NegotiationGuidance> {
   const fetchImpl = options.fetchFn ?? fetch;
   const apiBase = options.apiUrl ?? resolveApiBaseUrl() ?? 'http://localhost:8000';
+  const maxRetries = options.maxRetries ?? 3;
+  const baseRetryDelay = options.retryDelay ?? 1000; // 1 second base delay
 
   const body: NegotiationRequestPayload = {
     context,
     prompt_override: options.promptOverride ?? undefined
   };
 
-  const response = await fetchImpl(`${apiBase}/ai/negotiation`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body),
-    signal: options.signal,
-    cache: 'no-store'
-  } as RequestInit);
+  let lastError: Error | null = null;
 
-  if (!response.ok) {
-    const errorBody = await parseErrorBody(response);
-    let message: string;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetchImpl(`${apiBase}/ai/negotiation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body),
+        signal: options.signal,
+        cache: 'no-store'
+      } as RequestInit);
 
-    if (typeof errorBody === 'string' && errorBody.length > 0) {
-      message = errorBody;
-    } else {
-      const detail = (errorBody as { detail?: unknown })?.detail;
-      if (typeof detail === 'string' && detail.length > 0) {
-        message = detail;
-      } else {
-        message = `Request failed with status ${response.status}`;
+      if (!response.ok) {
+        const errorBody = await parseErrorBody(response);
+        let message: string;
+
+        if (typeof errorBody === 'string' && errorBody.length > 0) {
+          message = errorBody;
+        } else {
+          const detail = (errorBody as { detail?: unknown })?.detail;
+          if (typeof detail === 'string' && detail.length > 0) {
+            message = detail;
+          } else {
+            message = `Request failed with status ${response.status}`;
+          }
+        }
+
+        const error = new NegotiationApiError(message, { status: response.status, body: errorBody });
+        
+        // Check if this error is retryable and we have attempts left
+        if (isRetryableError(error) && attempt < maxRetries) {
+          lastError = error;
+          // Exponential backoff: 1s, 2s, 4s
+          const delay = baseRetryDelay * Math.pow(2, attempt);
+          console.warn(`Retrying negotiation guidance request (attempt ${attempt + 1}/${maxRetries}) after ${delay}ms`, error);
+          await sleep(delay);
+          continue;
+        }
+
+        throw error;
       }
-    }
 
-    throw new NegotiationApiError(message, { status: response.status, body: errorBody });
+      const payload = (await response.json()) as NegotiationGuidanceResponsePayload;
+      return normaliseGuidance(payload);
+    } catch (error) {
+      // Handle network errors and other exceptions
+      if (isRetryableError(error) && attempt < maxRetries) {
+        lastError = error as Error;
+        const delay = baseRetryDelay * Math.pow(2, attempt);
+        console.warn(`Retrying negotiation guidance request (attempt ${attempt + 1}/${maxRetries}) after ${delay}ms`, error);
+        await sleep(delay);
+        continue;
+      }
+
+      // If not retryable or out of attempts, throw
+      throw error;
+    }
   }
 
-  const payload = (await response.json()) as NegotiationGuidanceResponsePayload;
-  return normaliseGuidance(payload);
+  // If we exhausted all retries, throw the last error
+  throw lastError || new NegotiationApiError('Failed to generate playbook after maximum retries');
 }
 
 export interface ListNegotiationHistoryOptions {

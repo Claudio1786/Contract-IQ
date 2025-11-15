@@ -50,6 +50,8 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
   className = ''
 }) => {
   const [isGenerating, setIsGenerating] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     contractType: '',
     scenario: '',
@@ -105,45 +107,73 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
 
   const generatePlaybook = async () => {
     setIsGenerating(true);
+    setError(null);
+    setRetryCount(0);
     
-    try {
-      // Call the API to generate playbook with Gemini
-      const response = await fetch('/api/generate-playbook', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contractType: formData.contractType,
-          scenario: formData.scenario,
-          objectives: formData.objectives,
-          currentTerms: formData.currentTerms,
-          desiredOutcome: formData.desiredOutcome,
-        }),
-      });
+    const maxRetries = 3;
+    const baseDelay = 1000;
+    
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        setRetryCount(attempt);
+        
+        // Call the API to generate playbook with Gemini
+        const response = await fetch('/api/generate-playbook', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            contractType: formData.contractType,
+            scenario: formData.scenario,
+            objectives: formData.objectives,
+            currentTerms: formData.currentTerms,
+            desiredOutcome: formData.desiredOutcome,
+          }),
+        });
 
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status}`);
+        if (!response.ok) {
+          const isRetryable = [502, 503, 504, 429].includes(response.status);
+          
+          if (isRetryable && attempt < maxRetries) {
+            const delay = baseDelay * Math.pow(2, attempt);
+            console.warn(`Retrying playbook generation (attempt ${attempt + 1}/${maxRetries}) after ${delay}ms`);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            continue;
+          }
+          
+          throw new Error(`API Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (!data.success) {
+          throw new Error(data.error || 'Failed to generate playbook');
+        }
+
+        console.log('✅ Playbook generated successfully!');
+        console.log('Metadata:', data.metadata);
+        
+        setIsGenerating(false);
+        setError(null);
+        setRetryCount(0);
+        onPlaybookGenerated?.(data.playbook);
+        return;
+        
+      } catch (error: any) {
+        console.error(`❌ Error generating playbook (attempt ${attempt + 1}/${maxRetries + 1}):`, error);
+        
+        // If we've exhausted retries, show error with support info
+        if (attempt >= maxRetries) {
+          setIsGenerating(false);
+          setError(error.message || 'Failed to generate playbook');
+          return;
+        }
+        
+        // Otherwise, retry with exponential backoff
+        const delay = baseDelay * Math.pow(2, attempt);
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
-
-      const data = await response.json();
-      
-      if (!data.success) {
-        throw new Error(data.error || 'Failed to generate playbook');
-      }
-
-      console.log('✅ Playbook generated successfully!');
-      console.log('Metadata:', data.metadata);
-      
-      setIsGenerating(false);
-      onPlaybookGenerated?.(data.playbook);
-      
-    } catch (error: any) {
-      console.error('❌ Error generating playbook:', error);
-      setIsGenerating(false);
-      
-      // Show error to user - you could add a toast notification here
-      alert(`Failed to generate playbook: ${error.message}`);
     }
   };
 
@@ -301,14 +331,71 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
             onClick={generatePlaybook}
             disabled={!isFormValid || isGenerating}
             loading={isGenerating}
-            className="w-full"
+            className="w-full focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
             size="lg"
+            aria-busy={isGenerating}
+            aria-live="polite"
           >
             {isGenerating ? 'Generating Playbook...' : 'Generate Negotiation Strategy'}
           </Button>
+          
+          {/* Retry Status Indicator */}
+          {isGenerating && retryCount > 0 && (
+            <div 
+              className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-md"
+              role="status"
+              aria-live="polite"
+            >
+              <div className="flex items-center space-x-2 text-sm text-amber-800">
+                <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Retrying... (Attempt {retryCount + 1} of 3)</span>
+              </div>
+            </div>
+          )}
+          
+          {/* Error with Support Contact */}
+          {error && (
+            <div 
+              className="mt-3 p-4 bg-rose-50 border border-rose-200 rounded-md"
+              role="alert"
+              aria-live="assertive"
+            >
+              <div className="flex items-start space-x-3">
+                <svg className="h-5 w-5 text-rose-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+                <div className="flex-1">
+                  <h4 className="text-sm font-medium text-rose-800 mb-1">
+                    Failed to generate playbook
+                  </h4>
+                  <p className="text-sm text-rose-700 mb-3">
+                    {error}
+                  </p>
+                  <div className="bg-white border border-rose-200 rounded-md p-3">
+                    <p className="text-sm font-medium text-gray-900 mb-2">Need help?</p>
+                    <p className="text-xs text-gray-600 mb-2">
+                      Our support team is here to assist you with API connectivity issues.
+                    </p>
+                    <a 
+                      href="mailto:support@contractiq.ai?subject=Playbook Generation Error"
+                      className="inline-flex items-center space-x-1 text-sm font-medium text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 rounded"
+                    >
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <span>Contact Support</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        {!isFormValid && (
+        {!isFormValid && !error && (
           <p className="mt-2 text-sm text-gray-500">
             * Contract type, scenario, and objectives are required
           </p>

@@ -20,6 +20,8 @@ export const EnhancedPlaybookGenerator: React.FC<EnhancedPlaybookGeneratorProps>
   className = ''
 }) => {
   const [isGenerating, setIsGenerating] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+  const [error, setError] = useState<string | null>(null);
   const [useMultiLLM, setUseMultiLLM] = useState(true);
   const [formData, setFormData] = useState({
     contractType: '',
