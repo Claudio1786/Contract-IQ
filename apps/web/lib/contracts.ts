@@ -28,7 +28,12 @@ export async function fetchContract(
   options: FetchContractOptions = {}
 ): Promise<ContractRecord> {
   const fetchImpl = options.fetchFn ?? fetch;
-  const apiBaseUrl = options.apiUrl ?? process.env.CONTRACT_IQ_API_URL ?? 'http://localhost:8000';
+  const apiBaseUrl =
+    options.apiUrl ??
+    process.env.CONTRACT_IQ_API_URL ??
+    process.env.NEXT_PUBLIC_CONTRACT_IQ_API_URL ??
+    process.env.NEXT_PUBLIC_API_URL ??
+    'http://localhost:8000';
 
   const response = await fetchImpl(`${apiBaseUrl}/contracts/ingest`, {
     method: 'POST',

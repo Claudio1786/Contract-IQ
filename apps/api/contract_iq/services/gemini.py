@@ -16,7 +16,7 @@ from contract_iq.schemas import NegotiationContext
 
 logger = logging.getLogger("contract_iq.gemini")
 
-DEFAULT_MODEL = "gemini-1.5-pro-latest"
+DEFAULT_MODEL = "gemini-2.5-flash"
 
 
 class GeminiServiceError(RuntimeError):

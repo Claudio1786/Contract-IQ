@@ -136,7 +136,7 @@ function determineOptimalStrategy(scenario: string, objectives: string[], modelP
       },
       fallback: {
         provider: 'gemini',
-        model: 'gemini-1.5-pro',
+        model: 'gemini-2.5-flash',
         reason: 'Strong analytical backup for negotiation tactics'
       }
     },
@@ -145,7 +145,7 @@ function determineOptimalStrategy(scenario: string, objectives: string[], modelP
     'gdpr_dpa_compliance': {
       primary: {
         provider: 'gemini',
-        model: 'gemini-1.5-pro',
+        model: 'gemini-2.5-flash',
         reason: 'Excellent legal document understanding and compliance analysis'
       },
       fallback: {
@@ -164,7 +164,7 @@ function determineOptimalStrategy(scenario: string, objectives: string[], modelP
       },
       fallback: {
         provider: 'gemini',
-        model: 'gemini-1.5-pro',
+        model: 'gemini-2.5-flash',
         reason: 'Technical accuracy for SLA metrics and benchmarking'
       }
     }
@@ -187,7 +187,7 @@ function determineOptimalStrategy(scenario: string, objectives: string[], modelP
       return {
         primary: {
           provider: 'gemini',
-          model: 'gemini-1.5-pro',
+          model: 'gemini-2.5-flash',
           reason: 'User preference: Gemini for structured analysis'
         },
         fallback: baseStrategy.fallback

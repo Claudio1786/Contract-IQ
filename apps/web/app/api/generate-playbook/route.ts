@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     try {
       // Get Gemini model
       const model = genAI.getGenerativeModel({ 
-        model: 'gemini-1.5-flash',
+        model: 'gemini-2.5-flash',
         generationConfig: {
           temperature: 0.7,
           topK: 1,
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
       metadata: {
         promptLength: enhancedPrompt.length,
         responseLength: text.length,
-        model: 'gemini-1.5-flash'
+        model: 'gemini-2.5-flash'
       }
     });
 

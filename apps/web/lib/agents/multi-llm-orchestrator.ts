@@ -6,7 +6,7 @@ import OpenAI from 'openai';
 
 // Multi-LLM Provider Types
 export type LLMProvider = 'gemini' | 'openai';
-export type GeminiModel = 'gemini-1.5-pro' | 'gemini-1.5-flash' | 'text-embedding-004';
+export type GeminiModel = 'gemini-2.5-flash' | 'gemini-1.5-pro' | 'gemini-1.5-flash' | 'text-embedding-004';
 export type OpenAIModel = 'gpt-4o' | 'gpt-4o-mini' | 'gpt-3.5-turbo' | 'text-embedding-3-large' | 'text-embedding-3-small';
 
 export type ModelType = GeminiModel | OpenAIModel;
@@ -50,7 +50,7 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
   clause_extraction: {
     primary: {
       provider: 'gemini',
-      model: 'gemini-1.5-flash',
+      model: 'gemini-2.5-flash',
       reason: 'Superior speed for structured extraction, optimized for JSON output'
     },
     fallback: {
@@ -74,12 +74,12 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
     },
     fallback: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       reason: 'Strong legal document understanding as backup'
     },
     crossValidation: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       threshold: 0.75 // Critical decisions require dual validation
     }
   },
@@ -88,7 +88,7 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
   benchmarking: {
     primary: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       reason: 'Excellent at processing large datasets and patterns'
     },
     fallback: {
@@ -107,7 +107,7 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
     },
     fallback: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       reason: 'Strong analytical backup for strategy validation'
     }
   },
@@ -121,7 +121,7 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
     },
     fallback: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       reason: 'Reliable outcome prediction based on historical patterns'
     }
   },
@@ -130,7 +130,7 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
   reporting: {
     primary: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       reason: 'Excellent at clear, structured business writing'
     },
     fallback: {
@@ -149,7 +149,7 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
     },
     fallback: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       reason: 'Secondary validation when OpenAI unavailable'
     }
   },
@@ -163,7 +163,7 @@ export const MULTI_LLM_STRATEGIES: Record<AgentType, LLMStrategy> = {
     },
     fallback: {
       provider: 'gemini',
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.5-flash',
       reason: 'Analytical backup for cost calculations'
     }
   }

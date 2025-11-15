@@ -112,10 +112,17 @@ export interface RequestNegotiationGuidanceOptions {
 
 function resolveApiBaseUrl(): string | undefined {
   if (typeof window === 'undefined') {
-    return process.env.CONTRACT_IQ_API_URL;
+    return (
+      process.env.CONTRACT_IQ_API_URL ||
+      process.env.NEXT_PUBLIC_CONTRACT_IQ_API_URL ||
+      process.env.NEXT_PUBLIC_API_URL
+    );
   }
 
-  return process.env.NEXT_PUBLIC_CONTRACT_IQ_API_URL;
+  return (
+    process.env.NEXT_PUBLIC_CONTRACT_IQ_API_URL ||
+    process.env.NEXT_PUBLIC_API_URL
+  );
 }
 
 function normaliseGuidance(payload: NegotiationGuidanceResponsePayload): NegotiationGuidance {
