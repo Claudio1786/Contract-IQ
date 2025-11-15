@@ -370,27 +370,27 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
           <button
             onClick={() => {
               setFormData({
-                contractType: 'Master Service Agreement',
+                contractType: 'Service Agreement',
                 scenario: 'liability_cap_negotiation',
-                objectives: ['cap_unlimited_liability', 'mutual_indemnification', 'consequential_damages'],
+                objectives: ['reasonable_liability_cap', 'carve_out_exceptions'],
                 currentTerms: 'Unlimited liability, one-sided indemnification',
                 desiredOutcome: '12 months fee cap, mutual liability protection'
               });
             }}
             className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
           >
-            <div className="font-medium text-sm text-gray-900">⚖️ Liability Caps</div>
+            <div className="font-medium text-sm text-gray-900">🛡️ Liability Caps</div>
             <div className="text-xs text-gray-600">Risk limitation & protection</div>
           </button>
 
           <button
             onClick={() => {
               setFormData({
-                contractType: 'Professional Services',
-                scenario: 'termination_flexibility',
-                objectives: ['termination_for_convenience', 'notice_period', 'work_product_retention'],
-                currentTerms: 'Locked 3-year term, 90-day notice',
-                desiredOutcome: '30-day convenience termination, immediate work product'
+                contractType: 'Service Agreement',
+                scenario: 'termination_exit_rights',
+                objectives: ['termination_for_convenience', 'data_portability_rights'],
+                currentTerms: 'Locked 3-year term, no convenience termination',
+                desiredOutcome: '90-day convenience termination, full data portability'
               });
             }}
             className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
@@ -402,18 +402,52 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
           <button
             onClick={() => {
               setFormData({
-                contractType: 'Equipment Lease',
+                contractType: 'Service Agreement',
                 scenario: 'payment_terms_optimization',
-                objectives: ['payment_schedule', 'early_payment_discounts', 'late_payment_penalties'],
-                currentTerms: 'Monthly upfront, 2% late fees',
-                desiredOutcome: 'Quarterly payment, 1.5% early discount'
+                objectives: ['extend_payment_terms', 'early_payment_discounts'],
+                currentTerms: '30-day payment terms, no early discounts',
+                desiredOutcome: '60-day payment terms, 2% early payment discount'
               });
             }}
             className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
           >
-            <div className="font-medium text-sm text-gray-900">💰 Payment Terms</div>
+            <div className="font-medium text-sm text-gray-900">🏦 Payment Terms</div>
             <div className="text-xs text-gray-600">Cash flow optimization</div>
           </button>
+
+          <button
+            onClick={() => {
+              setFormData({
+                contractType: 'Service Agreement',
+                scenario: 'ip_rights_protection',
+                objectives: ['retain_ip_ownership', 'work_product_ownership'],
+                currentTerms: 'Unclear IP ownership, vendor-friendly terms',
+                desiredOutcome: 'Full IP retention, clear work-for-hire terms'
+              });
+            }}
+            className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
+          >
+            <div className="font-medium text-sm text-gray-900">🏛️ IP Rights</div>
+            <div className="text-xs text-gray-600">Intellectual property protection</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setFormData({
+                contractType: 'Purchase Agreement',
+                scenario: 'volume_discount_optimization',
+                objectives: ['tiered_volume_discounts', 'multi_year_volume_protection'],
+                currentTerms: 'Flat pricing, no volume incentives',
+                desiredOutcome: '15% discount at 3x volume, 3-year price protection'
+              });
+            }}
+            className="text-left p-3 border border-gray-200 rounded hover:border-blue-300 hover:bg-blue-50 transition-colors"
+          >
+            <div className="font-medium text-sm text-gray-900">📈 Volume Discounts</div>
+            <div className="text-xs text-gray-600">Scale-based pricing</div>
+          </button>
+
+
         </div>
       </Card>
     </div>
