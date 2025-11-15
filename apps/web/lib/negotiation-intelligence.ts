@@ -1523,3 +1523,44 @@ ${desiredOutcome ? `Desired Outcome: ${desiredOutcome}` : ''}
 
 Include market context, specific talking points, risk mitigation strategies, negotiation tactics, timeline, and success metrics.`;
 }
+
+// Shared Playbook Types
+export interface NegotiationPlaybook {
+  id: string;
+  title: string;
+  contractType: string;
+  scenario: string;
+  objectives: string[];
+  talkingPoints: Array<{
+    topic: string;
+    position: string;
+    rationale: string;
+    fallback?: string;
+  }>;
+  riskMitigation: Array<{
+    risk: string;
+    mitigation: string;
+    priority: 'high' | 'medium' | 'low';
+  }>;
+  tactics: Array<{
+    tactic: string;
+    description: string;
+    whenToUse: string;
+  }>;
+  timeline: Array<{
+    phase: string;
+    duration: string;
+    activities: string[];
+  }>;
+  successMetrics: string[];
+  content: string;
+  sections?: {
+    executiveSummary?: string;
+    talkingPoints?: string;
+    riskMitigation?: string;
+    tactics?: string;
+    timeline?: string;
+    successMetrics?: string;
+  };
+  createdAt: Date;
+}

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Card, Button } from '../ui';
-import { NegotiationPlaybook } from './EnhancedPlaybookGenerator';
+import { NegotiationPlaybook } from '../../lib/negotiation-intelligence';
 
 export interface EnhancedPlaybookViewProps {
   playbook: NegotiationPlaybook;
