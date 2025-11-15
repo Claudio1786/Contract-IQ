@@ -3,17 +3,25 @@
 import { useState } from 'react';
 import { PlaybookGenerator } from '../../components/playbooks/PlaybookGenerator';
 import { PlaybookView } from '../../components/playbooks/PlaybookView';
-import { EnhancedPlaybookGenerator } from '../../components/playbooks/EnhancedPlaybookGenerator';
-import { EnhancedPlaybookView } from '../../components/playbooks/EnhancedPlaybookView';
-import type { NegotiationPlaybook } from '../../lib/negotiation-intelligence';
 import { Button } from '../../components/ui';
 
+// Simple playbook interface for basic functionality
+interface BasicPlaybook {
+  id: string;
+  title: string;
+  content: string;
+  contractType?: string;
+  scenario?: string;
+  objectives?: string[];
+  createdAt: Date;
+}
+
 export default function PlaybooksPage() {
-  const [generatedPlaybook, setGeneratedPlaybook] = useState<NegotiationPlaybook | null>(null);
+  const [generatedPlaybook, setGeneratedPlaybook] = useState<BasicPlaybook | null>(null);
   const [playbookMetadata, setPlaybookMetadata] = useState<any>(null);
   const [showGenerator, setShowGenerator] = useState(true);
 
-  const handlePlaybookGenerated = (playbook: NegotiationPlaybook, metadata?: any) => {
+  const handlePlaybookGenerated = (playbook: BasicPlaybook, metadata?: any) => {
     setGeneratedPlaybook(playbook);
     setPlaybookMetadata(metadata);
     setShowGenerator(false);
@@ -56,34 +64,17 @@ export default function PlaybooksPage() {
                 <div className="space-y-8">
                   <div className="bg-blue-50 rounded-lg p-6">
                     <h2 className="text-xl font-semibold text-blue-900 mb-4">
-                      Enhanced AI-Powered Playbooks
+                      AI-Powered Contract Negotiation Playbooks
                     </h2>
                     <p className="text-blue-700 mb-4">
-                      Using multi-LLM architecture (OpenAI + Gemini) for superior negotiation intelligence
-                    </p>
-                    <EnhancedPlaybookGenerator onPlaybookGenerated={handlePlaybookGenerated} />
-                  </div>
-                  
-                  <div className="border-t border-gray-200 pt-8">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                      Standard Playbooks
-                    </h2>
-                    <p className="text-gray-600 mb-6">
-                      Generate playbooks using our core AI analysis engine
+                      Generate strategic negotiation playbooks using advanced AI analysis and market intelligence
                     </p>
                     <PlaybookGenerator onPlaybookGenerated={(playbook) => handlePlaybookGenerated(playbook)} />
                   </div>
                 </div>
               ) : (
                 <div className="space-y-6">
-                  {playbookMetadata ? (
-                    <EnhancedPlaybookView 
-                      playbook={generatedPlaybook!} 
-                      metadata={playbookMetadata}
-                    />
-                  ) : (
-                    <PlaybookView playbook={generatedPlaybook!} />
-                  )}
+                  <PlaybookView playbook={generatedPlaybook!} />
                 </div>
               )}
             </div>
