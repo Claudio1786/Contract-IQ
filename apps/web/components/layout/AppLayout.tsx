@@ -63,11 +63,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <aside className={`sidebar ${sidebarExpanded ? 'expanded' : ''}`}>
         <div className="sidebar-header">
           <div className="sidebar-logo">
-            <svg className="sidebar-logo-icon" width="32" height="32" viewBox="0 0 32 32">
-              <rect width="32" height="32" rx="8" fill="#2563eb"/>
-              <path d="M8 12h16M8 16h16M8 20h10" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <span className="sidebar-logo-text">Contract IQ</span>
+            <img 
+              src="/logo-full.svg" 
+              alt="Contract IQ" 
+              className="sidebar-logo-image"
+              style={{ height: '32px', width: 'auto' }}
+            />
           </div>
         </div>
         

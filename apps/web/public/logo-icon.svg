@@ -1,0 +1,65 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background with rounded corners -->
+    <rect width="512" height="512" rx="128" fill="url(#gradient-bg)"/>
+    
+    <!-- Subtle inner border -->
+    <rect x="4" y="4" width="504" height="504" rx="124" fill="none" stroke="url(#gradient-border)" stroke-width="2" opacity="0.3"/>
+    
+    <!-- Document Icon (centered and scaled) -->
+    <g transform="translate(128, 96)">
+        <!-- Main document body -->
+        <path d="M48 0H176L256 80V336C256 352 240 368 224 368H48C32 368 16 352 16 336V32C16 16 32 0 48 0Z" 
+              fill="white" opacity="0.95"/>
+        
+        <!-- Folded corner -->
+        <path d="M176 0L256 80H192C184 80 176 72 176 64V0Z" 
+              fill="white" opacity="0.7"/>
+        
+        <!-- Text lines with gradient -->
+        <rect x="64" y="128" width="144" height="16" rx="8" fill="url(#gradient-line-1)"/>
+        <rect x="64" y="168" width="144" height="16" rx="8" fill="url(#gradient-line-2)"/>
+        <rect x="64" y="208" width="96" height="16" rx="8" fill="url(#gradient-line-3)"/>
+        
+        <!-- AI spark icon -->
+        <g transform="translate(80, 280)" opacity="0.9">
+            <!-- Center circle -->
+            <circle cx="48" cy="0" r="12" fill="url(#gradient-spark)"/>
+            <!-- Rays -->
+            <path d="M48 -24L48 -16M48 16L48 24M24 0L16 0M80 0L72 0M30 -18L24 -12M66 -18L72 -12M30 18L24 12M66 18L72 12" 
+                  stroke="url(#gradient-spark)" stroke-width="4" stroke-linecap="round"/>
+        </g>
+    </g>
+    
+    <!-- Gradients -->
+    <defs>
+        <linearGradient id="gradient-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#2563EB;stop-opacity:1" />
+        </linearGradient>
+        
+        <linearGradient id="gradient-border" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.4" />
+            <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.1" />
+        </linearGradient>
+        
+        <linearGradient id="gradient-line-1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.8" />
+        </linearGradient>
+        
+        <linearGradient id="gradient-line-2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.6" />
+            <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.6" />
+        </linearGradient>
+        
+        <linearGradient id="gradient-line-3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.5" />
+            <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:0.5" />
+        </linearGradient>
+        
+        <linearGradient id="gradient-spark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+</svg>
