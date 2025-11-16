@@ -1,7 +1,35 @@
 /**
  * DASHBOARD - Flow AI Design System
- * Vendor Agreement Dashboard with KPI cards, charts, and insights
+ * Main dashboard with KPI cards, charts, and insights
  */
+
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Page Header */
+.dashboard-page-header {
+  margin-bottom: 40px;
+}
+
+.dashboard-header-content h1 {
+  font-size: 40px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+
+.dashboard-header-subtitle {
+  color: var(--text-tertiary);
+  font-size: 16px;
+}
 
 /* KPI Grid */
 .kpi-grid {

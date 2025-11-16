@@ -78,11 +78,12 @@ function RiskItem({ title, renewalDate, risk, onViewDetails }: RiskItemProps) {
 }
 
 /**
- * Dashboard Component - For users with contracts
- * Shows overview stats, urgent alerts, spending analysis, and quick actions
+ * Dashboard Component - Flow AI Design System
+ * Main dashboard with KPIs, charts, vendor table, and AI insights
  */
 export default function Dashboard() {
   const router = useRouter();
+  const [chartPeriod, setChartPeriod] = React.useState('1Y');
 
   const handleStartChat = () => {
     router.push('/chat');
@@ -100,14 +101,31 @@ export default function Dashboard() {
     router.push(`/contracts/${contractId}`);
   };
 
+  const monthData = [
+    { month: 'Jan', height: 45, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Feb', height: 60, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Mar', height: 55, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Apr', height: 70, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'May', height: 80, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Jun', height: 65, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Jul', height: 75, color: '#10B981', colorDark: '#059669' },
+    { month: 'Aug', height: 85, color: '#10B981', colorDark: '#059669' },
+    { month: 'Sep', height: 90, color: '#10B981', colorDark: '#059669' },
+    { month: 'Oct', height: 95, color: '#10B981', colorDark: '#059669' },
+    { month: 'Nov', height: 100, color: '#8B5CF6', colorDark: '#7C3AED' },
+    { month: 'Dec', height: 50, color: '#94A3B8', colorDark: '#64748B' }
+  ];
+
   return (
-    <div>
+    <div className="dashboard-container">
       {/* Page Header */}
-      <div style={{ marginBottom: 'var(--space-8)' }}>
-        <h1 className="text-h1">Vendor Agreement Dashboard</h1>
-        <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
-          🏢 Manage your organization's supplier contracts and renewal pipeline
-        </p>
+      <div className="dashboard-page-header">
+        <div className="dashboard-header-content">
+          <h1>Dashboard</h1>
+          <p className="dashboard-header-subtitle">
+            Real-time insights into your vendor relationships and contract performance
+          </p>
+        </div>
       </div>
 
       {/* KPI Grid */}
