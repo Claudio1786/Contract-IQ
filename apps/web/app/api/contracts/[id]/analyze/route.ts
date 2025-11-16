@@ -16,6 +16,11 @@ import {
   internalError,
 } from '@/lib/api-response';
 import { getAIAnalysisService } from '@/lib/ai-analysis';
+import {
+  notifyAnalysisComplete,
+  notifyHighRiskAlert,
+  notifyComplianceAlert,
+} from '@/lib/notification-service';
 
 export async function POST(
   request: NextRequest,
@@ -161,6 +166,26 @@ export async function GET(
     });
 
     if (!contract) {
+      return notFoundError('Contract');
+    }
+
+    if (!contract.analysis) {
+      return successResponse({
+        analyzed: false,
+        message: 'Contract not yet analyzed',
+      });
+    }
+
+    return successResponse({
+      analyzed: true,
+      analysis: contract.analysis,
+    });
+  } catch (error) {
+    console.error('Get analysis error:', error);
+    return internalError('Failed to get analysis');
+  }
+}
+ if (!contract) {
       return notFoundError('Contract');
     }
 

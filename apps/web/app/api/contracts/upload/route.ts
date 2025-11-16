@@ -22,6 +22,7 @@ import {
   MAX_FILE_SIZE,
 } from '@/lib/file-storage';
 import { parseDocumentFromBuffer, extractMetadata } from '@/lib/document-parser';
+import { notifyContractUploaded } from '@/lib/notification-service';
 
 export async function POST(request: NextRequest) {
   try {
@@ -112,6 +113,13 @@ export async function POST(request: NextRequest) {
         },
       },
     });
+
+    // Send upload notification
+    await notifyContractUploaded(
+      session.user.id,
+      contract.title,
+      contract.id
+    );
 
     // Trigger AI analysis in background (Epic 4)
     if (extractedText) {
