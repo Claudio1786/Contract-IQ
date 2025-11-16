@@ -2,262 +2,342 @@
 
 import React, { useState } from 'react';
 import AppLayout from '../../components/layout/AppLayout';
-import '../../styles/components-dark.css';
-
-interface StatCardProps {
-  title: string;
-  value: string;
-  trend: string;
-}
-
-function StatCard({ title, value, trend }: StatCardProps) {
-  return (
-    <div className="card">
-      <div className="card-body" style={{ textAlign: 'center' }}>
-        <h3 className="text-h3 text-secondary">{title}</h3>
-        <p className="text-display" style={{ margin: 'var(--space-2) 0' }}>{value}</p>
-        <p className="text-sm text-success">{trend}</p>
-      </div>
-    </div>
-  );
-}
-
-interface CategoryBarProps {
-  name: string;
-  percentage: number;
-  value: string;
-  vendors: string[];
-}
-
-function CategoryBar({ name, percentage, value, vendors }: CategoryBarProps) {
-  return (
-    <div style={{ marginBottom: 'var(--space-4)' }}>
-      {/* Category Header */}
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        marginBottom: 'var(--space-2)' 
-      }}>
-        <span className="text-base font-medium">{name}</span>
-        <span className="text-base">({percentage}% · {value})</span>
-      </div>
-      
-      {/* Progress Bar */}
-      <div className="progress" style={{ marginBottom: 'var(--space-2)' }}>
-        <div className="progress-bar" style={{ width: `${percentage}%` }}></div>
-      </div>
-      
-      {/* Vendors */}
-      <p className="text-sm text-tertiary">
-        → {vendors.join(' • ')}
-      </p>
-    </div>
-  );
-}
+import '../../styles/analytics.css';
 
 /**
- * Analytics Page - Follows wireframe specification exactly
+ * Analytics Dashboard - Flow AI Design System
+ * Vendor Agreement Dashboard with KPIs, Charts, Tables, and AI Insights
  */
 export default function AnalyticsPage() {
-  const [timePeriod, setTimePeriod] = useState('Q1 2026');
+  const [chartPeriod, setChartPeriod] = useState('1Y');
 
-  const categoryData: CategoryBarProps[] = [
-    {
-      name: 'CRM & Sales',
-      percentage: 45,
-      value: '$180K',
-      vendors: ['Salesforce Enterprise Agreement']
-    },
-    {
-      name: 'Marketing',
-      percentage: 18,
-      value: '$72K',
-      vendors: ['HubSpot Marketing Hub']
-    },
-    {
-      name: 'Software Development',
-      percentage: 24,
-      value: '$95K',
-      vendors: ['Acme Corp Software License']
-    },
-    {
-      name: 'Productivity',
-      percentage: 13,
-      value: '$53K',
-      vendors: ['Notion Team Plan', 'TechStart MSA']
-    }
-  ];
-
-  const renewalMonths = [
-    { month: 'JAN', amount: '$480K', height: 60 },
-    { month: 'FEB', amount: '$240K', height: 30 },
-    { month: 'MAR', amount: '$580K', height: 72 },
-    { month: 'APR', amount: '$120K', height: 15 },
-    { month: 'MAY', amount: '$220K', height: 28 },
-    { month: 'JUN', amount: '$380K', height: 48 },
-    { month: 'JUL', amount: '$160K', height: 20 },
-    { month: 'AUG', amount: '$290K', height: 36 },
-    { month: 'SEP', amount: '$350K', height: 44 },
-    { month: 'OCT', amount: '$200K', height: 25 },
-    { month: 'NOV', amount: '$140K', height: 18 },
-    { month: 'DEC', amount: '$420K', height: 52 }
+  const monthData = [
+    { month: 'Jan', height: 45, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Feb', height: 60, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Mar', height: 55, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Apr', height: 70, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'May', height: 80, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Jun', height: 65, color: '#3B82F6', colorDark: '#2563EB' },
+    { month: 'Jul', height: 75, color: '#10B981', colorDark: '#059669' },
+    { month: 'Aug', height: 85, color: '#10B981', colorDark: '#059669' },
+    { month: 'Sep', height: 90, color: '#10B981', colorDark: '#059669' },
+    { month: 'Oct', height: 95, color: '#10B981', colorDark: '#059669' },
+    { month: 'Nov', height: 100, color: '#8B5CF6', colorDark: '#7C3AED' },
+    { month: 'Dec', height: 50, color: '#94A3B8', colorDark: '#64748B' }
   ];
 
   return (
     <AppLayout>
-      <div>
+      <div className="analytics-container">
         {/* Page Header */}
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          marginBottom: 'var(--space-8)' 
-        }}>
-          <div>
-            <h1 className="text-h1">Client Agreement Portfolio</h1>
-            <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
-              📊 Manage your organization's vendor agreements and contract performance
-            </p>
-          </div>
-          
-          <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
-            <select 
-              className="input"
-              value={timePeriod}
-              onChange={(e) => setTimePeriod(e.target.value)}
-              style={{ minWidth: '150px' }}
-            >
-              <option value="Q1 2026">Q1 2026</option>
-              <option value="Q2 2026">Q2 2026</option>
-              <option value="Q3 2026">Q3 2026</option>
-              <option value="Q4 2026">Q4 2026</option>
-            </select>
-            
-            <button className="btn-secondary">Export PDF</button>
-          </div>
+        <div className="analytics-page-header">
+          <h1>Vendor Agreement Dashboard</h1>
+          <p className="analytics-header-subtitle">
+            Real-time insights into your vendor relationships and contract performance
+          </p>
         </div>
 
-        {/* Summary Stats Row */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(3, 1fr)', 
-          gap: 'var(--space-6)', 
-          marginBottom: 'var(--space-8)' 
-        }}>
-          <StatCard
-            title="Total Spend"
-            value="$400K"
-            trend="Demo Portfolio"
-          />
-          <StatCard
-            title="Contracts"
-            value="5"
-            trend="Active Agreements"
-          />
-          <StatCard
-            title="Avg Contract"
-            value="$80K"
-            trend="2 High Risk"
-          />
-        </div>
-
-        {/* SaaS Portfolio Breakdown */}
-        <div className="card card-accent card-accent-primary" style={{ marginBottom: 'var(--space-6)' }}>
-          <div className="card-header">
-            <h2 className="text-h2">📊 Vendor Agreement Portfolio: $400K Annual Spend</h2>
-            <p className="text-sm text-secondary">
-              Track spending across your organization's key supplier contracts
-            </p>
-          </div>
-          <div className="card-body">
-            {categoryData.map((category) => (
-              <CategoryBar key={category.name} {...category} />
-            ))}
-
-            {/* Key Insights Section */}
-            <div style={{ 
-              marginTop: 'var(--space-6)', 
-              paddingTop: 'var(--space-6)', 
-              borderTop: '1px solid var(--color-border)' 
-            }}>
-              <h3 className="text-h3" style={{ marginBottom: 'var(--space-4)' }}>💡 KEY INSIGHTS</h3>
-              
-              <div className="card card-accent card-accent-warning" style={{ marginBottom: 'var(--space-4)' }}>
-                <div className="card-body">
-                  <h4 className="text-lg font-medium" style={{ marginBottom: 'var(--space-3)' }}>
-                    ⚠️ $180K Optimization Opportunity
-                  </h4>
-                  <ul style={{ listStyle: 'none', padding: 0 }}>
-                    <li style={{ marginBottom: 'var(--space-2)' }}>
-                      • Salesforce pricing 15% above market average [1]
-                    </li>
-                    <li style={{ marginBottom: 'var(--space-2)' }}>
-                      • Redundant tools: Slack + Teams (~$50K)
-                    </li>
-                    <li>
-                      • AWS reserved instances could save 30% (~$200K)
-                    </li>
-                  </ul>
-                </div>
+        {/* KPI Grid */}
+        <div className="analytics-kpi-grid">
+          {/* Total Contract Value */}
+          <div
+            className="analytics-kpi-card"
+            style={{
+              '--kpi-gradient': 'linear-gradient(90deg, #3B82F6, #2563EB)',
+              '--kpi-bg': 'rgba(59,130,246,0.12)'
+            } as React.CSSProperties}
+          >
+            <div className="analytics-kpi-header">
+              <div className="analytics-kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+                  <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div className="analytics-kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                </svg>
+                +12.5%
               </div>
             </div>
+            <div className="analytics-kpi-value">$24.8M</div>
+            <div className="analytics-kpi-label">Total Contract Value</div>
+            <div className="analytics-kpi-meta">
+              <span className="analytics-kpi-meta-item">vs last quarter</span>
+              <span className="analytics-kpi-meta-value">+$2.8M</span>
+            </div>
           </div>
-          <div className="card-footer">
-            <button className="btn-secondary">Export as PDF</button>
-            <button className="btn-secondary">Drill Down</button>
-            <button className="btn-primary">Show Renewal Risk</button>
+
+          {/* Active Vendors */}
+          <div
+            className="analytics-kpi-card"
+            style={{
+              '--kpi-gradient': 'linear-gradient(90deg, #10B981, #059669)',
+              '--kpi-bg': 'rgba(16,185,129,0.12)'
+            } as React.CSSProperties}
+          >
+            <div className="analytics-kpi-header">
+              <div className="analytics-kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2">
+                  <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+              </div>
+              <div className="analytics-kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                </svg>
+                +8
+              </div>
+            </div>
+            <div className="analytics-kpi-value">247</div>
+            <div className="analytics-kpi-label">Active Vendors</div>
+            <div className="analytics-kpi-meta">
+              <span className="analytics-kpi-meta-item">New this month</span>
+              <span className="analytics-kpi-meta-value">12 vendors</span>
+            </div>
+          </div>
+
+          {/* Contracts Expiring */}
+          <div
+            className="analytics-kpi-card"
+            style={{
+              '--kpi-gradient': 'linear-gradient(90deg, #F59E0B, #D97706)',
+              '--kpi-bg': 'rgba(245,158,11,0.12)'
+            } as React.CSSProperties}
+          >
+            <div className="analytics-kpi-header">
+              <div className="analytics-kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div className="analytics-kpi-trend" style={{ '--trend-bg': 'rgba(245,158,11,0.1)', '--trend-color': '#F59E0B' } as React.CSSProperties}>
+                ⚠️ Attention
+              </div>
+            </div>
+            <div className="analytics-kpi-value">18</div>
+            <div className="analytics-kpi-label">Contracts Expiring (90 days)</div>
+            <div className="analytics-kpi-meta">
+              <span className="analytics-kpi-meta-item">Requiring action</span>
+              <span className="analytics-kpi-meta-value">8 contracts</span>
+            </div>
+          </div>
+
+          {/* High Risk Contracts */}
+          <div
+            className="analytics-kpi-card"
+            style={{
+              '--kpi-gradient': 'linear-gradient(90deg, #EF4444, #DC2626)',
+              '--kpi-bg': 'rgba(239,68,68,0.12)'
+            } as React.CSSProperties}
+          >
+            <div className="analytics-kpi-header">
+              <div className="analytics-kpi-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </div>
+              <div className="analytics-kpi-trend" style={{ '--trend-bg': 'rgba(239,68,68,0.1)', '--trend-color': '#EF4444' } as React.CSSProperties}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+                </svg>
+                -3
+              </div>
+            </div>
+            <div className="analytics-kpi-value">12</div>
+            <div className="analytics-kpi-label">High Risk Contracts</div>
+            <div className="analytics-kpi-meta">
+              <span className="analytics-kpi-meta-item">Resolved this month</span>
+              <span className="analytics-kpi-meta-value">5 contracts</span>
+            </div>
           </div>
         </div>
 
-        {/* Renewal Waterfall */}
-        <div className="card card-accent card-accent-warning">
-          <div className="card-header">
-            <h2 className="text-h2">📅 Renewal Waterfall - Next 12 Months</h2>
+        {/* Chart Section */}
+        <div className="analytics-chart-card">
+          <div className="analytics-chart-header">
+            <h2 className="analytics-chart-title">Contract Value by Month</h2>
+            <div className="analytics-chart-controls">
+              <button 
+                className={`analytics-chart-tab ${chartPeriod === '6M' ? 'active' : ''}`}
+                onClick={() => setChartPeriod('6M')}
+              >
+                6M
+              </button>
+              <button 
+                className={`analytics-chart-tab ${chartPeriod === '1Y' ? 'active' : ''}`}
+                onClick={() => setChartPeriod('1Y')}
+              >
+                1Y
+              </button>
+              <button 
+                className={`analytics-chart-tab ${chartPeriod === 'All' ? 'active' : ''}`}
+                onClick={() => setChartPeriod('All')}
+              >
+                All Time
+              </button>
+            </div>
           </div>
-          <div className="card-body">
-            {/* Chart */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'end', 
-              gap: 'var(--space-2)', 
-              height: '200px',
-              marginBottom: 'var(--space-4)' 
-            }}>
-              {renewalMonths.map((month) => (
-                <div 
-                  key={month.month}
-                  style={{ 
-                    flex: 1, 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    alignItems: 'center' 
-                  }}
-                >
-                  {/* Bar */}
-                  <div style={{
-                    width: '100%',
-                    height: `${month.height}px`,
-                    backgroundColor: 'var(--primary-600)',
-                    borderRadius: '4px 4px 0 0',
-                    marginBottom: 'var(--space-2)'
-                  }}></div>
-                  
-                  {/* Amount */}
-                  <span className="text-xs text-primary font-medium">
-                    {month.amount}
-                  </span>
-                  
-                  {/* Month */}
-                  <span className="text-xs text-tertiary">
-                    {month.month}
-                  </span>
+          <div className="analytics-chart-container">
+            <div className="analytics-chart-bars">
+              {monthData.map((month) => (
+                <div key={month.month} className="analytics-chart-bar">
+                  <div 
+                    className="analytics-bar" 
+                    style={{
+                      height: `${month.height}%`,
+                      '--bar-color': month.color,
+                      '--bar-color-dark': month.colorDark,
+                      '--bar-glow': `${month.color}4D`
+                    } as React.CSSProperties}
+                  />
+                  <div className="analytics-bar-label">{month.month}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="card-footer">
-            <button className="btn-secondary">View Details</button>
-            <button className="btn-primary">Export Calendar</button>
+        </div>
+
+        {/* Two Column Layout */}
+        <div className="analytics-two-column">
+          {/* Top Vendors Table */}
+          <div className="analytics-table-card">
+            <div className="analytics-table-header">
+              <h2 className="analytics-table-title">Top Vendors by Spend</h2>
+              <button className="analytics-table-action">View All →</button>
+            </div>
+            <table className="analytics-table">
+              <thead>
+                <tr>
+                  <th>Vendor</th>
+                  <th>Contract Value</th>
+                  <th>Status</th>
+                  <th>Risk Level</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>AWS</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Cloud Infrastructure</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$420,000</td>
+                  <td><span className="analytics-badge analytics-badge-active">Active</span></td>
+                  <td><span className="analytics-badge analytics-badge-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Microsoft</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Enterprise Software</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$295,000</td>
+                  <td><span className="analytics-badge analytics-badge-expiring">Expiring</span></td>
+                  <td><span className="analytics-badge analytics-badge-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Salesforce</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>CRM Platform</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$180,000</td>
+                  <td><span className="analytics-badge analytics-badge-expiring">Expiring</span></td>
+                  <td><span className="analytics-badge analytics-badge-high">High</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Google Workspace</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Productivity Suite</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$84,000</td>
+                  <td><span className="analytics-badge analytics-badge-active">Active</span></td>
+                  <td><span className="analytics-badge analytics-badge-low">Low</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>HubSpot</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Marketing Platform</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$78,000</td>
+                  <td><span className="analytics-badge analytics-badge-active">Active</span></td>
+                  <td><span className="analytics-badge analytics-badge-medium">Medium</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* AI Insights */}
+          <div className="analytics-insights-card">
+            <div className="analytics-insights-header">
+              <div className="analytics-insights-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <h3 className="analytics-insights-title">AI Insights</h3>
+            </div>
+
+            <div className="analytics-insight-item" style={{ '--insight-color': '#EF4444' } as React.CSSProperties}>
+              <div className="analytics-insight-type">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                </svg>
+                URGENT
+              </div>
+              <div className="analytics-insight-text">
+                3 contracts require renewal notice within 30 days to avoid auto-renewal. Total value: $475,000.
+              </div>
+            </div>
+
+            <div className="analytics-insight-item" style={{ '--insight-color': '#F59E0B' } as React.CSSProperties}>
+              <div className="analytics-insight-type">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10"/>
+                </svg>
+                OPTIMIZATION
+              </div>
+              <div className="analytics-insight-text">
+                AWS usage shows 32% underutilization. Potential savings: $134,000/year with plan optimization.
+              </div>
+            </div>
+
+            <div className="analytics-insight-item" style={{ '--insight-color': '#3B82F6' } as React.CSSProperties}>
+              <div className="analytics-insight-type">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+                INSIGHT
+              </div>
+              <div className="analytics-insight-text">
+                SaaS consolidation opportunity: 4 vendors offer overlapping features. Consolidation could save $89,000/year.
+              </div>
+            </div>
+
+            <div className="analytics-insight-item" style={{ '--insight-color': '#10B981' } as React.CSSProperties}>
+              <div className="analytics-insight-type">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                OPPORTUNITY
+              </div>
+              <div className="analytics-insight-text">
+                Salesforce renewal coming up. Historical data suggests 15-20% discount available with early negotiation.
+              </div>
+            </div>
+
+            <div className="analytics-insight-item" style={{ '--insight-color': '#8B5CF6' } as React.CSSProperties}>
+              <div className="analytics-insight-type">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                TREND
+              </div>
+              <div className="analytics-insight-text">
+                Contract spend increased 12.5% QoQ, driven primarily by cloud infrastructure expansion.
+              </div>
+            </div>
           </div>
         </div>
       </div>
