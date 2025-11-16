@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AppLayout from '../../components/layout/AppLayout';
+import UploadModal from '../../components/contracts/UploadModal';
 
 interface ContractCardProps {
   id: string;
@@ -100,6 +101,7 @@ export default function ContractsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterValue, setFilterValue] = useState('all');
   const [sortValue, setSortValue] = useState('recent');
+  const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   // Demo contract data - 5 visible + 1 hidden slot for uploaded docs
   const contracts: ContractCardProps[] = [
@@ -193,7 +195,25 @@ export default function ContractsPage() {
   const router = useRouter();
 
   const handleUploadContracts = () => {
-    router.push('/upload');
+    setIsUploadModalOpen(true);
+  };
+
+  const handleUploadSuccess = (contract: any) => {
+    // Store in sessionStorage for demo
+    const storageKey = `contract-uploaded-${Date.now()}`;
+    sessionStorage.setItem(storageKey, JSON.stringify(contract));
+
+    // Update uploaded contract
+    setUploadedContract({
+      id: contract.id,
+      name: contract.title || contract.fileName || 'Uploaded Document',
+      vendor: 'Uploaded Contract',
+      renewalDate: 'Analysis Complete',
+      annualValue: 'TBD',
+      keyTerm: 'Recently uploaded',
+      risk: 'medium',
+      riskLabel: 'M'
+    });
   };
 
   const handleViewContract = (contractId: string) => {
@@ -324,6 +344,13 @@ export default function ContractsPage() {
             + Upload New Contracts
           </button>
         </div>
+
+        {/* Upload Modal */}
+        <UploadModal
+          isOpen={isUploadModalOpen}
+          onClose={() => setIsUploadModalOpen(false)}
+          onUploadSuccess={handleUploadSuccess}
+        />
       </div>
     </AppLayout>
   );
