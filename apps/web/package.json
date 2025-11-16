@@ -22,7 +22,6 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@auth/prisma-adapter": "^2.11.1",
     "@contract-iq/ui": "workspace:*",
     "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^6.19.0",
@@ -30,7 +29,6 @@
     "class-variance-authority": "^0.7.0",
     "mammoth": "^1.11.0",
     "next": "^15.0.0",
-    "next-auth": "5.0.0-beta.30",
     "openai": "^6.9.0",
     "pdf-parse": "^2.4.5",
     "posthog-js": "^1.288.1",

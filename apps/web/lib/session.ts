@@ -3,7 +3,7 @@
  * Epic 1: Task 1.2 - Session Management
  */
 
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from './auth';
 import { redirect } from 'next/navigation';
 

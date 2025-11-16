@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import { SessionProvider } from '@/components/providers/SessionProvider';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 
 import './globals.css';

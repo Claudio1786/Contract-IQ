@@ -3,7 +3,7 @@
  * Epic 1: Authentication & User Management
  */
 
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions } from 'next-auth/next';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
