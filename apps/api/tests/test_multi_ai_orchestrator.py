@@ -51,7 +51,7 @@ class TestMultiAIOrchestrator:
         """Test that whitespace-only topic fails validation."""
         invalid_context = valid_context.model_copy(update={"topic": "   "})
         
-        with pytest.raises(ValueError, match="Invalid negotiation context"):
+        with pytest.raises(ValueError, match="Topic cannot be empty or whitespace"):
             orchestrator._validate_input(invalid_context)
 
     def test_empty_current_position_fails(self, orchestrator, valid_context):
@@ -103,7 +103,7 @@ class TestMultiAIOrchestrator:
             latency_ms=100,
         )
         
-        with pytest.raises(OutputValidationError, match="Summary is too short"):
+        with pytest.raises(ValueError, match="Summary is too short"):
             orchestrator._validate_output(invalid_guidance)
 
     def test_output_validation_requires_talking_points(self, orchestrator):
@@ -122,7 +122,7 @@ class TestMultiAIOrchestrator:
             latency_ms=100,
         )
         
-        with pytest.raises(OutputValidationError, match="No talking points"):
+        with pytest.raises(ValueError, match="No talking points"):
             orchestrator._validate_output(invalid_guidance)
 
     def test_output_validation_checks_confidence_range(self, orchestrator):
@@ -141,7 +141,7 @@ class TestMultiAIOrchestrator:
             latency_ms=100,
         )
         
-        with pytest.raises(OutputValidationError, match="Invalid confidence"):
+        with pytest.raises(ValueError, match="Invalid confidence"):
             orchestrator._validate_output(invalid_guidance)
 
     def test_provider_order_defaults_to_gemini_first(self, orchestrator):
@@ -211,17 +211,11 @@ class TestMultiAIOrchestrator:
         assert guidance.fallback_recommendation
         assert guidance.talking_points
 
-    def test_invalid_input_raises_value_error(self, orchestrator):
+    def test_invalid_input_raises_value_error(self, orchestrator, valid_context):
         """Test that invalid input raises ValueError (not crashes)."""
-        invalid_context = NegotiationContext(
-            topic="",  # Invalid
-            contract_id="test",
-            template_id="test",
-            current_position="position",
-            target_position="target",
-        )
+        invalid_context = valid_context.model_copy(update={"topic": ""})
         
-        with pytest.raises(ValueError):
+        with pytest.raises((ValueError, ValidationError)):
             orchestrator.generate_guidance(context=invalid_context)
 
     def test_provider_health_status_endpoint(self, orchestrator):
