@@ -187,34 +187,148 @@ export default function SettingsPage() {
           </div>
         )}
 
-        {/* Notifications Section */}
-        <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
-          <div className="card-header">
-            <h2 className="text-h2">🔔 Notifications</h2>
-          </div>
-          <div className="card-body">
-            {settings.filter(s => ['email-alerts', 'slack-notifications', 'renewal-window', 'risk-threshold'].includes(s.id)).map(setting => (
-              <div key={setting.id} style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                marginBottom: 'var(--space-4)',
-                paddingBottom: 'var(--space-4)',
-                borderBottom: '1px solid var(--color-border)'
-              }}>
-                <div style={{ flex: 1 }}>
-                  <h3 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
-                    {setting.label}
-                  </h3>
-                  <p className="text-sm text-secondary">
-                    {setting.description}
-                  </p>
-                </div>
-                <div style={{ marginLeft: 'var(--space-4)' }}>
-                  {renderSettingControl(setting)}
-                </div>
+        {/* Account Settings */}
+        <div className="settings-section">
+          <div className="settings-section-card">
+            <div className="settings-section-header">
+              <div className="settings-section-icon" style={{ '--icon-bg': 'rgba(59,130,246,0.12)' } as React.CSSProperties}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
               </div>
-            ))}
+              <div className="settings-section-title">Account Settings</div>
+            </div>
+            <div className="settings-group">
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Email Address</div>
+                  <div className="setting-description">Your primary email for notifications and account recovery</div>
+                </div>
+                <input
+                  type="email"
+                  className="settings-input"
+                  value={accountSettings.email}
+                  onChange={(e) => setAccountSettings({ ...accountSettings, email: e.target.value })}
+                />
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Company Name</div>
+                  <div className="setting-description">Organization name displayed in reports and contracts</div>
+                </div>
+                <input
+                  type="text"
+                  className="settings-input"
+                  value={accountSettings.company}
+                  onChange={(e) => setAccountSettings({ ...accountSettings, company: e.target.value })}
+                />
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Time Zone</div>
+                  <div className="setting-description">Used for scheduling and deadline calculations</div>
+                </div>
+                <select
+                  className="settings-select"
+                  value={accountSettings.timezone}
+                  onChange={(e) => setAccountSettings({ ...accountSettings, timezone: e.target.value })}
+                >
+                  <option>Pacific Time (PT)</option>
+                  <option>Mountain Time (MT)</option>
+                  <option>Central Time (CT)</option>
+                  <option>Eastern Time (ET)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Notification Preferences */}
+        <div className="settings-section">
+          <div className="settings-section-card">
+            <div className="settings-section-header">
+              <div className="settings-section-icon" style={{ '--icon-bg': 'rgba(245,158,11,0.12)' } as React.CSSProperties}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2">
+                  <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                </svg>
+              </div>
+              <div className="settings-section-title">Notification Preferences</div>
+            </div>
+            <div className="settings-group">
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Email Notifications</div>
+                  <div className="setting-description">Receive email alerts for important contract events</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={notificationSettings.emailNotifications}
+                    onChange={(e) => setNotificationSettings({ ...notificationSettings, emailNotifications: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Renewal Reminders</div>
+                  <div className="setting-description">Get notified before contracts expire</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={notificationSettings.renewalReminders}
+                    onChange={(e) => setNotificationSettings({ ...notificationSettings, renewalReminders: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Risk Alerts</div>
+                  <div className="setting-description">Immediate notification for high-risk contract issues</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={notificationSettings.riskAlerts}
+                    onChange={(e) => setNotificationSettings({ ...notificationSettings, riskAlerts: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Weekly Digest</div>
+                  <div className="setting-description">Summary of contract activity every Monday</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={notificationSettings.weeklyDigest}
+                    onChange={(e) => setNotificationSettings({ ...notificationSettings, weeklyDigest: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Reminder Lead Time</div>
+                  <div className="setting-description">How far in advance to send renewal reminders</div>
+                </div>
+                <select
+                  className="settings-select"
+                  value={notificationSettings.reminderLeadTime}
+                  onChange={(e) => setNotificationSettings({ ...notificationSettings, reminderLeadTime: e.target.value })}
+                >
+                  <option>30 days</option>
+                  <option>60 days</option>
+                  <option>90 days</option>
+                  <option>120 days</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
 
