@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "template": "sow-test",
+    "version": "2025.11",
+    "vertical": "professional-services",
+    "jurisdiction": "California, USA",
+    "counterparties": [
+      { "name": "Test Consulting Group", "role": "vendor" },
+      { "name": "Test Enterprise LLC", "role": "customer" }
+    ]
+  },
+  "projectScope": {
+    "title": "Test Software Implementation Project",
+    "description": "Implementation and configuration of enterprise software platform",
+    "startDate": "2025-12-01",
+    "endDate": "2026-02-28",
+    "deliverables": [
+      {
+        "id": "D1",
+        "title": "Requirements Analysis",
+        "dueDate": "2025-12-15",
+        "acceptanceCriteria": "Signed requirements document"
+      },
+      {
+        "id": "D2",
+        "title": "System Configuration",
+        "dueDate": "2026-01-31",
+        "acceptanceCriteria": "Configured system in staging environment"
+      },
+      {
+        "id": "D3",
+        "title": "Production Deployment",
+        "dueDate": "2026-02-28",
+        "acceptanceCriteria": "Live system with sign-off"
+      }
+    ]
+  },
+  "financials": {
+    "totalValue": 85000,
+    "currency": "USD",
+    "paymentSchedule": [
+      {
+        "milestone": "D1 acceptance",
+        "amount": 25500,
+        "percentage": 30
+      },
+      {
+        "milestone": "D2 acceptance",
+        "amount": 34000,
+        "percentage": 40
+      },
+      {
+        "milestone": "D3 acceptance",
+        "amount": 25500,
+        "percentage": 30
+      }
+    ]
+  },
+  "clauses": [
+    {
+      "id": "deliverable-acceptance",
+      "category": "operations",
+      "text": "Customer has 10 business days to review and accept or reject deliverables",
+      "riskPosture": "neutral"
+    },
+    {
+      "id": "change-orders",
+      "category": "financial",
+      "text": "Changes to scope require written change order with pricing adjustment",
+      "riskPosture": "favorable"
+    }
+  ]
+}
