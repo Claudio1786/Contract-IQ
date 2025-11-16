@@ -130,164 +130,315 @@ export default function Dashboard() {
 
       {/* KPI Grid */}
       <div className="kpi-grid">
-        <StatCard
-          title="Total Contract Value"
-          value="$2.4M"
-          subtitle="Active agreements"
-          trend="+12.5%"
-          gradient="linear-gradient(90deg, #3B82F6, #2563EB)"
-          bgColor="rgba(59,130,246,0.12)"
-          icon={
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
-              <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          }
-        />
-        <StatCard
-          title="Active Contracts"
-          value="18"
-          subtitle="Across 12 vendors"
-          trend="+3 this month"
-          gradient="linear-gradient(90deg, #8B5CF6, #7C3AED)"
-          bgColor="rgba(139,92,246,0.12)"
-          icon={
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2">
-              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-          }
-        />
-        <StatCard
-          title="Renewals This Quarter"
-          value="5"
-          subtitle="2 require action"
-          trend="45 days avg"
-          gradient="linear-gradient(90deg, #F59E0B, #D97706)"
-          bgColor="rgba(245,158,11,0.12)"
-          icon={
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2">
-              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          }
-        />
-      </div>
-
-      {/* Urgent Alerts Card */}
-      <div className="card card-accent card-accent-danger" style={{ marginBottom: 'var(--space-6)' }}>
-        <div className="card-header">
-          <h2 className="text-h2">⚠️ URGENT: 2 High Risk Contracts Need Attention</h2>
-        </div>
-        <div className="card-body">
-          <RiskItem
-            title="Salesforce Enterprise Agreement"
-            renewalDate="January 15, 2026 (30 days)"
-            risk="Auto-renewal clause"
-            onViewDetails={() => handleViewDetails('salesforce-ea')}
-          />
-          <RiskItem
-            title="Acme Corp Software License Agreement"
-            renewalDate="February 15, 2026 (60 days)"
-            risk="Liability cap limitation"
-            onViewDetails={() => handleViewDetails('acme-saas')}
-          />
-          <RiskItem
-            title="HubSpot Marketing Hub Order Form"
-            renewalDate="January 22, 2026 (37 days)"
-            risk="Price increase clause"
-            onViewDetails={() => handleViewDetails('hubspot-mh')}
-          />
-        </div>
-        <div className="card-footer">
-          <button className="btn-secondary" onClick={handleViewAllRisks}>
-            View All Risks →
-          </button>
-        </div>
-      </div>
-
-      {/* Spending Analysis Card */}
-      <div className="card card-accent card-accent-primary" style={{ marginBottom: 'var(--space-6)' }}>
-        <div className="card-header">
-          <h2 className="text-h2">📊 Vendor Spending by Category</h2>
-          <p className="text-sm text-secondary">
-            Breakdown of your organization's $400K annual contract portfolio
-          </p>
-        </div>
-        <div className="card-body">
-          {/* CRM & Sales Category */}
-          <div style={{ marginBottom: 'var(--space-4)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-              <span className="text-base font-medium">CRM & Sales</span>
-              <span className="text-base">45% · $180K</span>
+        {/* Total Contract Value */}
+        <div className="kpi-card" style={{ '--kpi-gradient': 'linear-gradient(90deg, #3B82F6, #2563EB)', '--kpi-bg': 'rgba(59,130,246,0.12)' } as React.CSSProperties}>
+          <div className="kpi-header">
+            <div className="kpi-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+                <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
             </div>
-            <div className="progress">
-              <div className="progress-bar" style={{ width: '45%' }}></div>
+            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+              </svg>
+              +12.5%
             </div>
           </div>
-
-          {/* Software Development Category */}
-          <div style={{ marginBottom: 'var(--space-4)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-              <span className="text-base font-medium">Software Development</span>
-              <span className="text-base">24% · $95K</span>
-            </div>
-            <div className="progress">
-              <div className="progress-bar" style={{ width: '24%' }}></div>
-            </div>
-          </div>
-
-          {/* Marketing Category */}
-          <div style={{ marginBottom: 'var(--space-4)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-              <span className="text-base font-medium">Marketing</span>
-              <span className="text-base">18% · $72K</span>
-            </div>
-            <div className="progress">
-              <div className="progress-bar" style={{ width: '18%' }}></div>
-            </div>
-          </div>
-
-          {/* Productivity Category */}
-          <div style={{ marginBottom: 'var(--space-4)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-              <span className="text-base font-medium">Productivity</span>
-              <span className="text-base">13% · $53K</span>
-            </div>
-            <div className="progress">
-              <div className="progress-bar" style={{ width: '13%' }}></div>
-            </div>
+          <div className="kpi-value">$24.8M</div>
+          <div className="kpi-label">Total Contract Value</div>
+          <div className="kpi-meta">
+            <span className="kpi-meta-item">vs last quarter</span>
+            <span className="kpi-meta-value">+$2.8M</span>
           </div>
         </div>
-        <div className="card-footer">
-          <button className="btn-secondary" onClick={handleViewAnalytics}>
-            View Full Analytics →
-          </button>
+
+        {/* Active Vendors */}
+        <div className="kpi-card" style={{ '--kpi-gradient': 'linear-gradient(90deg, #10B981, #059669)', '--kpi-bg': 'rgba(16,185,129,0.12)' } as React.CSSProperties}>
+          <div className="kpi-header">
+            <div className="kpi-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2">
+                <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+              </svg>
+              +8
+            </div>
+          </div>
+          <div className="kpi-value">247</div>
+          <div className="kpi-label">Active Vendors</div>
+          <div className="kpi-meta">
+            <span className="kpi-meta-item">New this month</span>
+            <span className="kpi-meta-value">12 vendors</span>
+          </div>
+        </div>
+
+        {/* Contracts Expiring */}
+        <div className="kpi-card" style={{ '--kpi-gradient': 'linear-gradient(90deg, #F59E0B, #D97706)', '--kpi-bg': 'rgba(245,158,11,0.12)' } as React.CSSProperties}>
+          <div className="kpi-header">
+            <div className="kpi-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(245,158,11,0.1)', '--trend-color': '#F59E0B' } as React.CSSProperties}>
+              ⚠️ Attention
+            </div>
+          </div>
+          <div className="kpi-value">18</div>
+          <div className="kpi-label">Contracts Expiring (90 days)</div>
+          <div className="kpi-meta">
+            <span className="kpi-meta-item">Requiring action</span>
+            <span className="kpi-meta-value">8 contracts</span>
+          </div>
+        </div>
+
+        {/* High Risk Contracts */}
+        <div className="kpi-card" style={{ '--kpi-gradient': 'linear-gradient(90deg, #EF4444, #DC2626)', '--kpi-bg': 'rgba(239,68,68,0.12)' } as React.CSSProperties}>
+          <div className="kpi-header">
+            <div className="kpi-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(239,68,68,0.1)', '--trend-color': '#EF4444' } as React.CSSProperties}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+              </svg>
+              -3
+            </div>
+          </div>
+          <div className="kpi-value">12</div>
+          <div className="kpi-label">High Risk Contracts</div>
+          <div className="kpi-meta">
+            <span className="kpi-meta-item">Resolved this month</span>
+            <span className="kpi-meta-value">5 contracts</span>
+          </div>
         </div>
       </div>
 
-      {/* Quick Actions Card */}
-      <div className="card">
-        <div className="card-header">
-          <h2 className="text-h2">💬 Quick Actions</h2>
+      {/* Chart Section */}
+      <div className="chart-card">
+        <div className="chart-header">
+          <h2 className="chart-title">Contract Value by Month</h2>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button 
+              className={`chart-tab ${chartPeriod === '6M' ? 'active' : ''}`}
+              onClick={() => setChartPeriod('6M')}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '10px',
+                fontSize: '14px',
+                fontWeight: '500',
+                background: chartPeriod === '6M' ? 'var(--surface-4)' : 'transparent',
+                color: chartPeriod === '6M' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                border: chartPeriod === '6M' ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              6M
+            </button>
+            <button 
+              className={`chart-tab ${chartPeriod === '1Y' ? 'active' : ''}`}
+              onClick={() => setChartPeriod('1Y')}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '10px',
+                fontSize: '14px',
+                fontWeight: '500',
+                background: chartPeriod === '1Y' ? 'var(--surface-4)' : 'transparent',
+                color: chartPeriod === '1Y' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                border: chartPeriod === '1Y' ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              1Y
+            </button>
+            <button 
+              className={`chart-tab ${chartPeriod === 'All' ? 'active' : ''}`}
+              onClick={() => setChartPeriod('All')}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '10px',
+                fontSize: '14px',
+                fontWeight: '500',
+                background: chartPeriod === 'All' ? 'var(--surface-4)' : 'transparent',
+                color: chartPeriod === 'All' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                border: chartPeriod === 'All' ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              All Time
+            </button>
+          </div>
         </div>
-        <div className="card-body">
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li style={{ marginBottom: 'var(--space-2)' }}>
-              <span>• Ask about upcoming renewals</span>
-            </li>
-            <li style={{ marginBottom: 'var(--space-2)' }}>
-              <span>• Analyze contract risks</span>
-            </li>
-            <li style={{ marginBottom: 'var(--space-2)' }}>
-              <span>• Generate negotiation playbooks</span>
-            </li>
-            <li>
-              <span>• Compare pricing to market</span>
-            </li>
-          </ul>
+        <div className="chart-container">
+          <div className="chart-bars">
+            {monthData.map((data, index) => (
+              <div key={index} className="chart-bar">
+                <div 
+                  className="bar" 
+                  style={{ 
+                    height: `${data.height}%`,
+                    '--bar-color': data.color,
+                    '--bar-color-dark': data.colorDark,
+                    '--bar-glow': `${data.color}33`
+                  } as React.CSSProperties}
+                ></div>
+                <div className="bar-label">{data.month}</div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="card-footer">
-          <button className="btn-primary" onClick={handleStartChat}>
-            Start New Chat →
-          </button>
+      </div>
+
+      {/* Two Column Layout */}
+      <div className="two-column">
+        {/* Top Vendors Table */}
+        <div className="table-card">
+          <div className="table-header">
+            <h2 className="table-title">Top Vendors by Spend</h2>
+            <button 
+              className="table-action"
+              onClick={() => router.push('/contracts')}
+              style={{
+                padding: '10px 18px',
+                background: 'var(--surface-4)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '10px',
+                color: 'var(--text-primary)',
+                fontSize: '14px',
+                fontWeight: '500',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              View All →
+            </button>
+          </div>
+          <table className="dashboard-table">
+            <thead>
+              <tr>
+                <th>Vendor</th>
+                <th>Contract Value</th>
+                <th>Status</th>
+                <th>Risk Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>AWS</div>
+                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Cloud Infrastructure</div>
+                </td>
+                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$420,000</td>
+                <td><span className="badge badge-active">Active</span></td>
+                <td><span className="badge badge-medium">Medium</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Microsoft</div>
+                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Enterprise Software</div>
+                </td>
+                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$295,000</td>
+                <td><span className="badge badge-expiring">Expiring</span></td>
+                <td><span className="badge badge-high">High</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Salesforce</div>
+                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>CRM Platform</div>
+                </td>
+                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$180,000</td>
+                <td><span className="badge badge-expiring">Expiring</span></td>
+                <td><span className="badge badge-high">High</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Google Workspace</div>
+                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Productivity Suite</div>
+                </td>
+                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$84,000</td>
+                <td><span className="badge badge-active">Active</span></td>
+                <td><span className="badge badge-low">Low</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>HubSpot</div>
+                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Marketing Platform</div>
+                </td>
+                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$78,000</td>
+                <td><span className="badge badge-active">Active</span></td>
+                <td><span className="badge badge-medium">Medium</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* AI Insights */}
+        <div className="insights-card">
+          <div className="insights-header">
+            <div className="insights-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+            </div>
+            <h3 className="insights-title">AI Insights</h3>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#EF4444' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              </svg>
+              URGENT
+            </div>
+            <div className="insight-text">3 contracts require renewal notice within 30 days to avoid auto-renewal. Total value: $475,000.</div>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#F59E0B' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10"/>
+              </svg>
+              OPTIMIZATION
+            </div>
+            <div className="insight-text">AWS usage shows 32% underutilization. Potential savings: $134,000/year with plan optimization.</div>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#3B82F6' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+              INSIGHT
+            </div>
+            <div className="insight-text">SaaS consolidation opportunity: 4 vendors offer overlapping features. Consolidation could save $89,000/year.</div>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#10B981' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              OPPORTUNITY
+            </div>
+            <div className="insight-text">Salesforce renewal coming up. Historical data suggests 15-20% discount available with early negotiation.</div>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#8B5CF6' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              TREND
+            </div>
+            <div className="insight-text">Contract spend increased 12.5% QoQ, driven primarily by cloud infrastructure expansion.</div>
+          </div>
         </div>
       </div>
     </div>
