@@ -2,188 +2,84 @@
 
 import React, { useState } from 'react';
 import AppLayout from '../../components/layout/AppLayout';
-import '../../styles/components-dark.css';
-
-interface SettingItem {
-  id: string;
-  label: string;
-  description: string;
-  type: 'toggle' | 'select' | 'input';
-  value: boolean | string;
-  options?: string[];
-}
+import '../../styles/settings.css';
 
 export default function SettingsPage() {
-  const [settings, setSettings] = useState<SettingItem[]>([
-    {
-      id: 'email-alerts',
-      label: 'Email Alerts',
-      description: 'Receive email notifications for contract renewals and risk alerts',
-      type: 'toggle',
-      value: true
-    },
-    {
-      id: 'slack-notifications',
-      label: 'Slack Notifications',
-      description: 'Send alerts to your Slack workspace',
-      type: 'toggle',
-      value: false
-    },
-    {
-      id: 'renewal-window',
-      label: 'Renewal Alert Window',
-      description: 'How far in advance to alert about contract renewals',
-      type: 'select',
-      value: '90 days',
-      options: ['30 days', '60 days', '90 days', '120 days', '180 days']
-    },
-    {
-      id: 'risk-threshold',
-      label: 'Risk Alert Threshold',
-      description: 'Minimum risk level to trigger alerts',
-      type: 'select',
-      value: 'Medium',
-      options: ['Low', 'Medium', 'High']
-    },
-    {
-      id: 'auto-analysis',
-      label: 'Auto-Analysis',
-      description: 'Automatically analyze new contracts upon upload',
-      type: 'toggle',
-      value: true
-    },
-    {
-      id: 'data-retention',
-      label: 'Data Retention Period',
-      description: 'How long to keep contract analysis data',
-      type: 'select',
-      value: '2 years',
-      options: ['6 months', '1 year', '2 years', '5 years', 'Indefinite']
-    }
-  ]);
+  // Account Settings
+  const [accountSettings, setAccountSettings] = useState({
+    email: 'ray@contractiq.com',
+    company: 'GroceryDeals.co',
+    timezone: 'Pacific Time (PT)'
+  });
+
+  // Notification Settings
+  const [notificationSettings, setNotificationSettings] = useState({
+    emailNotifications: true,
+    renewalReminders: true,
+    riskAlerts: true,
+    weeklyDigest: false,
+    reminderLeadTime: '90 days'
+  });
+
+  // AI Settings
+  const [aiSettings, setAISettings] = useState({
+    autoAnalysis: true,
+    riskScoring: true,
+    playbookGeneration: true,
+    analysisDetail: 'Comprehensive'
+  });
+
+  // Integration Settings
+  const [integrationSettings, setIntegrationSettings] = useState({
+    googleDriveSync: true,
+    calendarIntegration: true,
+    slackNotifications: false,
+    apiAccess: false
+  });
 
   const [showSaveMessage, setShowSaveMessage] = useState(false);
 
-  const updateSetting = (id: string, newValue: boolean | string) => {
-    setSettings(prev => prev.map(setting => 
-      setting.id === id ? { ...setting, value: newValue } : setting
-    ));
-  };
-
   const handleSave = () => {
-    // Simulate API call
+    console.log('Saving settings:', {
+      account: accountSettings,
+      notifications: notificationSettings,
+      ai: aiSettings,
+      integrations: integrationSettings
+    });
     setShowSaveMessage(true);
     setTimeout(() => setShowSaveMessage(false), 3000);
   };
 
-  const handleReset = () => {
-    // Reset to defaults
-    const confirmation = confirm('Are you sure you want to reset all settings to defaults?');
-    if (confirmation) {
-      // This would reset to default values
-      setShowSaveMessage(true);
-      setTimeout(() => setShowSaveMessage(false), 3000);
-    }
-  };
-
-  const renderSettingControl = (setting: SettingItem) => {
-    switch (setting.type) {
-      case 'toggle':
-        return (
-          <label className="toggle-switch" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <input
-              type="checkbox"
-              checked={setting.value as boolean}
-              onChange={(e) => updateSetting(setting.id, e.target.checked)}
-              style={{ display: 'none' }}
-            />
-            <div
-              className={`toggle-slider ${setting.value ? 'toggle-slider-active' : ''}`}
-              onClick={() => updateSetting(setting.id, !setting.value)}
-              style={{
-                width: '48px',
-                height: '24px',
-                backgroundColor: setting.value ? 'var(--primary-600)' : 'var(--gray-300)',
-                borderRadius: '12px',
-                position: 'relative',
-                cursor: 'pointer',
-                transition: 'all var(--transition-fast)'
-              }}
-            >
-              <div
-                style={{
-                  width: '20px',
-                  height: '20px',
-                  backgroundColor: 'white',
-                  borderRadius: '50%',
-                  position: 'absolute',
-                  top: '2px',
-                  left: setting.value ? '26px' : '2px',
-                  transition: 'all var(--transition-fast)',
-                  boxShadow: 'var(--shadow-sm)'
-                }}
-              />
-            </div>
-            <span className="text-sm">{setting.value ? 'Enabled' : 'Disabled'}</span>
-          </label>
-        );
-
-      case 'select':
-        return (
-          <select
-            className="input"
-            value={setting.value as string}
-            onChange={(e) => updateSetting(setting.id, e.target.value)}
-            style={{ maxWidth: '200px' }}
-          >
-            {setting.options?.map(option => (
-              <option key={option} value={option}>{option}</option>
-            ))}
-          </select>
-        );
-
-      case 'input':
-        return (
-          <input
-            type="text"
-            className="input"
-            value={setting.value as string}
-            onChange={(e) => updateSetting(setting.id, e.target.value)}
-            style={{ maxWidth: '300px' }}
-          />
-        );
-
-      default:
-        return null;
-    }
+  const handleCancel = () => {
+    // Reset to initial values or navigate away
+    window.location.reload();
   };
 
   return (
     <AppLayout>
-      <div>
+      <div className="settings-container">
         {/* Page Header */}
-        <div style={{ marginBottom: 'var(--space-6)' }}>
-          <h1 className="text-h1">Settings</h1>
-          <p className="text-base text-secondary" style={{ marginTop: 'var(--space-2)' }}>
-            Customize your Contract IQ experience and notification preferences.
+        <div className="settings-page-header">
+          <h1>Settings</h1>
+          <p className="settings-header-subtitle">
+            Manage your Contract IQ preferences and configurations
           </p>
         </div>
 
         {/* Success Message */}
         {showSaveMessage && (
-          <div 
-            className="card card-accent card-accent-success" 
-            style={{ 
-              marginBottom: 'var(--space-6)',
-              animation: 'fadeIn 0.3s ease-in'
-            }}
-          >
-            <div className="card-body">
-              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-                <span style={{ fontSize: '20px' }}>✅</span>
-                <span className="text-base font-medium">Settings saved successfully!</span>
-              </div>
-            </div>
+          <div style={{
+            background: 'linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0.05) 100%)',
+            border: '1px solid rgba(16,185,129,0.3)',
+            borderRadius: '14px',
+            padding: '16px 20px',
+            marginBottom: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px'
+          }}>
+            <span style={{ fontSize: '20px' }}>✅</span>
+            <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>Settings saved successfully!</span>
           </div>
         )}
 
@@ -332,122 +228,162 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Analysis Settings */}
-        <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
-          <div className="card-header">
-            <h2 className="text-h2">🔍 Analysis</h2>
-          </div>
-          <div className="card-body">
-            {settings.filter(s => ['auto-analysis', 'data-retention'].includes(s.id)).map(setting => (
-              <div key={setting.id} style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center',
-                marginBottom: 'var(--space-4)',
-                paddingBottom: 'var(--space-4)',
-                borderBottom: '1px solid var(--color-border)'
-              }}>
-                <div style={{ flex: 1 }}>
-                  <h3 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
-                    {setting.label}
-                  </h3>
-                  <p className="text-sm text-secondary">
-                    {setting.description}
-                  </p>
-                </div>
-                <div style={{ marginLeft: 'var(--space-4)' }}>
-                  {renderSettingControl(setting)}
-                </div>
+        {/* AI & Analysis Settings */}
+        <div className="settings-section">
+          <div className="settings-section-card">
+            <div className="settings-section-header">
+              <div className="settings-section-icon" style={{ '--icon-bg': 'rgba(139,92,246,0.12)' } as React.CSSProperties}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
               </div>
-            ))}
+              <div className="settings-section-title">AI & Analysis Settings</div>
+            </div>
+            <div className="settings-group">
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Auto-Analysis</div>
+                  <div className="setting-description">Automatically analyze new contracts with AI</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={aiSettings.autoAnalysis}
+                    onChange={(e) => setAISettings({ ...aiSettings, autoAnalysis: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Risk Scoring</div>
+                  <div className="setting-description">Calculate risk scores for all contracts</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={aiSettings.riskScoring}
+                    onChange={(e) => setAISettings({ ...aiSettings, riskScoring: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Playbook Generation</div>
+                  <div className="setting-description">Auto-generate negotiation playbooks for renewals</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={aiSettings.playbookGeneration}
+                    onChange={(e) => setAISettings({ ...aiSettings, playbookGeneration: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Analysis Detail Level</div>
+                  <div className="setting-description">Depth of AI contract analysis</div>
+                </div>
+                <select
+                  className="settings-select"
+                  value={aiSettings.analysisDetail}
+                  onChange={(e) => setAISettings({ ...aiSettings, analysisDetail: e.target.value })}
+                >
+                  <option>Basic</option>
+                  <option>Standard</option>
+                  <option>Comprehensive</option>
+                  <option>Deep Dive</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Account Section */}
-        <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
-          <div className="card-header">
-            <h2 className="text-h2">👤 Account</h2>
-          </div>
-          <div className="card-body">
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center',
-              marginBottom: 'var(--space-4)',
-              paddingBottom: 'var(--space-4)',
-              borderBottom: '1px solid var(--color-border)'
-            }}>
-              <div style={{ flex: 1 }}>
-                <h3 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
-                  Email Address
-                </h3>
-                <p className="text-sm text-secondary">
-                  demo@contractiq.com
-                </p>
+        {/* Integration Settings */}
+        <div className="settings-section">
+          <div className="settings-section-card">
+            <div className="settings-section-header">
+              <div className="settings-section-icon" style={{ '--icon-bg': 'rgba(16,185,129,0.12)' } as React.CSSProperties}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
               </div>
-              <button className="btn-secondary">Change</button>
+              <div className="settings-section-title">Integration Settings</div>
             </div>
-
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center',
-              marginBottom: 'var(--space-4)',
-              paddingBottom: 'var(--space-4)',
-              borderBottom: '1px solid var(--color-border)'
-            }}>
-              <div style={{ flex: 1 }}>
-                <h3 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
-                  Plan
-                </h3>
-                <p className="text-sm text-secondary">
-                  Professional Plan - 100 contracts/month
-                </p>
+            <div className="settings-group">
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Google Drive Sync</div>
+                  <div className="setting-description">Automatically import contracts from Google Drive</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={integrationSettings.googleDriveSync}
+                    onChange={(e) => setIntegrationSettings({ ...integrationSettings, googleDriveSync: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
               </div>
-              <button className="btn-primary">Upgrade</button>
-            </div>
-
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center'
-            }}>
-              <div style={{ flex: 1 }}>
-                <h3 className="text-base font-medium" style={{ marginBottom: 'var(--space-1)' }}>
-                  Export Data
-                </h3>
-                <p className="text-sm text-secondary">
-                  Download all your contract data and analysis results
-                </p>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Calendar Integration</div>
+                  <div className="setting-description">Sync renewal dates to Google Calendar</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={integrationSettings.calendarIntegration}
+                    onChange={(e) => setIntegrationSettings({ ...integrationSettings, calendarIntegration: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
               </div>
-              <button className="btn-secondary">Export</button>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Slack Notifications</div>
+                  <div className="setting-description">Send contract alerts to Slack channels</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={integrationSettings.slackNotifications}
+                    onChange={(e) => setIntegrationSettings({ ...integrationSettings, slackNotifications: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">API Access</div>
+                  <div className="setting-description">Enable API for custom integrations</div>
+                </div>
+                <label className="settings-toggle">
+                  <input
+                    type="checkbox"
+                    checked={integrationSettings.apiAccess}
+                    onChange={(e) => setIntegrationSettings({ ...integrationSettings, apiAccess: e.target.checked })}
+                  />
+                  <span className="settings-toggle-slider"></span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div style={{ display: 'flex', gap: 'var(--space-3)', justifyContent: 'flex-end' }}>
-          <button 
-            className="btn-secondary"
-            onClick={handleReset}
-          >
-            Reset to Defaults
-          </button>
-          <button 
-            className="btn-primary"
-            onClick={handleSave}
-          >
+        <div className="settings-action-buttons">
+          <button className="settings-btn settings-btn-primary" onClick={handleSave}>
             Save Changes
+          </button>
+          <button className="settings-btn settings-btn-secondary" onClick={handleCancel}>
+            Cancel
           </button>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </AppLayout>
   );
 }
