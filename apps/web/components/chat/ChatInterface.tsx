@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import '../../styles/chat.css';
+import '../../styles/chat-optimized.css';
 
 export interface ChatMessage {
   id: string;
@@ -83,13 +83,79 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     }
   };
 
-  const quickActions = [
-    { icon: '⚠️', text: 'Show high-risk contracts', bg: 'rgba(239,68,68,0.12)' },
-    { icon: '⏰', text: 'Contracts expiring soon', bg: 'rgba(245,158,11,0.12)' },
-    { icon: '💡', text: 'Optimization opportunities', bg: 'rgba(59,130,246,0.12)' }
+  const handleSuggestionClick = (text: string) => {
+    onSendMessage?.(text);
+  };
+
+  // 6 suggestion cards for empty state
+  const suggestionCards = [
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      ),
+      label: 'Show high-risk contracts',
+      description: 'View contracts requiring immediate attention',
+      bg: 'rgba(239,68,68,0.1)'
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      ),
+      label: 'Contracts expiring soon',
+      description: 'Find contracts expiring in the next 90 days',
+      bg: 'rgba(245,158,11,0.1)'
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+          <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      ),
+      label: 'Cost optimization opportunities',
+      description: 'Identify potential savings across vendors',
+      bg: 'rgba(59,130,246,0.1)'
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      ),
+      label: 'Portfolio performance',
+      description: 'Review overall contract health metrics',
+      bg: 'rgba(16,185,129,0.1)'
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2">
+          <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </svg>
+      ),
+      label: 'Generate negotiation playbook',
+      description: 'Create strategy for upcoming renewals',
+      bg: 'rgba(139,92,246,0.1)'
+    },
+    {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06B6D4" strokeWidth="2">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      ),
+      label: 'Search specific vendor',
+      description: 'Find all contracts with a particular vendor',
+      bg: 'rgba(6,182,212,0.1)'
+    }
   ];
 
-  const suggestions = [
+  // Follow-up suggestions after messages
+  const followUpSuggestions = [
     '💡 Create calendar alerts for all notice deadlines',
     '📊 Export auto-renewal report',
     '🎯 Generate negotiation playbooks'
@@ -97,34 +163,76 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      {/* Hero Section */}
-      <div className="chat-hero-section">
-        <h1 className="chat-hero-title">Contract Intelligence</h1>
-        <p className="chat-hero-subtitle">
-          Ask me anything about your contracts, vendors, and agreements. I'll analyze your data and provide actionable insights.
-        </p>
-        
-        <div className="chat-quick-actions">
-          {quickActions.map((action, index) => (
-            <div 
-              key={index}
-              className="chat-action-card" 
-              style={{ '--action-bg': action.bg } as React.CSSProperties}
-              onClick={() => onSendMessage?.(action.text)}
-            >
-              <div className="chat-action-icon">
-                <span style={{ fontSize: '20px' }}>{action.icon}</span>
-              </div>
-              <span className="chat-action-text">{action.text}</span>
+      {/* OPTIMIZED HEADER */}
+      <header className="page-header">
+        <div className="header-content">
+          <div className="header-left">
+            <div className="page-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2">
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
             </div>
-          ))}
+            <div className="header-title-group">
+              <h1 className="page-title">
+                <span className="title-gradient">Contract Intelligence</span>
+              </h1>
+              <p className="page-subtitle">Ask questions about your contracts and get instant insights</p>
+            </div>
+          </div>
+          <div className="header-actions">
+            <button className="header-btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+              Search
+            </button>
+            <button className="header-btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              New Chat
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Chat Container */}
+      {/* CHAT CONTAINER */}
       <div className="chat-container">
-        {/* Messages */}
+        {/* MESSAGES AREA */}
         <div className="chat-messages">
+          {/* Empty State with Suggestions */}
+          {messages.length === 0 && !isLoading && (
+            <div className="empty-state">
+              <div className="empty-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <h2 className="empty-title">What can I help you with?</h2>
+              <p className="empty-subtitle">Ask me about contracts, renewals, risks, vendors, or any insights you need</p>
+              
+              {/* Suggestions Grid */}
+              <div className="suggestions">
+                {suggestionCards.map((card, index) => (
+                  <div
+                    key={index}
+                    className="suggestion-card"
+                    style={{ '--suggestion-bg': card.bg } as React.CSSProperties}
+                    onClick={() => handleSuggestionClick(card.label)}
+                  >
+                    <div className="suggestion-icon">{card.icon}</div>
+                    <div className="suggestion-content">
+                      <div className="suggestion-label">{card.label}</div>
+                      <div className="suggestion-desc">{card.description}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Messages */}
           {messages.map((message) => (
             <div key={message.id} className={`chat-message ${message.type}`}>
               <div className={`chat-message-avatar ${message.type}`}>
@@ -191,7 +299,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           
           {messages.length > 0 && (
             <div className="chat-suggestions">
-              {suggestions.map((suggestion, index) => (
+              {followUpSuggestions.map((suggestion, index) => (
                 <div key={index} className="chat-suggestion-chip" onClick={() => onSendMessage?.(suggestion)}>
                   {suggestion}
                 </div>
