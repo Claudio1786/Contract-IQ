@@ -4,6 +4,7 @@ import React from 'react';
 import AppLayout from '../../components/layout/AppLayout';
 import { ChatInterface } from '../../components/chat/ChatInterface';
 import { useChat } from '../../hooks/useChat';
+import '../../styles/components-dark.css';
 
 export default function ChatPage() {
   const {

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AppLayout from '../../components/layout/AppLayout';
+import '../../styles/components-dark.css';
 
 interface ContractCardProps {
   id: string;

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import AppLayout from '../../components/layout/AppLayout';
+import '../../styles/components-dark.css';
 
 interface StatCardProps {
   title: string;
