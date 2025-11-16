@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract IQ - Screen Previews</title>
+    <style>
+        :root {
+            --surface-0: #0A0E1A;
+            --surface-1: #0F1319;
+            --surface-2: #14171F;
+            --surface-3: #1A1F2E;
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-tertiary: #94A3B8;
+            --primary: #3B82F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--surface-0);
+            color: var(--text-primary);
+            padding: 60px 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #F8FAFC 0%, #3B82F6 50%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--text-tertiary);
+            margin-bottom: 48px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-3) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 0 1px rgba(255,255,255,0.05),
+                0 4px 6px rgba(0,0,0,0.3),
+                0 2px 16px rgba(59,130,246,0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 8px 16px rgba(0,0,0,0.5),
+                0 0 32px rgba(59,130,246,0.15);
+            border-color: rgba(255,255,255,0.12);
+        }
+
+        .card-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(59,130,246,0.15);
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .card-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 0 1px rgba(255,255,255,0.1),
+                0 4px 8px rgba(59,130,246,0.3);
+        }
+
+        .card-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 0 0 1px rgba(255,255,255,0.15),
+                0 6px 12px rgba(59,130,246,0.4);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .badge-urgent { background: rgba(239,68,68,0.15); color: #EF4444; }
+        .badge-data { background: rgba(59,130,246,0.15); color: #3B82F6; }
+        .badge-chat { background: rgba(139,92,246,0.15); color: #8B5CF6; }
+        .badge-config { background: rgba(16,185,129,0.15); color: #10B981; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contract IQ Screen Previews</h1>
+        <p class="subtitle">Flow AI Dark Mode Design System Applied • All 6 Screens Transformed</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-number">1</div>
+                <span class="badge badge-urgent">Alerts</span>
+                <h2 class="card-title">Alerts & Notifications</h2>
+                <p class="card-description">
+                    Critical contract alerts with gradient borders, glowing badges, and multi-action cards. Shows urgent renewal notices and payment failures.
+                </p>
+                <a href="PREVIEW-01-alerts.html" class="card-link">
+                    View Screen
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">2</div>
+                <span class="badge badge-config">Configuration</span>
+                <h2 class="card-title">Settings</h2>
+                <p class="card-description">
+                    Professional settings interface with section icons, animated toggles, and glassmorphic cards. Organized by categories with visual hierarchy.
+                </p>
+                <a href="PREVIEW-02-settings.html" class="card-link">
+                    View Screen
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">3</div>
+                <span class="badge badge-data">Analytics</span>
+                <h2 class="card-title">Client Agreement Portfolio</h2>
+                <p class="card-description">
+                    Comprehensive portfolio view with gradient stat cards, interactive charts, and enhanced insights. Multi-layer shadows and visual depth throughout.
+                </p>
+                <a href="PREVIEW-03-portfolio.html" class="card-link">
+                    View Screen
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">4</div>
+                <span class="badge badge-data">Library</span>
+                <h2 class="card-title">Contracts Library</h2>
+                <p class="card-description">
+                    Risk-colored contract cards with large icons, colored borders, and detailed metadata. Advanced filtering and search with glassmorphic design.
+                </p>
+                <a href="PREVIEW-04-contracts-library.html" class="card-link">
+                    View Screen
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">5</div>
+                <span class="badge badge-data">Dashboard</span>
+                <h2 class="card-title">Vendor Agreement Dashboard</h2>
+                <p class="card-description">
+                    Executive dashboard with gradient KPI cards, interactive charts, and AI insights panel. Real-time metrics with visual hierarchy and depth.
+                </p>
+                <a href="PREVIEW-05-dashboard.html" class="card-link">
+                    View Screen
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">6</div>
+                <span class="badge badge-chat">AI Chat</span>
+                <h2 class="card-title">Contract Intelligence Chat</h2>
+                <p class="card-description">
+                    Hero gradient text, feature cards, conversation interface with glassmorphic bubbles, result cards, and inline citations. Full chat experience.
+                </p>
+                <a href="PREVIEW-06-chat.html" class="card-link">
+                    View Screen
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin-top: 60px; padding: 32px; background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-3) 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;">
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Design System Features</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px;">All screens include:</p>
+            <ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+                <li style="margin-bottom: 8px;">✓ 5-layer background depth system (#0A0E1A → #2D3347)</li>
+                <li style="margin-bottom: 8px;">✓ Multi-layer shadows (3-4 per element)</li>
+                <li style="margin-bottom: 8px;">✓ Gradient borders using CSS techniques</li>
+                <li style="margin-bottom: 8px;">✓ Glassmorphism effects with backdrop filters</li>
+                <li style="margin-bottom: 8px;">✓ Colored glows on status badges</li>
+                <li style="margin-bottom: 8px;">✓ Decorative wave backgrounds (light, not dark)</li>
+                <li style="margin-bottom: 8px;">✓ Professional typography & spacing</li>
+                <li>✓ Hover states & micro-interactions</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

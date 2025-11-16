@@ -9,16 +9,22 @@
      FOUNDATIONAL COLORS - DARK MODE
      ============================================ */
   
-  /* Background Layers - 5-Level Depth System */
-  --bg-layer-0: #050811;          /* Deepest - almost black */
-  --bg-layer-1: #0A0E1A;          /* Primary canvas */
-  --bg-layer-2: #111827;          /* Elevated cards */
-  --bg-layer-3: #1A1F2E;          /* Floating elements */
-  --bg-layer-4: #1F2937;          /* Highest elevation */
-  --bg-layer-5: #2C3441;          /* Modal overlays */
+  /* Background Layers - 5-Level Depth System (Flow AI Exact Match) */
+  --bg-layer-0: #0A0E1A;          /* Deepest - body background */
+  --bg-layer-1: #0F1319;          /* Input fields, nested cards */
+  --bg-layer-2: #14171F;          /* Card backgrounds - start */
+  --bg-layer-3: #1A1F2E;          /* Card backgrounds - end */
+  --bg-layer-4: #242938;          /* Hover states */
+  --bg-layer-5: #2D3347;          /* Lightest interactive */
   
-  /* Surface Variants */
-  --surface-base: var(--bg-layer-1);
+  /* Surface Variants (Aliases for consistency) */
+  --surface-0: var(--bg-layer-0);
+  --surface-1: var(--bg-layer-1);
+  --surface-2: var(--bg-layer-2);
+  --surface-3: var(--bg-layer-3);
+  --surface-4: var(--bg-layer-4);
+  --surface-5: var(--bg-layer-5);
+  --surface-base: var(--bg-layer-0);
   --surface-raised: var(--bg-layer-2);
   --surface-overlay: var(--bg-layer-3);
   --surface-modal: rgba(17, 24, 39, 0.85);
@@ -149,15 +155,21 @@
   
   /* Semantic Color Aliases - Flow AI Dark Theme */
   --color-background: #0A0E1A;
-  --color-surface: #111827;
-  --color-surface-elevated: #1F2937;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
+  --color-surface: #14171F;
+  --color-surface-elevated: #1A1F2E;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.12);
   
-  --color-text-primary: #F9FAFB;
-  --color-text-secondary: #E5E7EB;
-  --color-text-tertiary: #9CA3AF;
-  --color-text-disabled: #6B7280;
+  /* Text Colors - Flow AI Exact Match */
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-tertiary: #94A3B8;
+  --text-disabled: #64748B;
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
   --color-text-inverse: #111827;
   
   --color-link: var(--primary-500);
@@ -182,18 +194,43 @@
   --space-24: 96px;
   
   /* ========================================
-     ELEVATION (SHADOWS)
+     ELEVATION (SHADOWS) - Multi-Layer Flow AI System
      ======================================== */
   
+  /* Multi-layer shadows with blue/purple glow effects */
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  --shadow-sm: 
+    0 0 0 1px rgba(255,255,255,0.05),
+    0 1px 2px rgba(0,0,0,0.4),
+    0 0 8px rgba(59,130,246,0.05);
+  
+  --shadow-md:
+    0 0 0 1px rgba(255,255,255,0.05),
+    0 4px 6px rgba(0,0,0,0.3),
+    0 2px 16px rgba(59,130,246,0.08),
+    0 0 24px rgba(139,92,246,0.06);
+  
+  --shadow-lg:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 10px 15px rgba(0,0,0,0.4),
+    0 4px 24px rgba(59,130,246,0.12),
+    0 0 32px rgba(139,92,246,0.08);
+  
+  --shadow-xl: 
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 20px 25px rgba(0,0,0,0.5),
+    0 8px 32px rgba(59,130,246,0.15),
+    0 0 48px rgba(139,92,246,0.1);
+  
+  --shadow-glow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 8px 16px rgba(0,0,0,0.5),
+    0 0 32px rgba(59,130,246,0.15),
+    0 0 48px rgba(139,92,246,0.1);
   
   /* Focus Shadow */
-  --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.5);
+  --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
   
   /* ========================================
      BORDER RADIUS
