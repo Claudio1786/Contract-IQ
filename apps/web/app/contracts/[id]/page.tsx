@@ -1,379 +1,436 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import AppLayout from '../../../components/layout/AppLayout';
-import { PDFViewer, PDFHighlight } from '../../../components/pdf/PDFViewer';
-import { ChatInterface, ChatMessage } from '../../../components/chat/ChatInterface';
-import { Button } from '../../../components/ui';
-import { useChat } from '../../../hooks/useChat';
+/**
+ * Contract Details View
+ * Epic 6: Contract Management (Task 6.1)
+ */
 
-interface ContractViewPageProps {
-  params: Promise<{
+import { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import './contract-detail.css';
+
+interface Contract {
+  id: string;
+  title: string;
+  vendor: string | null;
+  value: number | null;
+  startDate: string | null;
+  endDate: string | null;
+  fileUrl: string;
+  status: string;
+  extractedText: string | null;
+  uploadedAt: string;
+  analysis: {
+    riskScore: number;
+    riskLevel: string;
+    keyTerms: any;
+    costAnalysis: any;
+    riskAssessment: any;
+    complianceCheck: any;
+  } | null;
+  tags: Array<{
     id: string;
+    name: string;
+    color: string;
   }>;
 }
 
-export default async function ContractViewPage({ params }: ContractViewPageProps) {
-  const resolvedParams = await params;
-  
-  return <ContractViewClient contractId={resolvedParams.id} />;
-}
-
-function ContractViewClient({ contractId }: { contractId: string }) {
-  const [showChat, setShowChat] = useState(true);
-  const [contractData, setContractData] = useState<{
-    title: string;
-    fileUrl?: string;
-    highlights: PDFHighlight[];
-    isUploaded?: boolean;
-    fileName?: string;
-    analysisData?: any;
-  } | null>(null);
-
-  const {
-    messages,
-    isLoading,
-    error,
-    sendMessage,
-  } = useChat();
+export default function ContractDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const [contract, setContract] = useState<Contract | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editForm, setEditForm] = useState({
+    title: '',
+    vendor: '',
+    value: '',
+    startDate: '',
+    endDate: '',
+  });
+  const [newTagName, setNewTagName] = useState('');
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   useEffect(() => {
-    const loadContract = async () => {
-      // Check if this is an uploaded contract
-      if (contractId.startsWith('uploaded-')) {
-        const storedData = typeof window !== 'undefined' 
-          ? sessionStorage.getItem(`contract-${contractId}`)
-          : null;
-        
-        if (storedData) {
-          const uploadedContract = JSON.parse(storedData);
-          
-          // Generate realistic analysis for uploaded contract
-          const analysisData = generateContractAnalysis(uploadedContract.fileName);
-          
-          setContractData({
-            title: uploadedContract.fileName,
-            fileName: uploadedContract.fileName,
-            isUploaded: true,
-            highlights: analysisData.highlights,
-            analysisData: analysisData
-          });
-          return;
-        }
+    if (params.id) {
+      loadContract();
+    }
+  }, [params.id]);
+
+  const loadContract = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/contracts/${params.id}`);
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to load contract');
       }
 
-      // Default mock data for demo contracts
-      const mockHighlights: PDFHighlight[] = [
-        {
-          pageNumber: 1,
-          textContent: 'Limitation of Liability',
-          bounds: { x: 100, y: 200, width: 200, height: 20 },
-          color: 'red',
-          note: 'Potential risk: Limited liability may not cover all damages'
-        },
-        {
-          pageNumber: 1,
-          textContent: 'Service Level Agreement',
-          bounds: { x: 150, y: 350, width: 180, height: 20 },
-          color: 'yellow',
-          note: 'Key term: 99.5% uptime guarantee'
-        },
-        {
-          pageNumber: 2,
-          textContent: 'Data Protection',
-          bounds: { x: 120, y: 180, width: 160, height: 20 },
-          color: 'green',
-          note: 'Favorable: Strong data protection clauses'
-        }
-      ];
-
-      setContractData({
-        title: getContractTitle(contractId),
-        highlights: mockHighlights,
-        isUploaded: false
+      setContract(data.data.contract);
+      setEditForm({
+        title: data.data.contract.title,
+        vendor: data.data.contract.vendor || '',
+        value: data.data.contract.value ? String(data.data.contract.value) : '',
+        startDate: data.data.contract.startDate ? data.data.contract.startDate.split('T')[0] : '',
+        endDate: data.data.contract.endDate ? data.data.contract.endDate.split('T')[0] : '',
       });
-    };
-
-    loadContract();
-  }, [contractId]);
-
-  const generateContractAnalysis = (fileName: string) => {
-    // Generate realistic analysis based on file name patterns
-    const analysisPatterns = {
-      saas: {
-        highlights: [
-          {
-            pageNumber: 1,
-            textContent: 'Service Level Agreement - 99.9% uptime',
-            bounds: { x: 120, y: 150, width: 250, height: 18 },
-            color: 'green',
-            note: 'Strong SLA commitment meets industry standards'
-          },
-          {
-            pageNumber: 1,
-            textContent: 'Limitation of Liability - $50,000 cap',
-            bounds: { x: 100, y: 220, width: 200, height: 18 },
-            color: 'red',
-            note: 'Low liability cap may be insufficient for your business size'
-          },
-          {
-            pageNumber: 2,
-            textContent: 'Data Processing Addendum required',
-            bounds: { x: 110, y: 180, width: 180, height: 18 },
-            color: 'yellow',
-            note: 'Standard data processing terms - review GDPR compliance'
-          }
-        ],
-        riskScore: 6.5,
-        keyFindings: [
-          'Liability limitation needs review',
-          'SLA terms are favorable',
-          'Data processing terms standard'
-        ]
-      },
-      service: {
-        highlights: [
-          {
-            pageNumber: 1,
-            textContent: 'Payment Terms - Net 60 days',
-            bounds: { x: 130, y: 200, width: 160, height: 18 },
-            color: 'red',
-            note: 'Extended payment terms impact cash flow'
-          },
-          {
-            pageNumber: 1,
-            textContent: 'Intellectual Property Assignment',
-            bounds: { x: 140, y: 280, width: 190, height: 18 },
-            color: 'yellow',
-            note: 'Review IP ownership clauses carefully'
-          },
-          {
-            pageNumber: 2,
-            textContent: 'Termination for convenience - 30 days',
-            bounds: { x: 120, y: 160, width: 210, height: 18 },
-            color: 'green',
-            note: 'Reasonable termination terms for both parties'
-          }
-        ],
-        riskScore: 7.2,
-        keyFindings: [
-          'Payment terms need negotiation',
-          'IP clauses require attention',
-          'Termination terms acceptable'
-        ]
-      },
-      default: {
-        highlights: [
-          {
-            pageNumber: 1,
-            textContent: 'Governing Law and Jurisdiction',
-            bounds: { x: 115, y: 190, width: 185, height: 18 },
-            color: 'yellow',
-            note: 'Review jurisdiction for legal proceedings'
-          },
-          {
-            pageNumber: 1,
-            textContent: 'Force Majeure clause',
-            bounds: { x: 125, y: 250, width: 145, height: 18 },
-            color: 'green',
-            note: 'Standard force majeure protections included'
-          },
-          {
-            pageNumber: 2,
-            textContent: 'Confidentiality obligations',
-            bounds: { x: 135, y: 170, width: 175, height: 18 },
-            color: 'green',
-            note: 'Mutual confidentiality terms are balanced'
-          }
-        ],
-        riskScore: 5.8,
-        keyFindings: [
-          'Standard contract terms identified',
-          'Balanced confidentiality provisions',
-          'Review governing law provisions'
-        ]
-      }
-    };
-
-    const fileNameLower = fileName.toLowerCase();
-    if (fileNameLower.includes('saas') || fileNameLower.includes('software')) {
-      return analysisPatterns.saas;
-    } else if (fileNameLower.includes('service') || fileNameLower.includes('agreement')) {
-      return analysisPatterns.service;
-    } else {
-      return analysisPatterns.default;
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const getContractTitle = (id: string): string => {
-    const titles: Record<string, string> = {
-      'saas-msa': 'SaaS Master Service Agreement',
-      'saas-dpa': 'Data Processing Agreement',
-      'healthcare-baa': 'Healthcare Business Associate Agreement',
-      'aws-enterprise': 'AWS Enterprise Agreement',
-      'public-sector-sow': 'Public Sector Statement of Work'
-    };
-    return titles[id] || 'Contract Document';
+  const handleEditSave = async () => {
+    try {
+      const response = await fetch(`/api/contracts/${params.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: editForm.title,
+          vendor: editForm.vendor || null,
+          value: editForm.value ? parseFloat(editForm.value) : null,
+          startDate: editForm.startDate || null,
+          endDate: editForm.endDate || null,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to update contract');
+      }
+
+      setContract(data.data.contract);
+      setIsEditing(false);
+    } catch (err: any) {
+      alert(`Error: ${err.message}`);
+    }
   };
 
-  const handleCitationClick = (pageNumber: number, highlight: PDFHighlight) => {
-    // Navigate to specific page and highlight
-    console.log('Navigate to page:', pageNumber, highlight);
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/contracts/${params.id}`, {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to delete contract');
+      }
+
+      router.push('/contracts');
+    } catch (err: any) {
+      alert(`Error: ${err.message}`);
+    }
   };
 
-  const toggleChatPanel = () => setShowChat(!showChat);
+  const handleAddTag = async () => {
+    if (!newTagName.trim()) return;
 
-  if (!contractData) {
+    try {
+      const response = await fetch(`/api/contracts/${params.id}/tags`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newTagName }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to add tag');
+      }
+
+      setNewTagName('');
+      await loadContract(); // Refresh
+    } catch (err: any) {
+      alert(`Error: ${err.message}`);
+    }
+  };
+
+  const handleRemoveTag = async (tagId: string) => {
+    try {
+      const response = await fetch(`/api/contracts/${params.id}/tags?tagId=${tagId}`, {
+        method: 'DELETE',
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to remove tag');
+      }
+
+      await loadContract(); // Refresh
+    } catch (err: any) {
+      alert(`Error: ${err.message}`);
+    }
+  };
+
+  if (loading) {
     return (
-      <AppLayout>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
-          height: '100%' 
-        }}>
-          <div style={{ textAlign: 'center' }}>
-            <div style={{
-              width: '32px',
-              height: '32px',
-              border: '3px solid var(--primary-600)',
-              borderTop: '3px solid transparent',
-              borderRadius: '50%',
-              margin: '0 auto var(--space-4)',
-              animation: 'spin 1s linear infinite'
-            }}></div>
-            <p className="text-base text-secondary">Loading contract...</p>
-          </div>
+      <div className="container-detail">
+        <div className="loading-state">
+          <div className="spinner"></div>
+          <p>Loading contract...</p>
         </div>
-      </AppLayout>
+      </div>
+    );
+  }
+
+  if (error || !contract) {
+    return (
+      <div className="container-detail">
+        <div className="error-state">
+          <h2>Error Loading Contract</h2>
+          <p>{error || 'Contract not found'}</p>
+          <button onClick={() => router.push('/contracts')} className="btn-primary">
+            Back to Contracts
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <AppLayout>
-      <div style={{ display: 'flex', height: 'calc(100vh - 200px)' }}>
-        {/* PDF Viewer Panel */}
-        <div className={`${showChat ? 'w-1/2' : 'w-full'} transition-all duration-300`}>
-          <div className="h-full flex flex-col">
-            {/* Header */}
-            <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
-              <div>
-                <h1 className="text-lg font-semibold text-gray-900">
-                  {contractData.title}
-                </h1>
-                <p className="text-sm text-gray-600">
-                  {contractData.highlights.length} highlights • AI-analyzed
-                </p>
+    <div className="container-detail">
+      {/* Header */}
+      <div className="detail-header">
+        <button onClick={() => router.push('/contracts')} className="btn-back">
+          ← Back to Contracts
+        </button>
+        <div className="header-actions">
+          {!isEditing && (
+            <>
+              <button onClick={() => setIsEditing(true)} className="btn-secondary">
+                ✏️ Edit
+              </button>
+              <button onClick={() => setShowDeleteConfirm(true)} className="btn-danger">
+                🗑️ Delete
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="detail-grid">
+        {/* Left Column - Contract Info */}
+        <div className="detail-left">
+          {isEditing ? (
+            <div className="edit-card">
+              <h2>Edit Contract</h2>
+              <div className="form-group">
+                <label>Title*</label>
+                <input
+                  type="text"
+                  value={editForm.title}
+                  onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
+                  className="form-input"
+                />
               </div>
-              <div className="flex items-center space-x-2">
-                <Button
-                  variant={showChat ? 'secondary' : 'primary'}
-                  size="sm"
-                  onClick={toggleChatPanel}
-                >
-                  {showChat ? '📄 Focus PDF' : '💬 Show Chat'}
-                </Button>
+              <div className="form-group">
+                <label>Vendor</label>
+                <input
+                  type="text"
+                  value={editForm.vendor}
+                  onChange={(e) => setEditForm({ ...editForm, vendor: e.target.value })}
+                  className="form-input"
+                />
+              </div>
+              <div className="form-group">
+                <label>Value ($)</label>
+                <input
+                  type="number"
+                  value={editForm.value}
+                  onChange={(e) => setEditForm({ ...editForm, value: e.target.value })}
+                  className="form-input"
+                />
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Start Date</label>
+                  <input
+                    type="date"
+                    value={editForm.startDate}
+                    onChange={(e) => setEditForm({ ...editForm, startDate: e.target.value })}
+                    className="form-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>End Date</label>
+                  <input
+                    type="date"
+                    value={editForm.endDate}
+                    onChange={(e) => setEditForm({ ...editForm, endDate: e.target.value })}
+                    className="form-input"
+                  />
+                </div>
+              </div>
+              <div className="form-actions">
+                <button onClick={handleEditSave} className="btn-primary">
+                  💾 Save Changes
+                </button>
+                <button onClick={() => setIsEditing(false)} className="btn-secondary">
+                  Cancel
+                </button>
               </div>
             </div>
+          ) : (
+            <div className="info-card">
+              <h1>{contract.title}</h1>
+              <div className="info-grid">
+                <div className="info-item">
+                  <span className="info-label">Vendor</span>
+                  <span className="info-value">{contract.vendor || 'Not specified'}</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Value</span>
+                  <span className="info-value">
+                    {contract.value ? `$${contract.value.toLocaleString()}` : 'Not specified'}
+                  </span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Start Date</span>
+                  <span className="info-value">
+                    {contract.startDate ? new Date(contract.startDate).toLocaleDateString() : 'Not specified'}
+                  </span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">End Date</span>
+                  <span className="info-value">
+                    {contract.endDate ? new Date(contract.endDate).toLocaleDateString() : 'Not specified'}
+                  </span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Status</span>
+                  <span className={`status-badge status-${contract.status.toLowerCase()}`}>
+                    {contract.status}
+                  </span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Uploaded</span>
+                  <span className="info-value">
+                    {new Date(contract.uploadedAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
 
-            {/* PDF Viewer */}
-            <div className="flex-1 p-4 bg-gray-50">
-              <PDFViewer
-                highlights={contractData.highlights}
-                onPageChange={(pageNumber) => console.log('Page changed to:', pageNumber)}
-                className="h-full"
-              />
-              
-              {/* Analysis Results for Uploaded Contracts */}
-              {contractData.isUploaded && contractData.analysisData && (
-                <div className="mt-4 space-y-4">
-                  {/* Analysis Summary Card */}
-                  <div className="bg-white border border-gray-200 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-lg font-semibold text-gray-900">AI Analysis Results</h3>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-600">Risk Score:</span>
-                        <span className={`px-2 py-1 rounded text-sm font-medium ${
-                          contractData.analysisData.riskScore >= 7 ? 'bg-red-100 text-red-800' :
-                          contractData.analysisData.riskScore >= 5 ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-green-100 text-green-800'
-                        }`}>
-                          {contractData.analysisData.riskScore}/10
-                        </span>
+              {/* Tags */}
+              <div className="tags-section">
+                <h3>Tags</h3>
+                <div className="tags-container">
+                  {contract.tags.map((tag) => (
+                    <span key={tag.id} className="tag" style={{ backgroundColor: tag.color }}>
+                      {tag.name}
+                      <button onClick={() => handleRemoveTag(tag.id)} className="tag-remove">
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <div className="add-tag">
+                  <input
+                    type="text"
+                    value={newTagName}
+                    onChange={(e) => setNewTagName(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleAddTag()}
+                    placeholder="Add tag..."
+                    className="tag-input"
+                  />
+                  <button onClick={handleAddTag} className="btn-add-tag">
+                    + Add
+                  </button>
+                </div>
+              </div>
+
+              {/* File Link */}
+              <div className="file-section">
+                <a href={contract.fileUrl} target="_blank" rel="noopener noreferrer" className="btn-view-file">
+                  📄 View Original File
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Right Column - Analysis */}
+        <div className="detail-right">
+          {contract.analysis ? (
+            <>
+              {/* Risk Overview */}
+              <div className="analysis-card risk-card">
+                <h3>Risk Assessment</h3>
+                <div className={`risk-score risk-${contract.analysis.riskLevel.toLowerCase()}`}>
+                  <span className="risk-number">{contract.analysis.riskScore}</span>
+                  <span className="risk-label">{contract.analysis.riskLevel}</span>
+                </div>
+                {contract.analysis.riskAssessment && (
+                  <div className="risk-details">
+                    <p>{contract.analysis.riskAssessment.summary || 'No summary available'}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Key Terms */}
+              {contract.analysis.keyTerms && (
+                <div className="analysis-card">
+                  <h3>Key Terms</h3>
+                  <div className="terms-grid">
+                    {Object.entries(contract.analysis.keyTerms).map(([key, value]: any) => (
+                      <div key={key} className="term-item">
+                        <span className="term-label">{key}</span>
+                        <span className="term-value">{String(value)}</span>
                       </div>
-                    </div>
-                    
-                    {/* Key Findings */}
-                    <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Key Findings:</h4>
-                      <ul className="space-y-1">
-                        {contractData.analysisData.keyFindings.map((finding: string, index: number) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <span className="text-blue-600 mt-1">•</span>
-                            <span className="text-sm text-gray-700">{finding}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Quick Actions */}
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <h4 className="font-medium text-blue-900 mb-3">Next Steps</h4>
-                    <div className="flex flex-wrap gap-2">
-                      <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition-colors">
-                        💬 Ask AI Questions
-                      </button>
-                      <button className="px-3 py-1 bg-white border border-blue-300 text-blue-700 text-sm rounded hover:bg-blue-50 transition-colors">
-                        📋 Generate Report
-                      </button>
-                      <button className="px-3 py-1 bg-white border border-blue-300 text-blue-700 text-sm rounded hover:bg-blue-50 transition-colors">
-                        🔄 Compare with Template
-                      </button>
-                    </div>
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* Demo message for non-uploaded contracts */}
-              {!contractData.isUploaded && (
-                <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded">
-                  <div className="text-sm text-yellow-800">
-                    <strong>Demo Mode:</strong> PDF viewer loaded with mock highlights. 
-                    In production, this would display your actual contract document.
+              {/* Cost Analysis */}
+              {contract.analysis.costAnalysis && (
+                <div className="analysis-card">
+                  <h3>Cost Analysis</h3>
+                  <div className="cost-details">
+                    <pre>{JSON.stringify(contract.analysis.costAnalysis, null, 2)}</pre>
                   </div>
                 </div>
               )}
+
+              {/* Compliance */}
+              {contract.analysis.complianceCheck && (
+                <div className="analysis-card">
+                  <h3>Compliance</h3>
+                  <div className="compliance-details">
+                    <pre>{JSON.stringify(contract.analysis.complianceCheck, null, 2)}</pre>
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="analysis-card">
+              <p>No analysis available yet.</p>
+              <button className="btn-primary">Run Analysis</button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="modal-overlay" onClick={() => setShowDeleteConfirm(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Delete Contract?</h2>
+            <p>This action cannot be undone. The contract and all associated data will be permanently deleted.</p>
+            <div className="modal-actions">
+              <button onClick={handleDelete} className="btn-danger">
+                Yes, Delete
+              </button>
+              <button onClick={() => setShowDeleteConfirm(false)} className="btn-secondary">
+                Cancel
+              </button>
             </div>
           </div>
         </div>
-
-        {/* Chat Panel */}
-        {showChat && (
-          <div className="w-1/2 border-l border-gray-200">
-            <div className="h-full flex flex-col">
-              <div className="bg-white border-b border-gray-200 p-4">
-                <h2 className="text-lg font-semibold text-gray-900">Contract Analysis</h2>
-                <p className="text-sm text-gray-600">
-                  Ask questions about this contract
-                </p>
-              </div>
-              
-              <div className="flex-1">
-                <ChatInterface
-                  messages={messages}
-                  isLoading={isLoading}
-                  onSendMessage={(message) => {
-                    // Add context about the current contract
-                    const contextualMessage = `Regarding the ${contractData.title}: ${message}`;
-                    sendMessage(contextualMessage);
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </AppLayout>
+      )}
+    </div>
   );
 }
