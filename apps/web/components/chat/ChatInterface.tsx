@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Button, Input, Card, Citation } from '../ui';
+import '../../styles/chat.css';
 
 export interface ChatMessage {
   id: string;
@@ -10,6 +10,7 @@ export interface ChatMessage {
   timestamp: Date;
   citations?: CitationData[];
   isStreaming?: boolean;
+  resultCard?: ResultCardData;
 }
 
 export interface CitationData {
@@ -18,6 +19,13 @@ export interface CitationData {
   page?: number;
   section?: string;
   confidence?: number;
+}
+
+export interface ResultCardData {
+  title: string;
+  badge: { text: string; level: 'high' | 'medium' | 'low' };
+  details: { label: string; value: string }[];
+  actions?: { text: string; icon: string; primary?: boolean }[];
 }
 
 export interface ChatInterfaceProps {
@@ -34,7 +42,6 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   isLoading = false
 }) => {
   const [inputValue, setInputValue] = useState('');
-  const [selectedCitation, setSelectedCitation] = useState<CitationData | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -69,10 +76,6 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     }
   };
 
-  const handleUploadClick = () => {
-    fileInputRef.current?.click();
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && onUploadContract) {
@@ -80,158 +83,179 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     }
   };
 
+  const quickActions = [
+    { icon: '⚠️', text: 'Show high-risk contracts', bg: 'rgba(239,68,68,0.12)' },
+    { icon: '⏰', text: 'Contracts expiring soon', bg: 'rgba(245,158,11,0.12)' },
+    { icon: '💡', text: 'Optimization opportunities', bg: 'rgba(59,130,246,0.12)' }
+  ];
+
+  const suggestions = [
+    '💡 Create calendar alerts for all notice deadlines',
+    '📊 Export auto-renewal report',
+    '🎯 Generate negotiation playbooks'
+  ];
+
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      height: '100%',
-      backgroundColor: 'var(--color-background)'
-    }}>
-      {/* Chat Header - Using our design system */}
-      <div style={{ 
-        padding: 'var(--space-6)', 
-        borderBottom: '1px solid var(--color-border)',
-        backgroundColor: 'var(--color-surface)'
-      }}>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center' 
-        }}>
-          <div>
-            <h1 className="text-h1">💬 Contract Intelligence Chat</h1>
-            <p className="text-base text-secondary">
-              Ask questions about your contracts, upload documents, or get negotiation insights
-            </p>
-          </div>
-          <button 
-            className="btn-primary"
-            onClick={handleUploadClick}
-            disabled={isLoading}
-          >
-            📄 Upload Contract
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf,.doc,.docx,.txt"
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+      {/* Hero Section */}
+      <div className="chat-hero-section">
+        <h1 className="chat-hero-title">Contract Intelligence</h1>
+        <p className="chat-hero-subtitle">
+          Ask me anything about your contracts, vendors, and agreements. I'll analyze your data and provide actionable insights.
+        </p>
+        
+        <div className="chat-quick-actions">
+          {quickActions.map((action, index) => (
+            <div 
+              key={index}
+              className="chat-action-card" 
+              style={{ '--action-bg': action.bg } as React.CSSProperties}
+              onClick={() => onSendMessage?.(action.text)}
+            >
+              <div className="chat-action-icon">
+                <span style={{ fontSize: '20px' }}>{action.icon}</span>
+              </div>
+              <span className="chat-action-text">{action.text}</span>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Messages Area - Using our design system */}
-      <div style={{ 
-        flex: 1, 
-        overflowY: 'auto', 
-        padding: 'var(--space-6)', 
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 'var(--space-4)'
-      }}>
-        {messages.length === 0 ? (
-          <WelcomeScreen onUploadClick={handleUploadClick} />
-        ) : (
-          messages.map((message) => (
-            <MessageBubble
-              key={message.id}
-              message={message}
-              onCitationClick={setSelectedCitation}
-            />
-          ))
-        )}
-        
-        {isLoading && (
-          <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-            <div className="card" style={{ maxWidth: '400px' }}>
-              <div className="card-body">
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-                  <div style={{ display: 'flex', gap: 'var(--space-1)' }}>
-                    <div style={{
-                      width: '8px',
-                      height: '8px',
-                      backgroundColor: 'var(--primary-600)',
-                      borderRadius: '50%',
-                      animation: 'bounce 1.4s ease-in-out infinite both'
-                    }} />
-                    <div style={{
-                      width: '8px',
-                      height: '8px',
-                      backgroundColor: 'var(--primary-600)',
-                      borderRadius: '50%',
-                      animation: 'bounce 1.4s ease-in-out 0.16s infinite both'
-                    }} />
-                    <div style={{
-                      width: '8px',
-                      height: '8px',
-                      backgroundColor: 'var(--primary-600)',
-                      borderRadius: '50%',
-                      animation: 'bounce 1.4s ease-in-out 0.32s infinite both'
-                    }} />
+      {/* Chat Container */}
+      <div className="chat-container">
+        {/* Messages */}
+        <div className="chat-messages">
+          {messages.map((message) => (
+            <div key={message.id} className={`chat-message ${message.type}`}>
+              <div className={`chat-message-avatar ${message.type}`}>
+                {message.type === 'user' ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                  </svg>
+                )}
+              </div>
+              <div className="chat-message-content">
+                <div className="chat-message-text">{message.content}</div>
+                
+                {message.resultCard && (
+                  <div className="chat-result-card">
+                    <div className="chat-result-header">
+                      <div className="chat-result-title">{message.resultCard.title}</div>
+                      <div className={`chat-result-badge ${message.resultCard.badge.level}`}>
+                        {message.resultCard.badge.text}
+                      </div>
+                    </div>
+                    {message.resultCard.details.map((detail, idx) => (
+                      <div key={idx} className="chat-result-detail">
+                        <div className="chat-result-label">{detail.label}</div>
+                        <div className="chat-result-value">{detail.value}</div>
+                      </div>
+                    ))}
+                    {message.resultCard.actions && (
+                      <div className="chat-result-actions">
+                        {message.resultCard.actions.map((action, idx) => (
+                          <button key={idx} className={`chat-result-btn ${action.primary ? 'primary' : 'secondary'}`}>
+                            <span>{action.icon}</span>
+                            {action.text}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <span className="text-base text-secondary">Contract IQ is analyzing...</span>
+                )}
+                
+                <div className="chat-message-meta">
+                  {message.type === 'user' ? 'You' : 'Contract IQ'} • {message.timestamp.toLocaleTimeString()}
                 </div>
               </div>
             </div>
-          </div>
-        )}
-        
-        <div ref={messagesEndRef} />
-      </div>
+          ))}
+          
+          {isLoading && (
+            <div className="chat-message assistant">
+              <div className="chat-message-avatar assistant">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <div className="chat-message-content">
+                <div className="chat-message-text">Analyzing...</div>
+              </div>
+            </div>
+          )}
+          
+          {messages.length > 0 && (
+            <div className="chat-suggestions">
+              {suggestions.map((suggestion, index) => (
+                <div key={index} className="chat-suggestion-chip" onClick={() => onSendMessage?.(suggestion)}>
+                  {suggestion}
+                </div>
+              ))}
+            </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
 
-      {/* Input Area - Using our design system */}
-      <div style={{ 
-        backgroundColor: 'var(--color-surface)',
-        borderTop: '1px solid var(--color-border)',
-        padding: 'var(--space-6)'
-      }}>
-        <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'flex-end' }}>
-          <div style={{ flex: 1 }}>
+        {/* Input Box */}
+        <div className="chat-input-container">
+          <div className="chat-input-wrapper">
+            <div className="chat-input-toolbar">
+              <button className="chat-toolbar-btn" title="Upload document" onClick={() => fileInputRef.current?.click()}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
+                </svg>
+              </button>
+              <button className="chat-toolbar-btn" title="Insert template">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              </button>
+              <button className="chat-toolbar-btn" title="Voice input">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+                  <path d="M19 10v2a7 7 0 01-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="23"/>
+                  <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+              </button>
+            </div>
             <textarea
               ref={textareaRef}
-              className="input"
+              className="chat-textarea"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyPress}
-              placeholder="💬 Ask about contract terms, risks, negotiation strategies..."
+              placeholder="Ask about contracts, renewals, risks, or any insights..."
               disabled={isLoading}
               rows={1}
-              style={{ 
-                resize: 'none',
-                maxHeight: '120px',
-                minHeight: '44px'
-              }}
             />
           </div>
           <button
-            className="btn-primary"
+            className="chat-send-btn"
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isLoading}
           >
-            {isLoading ? '...' : '📤'}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
           </button>
         </div>
         
-        <div style={{ 
-          marginTop: 'var(--space-3)',
-          display: 'flex',
-          gap: 'var(--space-4)',
-          flexWrap: 'wrap'
-        }}>
-          <span className="text-sm text-tertiary">
-            💡 Try asking: "What are the key risks?" • "Suggest negotiation points" • "Compare to market standards"
-          </span>
-        </div>
-      </div>
-
-      {/* Citation Preview Modal */}
-      {selectedCitation && (
-        <CitationPreview
-          citation={selectedCitation}
-          onClose={() => setSelectedCitation(null)}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".pdf,.doc,.docx,.txt"
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
         />
-      )}
+      </div>
     </div>
   );
 };
