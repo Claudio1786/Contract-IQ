@@ -231,12 +231,28 @@ export default function ContractsPage() {
   return (
     <AppLayout>
       <div>
-        {/* Page Header */}
-        <div style={{ marginBottom: 'var(--space-6)' }}>
-          <h1 className="text-h1">Contracts Library</h1>
-          <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
-            📄 Manage your organization's contract portfolio and track renewal pipeline
-          </p>
+        {/* Page Header - Matches Chat screen 1:1 */}
+        <div style={{ 
+          padding: 'var(--space-6)', 
+          borderBottom: '1px solid var(--color-border)',
+          backgroundColor: 'var(--color-surface)',
+          marginBottom: 'var(--space-6)'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center' 
+          }}>
+            <div>
+              <h1 className="text-h1">📚 Contract Library</h1>
+              <p className="text-base text-secondary">
+                Manage, analyze, and track all your vendor agreements
+              </p>
+            </div>
+            <button className="btn-primary" onClick={() => setIsUploadModalOpen(true)}>
+              ⬆️ Upload Contract
+            </button>
+          </div>
         </div>
 
         {/* Search and Filters */}

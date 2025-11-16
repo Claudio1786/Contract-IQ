@@ -160,12 +160,28 @@ export default function SettingsPage() {
   return (
     <AppLayout>
       <div>
-        {/* Page Header */}
-        <div style={{ marginBottom: 'var(--space-6)' }}>
-          <h1 className="text-h1">Settings</h1>
-          <p className="text-base text-secondary" style={{ marginTop: 'var(--space-2)' }}>
-            Customize your Contract IQ experience and notification preferences.
-          </p>
+        {/* Page Header - Matches Chat screen 1:1 */}
+        <div style={{ 
+          padding: 'var(--space-6)', 
+          borderBottom: '1px solid var(--color-border)',
+          backgroundColor: 'var(--color-surface)',
+          marginBottom: 'var(--space-6)'
+        }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center' 
+          }}>
+            <div>
+              <h1 className="text-h1">⚙️ Settings</h1>
+              <p className="text-base text-secondary">
+                Configure your notifications, preferences, and integrations
+              </p>
+            </div>
+            <button className="btn-primary" onClick={handleSave}>
+              💾 Save Changes
+            </button>
+          </div>
         </div>
 
         {/* Success Message */}

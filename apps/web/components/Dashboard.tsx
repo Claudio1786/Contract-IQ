@@ -72,12 +72,28 @@ export default function Dashboard() {
 
   return (
     <div>
-      {/* Page Header */}
-      <div style={{ marginBottom: 'var(--space-8)' }}>
-        <h1 className="text-h1">Vendor Agreement Dashboard</h1>
-        <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
-          🏢 Manage your organization's supplier contracts and renewal pipeline
-        </p>
+      {/* Page Header - Matches Chat screen 1:1 */}
+      <div style={{ 
+        padding: 'var(--space-6)', 
+        borderBottom: '1px solid var(--color-border)',
+        backgroundColor: 'var(--color-surface)',
+        marginBottom: 'var(--space-6)'
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center' 
+        }}>
+          <div>
+            <h1 className="text-h1">📊 Dashboard</h1>
+            <p className="text-base text-secondary">
+              Real-time insights into your contract portfolio and renewal pipeline
+            </p>
+          </div>
+          <button className="btn-primary" onClick={() => router.push('/contracts')}>
+            📄 View All Contracts
+          </button>
+        </div>
       </div>
 
       {/* Stats Row (3 cards) */}

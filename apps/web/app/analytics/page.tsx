@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import AppLayout from '../../components/layout/AppLayout';
 
 interface StatCardProps {
@@ -102,37 +103,32 @@ export default function AnalyticsPage() {
     { month: 'DEC', amount: '$420K', height: 52 }
   ];
 
+  const router = useRouter();
+
   return (
     <AppLayout>
       <div>
-        {/* Page Header */}
+        {/* Page Header - Matches Chat screen 1:1 */}
         <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          marginBottom: 'var(--space-8)' 
+          padding: 'var(--space-6)', 
+          borderBottom: '1px solid var(--color-border)',
+          backgroundColor: 'var(--color-surface)',
+          marginBottom: 'var(--space-6)'
         }}>
-          <div>
-            <h1 className="text-h1">Client Agreement Portfolio</h1>
-            <p className="text-base text-secondary" style={{ marginTop: 'var(--space-1)' }}>
-              📊 Manage your organization's vendor agreements and contract performance
-            </p>
-          </div>
-          
-          <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
-            <select 
-              className="input"
-              value={timePeriod}
-              onChange={(e) => setTimePeriod(e.target.value)}
-              style={{ minWidth: '150px' }}
-            >
-              <option value="Q1 2026">Q1 2026</option>
-              <option value="Q2 2026">Q2 2026</option>
-              <option value="Q3 2026">Q3 2026</option>
-              <option value="Q4 2026">Q4 2026</option>
-            </select>
-            
-            <button className="btn-secondary">Export PDF</button>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center' 
+          }}>
+            <div>
+              <h1 className="text-h1">📈 Analytics</h1>
+              <p className="text-base text-secondary">
+                Comprehensive insights into spending, risks, and vendor performance
+              </p>
+            </div>
+            <button className="btn-primary" onClick={() => router.push('/contracts')}>
+              📄 View Contracts
+            </button>
           </div>
         </div>
 
