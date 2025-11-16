@@ -1,0 +1,12 @@
+{
+  "buildCommand": "pnpm turbo build --filter=@contract-iq/web",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://contract-iq-api.vercel.app/api/:path*"
+    }
+  ]
+}
