@@ -23,13 +23,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://contractiq.com',
+    url: 'https://contract-iq.org',
     siteName: 'Contract IQ',
     title: 'Contract IQ - AI-Powered Contract Intelligence',
     description: 'Smart contract analysis, risk detection, and portfolio insights powered by AI',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://contract-iq.org/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Contract IQ - AI-Powered Contract Intelligence'
