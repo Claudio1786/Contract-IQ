@@ -1,0 +1,241 @@
+// Prisma schema for Contract IQ
+// Authentication & User Management (Epic 1)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// AUTHENTICATION & USER MANAGEMENT
+// ==========================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // For email/password auth
+  role          UserRole  @default(VIEWER)
+  
+  // Timestamps
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Relations
+  accounts      Account[]
+  sessions      Session[]
+  contracts     Contract[]
+  conversations Conversation[]
+  notifications Notification[]
+  
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  VIEWER
+}
+
+// ==========================================
+// CONTRACTS & ANALYSIS (Epic 3 & 4)
+// ==========================================
+
+model Contract {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  fileName    String
+  fileUrl     String
+  fileSize    Int
+  mimeType    String
+  status      ContractStatus @default(PENDING)
+  
+  // Extracted metadata
+  vendor      String?
+  startDate   DateTime?
+  endDate     DateTime?
+  value       Float?
+  
+  // Timestamps
+  uploadedAt  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  analysis    Analysis?
+  tags        ContractTag[]
+  
+  @@map("contracts")
+}
+
+model Analysis {
+  id              String   @id @default(cuid())
+  contractId      String   @unique
+  riskScore       Int      // 0-100
+  riskLevel       RiskLevel
+  
+  // Risk findings
+  liabilityRisks  String[] // JSON array
+  complianceRisks String[] // JSON array
+  financialRisks  String[] // JSON array
+  
+  // Analysis results
+  costAnalysis    String   @db.Text // JSON
+  complianceCheck String   @db.Text // JSON
+  recommendations String   @db.Text // JSON
+  playbook        String   @db.Text // JSON
+  
+  // Timestamps
+  analyzedAt      DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  // Relations
+  contract        Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  
+  @@map("analyses")
+}
+
+model ContractTag {
+  id         String   @id @default(cuid())
+  contractId String
+  tag        String
+  
+  contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  
+  @@unique([contractId, tag])
+  @@map("contract_tags")
+}
+
+enum ContractStatus {
+  PENDING
+  PROCESSING
+  ANALYZED
+  ERROR
+}
+
+enum RiskLevel {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+// ==========================================
+// CHAT & CONVERSATIONS (Epic 5)
+// ==========================================
+
+model Conversation {
+  id        String    @id @default(cuid())
+  userId    String
+  title     String    @default("New Conversation")
+  
+  // Timestamps
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  // Relations
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Message[]
+  
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           MessageRole
+  content        String   @db.Text
+  
+  // Optional result card data
+  resultCard     String?  @db.Text // JSON
+  
+  // Timestamps
+  createdAt      DateTime @default(now())
+  
+  // Relations
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  
+  @@map("messages")
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+// ==========================================
+// NOTIFICATIONS (Epic 7)
+// ==========================================
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String           @db.Text
+  read      Boolean          @default(false)
+  
+  // Optional metadata
+  metadata  String?          @db.Text // JSON
+  
+  // Timestamps
+  createdAt DateTime         @default(now())
+  
+  // Relations
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("notifications")
+}
+
+enum NotificationType {
+  CONTRACT_EXPIRING
+  HIGH_RISK_ALERT
+  ANALYSIS_COMPLETE
+  SYSTEM
+  CUSTOM
+}
