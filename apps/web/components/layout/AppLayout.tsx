@@ -7,6 +7,7 @@ import NotificationsModal from '../NotificationsModal';
 /**
  * Master Layout Component - Used on ALL pages
  * Provides consistent sidebar, header, and content structure
+ * OPTIMIZED SIDEBAR: Larger touch targets, glowing badges, section grouping, enhanced visual hierarchy
  */
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -14,93 +15,181 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-  const navigationItems = [
+  // Main Navigation Section
+  const mainNavItems = [
     { 
       href: '/', 
-      icon: '🏠', 
-      label: 'Home', 
+      label: 'Home',
+      iconClass: 'icon-home',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+      ),
       active: pathname === '/' 
     },
     { 
       href: '/chat', 
-      icon: '💬', 
-      label: 'Chat', 
+      label: 'Chat',
+      iconClass: 'icon-chat',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+        </svg>
+      ),
       active: pathname.startsWith('/chat') 
     },
     { 
       href: '/contracts', 
-      icon: '📋', 
-      label: 'Contracts', 
-      badge: '47', 
+      label: 'Contracts',
+      iconClass: 'icon-contracts',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      ),
+      badge: '47',
+      badgeClass: 'badge-primary',
       active: pathname.startsWith('/contracts') 
     },
     { 
       href: '/analytics', 
-      icon: '📊', 
-      label: 'Analytics', 
+      label: 'Analytics',
+      iconClass: 'icon-analytics',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      ),
       active: pathname.startsWith('/analytics') 
-    },
-    { 
-      href: '/settings', 
-      icon: '⚙️', 
-      label: 'Settings', 
-      active: pathname.startsWith('/settings') 
     },
   ];
 
-  const alertsItem = {
-    href: '/alerts',
-    icon: '🔔',
-    label: 'Alerts',
-    badge: '3',
-    badgeVariant: 'danger' as const,
-    active: pathname.startsWith('/alerts')
-  };
+  // Management Navigation Section
+  const managementNavItems = [
+    { 
+      href: '/settings', 
+      label: 'Settings',
+      iconClass: 'icon-settings',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+      ),
+      active: pathname.startsWith('/settings') 
+    },
+    {
+      href: '/alerts',
+      label: 'Alerts',
+      iconClass: 'icon-alerts',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      ),
+      badge: '3',
+      badgeClass: 'badge-error',
+      active: pathname.startsWith('/alerts')
+    },
+  ];
 
   return (
     <div className="app-container">
-      {/* Global Sidebar - Same on ALL pages */}
+      {/* Global Sidebar - Optimized UX */}
       <aside className={`sidebar ${sidebarExpanded ? 'expanded' : ''}`}>
+        {/* Enhanced Header */}
         <div className="sidebar-header">
-          <div className="sidebar-logo">
-            <svg className="sidebar-logo-icon" width="32" height="32" viewBox="0 0 32 32">
-              <rect width="32" height="32" rx="8" fill="#2563eb"/>
-              <path d="M8 12h16M8 16h16M8 20h10" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <span className="sidebar-logo-text">Contract IQ</span>
+          <div className="logo-container">
+            <div className="logo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
+                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <span className="brand-name">Contract IQ</span>
           </div>
+          <button 
+            className="menu-toggle"
+            onClick={() => setSidebarExpanded(!sidebarExpanded)}
+            aria-label="Toggle sidebar"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
         </div>
         
-        <nav className="sidebar-nav">
-          {navigationItems.map((item) => (
-            <div 
-              key={item.href}
-              className={`sidebar-nav-item ${item.active ? 'active' : ''}`}
-              onClick={() => router.push(item.href)}
-            >
-              <span className="sidebar-nav-icon">{item.icon}</span>
-              <span className="sidebar-nav-text">{item.label}</span>
-              {item.badge && (
-                <span className="sidebar-nav-badge badge badge-primary">{item.badge}</span>
-              )}
-            </div>
-          ))}
+        {/* Navigation with Section Grouping */}
+        <nav className="nav-container">
+          {/* Main Section */}
+          <div className="nav-section">
+            <div className="nav-section-label">Main</div>
+            {mainNavItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`nav-item ${item.iconClass} ${item.active ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push(item.href);
+                }}
+              >
+                <div className="nav-icon-wrapper">
+                  <div className="nav-icon">{item.icon}</div>
+                </div>
+                <span className="nav-label">{item.label}</span>
+                {item.badge && (
+                  <span className={`nav-badge ${item.badgeClass}`}>{item.badge}</span>
+                )}
+              </a>
+            ))}
+          </div>
 
-          {/* Alerts with danger badge */}
-          <div 
-            className={`sidebar-nav-item ${alertsItem.active ? 'active' : ''}`}
-            onClick={() => router.push(alertsItem.href)}
-          >
-            <span className="sidebar-nav-icon">{alertsItem.icon}</span>
-            <span className="sidebar-nav-text">{alertsItem.label}</span>
-            <span className="sidebar-nav-badge badge badge-danger">{alertsItem.badge}</span>
+          {/* Management Section */}
+          <div className="nav-section">
+            <div className="nav-section-label">Management</div>
+            {managementNavItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`nav-item ${item.iconClass} ${item.active ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push(item.href);
+                }}
+              >
+                <div className="nav-icon-wrapper">
+                  <div className="nav-icon">{item.icon}</div>
+                </div>
+                <span className="nav-label">{item.label}</span>
+                {item.badge && (
+                  <span className={`nav-badge ${item.badgeClass}`}>{item.badge}</span>
+                )}
+              </a>
+            ))}
           </div>
         </nav>
 
+        {/* Enhanced Profile Footer */}
         <div className="sidebar-footer">
-          <div className="sidebar-nav-item">
-            <span className="sidebar-nav-icon">👤</span>
-            <span className="sidebar-nav-text">Profile</span>
+          <div className="profile-item">
+            <div className="profile-avatar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div className="profile-info">
+              <div className="profile-name">Ray</div>
+              <div className="profile-status">View Profile</div>
+            </div>
+            <svg className="profile-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
           </div>
         </div>
       </aside>
