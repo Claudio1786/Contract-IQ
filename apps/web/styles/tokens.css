@@ -1,16 +1,59 @@
 /**
- * Contract IQ Design System v3.0
- * Foundation tokens - Use these variables throughout the application
+ * CONTRACT IQ DARK MODE - COMPLETE DESIGN TOKENS
+ * Production-ready CSS variables for premium dark theme
+ * Based on modern SaaS design patterns
  */
 
 :root {
-  /* ========================================
-     TYPOGRAPHY SYSTEM
-     ======================================== */
+  /* ============================================
+     FOUNDATIONAL COLORS - DARK MODE
+     ============================================ */
+  
+  /* Background Layers - 5-Level Depth System */
+  --bg-layer-0: #050811;          /* Deepest - almost black */
+  --bg-layer-1: #0A0E1A;          /* Primary canvas */
+  --bg-layer-2: #111827;          /* Elevated cards */
+  --bg-layer-3: #1A1F2E;          /* Floating elements */
+  --bg-layer-4: #1F2937;          /* Highest elevation */
+  --bg-layer-5: #2C3441;          /* Modal overlays */
+  
+  /* Surface Variants */
+  --surface-base: var(--bg-layer-1);
+  --surface-raised: var(--bg-layer-2);
+  --surface-overlay: var(--bg-layer-3);
+  --surface-modal: rgba(17, 24, 39, 0.85);
+  
+  /* ============================================
+     BORDERS & DIVIDERS
+     ============================================ */
+  
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-emphasis: rgba(255, 255, 255, 0.16);
+  
+  /* Gradient Borders */
+  --border-gradient-start: rgba(255, 255, 255, 0.12);
+  --border-gradient-mid: rgba(255, 255, 255, 0.04);
+  --border-gradient-end: rgba(59, 130, 246, 0.08);
+  
+  /* Dividers */
+  --divider-horizontal: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
   
   /* Font Families */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", 
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", 
+               Consolas, "Courier New", monospace;
   
   /* Font Sizes */
   --text-xs: 12px;

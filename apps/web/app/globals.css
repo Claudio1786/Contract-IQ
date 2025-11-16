@@ -1,12 +1,14 @@
 /**
- * Contract IQ Design System v3.0
+ * CONTRACT IQ DARK MODE - PREMIUM DESIGN SYSTEM
  * Main application styles - imports complete design system
+ * Premium dark theme with glassmorphism, multi-layer shadows, and glowing effects
  */
 
 /* Import complete design system */
 @import '../styles/tokens.css';
 @import '../styles/base.css';
 @import '../styles/components.css';
+@import '../styles/components-dark.css';  /* Premium dark mode components */
 @import '../styles/layout.css';
 
 /* Tailwind CSS (for any utility classes we need) */
