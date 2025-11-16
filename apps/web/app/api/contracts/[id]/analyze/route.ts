@@ -185,23 +185,3 @@ export async function GET(
     return internalError('Failed to get analysis');
   }
 }
- if (!contract) {
-      return notFoundError('Contract');
-    }
-
-    if (!contract.analysis) {
-      return successResponse({
-        analyzed: false,
-        message: 'Contract not yet analyzed',
-      });
-    }
-
-    return successResponse({
-      analyzed: true,
-      analysis: contract.analysis,
-    });
-  } catch (error) {
-    console.error('Get analysis error:', error);
-    return internalError('Failed to get analysis');
-  }
-}
