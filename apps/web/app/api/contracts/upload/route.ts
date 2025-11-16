@@ -113,7 +113,16 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // TODO: Trigger AI analysis job (Epic 4)
+    // Trigger AI analysis in background (Epic 4)
+    if (extractedText) {
+      // Queue analysis (fire and forget)
+      fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/contracts/${contract.id}/analyze`, {
+        method: 'POST',
+        headers: {
+          'Cookie': request.headers.get('cookie') || '',
+        },
+      }).catch(err => console.error('Background analysis failed:', err));
+    }
 
     return successResponse(
       {
