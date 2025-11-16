@@ -1,8 +1,10 @@
 {
-  "buildCommand": "pnpm turbo build --filter=@contract-iq/web",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd apps/web && pnpm install && pnpm build",
   "outputDirectory": "apps/web/.next",
-  "installCommand": "pnpm install",
+  "installCommand": "pnpm install --frozen-lockfile",
   "framework": "nextjs",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./apps/web",
   "rewrites": [
     {
       "source": "/api/:path*",
