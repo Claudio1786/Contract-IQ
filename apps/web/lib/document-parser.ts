@@ -5,9 +5,11 @@
  * Extracts text content from PDF, DOCX, DOC, and TXT files
  */
 
-import * as pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
 import { readFile } from 'fs/promises';
+
+// Use dynamic require for CommonJS module to avoid ESM import warnings
+const pdfParse = require('pdf-parse');
 
 export interface ParsedDocument {
   text: string;
