@@ -39,10 +39,12 @@ export default function LandingPage() {
         }
 
         .nav-container {
-          max-width: 1200px;
+          max-width: 1400px;
+          width: 100%;
           margin: 0 auto;
-          padding: 0 32px;
+          padding: 0 48px;
           display: flex;
+          flex-direction: row;
           justify-content: space-between;
           align-items: center;
         }
@@ -50,30 +52,34 @@ export default function LandingPage() {
         .logo-section {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 16px;
+          flex-shrink: 0;
+          margin-right: auto;
         }
 
         .logo-icon {
-          width: 40px;
-          height: 40px;
+          width: 50px;
+          height: 50px;
           background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-          border-radius: 10px;
+          border-radius: 12px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 24px;
+          font-size: 28px;
+          flex-shrink: 0;
           box-shadow: 
             0 0 20px rgba(99, 102, 241, 0.3),
             0 4px 12px rgba(0, 0, 0, 0.4);
         }
 
         .logo-text {
-          font-size: 22px;
+          font-size: 26px;
           font-weight: 700;
           background: linear-gradient(135deg, #E8EAF0 0%, #B8BCCC 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          white-space: nowrap;
         }
 
         .nav-cta {
