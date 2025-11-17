@@ -5,7 +5,7 @@
  * Extracts text content from PDF, DOCX, DOC, and TXT files
  */
 
-import pdf from 'pdf-parse';
+import * as pdfParse from 'pdf-parse';
 import mammoth from 'mammoth';
 import { readFile } from 'fs/promises';
 
