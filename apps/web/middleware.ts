@@ -11,7 +11,6 @@ import { getToken } from 'next-auth/jwt';
 
 // Routes that require authentication
 const protectedRoutes = [
-  '/', // Root redirects to dashboard (requires auth)
   '/dashboard',
   '/contracts',
   '/analytics',
