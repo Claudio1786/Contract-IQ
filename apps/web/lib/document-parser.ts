@@ -31,7 +31,7 @@ export interface ParsedDocument {
  */
 async function parsePDF(buffer: Buffer): Promise<ParsedDocument> {
   try {
-    const data = await pdf(buffer);
+    const data = await (pdfParse as any).default(buffer);
 
     return {
       text: data.text,
