@@ -641,10 +641,3 @@ export default function LandingPage() {
     </>
   );
 }
-d for results.
-          </p>
-        </div>
-      </footer>
-    </>
-  );
-}
