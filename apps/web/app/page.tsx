@@ -77,18 +77,20 @@ export default function LandingPage() {
         }
 
         .nav-cta {
-          padding: 12px 28px;
+          padding: 14px 32px;
           background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
           border: none;
           border-radius: 10px;
           color: white;
-          font-size: 15px;
+          font-size: 16px;
           font-weight: 600;
           cursor: pointer;
           box-shadow: 
             0 0 30px rgba(59, 130, 246, 0.4),
             0 4px 12px rgba(0, 0, 0, 0.3);
           transition: all 0.3s ease;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
 
         .nav-cta:hover {
@@ -633,6 +635,13 @@ export default function LandingPage() {
           </div>
           <p className="footer-text">
             © 2024 Contract IQ. Built with intelligence, designed for results.
+          </p>
+        </div>
+      </footer>
+    </>
+  );
+}
+d for results.
           </p>
         </div>
       </footer>
