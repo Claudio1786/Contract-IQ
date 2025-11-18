@@ -14,15 +14,21 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "format": "prettier --check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "test:backend": "tsx scripts/test-backend.ts"
   },
   "dependencies": {
     "@contract-iq/ui": "workspace:*",
     "@google/generative-ai": "^0.24.1",
+    "@prisma/client": "^6.19.0",
     "class-variance-authority": "^0.7.0",
     "next": "^15.0.0",
     "openai": "^6.9.0",
     "posthog-js": "^1.288.1",
+    "prisma": "^6.19.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -43,6 +49,7 @@
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.15",
+    "tsx": "^4.20.6",
     "typescript": "^5.6.3",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^2.1.4"
