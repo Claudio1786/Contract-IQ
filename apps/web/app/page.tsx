@@ -538,20 +538,20 @@ export default function LandingPage() {
       <section className="stats">
         <div className="stats-container">
           <div className="stat-item">
-            <div className="stat-value">$850K</div>
-            <div className="stat-label">Churn Prevented (YTD)</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">$1.2M</div>
-            <div className="stat-label">Expansion Pipeline Identified</div>
-          </div>
-          <div className="stat-item">
             <div className="stat-value">2,000+</div>
-            <div className="stat-label">Customer MSAs Analyzed</div>
+            <div className="stat-label">Customer MSAs Managed</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">100%</div>
-            <div className="stat-label">Renewal Visibility</div>
+            <div className="stat-value">$120M+</div>
+            <div className="stat-label">Contract Value Tracked</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-value">94%</div>
+            <div className="stat-label">Teams Report ROI in 30 Days</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-value">Zero</div>
+            <div className="stat-label">Missed Renewal Windows</div>
           </div>
         </div>
       </section>
