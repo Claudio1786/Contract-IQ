@@ -88,36 +88,36 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2">
           <NavItem
-            href="/chat"
-            icon="💬"
-            label="New Chat"
-            collapsed={!sidebarOpen}
-            isActive={false}
-          />
-          <NavItem
-            href="/contracts"
-            icon="📋"
-            label="Contracts"
-            collapsed={!sidebarOpen}
-            isActive={false}
-          />
-          <NavItem
             href="/dashboard"
-            icon="📊"
+            icon="🏠"
             label="Dashboard"
             collapsed={!sidebarOpen}
             isActive={false}
           />
           <NavItem
+            href="/chat"
+            icon="💬"
+            label="Chat"
+            collapsed={!sidebarOpen}
+            isActive={false}
+          />
+          <NavItem
+            href="/contracts"
+            icon="👥"
+            label="Customers"
+            collapsed={!sidebarOpen}
+            isActive={false}
+          />
+          <NavItem
             href="/analytics"
-            icon="📈"
-            label="Analytics"
+            icon="📊"
+            label="Revenue Intelligence"
             collapsed={!sidebarOpen}
             isActive={false}
           />
           <NavItem
             href="/playbooks"
-            icon="🎯"
+            icon="📈"
             label="Intelligence Reports"
             collapsed={!sidebarOpen}
             isActive={false}
@@ -126,6 +126,13 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
             href="/alerts"
             icon="🔔"
             label="Renewal Alerts"
+            collapsed={!sidebarOpen}
+            isActive={false}
+          />
+          <NavItem
+            href="/settings"
+            icon="⚙️"
+            label="Settings"
             collapsed={!sidebarOpen}
             isActive={false}
           />
