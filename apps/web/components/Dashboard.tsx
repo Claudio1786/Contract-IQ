@@ -3,6 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import '../styles/dashboard.css';
+import PageHeader from '@/components/ui/PageHeader';
 
 interface StatCardProps {
   title: string;
@@ -146,30 +147,27 @@ export default function Dashboard() {
   return (
     <div className="dashboard-container">
       {/* Page Header */}
-      <div className="dashboard-page-header">
-        <div className="dashboard-header-content">
-          <div className="flex items-center justify-between w-full">
-            <div>
-              <h1>Dashboard</h1>
-              <p className="dashboard-header-subtitle">
-                Real-time insights into your customer relationships and contract performance
-              </p>
-            </div>
-            <button
-              onClick={() => router.push('/app/admin/contracts/new')}
-              className="px-6 py-3 rounded-xl text-white text-[16px] font-semibold flex items-center gap-2 
-                bg-gradient-to-br from-blue-500 to-blue-600 shadow-md hover:shadow-lg transition-transform 
-                hover:-translate-y-0.5"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              Add Contract
-            </button>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        title="Dashboard"
+        subtitle="Real-time insights into your customer relationships and contract performance"
+        icon={
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+          </svg>
+        }
+        actions={
+          <button
+            onClick={() => router.push('/app/admin/contracts/new')}
+            className="px-6 py-3 rounded-xl text-white text-[16px] font-semibold flex items-center gap-2 bg-gradient-to-br from-blue-500 to-blue-600 shadow-md hover:shadow-lg transition-transform hover:-translate-y-0.5"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add Contract
+          </button>
+        }
+      />
 
       {/* KPI Grid */}
       <div className="kpi-grid">
