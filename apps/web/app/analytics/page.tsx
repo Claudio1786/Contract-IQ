@@ -31,7 +31,7 @@ export default function AnalyticsPage() {
       <div className="analytics-container">
         {/* Page Header */}
         <div className="analytics-page-header">
-          <h1>Revenue Intelligence Dashboard</h1>
+          <h1>📊 Revenue Intelligence</h1>
           <p className="analytics-header-subtitle">
             Real-time insights into your customer contracts and revenue performance
           </p>

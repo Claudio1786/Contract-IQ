@@ -118,7 +118,7 @@ export default function AlertsPage() {
             </div>
             <div style={{ flex: 1 }}>
               <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#F8FAFC', marginBottom: '8px' }}>
-                Renewal Alerts
+                🔔 Renewal Alerts
               </h1>
               <p style={{ fontSize: '16px', color: '#94A3B8' }}>
                 Track upcoming renewals, churn risks, and revenue optimization opportunities

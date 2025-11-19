@@ -174,7 +174,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             </div>
             <div className="header-title-group">
               <h1 className="page-title">
-                <span className="title-gradient">Contract Intelligence</span>
+                <span className="title-gradient">💬 Chat</span>
               </h1>
               <p className="page-subtitle">Ask questions about your contracts and get instant insights</p>
             </div>

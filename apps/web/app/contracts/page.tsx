@@ -379,7 +379,7 @@ export default function ContractsPage() {
             <div className="contracts-page-header">
               <div className="contracts-header-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <div>
-                  <h1>Customer Contracts</h1>
+                  <h1>👥 Customers</h1>
                   <div className="contracts-header-meta">
                     <div className="contracts-stat-item">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
