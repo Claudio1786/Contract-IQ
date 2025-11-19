@@ -222,8 +222,14 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
     <div className={`space-y-6 ${className}`}>
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-gray-900">
-          📊 Negotiation Intelligence Metrics
+        <h2 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M3 3v18h18"/>
+            <rect x="7" y="12" width="3" height="6"/>
+            <rect x="12" y="8" width="3" height="10"/>
+            <rect x="17" y="5" width="3" height="13"/>
+          </svg>
+          Negotiation Intelligence Metrics
         </h2>
         <div>
           <select
@@ -245,7 +251,10 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <span className="text-green-600 text-lg">✓</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-600">
+                  <path d="M9 12l2 2 4-4"/>
+                  <circle cx="12" cy="12" r="10"/>
+                </svg>
               </div>
             </div>
             <div className="ml-4">
@@ -264,7 +273,11 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <span className="text-blue-600 text-lg">💰</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-blue-600">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 12h8"/>
+                  <path d="M12 8v8"/>
+                </svg>
               </div>
             </div>
             <div className="ml-4">
@@ -283,7 +296,11 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                <span className="text-purple-600 text-lg">🎯</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-purple-600">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
               </div>
             </div>
             <div className="ml-4">
@@ -302,7 +319,9 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                <span className="text-orange-600 text-lg">⚡</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-orange-600">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
               </div>
             </div>
             <div className="ml-4">
@@ -320,7 +339,7 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
 
       {/* Scenario Performance */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🎭 Scenario Performance</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Scenario Performance</h3>
         <div className="space-y-4">
           {metricsData.scenarioPerformance.map((scenario, index) => (
             <div key={index} className="border-l-4 border-blue-400 pl-4">
@@ -357,7 +376,7 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Tactic Effectiveness */}
         <Card className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">⚔️ Tactic Effectiveness</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Tactic Effectiveness</h3>
           <div className="space-y-4">
             {metricsData.tacticEffectiveness.map((tactic, index) => (
               <div key={index} className="flex items-center justify-between py-2">
@@ -386,7 +405,7 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
 
         {/* Prediction Accuracy Breakdown */}
         <Card className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">🔮 AI Prediction Accuracy</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">AI Prediction Accuracy</h3>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center mb-2">
@@ -444,7 +463,13 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
 
       {/* Monthly Trends */}
       <Card className="p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📈 Monthly Trends</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="3 17 9 11 13 15 21 7"/>
+            <polyline points="3 7 3 17 21 17"/>
+          </svg>
+          Monthly Trends
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {metricsData.monthlyTrends.map((month, index) => (
             <div key={index} className="text-center p-4 border border-gray-200 rounded-lg">
@@ -467,22 +492,27 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
 
       {/* Action Items */}
       <Card className="p-6 bg-blue-50 border-blue-200">
-        <h3 className="text-lg font-semibold text-blue-900 mb-3">🚀 Improvement Opportunities</h3>
+        <h3 className="text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 13l4 4L19 7"/>
+          </svg>
+          Improvement Opportunities
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div>
             <h4 className="font-medium text-blue-800 mb-2">Prediction Accuracy</h4>
             <ul className="space-y-1 text-blue-700">
-              <li>• Timeline predictions need improvement (71.8% accurate)</li>
-              <li>• More data needed for volume discount scenarios</li>
-              <li>• Consider tactic sequencing analysis</li>
+              <li>Timeline predictions need improvement (71.8% accurate)</li>
+              <li>More data needed for volume discount scenarios</li>
+              <li>Consider tactic sequencing analysis</li>
             </ul>
           </div>
           <div>
             <h4 className="font-medium text-blue-800 mb-2">Process Optimization</h4>
             <ul className="space-y-1 text-blue-700">
-              <li>• End-of-quarter timing shows high impact but lower confidence</li>
-              <li>• SLA negotiations take longer than other scenarios</li>
-              <li>• Consider industry-specific playbook variations</li>
+              <li>End-of-quarter timing shows high impact but lower confidence</li>
+              <li>SLA negotiations take longer than other scenarios</li>
+              <li>Consider industry-specific playbook variations</li>
             </ul>
           </div>
         </div>

@@ -69,9 +69,13 @@ function RiskItem({ title, renewalDate, risk, onViewDetails }: RiskItemProps) {
       <button 
         className="btn-ghost btn-sm" 
         onClick={onViewDetails}
-        style={{ marginTop: 'var(--space-2)' }}
+        style={{ marginTop: 'var(--space-2)', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
       >
-        View Details →
+        <span>View Details</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M5 12h14"/>
+          <path d="M13 5l7 7-7 7"/>
+        </svg>
       </button>
     </div>
   );
@@ -214,7 +218,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Active Vendors */}
+        {/* Active Customers */}
         <div className="kpi-card" style={{ '--kpi-gradient': 'linear-gradient(90deg, #10B981, #059669)', '--kpi-bg': 'rgba(16,185,129,0.12)' } as React.CSSProperties}>
           <div className="kpi-header">
             <div className="kpi-icon">
@@ -230,10 +234,10 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="kpi-value">247</div>
-          <div className="kpi-label">Active Vendors</div>
+          <div className="kpi-label">Active Customers</div>
           <div className="kpi-meta">
             <span className="kpi-meta-item">New this month</span>
-            <span className="kpi-meta-value">12 vendors</span>
+            <span className="kpi-meta-value">12 customers</span>
           </div>
         </div>
 
@@ -246,8 +250,11 @@ export default function Dashboard() {
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
             </div>
-            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(245,158,11,0.1)', '--trend-color': '#F59E0B' } as React.CSSProperties}>
-              ⚠️ Attention
+            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(245,158,11,0.1)', '--trend-color': '#F59E0B', display: 'inline-flex', alignItems: 'center', gap: '6px' } as React.CSSProperties}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              </svg>
+              <span>Attention</span>
             </div>
           </div>
           <div className="kpi-value">18</div>
@@ -383,7 +390,13 @@ export default function Dashboard() {
                 transition: 'all 0.3s ease'
               }}
             >
-              View All →
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <span>View All</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14"/>
+                  <path d="M13 5l7 7-7 7"/>
+                </svg>
+              </span>
             </button>
           </div>
           <table className="dashboard-table">
@@ -460,14 +473,14 @@ export default function Dashboard() {
             </div>
             <div className="insight-text">3 contracts require renewal notice within 30 days to avoid auto-renewal. Total value: $475,000.</div>
           </div>
-          <div className="insight-item" style={{ '--insight-color': '#F59E0B' } as React.CSSProperties}>
+          <div className="insight-item" style={{ '--insight-color': '#10B981' } as React.CSSProperties}>
             <div className="insight-type">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                 <circle cx="12" cy="12" r="10"/>
               </svg>
-              OPTIMIZATION
+              EXPANSION
             </div>
-            <div className="insight-text">AWS usage shows 32% underutilization. Potential savings: $134,000/year with plan optimization.</div>
+            <div className="insight-text">Expansion signals detected across key accounts. Estimated revenue impact: $134,000/year with targeted upsells.</div>
           </div>
           <div className="insight-item" style={{ '--insight-color': '#3B82F6' } as React.CSSProperties}>
             <div className="insight-type">
@@ -476,7 +489,7 @@ export default function Dashboard() {
               </svg>
               INSIGHT
             </div>
-            <div className="insight-text">SaaS consolidation opportunity: 4 vendors offer overlapping features. Consolidation could save $89,000/year.</div>
+            <div className="insight-text">Bundling opportunity: 4 customers show alignment for packaged expansion. Estimated revenue impact: $89,000/year.</div>
           </div>
           <div className="insight-item" style={{ '--insight-color': '#10B981' } as React.CSSProperties}>
             <div className="insight-type">
@@ -485,7 +498,7 @@ export default function Dashboard() {
               </svg>
               OPPORTUNITY
             </div>
-            <div className="insight-text">Salesforce renewal coming up. Historical data suggests 15-20% discount available with early negotiation.</div>
+            <div className="insight-text">Top customer renewal approaching. Early engagement suggests 5–10% uplift possible with multi-year commitment.</div>
           </div>
           <div className="insight-item" style={{ '--insight-color': '#8B5CF6' } as React.CSSProperties}>
             <div className="insight-type">
@@ -494,7 +507,7 @@ export default function Dashboard() {
               </svg>
               TREND
             </div>
-            <div className="insight-text">Contract spend increased 12.5% QoQ, driven primarily by cloud infrastructure expansion.</div>
+            <div className="insight-text">Revenue increased 12.5% QoQ, driven primarily by customer expansions.</div>
           </div>
         </div>
       </div>

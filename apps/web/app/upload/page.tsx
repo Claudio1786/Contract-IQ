@@ -23,7 +23,7 @@ export default function UploadPage() {
   // Key objectives for uploaded contracts
   const contractObjectives = [
     { id: 'risk_assessment', label: 'Risk Assessment & Liability Review' },
-    { id: 'pricing_analysis', label: 'Pricing & Cost Optimization' },
+    { id: 'pricing_analysis', label: 'Pricing & Terms Optimization' },
     { id: 'sla_review', label: 'Service Level Agreement Review' },
     { id: 'termination_rights', label: 'Termination Rights & Exit Clauses' },
     { id: 'data_protection', label: 'Data Protection & Privacy Compliance' },
@@ -207,19 +207,33 @@ export default function UploadPage() {
               {/* Upload Icon/Status */}
               <div style={{ marginBottom: 'var(--space-4)' }}>
                 {uploadStatus.status === 'idle' && (
-                  <div style={{ fontSize: '48px' }}>📄</div>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <path d="M14 2v6h6"/>
+                  </svg>
                 )}
                 {uploadStatus.status === 'uploading' && (
-                  <div style={{ fontSize: '48px' }}>⬆️</div>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M12 19V6"/>
+                    <path d="M5 12l7-7 7 7"/>
+                  </svg>
                 )}
                 {uploadStatus.status === 'processing' && (
-                  <div style={{ fontSize: '48px' }}>🔄</div>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M21 12a9 9 0 11-9-9"/>
+                  </svg>
                 )}
                 {uploadStatus.status === 'success' && (
-                  <div style={{ fontSize: '48px' }}>✅</div>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M9 12l2 2 4-4"/>
+                    <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
                 )}
                 {uploadStatus.status === 'error' && (
-                  <div style={{ fontSize: '48px' }}>❌</div>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M18 6L6 18"/>
+                    <path d="M6 6l12 12"/>
+                  </svg>
                 )}
               </div>
 
@@ -282,7 +296,15 @@ export default function UploadPage() {
                           }
                         }}
                       >
-                        📊 View Analysis Results
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M3 3v18h18"/>
+                            <rect x="7" y="12" width="3" height="6"/>
+                            <rect x="12" y="8" width="3" height="10"/>
+                            <rect x="17" y="5" width="3" height="13"/>
+                          </svg>
+                          <span>View Analysis Results</span>
+                        </span>
                       </button>
                       <button 
                         className="btn-secondary"
@@ -293,7 +315,14 @@ export default function UploadPage() {
                           router.push('/contracts');
                         }}
                       >
-                        📚 Go to Contracts Library
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                            <path d="M20 22H6.5a2.5 2.5 0 010-5H20v5z"/>
+                            <path d="M6.5 17V2"/>
+                          </svg>
+                          <span>Go to Contracts Library</span>
+                        </span>
                       </button>
                       <button 
                         className="btn-secondary"
@@ -306,7 +335,14 @@ export default function UploadPage() {
                           }
                         }}
                       >
-                        🎯 Generate Account Intelligence Brief
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                          </svg>
+                          <span>Generate Account Intelligence Brief</span>
+                        </span>
                       </button>
                     </div>
                   </>
@@ -347,7 +383,14 @@ export default function UploadPage() {
         {uploadStatus.status === 'idle' && (
           <div className="card" style={{ marginBottom: 'var(--space-6)' }}>
             <div className="card-header">
-              <h2 className="text-h2">🎯 Analysis Objectives</h2>
+              <h2 className="text-h2" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+                Analysis Objectives
+              </h2>
               <p className="text-sm text-secondary">
                 Select what you want to focus on when analyzing your contract (optional)
               </p>
@@ -404,7 +447,13 @@ export default function UploadPage() {
                       style={{ marginTop: '2px' }}
                     />
                     <div style={{ flex: 1 }}>
-                      <span className="text-sm font-medium">✏️ Other (specify below)</span>
+                      <span className="text-sm font-medium" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M12 20h9"/>
+                          <path d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4 12.5-12.5z"/>
+                        </svg>
+                        <span>Other (specify below)</span>
+                      </span>
                       {selectedObjectives.includes('custom') && (
                         <textarea
                           value={customObjective}
@@ -450,7 +499,12 @@ export default function UploadPage() {
         }}>
           <div className="card">
             <div className="card-body" style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '32px', marginBottom: 'var(--space-3)' }}>🔍</div>
+              <div style={{ marginBottom: 'var(--space-3)' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </div>
               <h3 className="text-h3" style={{ marginBottom: 'var(--space-2)' }}>Risk Analysis</h3>
               <p className="text-sm text-secondary">
                 Automatically identify potential risks, liabilities, and unfavorable terms in your contracts.
@@ -460,7 +514,11 @@ export default function UploadPage() {
 
           <div className="card">
             <div className="card-body" style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '32px', marginBottom: 'var(--space-3)' }}>💬</div>
+              <div style={{ marginBottom: 'var(--space-3)' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M21 15a4 4 0 01-4 4H8l-5 3V6a4 4 0 014-4h10a4 4 0 014 4z"/>
+                </svg>
+              </div>
               <h3 className="text-h3" style={{ marginBottom: 'var(--space-2)' }}>AI Chat</h3>
               <p className="text-sm text-secondary">
                 Ask questions and get instant answers about any clause or term in your contract.
@@ -470,7 +528,13 @@ export default function UploadPage() {
 
           <div className="card">
             <div className="card-body" style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '32px', marginBottom: 'var(--space-3)' }}>🎯</div>
+              <div style={{ marginBottom: 'var(--space-3)' }}>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              </div>
               <h3 className="text-h3" style={{ marginBottom: 'var(--space-2)' }}>Negotiation Tips</h3>
               <p className="text-sm text-secondary">
                 Get strategic recommendations and playbooks for improving your contract terms.
@@ -495,19 +559,38 @@ export default function UploadPage() {
               className="btn-secondary"
               onClick={() => router.push('/contracts/saas-msa')}
             >
-              📄 SaaS Agreement
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <path d="M14 2v6h6"/>
+                </svg>
+                <span>SaaS Agreement</span>
+              </span>
             </button>
             <button 
               className="btn-secondary"
               onClick={() => router.push('/contracts/saas-dpa')}
             >
-              🔒 Data Processing
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2"/>
+                  <path d="M7 11V7a5 5 0 0110 0v4"/>
+                </svg>
+                <span>Data Processing</span>
+              </span>
             </button>
             <button 
               className="btn-secondary"
               onClick={() => router.push('/contracts/healthcare-baa')}
             >
-              🏥 Healthcare BAA
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M12 7v10"/>
+                  <path d="M7 12h10"/>
+                </svg>
+                <span>Healthcare BAA</span>
+              </span>
             </button>
           </div>
         </div>
