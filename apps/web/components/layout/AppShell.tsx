@@ -242,7 +242,4 @@ const ChatHistoryItem: React.FC<ChatHistoryItemProps> = ({ title, timestamp, hre
     <div className="font-medium truncate">{title}</div>
     <div className="text-gray-400">{timestamp}</div>
   </Link>
-);e="font-medium truncate">{title}</div>
-    <div className="text-gray-400">{timestamp}</div>
-  </Link>
 );
