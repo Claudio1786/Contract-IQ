@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "template": "msa-test",
+    "version": "2025.11",
+    "vertical": "technology",
+    "jurisdiction": "New York, USA",
+    "counterparties": [
+      { "name": "Test Vendor Inc.", "role": "vendor" },
+      { "name": "Test Customer Corp.", "role": "customer" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 120000,
+      "currency": "USD",
+      "billingFrequency": "annual"
+    }
+  },
+  "clauses": [
+    {
+      "id": "payment-terms",
+      "category": "financial",
+      "text": "Payment terms: Net 30 days from invoice date",
+      "riskPosture": "neutral"
+    },
+    {
+      "id": "liability-cap",
+      "category": "risk",
+      "text": "Total liability capped at 2x annual fees",
+      "riskPosture": "favorable"
+    }
+  ]
+}

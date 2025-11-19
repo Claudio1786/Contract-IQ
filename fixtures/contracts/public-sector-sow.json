@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "template": "public-sector-it-sow",
+    "version": "2025.11",
+    "vertical": "public-sector",
+    "jurisdiction": "State of California",
+    "renewal": {
+      "type": "manual",
+      "termMonths": 18,
+      "noticeDays": 120
+    },
+    "counterparties": [
+      { "name": "California Office of Digital Services", "role": "agency" },
+      { "name": "CivicForge Solutions", "role": "vendor" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 210000,
+      "currency": "USD",
+      "billingFrequency": "milestone"
+    },
+    "milestones": [
+      { "name": "Discovery & UX research", "amount": 50000, "due": "2025-12-15" },
+      { "name": "MVP delivery", "amount": 95000, "due": "2026-04-30" },
+      { "name": "Pilot rollout", "amount": 65000, "due": "2026-08-31" }
+    ],
+    "incentives": [
+      {
+        "type": "holdback",
+        "description": "10% retention released upon meeting 99% accessibility compliance score (WCAG 2.2 AA)",
+        "trigger": "Accessibility audit",
+        "amount": 0.1,
+        "unit": "percentage"
+      }
+    ]
+  },
+  "clauses": [
+    {
+      "id": "deliverable-acceptance",
+      "category": "performance",
+      "text": "Agency shall have fifteen (15) business days to review and accept each deliverable; lack of written rejection constitutes deemed acceptance.",
+      "benchmarkPercentile": 48,
+      "riskPosture": "watch",
+      "source": { "page": 12, "section": "6.4" },
+      "playbook": {
+        "fallback": "Extend review window to 30 business days with automatic timeline extension upon rejection.",
+        "impact": "medium",
+        "stakeholders": ["program", "legal"]
+      }
+    },
+    {
+      "id": "liquidated-damages",
+      "category": "commercial",
+      "text": "Vendor agrees to liquidated damages of $5,000 per business day for delays exceeding ten (10) days beyond the agreed milestone delivery date.",
+      "benchmarkPercentile": 35,
+      "riskPosture": "elevated",
+      "source": { "page": 16, "section": "8.3" },
+      "playbook": {
+        "fallback": "Cap damages at 15% of milestone value and introduce cure period before assessment.",
+        "impact": "high",
+        "stakeholders": ["legal", "finance"]
+      }
+    },
+    {
+      "id": "open-data",
+      "category": "compliance",
+      "text": "All software deliverables must comply with the California Open Data Policy and be released under permissive open source licenses unless exempted in writing.",
+      "benchmarkPercentile": 61,
+      "riskPosture": "standard",
+      "source": { "page": 19, "section": "10.2" },
+      "playbook": {
+        "fallback": "Allow proprietary components with security review and escrow requirement.",
+        "impact": "medium",
+        "stakeholders": ["legal", "technology"]
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "acceptance-window",
+      "severity": 3,
+      "signal": "Review period shorter than state procurement benchmark (20 business days).",
+      "recommendation": "Negotiate 30-day review with iterative feedback rights.",
+      "linkedClause": "deliverable-acceptance"
+    },
+    {
+      "id": "liquidated-damages",
+      "severity": 5,
+      "signal": "Per-day damages uncapped and exceed 20% margin at 30-day delay.",
+      "recommendation": "Introduce cap tied to milestone value and cure process.",
+      "linkedClause": "liquidated-damages"
+    }
+  ],
+  "obligations": [
+    {
+      "owner": "agency",
+      "description": "Provide timely access to legacy system SMEs and staging environments.",
+      "kpi": "delivery",
+      "due": null
+    },
+    {
+      "owner": "vendor",
+      "description": "Submit monthly project status reports including earned value metrics and risk register.",
+      "kpi": "governance",
+      "due": "2025-12-01"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Liquidated damages cap",
+        "current": "$5k per day uncapped",
+        "target": "Cap at 10% of milestone with 7-day cure",
+        "fallback": "Cap at 15% with phased damages",
+        "impact": "high",
+        "confidence": 0.63
+      },
+      {
+        "topic": "Acceptance period",
+        "current": "15 business days",
+        "target": "30 business days",
+        "fallback": "25 business days with optional extension",
+        "impact": "medium",
+        "confidence": 0.61
+      }
+    ]
+  },
+  "audit": {
+    "sourceFile": "public-sector-sow-redacted.pdf",
+    "confidence": {
+      "overall": 0.88,
+      "fields": {
+        "clauses.liquidated-damages": 0.8,
+        "obligations.vendor": 0.87,
+        "financials.milestones[1]": 0.9
+      }
+    }
+  }
+}

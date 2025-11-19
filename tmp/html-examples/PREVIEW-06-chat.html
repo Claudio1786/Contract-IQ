@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Intelligence Chat - Contract IQ</title>
+    <style>
+        /* ===== DESIGN TOKENS ===== */
+        :root {
+            /* Backgrounds - 5-layer depth system */
+            --surface-0: #0A0E1A;
+            --surface-1: #0F1319;
+            --surface-2: #14171F;
+            --surface-3: #1A1F2E;
+            --surface-4: #242938;
+            --surface-5: #2D3347;
+
+            /* Text Colors */
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-tertiary: #94A3B8;
+            --text-disabled: #64748B;
+
+            /* Brand Colors */
+            --primary: #3B82F6;
+            --primary-hover: #2563EB;
+            --secondary: #8B5CF6;
+            
+            /* Status Colors */
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --info: #06B6D4;
+
+            /* Shadows - Multi-layer depth */
+            --shadow-sm: 
+                0 0 0 1px rgba(255,255,255,0.05),
+                0 1px 2px rgba(0,0,0,0.4),
+                0 0 8px rgba(59,130,246,0.05);
+            
+            --shadow-md:
+                0 0 0 1px rgba(255,255,255,0.05),
+                0 4px 6px rgba(0,0,0,0.3),
+                0 2px 16px rgba(59,130,246,0.08),
+                0 0 24px rgba(139,92,246,0.06);
+            
+            --shadow-lg:
+                0 0 0 1px rgba(255,255,255,0.06),
+                0 10px 15px rgba(0,0,0,0.4),
+                0 4px 24px rgba(59,130,246,0.12),
+                0 0 32px rgba(139,92,246,0.08);
+            
+            --shadow-glow:
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 8px 16px rgba(0,0,0,0.5),
+                0 0 32px rgba(59,130,246,0.15),
+                0 0 48px rgba(139,92,246,0.1);
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--surface-0);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== DECORATIVE WAVES ===== */
+        .decorative-waves {
+            position: fixed;
+            top: -10%;
+            right: -10%;
+            width: 70%;
+            height: 70%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+            filter: blur(80px);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            position: relative;
+            z-index: 1;
+            padding: 80px 32px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, 
+                var(--surface-0) 0%, 
+                var(--surface-1) 100%
+            );
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, 
+                #F8FAFC 0%, 
+                #3B82F6 50%, 
+                #8B5CF6 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-tertiary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* ===== QUICK ACTIONS ===== */
+        .quick-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .action-card {
+            background: linear-gradient(135deg, 
+                var(--surface-2) 0%, 
+                var(--surface-3) 100%
+            );
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 20px 28px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .action-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--action-bg);
+            flex-shrink: 0;
+        }
+
+        .action-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* ===== CHAT CONTAINER ===== */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 32px 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== MESSAGES ===== */
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .message {
+            display: flex;
+            gap: 16px;
+            max-width: 85%;
+        }
+
+        .message.user {
+            margin-left: auto;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .message-avatar.user {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+        }
+
+        .message-avatar.assistant {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+        }
+
+        .message-content {
+            background: linear-gradient(135deg, 
+                var(--surface-2) 0%, 
+                var(--surface-3) 100%
+            );
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 20px 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .message-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .message.assistant .message-text {
+            color: var(--text-secondary);
+        }
+
+        .message-meta {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== RESULT CARD ===== */
+        .result-card {
+            background: var(--surface-1);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 16px;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .result-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .result-badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+        }
+
+        .result-detail {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .result-detail:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            color: var(--text-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .result-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .result-btn {
+            flex: 1;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .result-btn.primary {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            box-shadow: 0 4px 8px rgba(59,130,246,0.3);
+        }
+
+        .result-btn.secondary {
+            background: var(--surface-3);
+            color: var(--text-primary);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ===== INPUT BOX ===== */
+        .input-container {
+            background: linear-gradient(135deg, 
+                var(--surface-2) 0%, 
+                var(--surface-3) 100%
+            );
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-toolbar {
+            display: flex;
+            gap: 8px;
+            padding: 0 8px;
+        }
+
+        .toolbar-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--surface-4);
+            color: var(--text-primary);
+        }
+
+        textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-family: inherit;
+            resize: none;
+            padding: 8px 16px;
+            min-height: 24px;
+            max-height: 200px;
+            outline: none;
+        }
+
+        textarea::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 
+                0 0 0 1px rgba(255,255,255,0.1),
+                0 4px 12px rgba(59,130,246,0.4),
+                0 0 24px rgba(59,130,246,0.2);
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 0 0 1px rgba(255,255,255,0.15),
+                0 6px 16px rgba(59,130,246,0.5),
+                0 0 32px rgba(59,130,246,0.3);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ===== SUGGESTIONS ===== */
+        .suggestions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .suggestion-chip {
+            padding: 10px 16px;
+            background: var(--surface-2);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-chip:hover {
+            background: var(--surface-3);
+            border-color: rgba(255,255,255,0.12);
+            color: var(--text-primary);
+        }
+
+        /* ===== CITATIONS ===== */
+        .citation {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: rgba(59,130,246,0.15);
+            color: #3B82F6;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 0 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .citation:hover {
+            background: rgba(59,130,246,0.25);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .hero-section {
+                padding: 60px 24px 40px;
+            }
+
+            .chat-container {
+                padding: 0 16px 16px;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .quick-actions {
+                flex-direction: column;
+            }
+
+            .action-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative Waves Background -->
+    <div class="decorative-waves">
+        <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgba(59,130,246,0.25);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgba(139,92,246,0.15);stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="wave2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgba(139,92,246,0.2);stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:rgba(59,130,246,0.1);stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M0,400 Q250,200 500,400 T1000,400 L1000,1000 L0,1000 Z" fill="url(#wave1)"/>
+            <path d="M0,500 Q250,350 500,500 T1000,500 L1000,1000 L0,1000 Z" fill="url(#wave2)"/>
+        </svg>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1 class="hero-title">Contract Intelligence</h1>
+        <p class="hero-subtitle">Ask me anything about your contracts, vendors, and agreements. I'll analyze your data and provide actionable insights.</p>
+        
+        <div class="quick-actions">
+            <div class="action-card" style="--action-bg: rgba(239,68,68,0.12);">
+                <div class="action-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    </svg>
+                </div>
+                <span class="action-text">Show high-risk contracts</span>
+            </div>
+
+            <div class="action-card" style="--action-bg: rgba(245,158,11,0.12);">
+                <div class="action-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <span class="action-text">Contracts expiring soon</span>
+            </div>
+
+            <div class="action-card" style="--action-bg: rgba(59,130,246,0.12);">
+                <div class="action-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <span class="action-text">Optimization opportunities</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <!-- Messages -->
+        <div class="messages">
+            <!-- Sample Conversation -->
+            <div class="message user">
+                <div class="message-avatar user">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">Show me Salesforce renewal risks</div>
+                    <div class="message-meta">You • Just now</div>
+                </div>
+            </div>
+
+            <div class="message assistant">
+                <div class="message-avatar assistant">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
+                        I found your Salesforce Enterprise Agreement. Here's the risk analysis:
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">⚠️ Salesforce Enterprise Agreement</div>
+                            <div class="result-badge">HIGH RISK</div>
+                        </div>
+
+                        <div class="result-detail">
+                            <div class="result-label">Primary Risk</div>
+                            <div class="result-value">Auto-renewal with 60-day notice required <span class="citation">1</span></div>
+                        </div>
+
+                        <div class="result-detail">
+                            <div class="result-label">Annual Spend</div>
+                            <div class="result-value">$180,000</div>
+                        </div>
+
+                        <div class="result-detail">
+                            <div class="result-label">Expiry Date</div>
+                            <div class="result-value">December 15, 2025 (29 days)</div>
+                        </div>
+
+                        <div class="result-detail">
+                            <div class="result-label">Recommendation</div>
+                            <div class="result-value">Start negotiation immediately. You must provide notice by October 16 to avoid auto-renewal.</div>
+                        </div>
+
+                        <div class="result-actions">
+                            <button class="result-btn primary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                View Full Analysis
+                            </button>
+                            <button class="result-btn secondary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                </svg>
+                                Generate Playbook
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="message-meta">
+                        Contract IQ • Analyzed 1 contract in 0.8s
+                    </div>
+                </div>
+            </div>
+
+            <div class="message user">
+                <div class="message-avatar user">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">What other contracts have similar auto-renewal clauses?</div>
+                    <div class="message-meta">You • Just now</div>
+                </div>
+            </div>
+
+            <div class="message assistant">
+                <div class="message-avatar assistant">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <div class="message-text">
+                        I found 11 additional contracts with auto-renewal clauses. Here's the breakdown by risk level:
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">🔴 HIGH RISK (3 contracts)</div>
+                        </div>
+                        <div class="result-detail">
+                            <div class="result-value">
+                                • Microsoft 365 Enterprise E5 - $295K/year (90-day notice) <span class="citation">2</span><br>
+                                • AWS Enterprise Support - $420K/year (60-day notice) <span class="citation">3</span><br>
+                                • Salesforce - $180K/year (60-day notice) <span class="citation">1</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">🟡 MEDIUM RISK (5 contracts)</div>
+                        </div>
+                        <div class="result-detail">
+                            <div class="result-value">
+                                Total Value: $412K/year • Notice periods: 30-45 days
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="result-title">🟢 LOW RISK (3 contracts)</div>
+                        </div>
+                        <div class="result-detail">
+                            <div class="result-value">
+                                Total Value: $156K/year • Notice periods: 7-30 days
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-meta">
+                        Contract IQ • Analyzed 247 contracts in 1.2s
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggestions -->
+            <div class="suggestions">
+                <div class="suggestion-chip">💡 Create calendar alerts for all notice deadlines</div>
+                <div class="suggestion-chip">📊 Export auto-renewal report</div>
+                <div class="suggestion-chip">🎯 Generate negotiation playbooks</div>
+            </div>
+        </div>
+
+        <!-- Input Box -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <div class="input-toolbar">
+                    <button class="toolbar-btn" title="Upload document">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
+                        </svg>
+                    </button>
+                    <button class="toolbar-btn" title="Insert template">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </button>
+                    <button class="toolbar-btn" title="Voice input">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/>
+                            <path d="M19 10v2a7 7 0 01-14 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                    </button>
+                </div>
+                <textarea 
+                    placeholder="Ask about contracts, renewals, risks, or any insights..." 
+                    rows="1"
+                    oninput="this.style.height = '';this.style.height = this.scrollHeight + 'px'"
+                ></textarea>
+            </div>
+            <button class="send-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Auto-resize textarea
+        const textarea = document.querySelector('textarea');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // Enable/disable send button based on input
+        const sendBtn = document.querySelector('.send-btn');
+        textarea.addEventListener('input', function() {
+            sendBtn.disabled = this.value.trim() === '';
+        });
+    </script>
+</body>
+</html>

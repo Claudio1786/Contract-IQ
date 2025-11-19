@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "template": "enterprise-saas-msa",
+    "version": "2025.11",
+    "vertical": "saas",
+    "jurisdiction": "Delaware, USA",
+    "renewal": {
+      "type": "auto",
+      "termMonths": 12,
+      "noticeDays": 45
+    },
+    "counterparties": [
+      { "name": "LatticeWorks, Inc.", "role": "vendor" },
+      { "name": "Northstar Retail Holdings", "role": "customer" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 185000,
+      "currency": "USD",
+      "billingFrequency": "annual",
+      "escalatorPercent": 5
+    },
+    "usageBands": [
+      {
+        "unit": "active users",
+        "tiers": [
+          { "min": 0, "max": 500, "rate": 0 },
+          { "min": 501, "max": 2000, "rate": 6.5 },
+          { "min": 2001, "max": null, "rate": 5.2 }
+        ]
+      }
+    ],
+    "incentives": [
+      {
+        "type": "credit",
+        "description": "10% service credit if uptime < 99.5% in a calendar month",
+        "trigger": "SLA breach",
+        "amount": 0.1,
+        "unit": "percentage"
+      }
+    ]
+  },
+  "clauses": [
+    {
+      "id": "liability-cap",
+      "category": "risk",
+      "text": "Vendor's aggregate liability is limited to 1x the fees paid in the preceding 12 months.",
+      "benchmarkPercentile": 40,
+      "riskPosture": "elevated",
+      "source": { "page": 18, "section": "10.2" },
+      "playbook": {
+        "fallback": "Set cap to 2x fees with carve-outs for data breach and IP claims.",
+        "impact": "high",
+        "stakeholders": ["legal", "procurement"]
+      }
+    },
+    {
+      "id": "data-residency",
+      "category": "compliance",
+      "text": "Customer data will be hosted exclusively within US-based data centers with SOC 2 Type II certification.",
+      "benchmarkPercentile": 78,
+      "riskPosture": "standard",
+      "source": { "page": 9, "section": "4.1" },
+      "playbook": {
+        "fallback": "Require annual third-party audit confirmation and breach notification within 24 hours.",
+        "impact": "medium",
+        "stakeholders": ["security", "procurement"]
+      }
+    },
+    {
+      "id": "renewal-uplift",
+      "category": "commercial",
+      "text": "Renewal pricing may increase by no more than 7% year-over-year.",
+      "benchmarkPercentile": 55,
+      "riskPosture": "watch",
+      "source": { "page": 6, "section": "2.4" },
+      "playbook": {
+        "fallback": "Cap uplift at lesser of CPI + 2% or 4% absolute.",
+        "impact": "medium",
+        "stakeholders": ["finance", "procurement"]
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "renewal-notice",
+      "severity": 3,
+      "signal": "Auto-renewal notice period < 60 days",
+      "recommendation": "Negotiate 90-day notice to match internal renewal calendar.",
+      "linkedClause": "renewal-uplift"
+    },
+    {
+      "id": "liability-cap",
+      "severity": 4,
+      "signal": "Cap below peer benchmark (2.1x ARR)",
+      "recommendation": "Escalate to legal for fallback language.",
+      "linkedClause": "liability-cap"
+    }
+  ],
+  "obligations": [
+    {
+      "owner": "vendor",
+      "description": "Provide annual SOC 2 Type II report within 30 days of completion.",
+      "kpi": "compliance",
+      "due": "2025-12-31"
+    },
+    {
+      "owner": "customer",
+      "description": "Review and approve security questionnaire updates each quarter.",
+      "kpi": "governance",
+      "due": null
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Liability Cap",
+        "current": "1x ARR",
+        "target": "2x ARR",
+        "fallback": "1.5x ARR with breach carve-outs",
+        "impact": "high",
+        "confidence": 0.7
+      },
+      {
+        "topic": "Renewal Uplift",
+        "current": "7%",
+        "target": "4%",
+        "fallback": "CPI + 2%",
+        "impact": "medium",
+        "confidence": 0.65
+      }
+    ]
+  },
+  "audit": {
+    "sourceFile": "saas-msa-redacted.pdf",
+    "confidence": {
+      "overall": 0.91,
+      "fields": {
+        "financials.baseFee": 0.97,
+        "clauses.liability-cap": 0.83,
+        "risks.renewal-notice": 0.9
+      }
+    }
+  }
+}

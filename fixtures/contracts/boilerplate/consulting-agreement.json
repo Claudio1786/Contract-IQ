@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "template": "consulting-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "Consulting_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "CLIENT",
+        "role": "party-1"
+      },
+      {
+        "name": "Client",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "obligation",
+      "section": "1. CONSULTING SERVICES",
+      "text": "1.1 Services. Consultant agrees to provide consulting services to Client as described in the attached Scope of Work or as otherwise agreed upon in writing (\"Services\").\n1.2 Performance. Consultant shall perform the Services with professional skill and diligence, consistent with industry standards.\n1.3 Deliverables. Consultant shall provide the deliverables specified in the Scope of Work by the dates indicated.\n1.4 Time Commitment. Consultant shall dedicate sufficient time and resources to comple",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. COMPENSATION",
+      "text": "2.1 Fees. Client shall pay Consultant as follows: (a) Hourly Rate: $[Amount] per hour, or (b) Fixed Fee: $[Amount] for the entire project, or (c) Retainer: $[Amount] per month.\n2.2 Payment Schedule. Invoices shall be submitted [frequency] and are due within thirty (30) days of receipt.\n2.3 Expenses. Client shall reimburse Consultant for reasonable, pre-approved expenses incurred in connection with the Services, provided Consultant submits itemized receipts.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. TERM AND TERMINATION",
+      "text": "3.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration] or until completion of the Services, unless earlier terminated.\n3.2 Termination. Either party may terminate this Agreement upon [Number] days' written notice. Client shall pay for all Services performed through the termination date.\n3.3 Immediate Termination. Either party may terminate immediately for material breach that remains uncured for fifteen (15) days after written notice.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "4. INTELLECTUAL PROPERTY",
+      "text": "4.1 Work Product Ownership. All work product, deliverables, and materials created by Consultant under this Agreement shall be the sole property of Client. Consultant hereby assigns all rights to Client.\n4.2 License to Pre-Existing Materials. Consultant grants Client a perpetual, non-exclusive license to use any pre-existing materials incorporated into the work product.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. CONFIDENTIALITY",
+      "text": "5.1 Protection of Information. Consultant shall hold all Client confidential information in strict confidence and use it solely to perform the Services.\n5.2 Non-Disclosure. Consultant shall not disclose confidential information to third parties without prior written consent.\n5.3 Duration. Confidentiality obligations shall survive termination for three (3) years.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. NON-COMPETE AND NON-SOLICITATION",
+      "text": "6.1 Non-Compete. During the term and for twelve (12) months thereafter, Consultant shall not engage in any business that directly competes with Client in [geographic area/industry].\n6.2 Non-Solicitation. Consultant shall not solicit Client's employees or customers for a period of twelve (12) months after termination.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "termination",
+      "section": "7. INDEPENDENT CONTRACTOR STATUS",
+      "text": "7.1 Relationship. Consultant is an independent contractor and not an employee, agent, or partner of Client.\n7.2 Taxes and Benefits. Consultant is responsible for all taxes, insurance, licenses, and benefits. No tax withholding or employee benefits will be provided.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "obligation",
+      "section": "8. WARRANTIES AND REPRESENTATIONS",
+      "text": "8.1 Authority. Consultant represents that it has full authority to enter into this Agreement and perform the Services.\n8.2 Qualifications. Consultant warrants that it possesses the necessary skills, expertise, and qualifications to perform the Services.\n8.3 Compliance. Consultant shall comply with all applicable laws, regulations, and industry standards.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. INDEMNIFICATION",
+      "text": "Consultant shall indemnify and hold harmless Client from any claims arising from: (a) Consultant's breach of this Agreement; (b) Consultant's negligence or willful misconduct; or (c) violation of applicable law.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "obligation",
+      "section": "10. LIMITATION OF LIABILITY",
+      "text": "CONSULTANT'S TOTAL LIABILITY SHALL NOT EXCEED THE TOTAL FEES PAID BY CLIENT IN THE SIX (6) MONTHS PRECEDING THE CLAIM. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "CONSULTING AGREEMENT\n\nThis Consulting Agreement (\"Agreement\") is entered into as of [Date] (\"Effective Date\") by and between [Client Name], a [State] corporation (\"Client\"), and [Consultant Name] (\"Consultant\").\n\n1. CONSULTING SERVICES\n\n1.1 Services. Consultant agrees to provide consulting services to Client as described in the attached Scope of Work or as otherwise agreed upon in writing (\"Services\").\n\n1.2 Performance. Consultant shall perform the Services with professional skill and diligence, consistent with industry standards.\n\n1.3 Deliverables. Consultant shall provide the deliverables specified in the Scope of Work by the dates indicated.\n\n1.4 Time Commitment. Consultant shall dedicate sufficient time and resources to complete the Services in a timely manner. Estimated hours are [Number] hours per [week/month].\n\n2. COMPENSATION\n\n2.1 Fees. Client shall pay Consultant as follows: (a) Hourly Rate: $[Amount] per hour, or (b) Fixed Fee: $[Amount] for the entire project, or (c) Retainer: $[Amount] per month.\n\n2.2 Payment Schedule. Invoices shall be submitted [frequency] and are due within thirty (30) days of receipt.\n\n2.3 Expenses. Client shall reimburse Consultant for reasonable, pre-approved expenses incurred in connection with the Services, provided Consultant submits itemized receipts.\n\n3. TERM AND TERMINATION\n\n3.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration] or until completion of the Services, unless earlier terminated.\n\n3.2 Termination. Either party may terminate this Agreement upon [Number] days' written notice. Client shall pay for all Services performed through the termination date.\n\n3.3 Immediate Termination. Either party may terminate immediately for material breach that remains uncured for fifteen (15) days after written notice.\n\n4. INTELLECTUAL PROPERTY\n\n4.1 Work Product Ownership. All work product, deliverables, and materials created by Consultant under this Agreement shall be the sole property of Client. Consultant hereby assigns all rights to Client.\n\n4.2 License to Pre-Existing Materials. Consultant grants Client a perpetual, non-exclusive license to use any pre-existing materials incorporated into the work product.\n\n5. CONFIDENTIALITY\n\n5.1 Protection of Information. Consultant shall hold all Client confidential information in strict confidence and use it solely to perform the Services.\n\n5.2 Non-Disclosure. Consultant shall not disclose confidential information to third parties without prior written consent.\n\n5.3 Duration. Confidentiality obligations shall survive termination for three (3) years.\n\n6. NON-COMPETE AND NON-SOLICITATION\n\n6.1 Non-Compete. During the term and for twelve (12) months thereafter, Consultant shall not engage in any business that directly competes with Client in [geographic area/industry].\n\n6.2 Non-Solicitation. Consultant shall not solicit Client's employees or customers for a period of twelve (12) months after termination.\n\n7. INDEPENDENT CONTRACTOR STATUS\n\n7.1 Relationship. Consultant is an independent contractor and not an employee, agent, or partner of Client.\n\n7.2 Taxes and Benefits. Consultant is responsible for all taxes, insurance, licenses, and benefits. No tax withholding or employee benefits will be provided.\n\n8. WARRANTIES AND REPRESENTATIONS\n\n8.1 Authority. Consultant represents that it has full authority to enter into this Agreement and perform the Services.\n\n8.2 Qualifications. Consultant warrants that it possesses the necessary skills, expertise, and qualifications to perform the Services.\n\n8.3 Compliance. Consultant shall comply with all applicable laws, regulations, and industry standards.\n\n9. INDEMNIFICATION\n\nConsultant shall indemnify and hold harmless Client from any claims arising from: (a) Consultant's breach of this Agreement; (b) Consultant's negligence or willful misconduct; or (c) violation of applicable law.\n\n10. LIMITATION OF LIABILITY\n\nCONSULTANT'S TOTAL LIABILITY SHALL NOT EXCEED THE TOTAL FEES PAID BY CLIENT IN THE SIX (6) MONTHS PRECEDING THE CLAIM. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES.\n\n11. GENERAL PROVISIONS\n\n11.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n\n11.2 Amendment. Amendments must be in writing and signed by both parties.\n\n11.3 Governing Law. This Agreement shall be governed by the laws of [State].\n\n11.4 Dispute Resolution. Disputes shall be resolved through mediation, then binding arbitration.\n\n11.5 Assignment. Neither party may assign this Agreement without prior written consent.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\n\nCLIENT:\t\t\t\tCONSULTANT:\n\nBy: _________________________\t\tBy: _________________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nTitle: [Title]\t\t\t\tTitle: [Title]\n\nDate: _______________\t\t\tDate: _______________",
+    "sections": [
+      {
+        "title": "1. CONSULTING SERVICES",
+        "text": "1.1 Services. Consultant agrees to provide consulting services to Client as described in the attached Scope of Work or as otherwise agreed upon in writing (\"Services\").\n1.2 Performance. Consultant shall perform the Services with professional skill and diligence, consistent with industry standards.\n1.3 Deliverables. Consultant shall provide the deliverables specified in the Scope of Work by the dates indicated.\n1.4 Time Commitment. Consultant shall dedicate sufficient time and resources to complete the Services in a timely manner. Estimated hours are [Number] hours per [week/month]."
+      },
+      {
+        "title": "2. COMPENSATION",
+        "text": "2.1 Fees. Client shall pay Consultant as follows: (a) Hourly Rate: $[Amount] per hour, or (b) Fixed Fee: $[Amount] for the entire project, or (c) Retainer: $[Amount] per month.\n2.2 Payment Schedule. Invoices shall be submitted [frequency] and are due within thirty (30) days of receipt.\n2.3 Expenses. Client shall reimburse Consultant for reasonable, pre-approved expenses incurred in connection with the Services, provided Consultant submits itemized receipts."
+      },
+      {
+        "title": "3. TERM AND TERMINATION",
+        "text": "3.1 Term. This Agreement shall commence on the Effective Date and continue for [Duration] or until completion of the Services, unless earlier terminated.\n3.2 Termination. Either party may terminate this Agreement upon [Number] days' written notice. Client shall pay for all Services performed through the termination date.\n3.3 Immediate Termination. Either party may terminate immediately for material breach that remains uncured for fifteen (15) days after written notice."
+      },
+      {
+        "title": "4. INTELLECTUAL PROPERTY",
+        "text": "4.1 Work Product Ownership. All work product, deliverables, and materials created by Consultant under this Agreement shall be the sole property of Client. Consultant hereby assigns all rights to Client.\n4.2 License to Pre-Existing Materials. Consultant grants Client a perpetual, non-exclusive license to use any pre-existing materials incorporated into the work product."
+      },
+      {
+        "title": "5. CONFIDENTIALITY",
+        "text": "5.1 Protection of Information. Consultant shall hold all Client confidential information in strict confidence and use it solely to perform the Services.\n5.2 Non-Disclosure. Consultant shall not disclose confidential information to third parties without prior written consent.\n5.3 Duration. Confidentiality obligations shall survive termination for three (3) years."
+      },
+      {
+        "title": "6. NON-COMPETE AND NON-SOLICITATION",
+        "text": "6.1 Non-Compete. During the term and for twelve (12) months thereafter, Consultant shall not engage in any business that directly competes with Client in [geographic area/industry].\n6.2 Non-Solicitation. Consultant shall not solicit Client's employees or customers for a period of twelve (12) months after termination."
+      },
+      {
+        "title": "7. INDEPENDENT CONTRACTOR STATUS",
+        "text": "7.1 Relationship. Consultant is an independent contractor and not an employee, agent, or partner of Client.\n7.2 Taxes and Benefits. Consultant is responsible for all taxes, insurance, licenses, and benefits. No tax withholding or employee benefits will be provided."
+      },
+      {
+        "title": "8. WARRANTIES AND REPRESENTATIONS",
+        "text": "8.1 Authority. Consultant represents that it has full authority to enter into this Agreement and perform the Services.\n8.2 Qualifications. Consultant warrants that it possesses the necessary skills, expertise, and qualifications to perform the Services.\n8.3 Compliance. Consultant shall comply with all applicable laws, regulations, and industry standards."
+      },
+      {
+        "title": "9. INDEMNIFICATION",
+        "text": "Consultant shall indemnify and hold harmless Client from any claims arising from: (a) Consultant's breach of this Agreement; (b) Consultant's negligence or willful misconduct; or (c) violation of applicable law."
+      },
+      {
+        "title": "10. LIMITATION OF LIABILITY",
+        "text": "CONSULTANT'S TOTAL LIABILITY SHALL NOT EXCEED THE TOTAL FEES PAID BY CLIENT IN THE SIX (6) MONTHS PRECEDING THE CLAIM. NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, CONSEQUENTIAL, OR PUNITIVE DAMAGES."
+      },
+      {
+        "title": "11. GENERAL PROVISIONS",
+        "text": "11.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n11.2 Amendment. Amendments must be in writing and signed by both parties.\n11.3 Governing Law. This Agreement shall be governed by the laws of [State].\n11.4 Dispute Resolution. Disputes shall be resolved through mediation, then binding arbitration.\n11.5 Assignment. Neither party may assign this Agreement without prior written consent.\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\nCLIENT:\t\t\t\tCONSULTANT:\nBy: _________________________\t\tBy: _________________________\nName: [Name]\t\t\t\tName: [Name]\nTitle: [Title]\t\t\t\tTitle: [Title]\nDate: _______________\t\t\tDate: _______________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:55.976206Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

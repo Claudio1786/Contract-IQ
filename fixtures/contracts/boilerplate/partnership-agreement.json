@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "template": "partnership-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "Partnership_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "Party A",
+        "role": "party-1"
+      },
+      {
+        "name": "Party B",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "obligation",
+      "section": "1. FORMATION AND PURPOSE",
+      "text": "1.1 Partnership Name. The partnership shall be known as [Partnership Name].\n1.2 Principal Place of Business. The principal place of business shall be [Address].\n1.3 Business Purpose. The partnership is formed for the purpose of [Description of Business].",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. TERM",
+      "text": "This partnership shall commence on [Date] and continue until dissolved by mutual agreement or as provided in this Agreement.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. CAPITAL CONTRIBUTIONS",
+      "text": "3.1 Initial Contributions. Each Partner shall contribute the following capital: Partner 1: $[Amount]; Partner 2: $[Amount].\n3.2 Additional Contributions. Additional capital contributions may be required upon unanimous consent of all Partners.\n3.3 Capital Accounts. A separate capital account shall be maintained for each Partner showing contributions, distributions, and allocated profits/losses.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "4. OWNERSHIP AND PROFIT SHARING",
+      "text": "4.1 Ownership Percentage. Partner 1: [Percentage]%; Partner 2: [Percentage]%.\n4.2 Profit and Loss Distribution. Profits and losses shall be allocated to Partners in proportion to their ownership percentages.\n4.3 Distributions. Distributions shall be made quarterly or as unanimously agreed, in proportion to ownership percentages.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. MANAGEMENT AND VOTING",
+      "text": "5.1 Management Authority. Each Partner shall have equal management authority unless otherwise specified.\n5.2 Major Decisions. The following decisions require unanimous consent: (a) admission of new partners; (b) sale or encumbrance of partnership assets; (c) merger or dissolution; (d) loans exceeding $[Amount].\n5.3 Day-to-Day Operations. Routine business decisions may be made by any Partner without consent of others.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. PARTNER DUTIES AND RESPONSIBILITIES",
+      "text": "6.1 Duties. Each Partner shall: (a) devote sufficient time and effort to partnership business; (b) act in the best interests of the partnership; (c) maintain accurate books and records; (d) comply with all applicable laws.\n6.2 Prohibited Activities. Without unanimous consent, no Partner shall: (a) compete with the partnership; (b) use partnership property for personal benefit; (c) enter contracts binding the partnership exceeding $[Amount].",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "obligation",
+      "section": "7. ADMISSION AND WITHDRAWAL OF PARTNERS",
+      "text": "7.1 New Partners. New partners may be admitted only with unanimous consent of existing Partners.\n7.2 Voluntary Withdrawal. A Partner may withdraw upon [Number] days' written notice. The withdrawing Partner's interest shall be valued and purchased as provided in Section 8.\n7.3 Involuntary Removal. A Partner may be removed for: (a) material breach of this Agreement; (b) bankruptcy; (c) incompetence; or (d) criminal conduct affecting the partnership.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "obligation",
+      "section": "8. BUYOUT PROVISIONS",
+      "text": "8.1 Valuation. A Partner's interest shall be valued based on: (a) book value of capital account; or (b) fair market value determined by independent appraisal.\n8.2 Purchase Terms. The remaining Partners shall have the right to purchase the departing Partner's interest. Payment may be made in installments over [Number] years at [Interest Rate]% interest.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. DISSOLUTION",
+      "text": "9.1 Events. The partnership shall dissolve upon: (a) unanimous agreement; (b) withdrawal of all but one Partner; (c) bankruptcy; or (d) expiration of term.\n9.2 Winding Up. Upon dissolution, partnership assets shall be liquidated and proceeds distributed as follows: (a) payment of debts and liabilities; (b) return of capital contributions; (c) distribution of remaining assets according to ownership percentages.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "obligation",
+      "section": "10. GENERAL PROVISIONS",
+      "text": "10.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n10.2 Amendment. Amendments require unanimous written consent.\n10.3 Governing Law. This Agreement shall be governed by the laws of [State].\n10.4 Dispute Resolution. Disputes shall be resolved through mediation, then binding arbitration.\nIN WITNESS WHEREOF, the Partners have executed this Agreement.\nPARTNER 1:\t\t\t\tPARTNER 2:\nSignature: ___________________\t\tSignature: ___________________\nName: [Name]\t\t\t\tName:",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "PARTNERSHIP AGREEMENT\n\nThis Partnership Agreement (\"Agreement\") is entered into as of [Date] by and between [Partner 1 Name] and [Partner 2 Name] (collectively \"Partners\").\n\n1. FORMATION AND PURPOSE\n\n1.1 Partnership Name. The partnership shall be known as [Partnership Name].\n\n1.2 Principal Place of Business. The principal place of business shall be [Address].\n\n1.3 Business Purpose. The partnership is formed for the purpose of [Description of Business].\n\n2. TERM\n\nThis partnership shall commence on [Date] and continue until dissolved by mutual agreement or as provided in this Agreement.\n\n3. CAPITAL CONTRIBUTIONS\n\n3.1 Initial Contributions. Each Partner shall contribute the following capital: Partner 1: $[Amount]; Partner 2: $[Amount].\n\n3.2 Additional Contributions. Additional capital contributions may be required upon unanimous consent of all Partners.\n\n3.3 Capital Accounts. A separate capital account shall be maintained for each Partner showing contributions, distributions, and allocated profits/losses.\n\n4. OWNERSHIP AND PROFIT SHARING\n\n4.1 Ownership Percentage. Partner 1: [Percentage]%; Partner 2: [Percentage]%.\n\n4.2 Profit and Loss Distribution. Profits and losses shall be allocated to Partners in proportion to their ownership percentages.\n\n4.3 Distributions. Distributions shall be made quarterly or as unanimously agreed, in proportion to ownership percentages.\n\n5. MANAGEMENT AND VOTING\n\n5.1 Management Authority. Each Partner shall have equal management authority unless otherwise specified.\n\n5.2 Major Decisions. The following decisions require unanimous consent: (a) admission of new partners; (b) sale or encumbrance of partnership assets; (c) merger or dissolution; (d) loans exceeding $[Amount].\n\n5.3 Day-to-Day Operations. Routine business decisions may be made by any Partner without consent of others.\n\n6. PARTNER DUTIES AND RESPONSIBILITIES\n\n6.1 Duties. Each Partner shall: (a) devote sufficient time and effort to partnership business; (b) act in the best interests of the partnership; (c) maintain accurate books and records; (d) comply with all applicable laws.\n\n6.2 Prohibited Activities. Without unanimous consent, no Partner shall: (a) compete with the partnership; (b) use partnership property for personal benefit; (c) enter contracts binding the partnership exceeding $[Amount].\n\n7. ADMISSION AND WITHDRAWAL OF PARTNERS\n\n7.1 New Partners. New partners may be admitted only with unanimous consent of existing Partners.\n\n7.2 Voluntary Withdrawal. A Partner may withdraw upon [Number] days' written notice. The withdrawing Partner's interest shall be valued and purchased as provided in Section 8.\n\n7.3 Involuntary Removal. A Partner may be removed for: (a) material breach of this Agreement; (b) bankruptcy; (c) incompetence; or (d) criminal conduct affecting the partnership.\n\n8. BUYOUT PROVISIONS\n\n8.1 Valuation. A Partner's interest shall be valued based on: (a) book value of capital account; or (b) fair market value determined by independent appraisal.\n\n8.2 Purchase Terms. The remaining Partners shall have the right to purchase the departing Partner's interest. Payment may be made in installments over [Number] years at [Interest Rate]% interest.\n\n9. DISSOLUTION\n\n9.1 Events. The partnership shall dissolve upon: (a) unanimous agreement; (b) withdrawal of all but one Partner; (c) bankruptcy; or (d) expiration of term.\n\n9.2 Winding Up. Upon dissolution, partnership assets shall be liquidated and proceeds distributed as follows: (a) payment of debts and liabilities; (b) return of capital contributions; (c) distribution of remaining assets according to ownership percentages.\n\n10. GENERAL PROVISIONS\n\n10.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n\n10.2 Amendment. Amendments require unanimous written consent.\n\n10.3 Governing Law. This Agreement shall be governed by the laws of [State].\n\n10.4 Dispute Resolution. Disputes shall be resolved through mediation, then binding arbitration.\n\nIN WITNESS WHEREOF, the Partners have executed this Agreement.\n\nPARTNER 1:\t\t\t\tPARTNER 2:\n\nSignature: ___________________\t\tSignature: ___________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nDate: _______________\t\t\tDate: _______________",
+    "sections": [
+      {
+        "title": "1. FORMATION AND PURPOSE",
+        "text": "1.1 Partnership Name. The partnership shall be known as [Partnership Name].\n1.2 Principal Place of Business. The principal place of business shall be [Address].\n1.3 Business Purpose. The partnership is formed for the purpose of [Description of Business]."
+      },
+      {
+        "title": "2. TERM",
+        "text": "This partnership shall commence on [Date] and continue until dissolved by mutual agreement or as provided in this Agreement."
+      },
+      {
+        "title": "3. CAPITAL CONTRIBUTIONS",
+        "text": "3.1 Initial Contributions. Each Partner shall contribute the following capital: Partner 1: $[Amount]; Partner 2: $[Amount].\n3.2 Additional Contributions. Additional capital contributions may be required upon unanimous consent of all Partners.\n3.3 Capital Accounts. A separate capital account shall be maintained for each Partner showing contributions, distributions, and allocated profits/losses."
+      },
+      {
+        "title": "4. OWNERSHIP AND PROFIT SHARING",
+        "text": "4.1 Ownership Percentage. Partner 1: [Percentage]%; Partner 2: [Percentage]%.\n4.2 Profit and Loss Distribution. Profits and losses shall be allocated to Partners in proportion to their ownership percentages.\n4.3 Distributions. Distributions shall be made quarterly or as unanimously agreed, in proportion to ownership percentages."
+      },
+      {
+        "title": "5. MANAGEMENT AND VOTING",
+        "text": "5.1 Management Authority. Each Partner shall have equal management authority unless otherwise specified.\n5.2 Major Decisions. The following decisions require unanimous consent: (a) admission of new partners; (b) sale or encumbrance of partnership assets; (c) merger or dissolution; (d) loans exceeding $[Amount].\n5.3 Day-to-Day Operations. Routine business decisions may be made by any Partner without consent of others."
+      },
+      {
+        "title": "6. PARTNER DUTIES AND RESPONSIBILITIES",
+        "text": "6.1 Duties. Each Partner shall: (a) devote sufficient time and effort to partnership business; (b) act in the best interests of the partnership; (c) maintain accurate books and records; (d) comply with all applicable laws.\n6.2 Prohibited Activities. Without unanimous consent, no Partner shall: (a) compete with the partnership; (b) use partnership property for personal benefit; (c) enter contracts binding the partnership exceeding $[Amount]."
+      },
+      {
+        "title": "7. ADMISSION AND WITHDRAWAL OF PARTNERS",
+        "text": "7.1 New Partners. New partners may be admitted only with unanimous consent of existing Partners.\n7.2 Voluntary Withdrawal. A Partner may withdraw upon [Number] days' written notice. The withdrawing Partner's interest shall be valued and purchased as provided in Section 8.\n7.3 Involuntary Removal. A Partner may be removed for: (a) material breach of this Agreement; (b) bankruptcy; (c) incompetence; or (d) criminal conduct affecting the partnership."
+      },
+      {
+        "title": "8. BUYOUT PROVISIONS",
+        "text": "8.1 Valuation. A Partner's interest shall be valued based on: (a) book value of capital account; or (b) fair market value determined by independent appraisal.\n8.2 Purchase Terms. The remaining Partners shall have the right to purchase the departing Partner's interest. Payment may be made in installments over [Number] years at [Interest Rate]% interest."
+      },
+      {
+        "title": "9. DISSOLUTION",
+        "text": "9.1 Events. The partnership shall dissolve upon: (a) unanimous agreement; (b) withdrawal of all but one Partner; (c) bankruptcy; or (d) expiration of term.\n9.2 Winding Up. Upon dissolution, partnership assets shall be liquidated and proceeds distributed as follows: (a) payment of debts and liabilities; (b) return of capital contributions; (c) distribution of remaining assets according to ownership percentages."
+      },
+      {
+        "title": "10. GENERAL PROVISIONS",
+        "text": "10.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties.\n10.2 Amendment. Amendments require unanimous written consent.\n10.3 Governing Law. This Agreement shall be governed by the laws of [State].\n10.4 Dispute Resolution. Disputes shall be resolved through mediation, then binding arbitration.\nIN WITNESS WHEREOF, the Partners have executed this Agreement.\nPARTNER 1:\t\t\t\tPARTNER 2:\nSignature: ___________________\t\tSignature: ___________________\nName: [Name]\t\t\t\tName: [Name]\nDate: _______________\t\t\tDate: _______________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.014220Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

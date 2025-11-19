@@ -1,0 +1,135 @@
+{
+  "metadata": {
+    "template": "healthcare-business-associate",
+    "version": "2025.11",
+    "vertical": "healthcare",
+    "jurisdiction": "HIPAA / HITECH",
+    "renewal": {
+      "type": "auto",
+      "termMonths": 24,
+      "noticeDays": 90
+    },
+    "counterparties": [
+      { "name": "Aurora Health Network", "role": "covered-entity" },
+      { "name": "Medidata Analytics LLC", "role": "business-associate" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 125000,
+      "currency": "USD",
+      "billingFrequency": "annual"
+    },
+    "incentives": [
+      {
+        "type": "credit",
+        "description": "5% fee reduction tied to annual HIPAA security risk assessment completion",
+        "trigger": "Assessment delivered by Q1",
+        "amount": 0.05,
+        "unit": "percentage"
+      }
+    ]
+  },
+  "clauses": [
+    {
+      "id": "phi-security-controls",
+      "category": "privacy",
+      "text": "Business Associate shall implement administrative, physical, and technical safeguards consistent with 45 C.F.R. §164.308-312, including AES-256 encryption at rest and TLS 1.3 in transit.",
+      "benchmarkPercentile": 82,
+      "riskPosture": "strong",
+      "source": { "page": 7, "section": "3.2" },
+      "playbook": {
+        "fallback": "Add quarterly penetration testing attestation and SOC 2 Type II mapping table.",
+        "impact": "high",
+        "stakeholders": ["security", "compliance"]
+      }
+    },
+    {
+      "id": "breach-notification",
+      "category": "privacy",
+      "text": "Business Associate will notify Covered Entity within 24 hours of discovering an actual or suspected Breach of Unsecured PHI and provide a detailed incident report within 48 hours.",
+      "benchmarkPercentile": 76,
+      "riskPosture": "standard",
+      "source": { "page": 9, "section": "4.1" },
+      "playbook": {
+        "fallback": "Include interim status updates every 12 hours until containment is confirmed.",
+        "impact": "medium",
+        "stakeholders": ["security", "communications"]
+      }
+    },
+    {
+      "id": "subcontractor-flowdown",
+      "category": "compliance",
+      "text": "Business Associate must execute written sub-BAA agreements with all subcontractors that create, receive, maintain, or transmit PHI on its behalf prior to data exchange.",
+      "benchmarkPercentile": 69,
+      "riskPosture": "watch",
+      "source": { "page": 11, "section": "5.2" },
+      "playbook": {
+        "fallback": "Require annual subcontractor roster with security attestations and right-to-audit language.",
+        "impact": "medium",
+        "stakeholders": ["compliance", "procurement"]
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "breach-window",
+      "severity": 4,
+      "signal": "Breach notice lacks real-time escalation pathway.",
+      "recommendation": "Add 24/7 incident hotline and escalation matrix.",
+      "linkedClause": "breach-notification"
+    },
+    {
+      "id": "subcontractor-visibility",
+      "severity": 3,
+      "signal": "No defined cadence for subcontractor disclosures.",
+      "recommendation": "Mandate quarterly subcontractor reporting and spot audits.",
+      "linkedClause": "subcontractor-flowdown"
+    }
+  ],
+  "obligations": [
+    {
+      "owner": "business-associate",
+      "description": "Deliver HIPAA security risk assessment report and remediation roadmap",
+      "kpi": "compliance",
+      "due": "2026-03-31"
+    },
+    {
+      "owner": "covered-entity",
+      "description": "Provide minimum necessary PHI inventory and data flow diagrams",
+      "kpi": "privacy",
+      "due": "2025-12-15"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Breach escalation",
+        "current": "24-hour notice",
+        "target": "6-hour initial alert",
+        "fallback": "12-hour alert with named escalation contacts",
+        "impact": "high",
+        "confidence": 0.66
+      },
+      {
+        "topic": "Subcontractor transparency",
+        "current": "Annual roster",
+        "target": "Quarterly roster + attestations",
+        "fallback": "Semi-annual roster with right-to-audit clause",
+        "impact": "medium",
+        "confidence": 0.58
+      }
+    ]
+  },
+  "audit": {
+    "sourceFile": "healthcare-baa-redacted.pdf",
+    "confidence": {
+      "overall": 0.9,
+      "fields": {
+        "clauses.breach-notification": 0.93,
+        "clauses.subcontractor-flowdown": 0.82,
+        "obligations.business-associate": 0.9
+      }
+    }
+  }
+}

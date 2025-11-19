@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@contract-iq/ui": ["packages/ui/src/index.ts"],
+      "@contract-iq/ui/*": ["packages/ui/src/*"],
+      "@contract-iq/analytics": ["packages/analytics/src/index.ts"],
+      "@contract-iq/analytics/*": ["packages/analytics/src/*"],
+      "@contract-iq/prompts": ["packages/prompts/src/index.ts"],
+      "@contract-iq/prompts/*": ["packages/prompts/src/*"],
+      "@contract-iq/fixtures": ["packages/fixtures/src/index.ts"],
+      "@contract-iq/fixtures/*": ["packages/fixtures/src/*"]
+    }
+  }
+}

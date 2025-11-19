@@ -13,6 +13,13 @@ __pycache__/
 node_modules/
 dist/
 build/
+.turbo/
+.next/
+coverage/
+
+# Poetry
+.pytest_cache/
+.mypy_cache/
 
 # Env & secrets
 .env

@@ -1,0 +1,209 @@
+{
+  "metadata": {
+    "template": "sow-consulting",
+    "version": "2025.11",
+    "vertical": "professional-services",
+    "jurisdiction": "Texas, USA",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 6,
+      "noticeDays": null
+    },
+    "counterparties": [
+      { "name": "TechConsult Partners LLC", "role": "vendor" },
+      { "name": "Manufacturing Excellence Corp", "role": "customer" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 120000,
+      "currency": "USD",
+      "billingFrequency": "monthly",
+      "escalatorPercent": 0
+    },
+    "usageBands": [
+      {
+        "unit": "consulting hours",
+        "tiers": [
+          { "min": 0, "max": 400, "rate": 250 },
+          { "min": 401, "max": 800, "rate": 225 },
+          { "min": 801, "max": null, "rate": 200 }
+        ]
+      }
+    ],
+    "incentives": []
+  },
+  "clauses": [
+    {
+      "id": "deliverables",
+      "category": "scope",
+      "text": "Vendor shall deliver: (1) Current-state assessment report, (2) Process optimization roadmap, (3) Implementation plan with milestones, (4) Training materials.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "acceptance-criteria",
+      "category": "quality",
+      "text": "Deliverables subject to 10-day acceptance review. Customer may reject once with specific deficiencies; vendor has 5 days to cure.",
+      "benchmarkPercentile": 60,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "ip-ownership",
+      "category": "intellectual-property",
+      "text": "Customer owns all work product created under SOW. Vendor retains ownership of pre-existing tools and methodologies.",
+      "benchmarkPercentile": 55,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "payment-terms",
+      "category": "payment",
+      "text": "50% upon execution, 25% at mid-point milestone, 25% upon final deliverable acceptance.",
+      "benchmarkPercentile": 35,
+      "riskPosture": "elevated"
+    },
+    {
+      "id": "termination-convenience",
+      "category": "exit",
+      "text": "Customer may terminate for convenience with 30 days notice. Fees owed for work completed plus wind-down costs.",
+      "benchmarkPercentile": 70,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "liability-cap",
+      "category": "risk",
+      "text": "Vendor liability capped at fees paid under this SOW, excluding gross negligence and willful misconduct.",
+      "benchmarkPercentile": 30,
+      "riskPosture": "elevated"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "high",
+      "title": "Aggressive Payment Terms (50% Upfront)",
+      "description": "50% payment upon execution creates financial risk if deliverables are unsatisfactory or vendor fails to perform.",
+      "mitigation": "Negotiate 30% upfront, 30% at milestones, 40% upon final acceptance to align payment with value delivery.",
+      "confidence": 0.93
+    },
+    {
+      "id": "risk-002",
+      "severity": "medium",
+      "title": "Low Liability Cap",
+      "description": "Liability capped at SOW fees (likely $120K) may be insufficient for consulting errors causing operational disruption.",
+      "mitigation": "Negotiate 2-3x SOW fees for professional errors and omissions.",
+      "confidence": 0.81
+    },
+    {
+      "id": "risk-003",
+      "severity": "low",
+      "title": "No Performance Guarantees",
+      "description": "SOW lacks KPIs or performance metrics for process optimization outcomes.",
+      "mitigation": "Add measurable success criteria (e.g., '15% efficiency improvement' or 'reduce cycle time by X days').",
+      "confidence": 0.72
+    }
+  ],
+  "obligations": [
+    {
+      "party": "vendor",
+      "action": "deliver-assessment-report",
+      "deadline": "Month 2",
+      "recurring": false,
+      "condition": "per SOW timeline"
+    },
+    {
+      "party": "vendor",
+      "action": "deliver-optimization-roadmap",
+      "deadline": "Month 3",
+      "recurring": false,
+      "condition": "per SOW timeline"
+    },
+    {
+      "party": "vendor",
+      "action": "deliver-implementation-plan",
+      "deadline": "Month 4",
+      "recurring": false,
+      "condition": "per SOW timeline"
+    },
+    {
+      "party": "vendor",
+      "action": "deliver-training-materials",
+      "deadline": "Month 6",
+      "recurring": false,
+      "condition": "per SOW timeline"
+    },
+    {
+      "party": "customer",
+      "action": "pay-initial-installment",
+      "deadline": "upon SOW execution",
+      "recurring": false,
+      "condition": "SOW signature"
+    },
+    {
+      "party": "customer",
+      "action": "provide-access-and-stakeholders",
+      "deadline": "within 5 days of SOW execution",
+      "recurring": false,
+      "condition": "project kickoff"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Payment Terms Rebalancing",
+        "current": "50% upfront / 25% mid / 25% final",
+        "target": "25% upfront / 35% at milestones / 40% final acceptance",
+        "fallback": "30% upfront / 30% mid / 40% final",
+        "impact": "high",
+        "confidence": 0.86,
+        "talking_points": [
+          "Payment should align with value delivery and deliverable acceptance",
+          "Industry standard for fixed-price projects is 20-30% upfront",
+          "Protects against vendor non-performance or quality issues"
+        ],
+        "risk_callouts": [
+          "Ensure final payment contingent on deliverable acceptance, not just submission"
+        ]
+      },
+      {
+        "topic": "Liability Cap Increase",
+        "current": "1x SOW fees (~$120K)",
+        "target": "3x SOW fees",
+        "fallback": "2x SOW fees",
+        "impact": "high",
+        "confidence": 0.77,
+        "talking_points": [
+          "Consulting errors could cause operational disruption exceeding SOW value",
+          "Professional services agreements typically have 2-3x liability caps",
+          "Vendor should carry E&O insurance to backstop higher cap"
+        ],
+        "risk_callouts": [
+          "Clarify cap excludes IP indemnification and confidentiality breaches"
+        ]
+      },
+      {
+        "topic": "Performance Metrics Addition",
+        "current": "No quantified success criteria",
+        "target": "15% efficiency improvement or documented savings",
+        "fallback": "Qualitative success criteria with measurement framework",
+        "impact": "medium",
+        "confidence": 0.71,
+        "talking_points": [
+          "Measurable outcomes justify investment and enable vendor accountability",
+          "Process optimization should have quantifiable business impact",
+          "Success metrics align stakeholder expectations"
+        ],
+        "risk_callouts": [
+          "Agree on baseline metrics and measurement methodology upfront"
+        ]
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.84,
+    "extractedAt": "2025-11-15T08:45:00Z",
+    "model": "gemini-2.5-flash",
+    "reviewRequired": true,
+    "reviewReason": "Payment terms and liability cap require procurement/legal review"
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "metadata": {
+    "template": "msa-standard",
+    "version": "2025.11",
+    "vertical": "technology",
+    "jurisdiction": "New York, USA",
+    "renewal": {
+      "type": "auto",
+      "termMonths": 12,
+      "noticeDays": 60
+    },
+    "counterparties": [
+      { "name": "CloudScale Systems Inc.", "role": "vendor" },
+      { "name": "Enterprise Solutions Group", "role": "customer" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 240000,
+      "currency": "USD",
+      "billingFrequency": "annual",
+      "escalatorPercent": 3
+    },
+    "usageBands": [
+      {
+        "unit": "API calls per month",
+        "tiers": [
+          { "min": 0, "max": 1000000, "rate": 0 },
+          { "min": 1000001, "max": 5000000, "rate": 0.002 },
+          { "min": 5000001, "max": null, "rate": 0.0015 }
+        ]
+      }
+    ],
+    "incentives": [
+      {
+        "type": "credit",
+        "description": "5% service credit for each 0.1% below 99.9% uptime",
+        "trigger": "SLA breach",
+        "amount": 0.05,
+        "unit": "percentage"
+      }
+    ]
+  },
+  "clauses": [
+    {
+      "id": "liability-cap",
+      "category": "risk",
+      "text": "Total liability capped at 2x annual fees for general damages, uncapped for gross negligence and willful misconduct.",
+      "benchmarkPercentile": 70,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "sla-guarantee",
+      "category": "performance",
+      "text": "Vendor guarantees 99.9% uptime measured monthly, excluding scheduled maintenance windows.",
+      "benchmarkPercentile": 55,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "data-security",
+      "category": "compliance",
+      "text": "Vendor maintains SOC 2 Type II certification and encrypts data at rest and in transit using industry-standard protocols.",
+      "benchmarkPercentile": 65,
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "termination-convenience",
+      "category": "exit",
+      "text": "Either party may terminate for convenience with 90 days written notice.",
+      "benchmarkPercentile": 45,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "medium",
+      "title": "Auto-Renewal with Short Notice Period",
+      "description": "60-day notice period for non-renewal may be insufficient for budget planning cycles.",
+      "mitigation": "Negotiate 90-day notice period or calendar reminders 75 days before renewal.",
+      "confidence": 0.87
+    },
+    {
+      "id": "risk-002",
+      "severity": "low",
+      "title": "Usage-Based Pricing Variability",
+      "description": "API call pricing can create budget uncertainty if usage spikes.",
+      "mitigation": "Request usage caps or negotiate fixed-tier pricing for predictability.",
+      "confidence": 0.82
+    }
+  ],
+  "obligations": [
+    {
+      "party": "vendor",
+      "action": "maintain-sla",
+      "deadline": null,
+      "recurring": true,
+      "condition": "throughout contract term"
+    },
+    {
+      "party": "customer",
+      "action": "pay-fees",
+      "deadline": "net-30 from invoice date",
+      "recurring": true,
+      "condition": "monthly/annual per billing schedule"
+    },
+    {
+      "party": "vendor",
+      "action": "provide-soc2-certification",
+      "deadline": "within 30 days of request",
+      "recurring": false,
+      "condition": "upon customer request"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Liability Cap Increase",
+        "current": "2x annual fees",
+        "target": "3x annual fees",
+        "fallback": "2.5x annual fees",
+        "impact": "high",
+        "confidence": 0.78,
+        "talking_points": [
+          "Higher cap aligns with criticality of service to our operations",
+          "Comparable vendors offer 3-5x caps for enterprise agreements",
+          "Data breach or prolonged outage could exceed 2x threshold"
+        ],
+        "risk_callouts": [
+          "Ensure cap excludes IP indemnification and data breach liability"
+        ]
+      },
+      {
+        "topic": "SLA Enhancement to 99.95%",
+        "current": "99.9% uptime",
+        "target": "99.95% uptime",
+        "fallback": "99.9% with enhanced credits",
+        "impact": "high",
+        "confidence": 0.71,
+        "talking_points": [
+          "Mission-critical workloads require higher availability",
+          "Current SLA allows 43 minutes downtime/month",
+          "Enhanced SLA reduces acceptable downtime to 22 minutes/month"
+        ],
+        "risk_callouts": [
+          "Negotiate meaningful service credits (10-15% per breach)",
+          "Clarify measurement methodology and exclusions"
+        ]
+      },
+      {
+        "topic": "Auto-Renewal Notice Period Extension",
+        "current": "60 days",
+        "target": "90 days",
+        "fallback": "75 days",
+        "impact": "medium",
+        "confidence": 0.92,
+        "talking_points": [
+          "Aligns with our annual budget planning cycle",
+          "Provides sufficient time for RFP process if non-renewing",
+          "Industry standard is 60-90 days"
+        ],
+        "risk_callouts": []
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.89,
+    "extractedAt": "2025-11-15T08:15:00Z",
+    "model": "gemini-2.5-flash",
+    "reviewRequired": false
+  }
+}

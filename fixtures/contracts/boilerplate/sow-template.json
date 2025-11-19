@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "template": "sow-template",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "SOW_Template.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "CUSTOMER",
+        "role": "party-1"
+      },
+      {
+        "name": "Customer",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "STATEMENT OF WORK\n\nSOW #[NUMBER]\n\nThis Statement of Work (\"SOW\") is entered into as of [DATE], pursuant to the Master Service Agreement dated [MSA DATE] (\"Master Agreement\") between [SERVICE PROVIDER] (\"Service Provider\") and [CUSTOMER] (\"Customer\").\n\nPROJECT OVERVIEW\n\n1.1. Project Name: [PROJECT NAME]\n\n1.2. Project Description: [DESCRIBE THE PROJECT SCOPE, OBJECTIVES, AND GOALS]\n\nSCOPE OF SERVICES\n\n2.1. Services to be Provided: Service Provider shall provide the following services:\n\n(a) [SERVICE ITEM 1]\n\n(b) [SERVICE ITEM 2]\n\n(c) [SERVICE ITEM 3]\n\n2.2. Out of Scope: The following items are explicitly excluded from this SOW: [LIST EXCLUSIONS]\n\nDELIVERABLES\n\nDeliverable 1: [DESCRIPTION] - Due: [DATE]\n\nDeliverable 2: [DESCRIPTION] - Due: [DATE]\n\nDeliverable 3: [DESCRIPTION] - Due: [DATE]\n\nPROJECT TIMELINE\n\n4.1. Start Date: [DATE]\n\n4.2. Completion Date: [DATE]\n\n4.3. Key Milestones: [LIST MAJOR MILESTONES AND DATES]\n\nFEES AND PAYMENT\n\n5.1. Total Fees: $[AMOUNT]\n\n5.2. Payment Schedule: [DESCRIBE PAYMENT MILESTONES OR SCHEDULE]\n\nCUSTOMER RESPONSIBILITIES\n\nCustomer shall: (a) provide timely access to necessary resources, data, and personnel; (b) provide timely feedback and approvals; (c) ensure availability of key stakeholders for meetings; and (d) [OTHER RESPONSIBILITIES].\n\nACCEPTANCE CRITERIA\n\n7.1. Deliverables shall be deemed accepted if Customer does not provide written notice of rejection within [NUMBER] business days of receipt, specifying reasons for rejection. Service Provider shall have [NUMBER] days to remedy any deficiencies.\n\nGENERAL PROVISIONS\n\n8.1. This SOW is governed by the terms and conditions of the Master Agreement. In the event of conflict between this SOW and the Master Agreement, the Master Agreement shall prevail unless this SOW explicitly modifies a specific provision.\n\nSERVICE PROVIDER:\n\n__________________________________________________\n\nName: _________________ Title: _________________ Date: _________________\n\nCUSTOMER:\n\n__________________________________________________\n\nName: _________________ Title: _________________ Date: _________________",
+    "sections": []
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.064221Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

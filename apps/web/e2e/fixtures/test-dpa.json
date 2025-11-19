@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "template": "dpa-test",
+    "version": "2025.11",
+    "vertical": "technology",
+    "jurisdiction": "EU/GDPR",
+    "counterparties": [
+      { "name": "Test Processor Ltd.", "role": "processor" },
+      { "name": "Test Controller Inc.", "role": "controller" }
+    ]
+  },
+  "dataProtection": {
+    "dataTypes": [
+      "personal_identifiable_information",
+      "contact_information"
+    ],
+    "processingPurpose": "Service delivery and customer support",
+    "retentionPeriod": "Duration of service plus 30 days",
+    "security": {
+      "encryption": "AES-256",
+      "accessControls": "role-based"
+    }
+  },
+  "clauses": [
+    {
+      "id": "gdpr-compliance",
+      "category": "compliance",
+      "text": "Both parties shall comply with all applicable data protection laws including GDPR",
+      "riskPosture": "required"
+    },
+    {
+      "id": "breach-notification",
+      "category": "security",
+      "text": "Processor shall notify Controller within 24 hours of any personal data breach",
+      "riskPosture": "favorable"
+    },
+    {
+      "id": "sub-processors",
+      "category": "operations",
+      "text": "Processor may engage sub-processors with prior written consent from Controller",
+      "riskPosture": "neutral"
+    }
+  ]
+}

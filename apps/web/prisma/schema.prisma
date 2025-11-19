@@ -1,0 +1,135 @@
+// Contract IQ Database Schema
+// Backend for customer revenue intelligence
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Organizations (multi-tenancy)
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  domain    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  users     User[]
+  contracts Contract[]
+}
+
+// Users
+model User {
+  id             String       @id @default(cuid())
+  email          String       @unique
+  name           String?
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  createdAt      DateTime     @default(now())
+  
+  @@index([organizationId])
+}
+
+// Core Contracts Table
+model Contract {
+  id               String       @id @default(cuid())
+  organizationId   String
+  organization     Organization @relation(fields: [organizationId], references: [id])
+  
+  // File metadata
+  fileName         String
+  fileUrl          String?
+  fileSizeBytes    Int?
+  uploadedAt       DateTime     @default(now())
+  
+  // Contract identification
+  customerName     String
+  customerType     String?      // 'Enterprise', 'Mid-Market', 'SMB', 'Startup'
+  industry         String?      // 'FinTech', 'Healthcare', 'SaaS', 'Retail', etc.
+  contractType     String?      // 'MSA', 'SOW', 'Order Form', 'Amendment'
+  effectiveDate    DateTime?
+  
+  // Term & Renewal (MANUALLY ENTERED)
+  initialTermEndDate      DateTime
+  renewalType             String   // 'AUTO_RENEWAL', 'MANUAL_RENEWAL', 'ONE_TIME'
+  renewalNoticeDays       Int?
+  renewalNoticeDeadline   DateTime? // Calculated field
+  whoCanTerminate         String?   // 'EITHER_PARTY', 'CUSTOMER_ONLY', 'PROVIDER_ONLY'
+  
+  // Pricing
+  pricingModel     String?      // 'PER_USER', 'FLAT_FEE', 'USAGE_BASED', 'HYBRID'
+  baseMonthlyFee   Decimal?     @db.Decimal(10, 2)
+  baseAnnualFee    Decimal?     @db.Decimal(10, 2)
+  currency         String       @default("USD")
+  committedSeats   Int?
+  
+  // Contract value
+  totalContractValue  Decimal? @db.Decimal(12, 2)
+  annualContractValue Decimal? @db.Decimal(12, 2)
+  
+  // Status
+  status              String   @default("active") // 'active', 'archived', 'expired'
+  manualEntryComplete Boolean  @default(false)
+  
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  
+  riskScore        RiskScore?
+  
+  @@index([organizationId])
+  @@index([customerName])
+  @@index([renewalNoticeDeadline])
+}
+
+// Risk Scores
+model RiskScore {
+  id                     String   @id @default(cuid())
+  contractId             String   @unique
+  contract               Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  
+  // Overall risk
+  overallRiskScore       Int      // 0-100
+  riskClassification     String   // 'HIGH', 'MEDIUM', 'LOW'
+  
+  // Risk breakdown
+  renewalRiskScore       Int
+  pricingRiskScore       Int
+  terminationRiskScore   Int
+  complianceRiskScore    Int
+  relationshipRiskScore  Int
+  
+  // Risk factors (JSON)
+  renewalRiskFactors     Json?
+  pricingRiskFactors     Json?
+  terminationRiskFactors Json?
+  
+  // Recommended actions (JSON array)
+  recommendedActions     Json?
+  
+  calculatedAt           DateTime @default(now())
+  calculationVersion     String   @default("v1.0.0")
+  
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+// Salesforce Connections (optional for MVP)
+model SalesforceConnection {
+  id             String   @id @default(cuid())
+  organizationId String   @unique
+  
+  accessToken    String
+  refreshToken   String
+  instanceUrl    String
+  
+  connectedAt    DateTime
+  lastSyncAt     DateTime?
+  syncStatus     String   @default("connected")
+  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

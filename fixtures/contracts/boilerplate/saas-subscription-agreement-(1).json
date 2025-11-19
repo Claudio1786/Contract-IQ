@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "template": "saas-subscription-agreement-(1)",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "SaaS_Subscription_Agreement (1).docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "CUSTOMER",
+        "role": "party-1"
+      },
+      {
+        "name": "Customer",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "general",
+      "section": "1. DEFINITIONS",
+      "text": "1.1 \"Application Platform\" means the SaaS platform and infrastructure provided by Provider.\n1.2 \"Authorized Users\" means Customer's employees, contractors, and agents authorized to access the SaaS Services.\n1.3 \"Customer Data\" means all electronic data and information submitted by or on behalf of Customer to the SaaS Services.\n1.4 \"Documentation\" means Provider's standard user documentation for the SaaS Services.\n1.5 \"SaaS Services\" means the software-as-a-service applications and related servic",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. GRANT OF RIGHTS",
+      "text": "2.1 SaaS Services License. Subject to the terms of this Agreement, Provider grants Customer a non-exclusive, non-transferable right to access and use the SaaS Services and Documentation during the Subscription Term solely for Customer's internal business operations.\n2.2 User Subscriptions. Customer may purchase user subscriptions as specified in the applicable Order Form. Each Authorized User must have a unique login credential and may not share credentials with others.\n2.3 Restrictions. Custome",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. PROVISION OF SERVICES",
+      "text": "3.1 Hosting and Support. Provider shall: (a) host and maintain the Application Platform; (b) provide standard technical support during Normal Business Hours; and (c) perform backups of Customer Data in accordance with Provider's standard backup procedures.\n3.2 Updates and Maintenance. Provider may perform scheduled maintenance and updates to the SaaS Services. Provider shall use commercially reasonable efforts to provide advance notice of scheduled maintenance that may affect availability.\n3.3 U",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "4. SUBSCRIPTION FEES AND PAYMENT",
+      "text": "4.1 Subscription Fees. Customer shall pay Provider the subscription fees specified in the applicable Order Form (\"Subscription Fees\"). All fees are non-refundable except as expressly provided in this Agreement.\n4.2 Payment Terms. Invoices are due and payable within thirty (30) days of the invoice date. Late payments shall accrue interest at the rate of 1.5% per month or the maximum rate permitted by law, whichever is less.\n4.3 Fee Increases. Provider may increase Subscription Fees upon renewal b",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. TERM AND RENEWAL",
+      "text": "5.1 Initial Term. The initial Subscription Term shall commence on the Effective Date and continue for the period specified in the Order Form.\n5.2 Auto-Renewal. This Agreement shall automatically renew for successive renewal terms equal to the initial Subscription Term unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current term.\n5.3 Termination for Convenience. Customer may terminate this Agreement for convenience upon thirty (30)",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. CUSTOMER DATA AND PRIVACY",
+      "text": "6.1 Ownership. As between the parties, Customer retains all right, title, and interest in and to the Customer Data. Customer grants Provider a limited license to use Customer Data solely to provide the SaaS Services.\n6.2 Data Security. Provider shall maintain administrative, physical, and technical safeguards designed to protect the security, confidentiality, and integrity of Customer Data in accordance with industry standards.\n6.3 Data Processing. Provider shall process Customer Data in accorda",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "carveout",
+      "section": "7. SERVICE LEVEL AGREEMENT",
+      "text": "7.1 Availability. Provider commits to maintaining 99.9% uptime for the SaaS Services during each calendar month, calculated as: (Total Minutes in Month - Downtime Minutes) / Total Minutes in Month.\n7.2 Exclusions. Uptime calculations exclude: (a) scheduled maintenance windows; (b) downtime caused by Customer's acts or omissions; (c) force majeure events; and (d) internet connectivity issues outside Provider's control.\n7.3 Service Credits. If Provider fails to meet the uptime commitment, Customer",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "payment",
+      "section": "8. INTELLECTUAL PROPERTY",
+      "text": "8.1 Provider IP. Provider retains all right, title, and interest in and to the SaaS Services, Application Platform, and Documentation, including all intellectual property rights therein.\n8.2 Feedback. Customer may provide suggestions or feedback regarding the SaaS Services. Provider may use such feedback without restriction or compensation to Customer.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. WARRANTIES AND DISCLAIMERS",
+      "text": "9.1 Performance Warranty. Provider warrants that the SaaS Services shall perform materially in accordance with the Documentation. Customer's exclusive remedy for breach of this warranty is Provider's correction of the non-conformity or, if Provider cannot reasonably correct it, termination and pro-rata refund.\n9.2 Disclaimer. EXCEPT AS EXPRESSLY PROVIDED HEREIN, THE SAAS SERVICES ARE PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND. PROVIDER DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING M",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "obligation",
+      "section": "10. LIMITATION OF LIABILITY",
+      "text": "10.1 Cap on Liability. EXCEPT FOR EXCLUDED CLAIMS, EACH PARTY'S TOTAL LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL NOT EXCEED THE SUBSCRIPTION FEES PAID OR PAYABLE BY CUSTOMER IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.\n10.2 Excluded Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, OR LOST DATA, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\n10.3 Excluded Claims. T",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "SAAS SUBSCRIPTION AGREEMENT\n\nThis SaaS Subscription Agreement (\"Agreement\") is entered into as of [Date] (\"Effective Date\") by and between [Provider Name], a [State] corporation (\"Provider\"), and [Customer Name], a [State] corporation (\"Customer\").\n\n1. DEFINITIONS\n\n1.1 \"Application Platform\" means the SaaS platform and infrastructure provided by Provider.\n\n1.2 \"Authorized Users\" means Customer's employees, contractors, and agents authorized to access the SaaS Services.\n\n1.3 \"Customer Data\" means all electronic data and information submitted by or on behalf of Customer to the SaaS Services.\n\n1.4 \"Documentation\" means Provider's standard user documentation for the SaaS Services.\n\n1.5 \"SaaS Services\" means the software-as-a-service applications and related services described in the applicable Order Form.\n\n1.6 \"Subscription Term\" means the period during which Customer is entitled to access the SaaS Services.\n\n2. GRANT OF RIGHTS\n\n2.1 SaaS Services License. Subject to the terms of this Agreement, Provider grants Customer a non-exclusive, non-transferable right to access and use the SaaS Services and Documentation during the Subscription Term solely for Customer's internal business operations.\n\n2.2 User Subscriptions. Customer may purchase user subscriptions as specified in the applicable Order Form. Each Authorized User must have a unique login credential and may not share credentials with others.\n\n2.3 Restrictions. Customer shall not: (a) modify, copy, or create derivative works of the SaaS Services; (b) reverse engineer, decompile, or disassemble the SaaS Services; (c) rent, lease, lend, sell, sublicense, or otherwise transfer rights to the SaaS Services; (d) use the SaaS Services for service bureau or time-sharing purposes; or (e) remove or modify any proprietary markings or notices.\n\n3. PROVISION OF SERVICES\n\n3.1 Hosting and Support. Provider shall: (a) host and maintain the Application Platform; (b) provide standard technical support during Normal Business Hours; and (c) perform backups of Customer Data in accordance with Provider's standard backup procedures.\n\n3.2 Updates and Maintenance. Provider may perform scheduled maintenance and updates to the SaaS Services. Provider shall use commercially reasonable efforts to provide advance notice of scheduled maintenance that may affect availability.\n\n3.3 Uptime Commitment. Provider shall use commercially reasonable efforts to maintain the SaaS Services with an uptime percentage of 99.9% calculated monthly, excluding scheduled maintenance and force majeure events.\n\n4. SUBSCRIPTION FEES AND PAYMENT\n\n4.1 Subscription Fees. Customer shall pay Provider the subscription fees specified in the applicable Order Form (\"Subscription Fees\"). All fees are non-refundable except as expressly provided in this Agreement.\n\n4.2 Payment Terms. Invoices are due and payable within thirty (30) days of the invoice date. Late payments shall accrue interest at the rate of 1.5% per month or the maximum rate permitted by law, whichever is less.\n\n4.3 Fee Increases. Provider may increase Subscription Fees upon renewal by providing at least sixty (60) days' prior written notice. Annual fee increases shall not exceed the greater of (a) 5% or (b) the percentage increase in the Consumer Price Index.\n\n4.4 Taxes. All fees are exclusive of applicable taxes. Customer shall pay all sales, use, VAT, and other taxes, excluding taxes based on Provider's net income.\n\n5. TERM AND RENEWAL\n\n5.1 Initial Term. The initial Subscription Term shall commence on the Effective Date and continue for the period specified in the Order Form.\n\n5.2 Auto-Renewal. This Agreement shall automatically renew for successive renewal terms equal to the initial Subscription Term unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current term.\n\n5.3 Termination for Convenience. Customer may terminate this Agreement for convenience upon thirty (30) days' prior written notice. Provider shall refund any prepaid fees for unused services on a pro-rata basis.\n\n6. CUSTOMER DATA AND PRIVACY\n\n6.1 Ownership. As between the parties, Customer retains all right, title, and interest in and to the Customer Data. Customer grants Provider a limited license to use Customer Data solely to provide the SaaS Services.\n\n6.2 Data Security. Provider shall maintain administrative, physical, and technical safeguards designed to protect the security, confidentiality, and integrity of Customer Data in accordance with industry standards.\n\n6.3 Data Processing. Provider shall process Customer Data in accordance with its Privacy Policy and applicable data protection laws. If processing personal data subject to GDPR, the parties shall execute a Data Processing Addendum.\n\n6.4 Data Portability. Upon request during the Subscription Term or within thirty (30) days after termination, Provider shall make Customer Data available for export in a commonly used format.\n\n7. SERVICE LEVEL AGREEMENT\n\n7.1 Availability. Provider commits to maintaining 99.9% uptime for the SaaS Services during each calendar month, calculated as: (Total Minutes in Month - Downtime Minutes) / Total Minutes in Month.\n\n7.2 Exclusions. Uptime calculations exclude: (a) scheduled maintenance windows; (b) downtime caused by Customer's acts or omissions; (c) force majeure events; and (d) internet connectivity issues outside Provider's control.\n\n7.3 Service Credits. If Provider fails to meet the uptime commitment, Customer may request service credits as follows: (a) 95-99.9% uptime: 10% credit; (b) 90-95% uptime: 25% credit; (c) below 90% uptime: 50% credit. Credits apply only to future Subscription Fees and do not exceed one month's fees.\n\n8. INTELLECTUAL PROPERTY\n\n8.1 Provider IP. Provider retains all right, title, and interest in and to the SaaS Services, Application Platform, and Documentation, including all intellectual property rights therein.\n\n8.2 Feedback. Customer may provide suggestions or feedback regarding the SaaS Services. Provider may use such feedback without restriction or compensation to Customer.\n\n9. WARRANTIES AND DISCLAIMERS\n\n9.1 Performance Warranty. Provider warrants that the SaaS Services shall perform materially in accordance with the Documentation. Customer's exclusive remedy for breach of this warranty is Provider's correction of the non-conformity or, if Provider cannot reasonably correct it, termination and pro-rata refund.\n\n9.2 Disclaimer. EXCEPT AS EXPRESSLY PROVIDED HEREIN, THE SAAS SERVICES ARE PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND. PROVIDER DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.\n\n10. LIMITATION OF LIABILITY\n\n10.1 Cap on Liability. EXCEPT FOR EXCLUDED CLAIMS, EACH PARTY'S TOTAL LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL NOT EXCEED THE SUBSCRIPTION FEES PAID OR PAYABLE BY CUSTOMER IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.\n\n10.2 Excluded Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, OR LOST DATA, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\n\n10.3 Excluded Claims. The limitations in this Section 10 do not apply to: (a) either party's indemnification obligations; (b) Customer's payment obligations; (c) violations of intellectual property rights; or (d) either party's gross negligence or willful misconduct.\n\n11. INDEMNIFICATION\n\n11.1 Provider Indemnity. Provider shall defend, indemnify, and hold harmless Customer from third-party claims that the SaaS Services infringe any patent, copyright, or trademark. Provider's obligations are conditioned on Customer providing prompt notice and full cooperation.\n\n11.2 Customer Indemnity. Customer shall defend, indemnify, and hold harmless Provider from third-party claims arising from: (a) Customer Data; (b) Customer's violation of this Agreement; or (c) Customer's violation of applicable law.\n\n12. CONFIDENTIALITY\n\n12.1 Confidential Information. Each party may disclose Confidential Information to the other. Confidential Information means non-public information marked as confidential or that reasonably should be considered confidential.\n\n12.2 Protection. The receiving party shall: (a) protect Confidential Information with the same degree of care used to protect its own confidential information; and (b) not disclose Confidential Information except to employees and contractors with a need to know.\n\n12.3 Exclusions. Confidential Information does not include information that: (a) is publicly available; (b) was known prior to disclosure; (c) was independently developed; or (d) was received from a third party without restriction.\n\n13. TERMINATION\n\n13.1 Termination for Cause. Either party may terminate this Agreement if the other party materially breaches and fails to cure within thirty (30) days of written notice.\n\n13.2 Effect of Termination. Upon termination: (a) Customer's access to the SaaS Services shall cease; (b) Provider shall make Customer Data available for export for thirty (30) days; and (c) all payment obligations for services rendered shall become immediately due.\n\n13.3 Survival. Sections relating to payment, confidentiality, intellectual property, warranties, limitations of liability, and indemnification shall survive termination.\n\n14. GENERAL PROVISIONS\n\n14.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements.\n\n14.2 Amendment. This Agreement may only be amended by a written agreement signed by both parties.\n\n14.3 Governing Law. This Agreement shall be governed by the laws of [State], without regard to conflicts of law principles.\n\n14.4 Dispute Resolution. Any disputes shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association.\n\n14.5 Force Majeure. Neither party shall be liable for failure to perform due to causes beyond its reasonable control.\n\n14.6 Assignment. Neither party may assign this Agreement without the other party's prior written consent, except to a successor in connection with a merger or acquisition.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\n\nPROVIDER:\t\t\t\tCUSTOMER:\n\nBy: _________________________\t\tBy: _________________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nTitle: [Title]\t\t\t\tTitle: [Title]\n\nDate: _______________\t\t\tDate: _______________",
+    "sections": [
+      {
+        "title": "1. DEFINITIONS",
+        "text": "1.1 \"Application Platform\" means the SaaS platform and infrastructure provided by Provider.\n1.2 \"Authorized Users\" means Customer's employees, contractors, and agents authorized to access the SaaS Services.\n1.3 \"Customer Data\" means all electronic data and information submitted by or on behalf of Customer to the SaaS Services.\n1.4 \"Documentation\" means Provider's standard user documentation for the SaaS Services.\n1.5 \"SaaS Services\" means the software-as-a-service applications and related services described in the applicable Order Form.\n1.6 \"Subscription Term\" means the period during which Customer is entitled to access the SaaS Services."
+      },
+      {
+        "title": "2. GRANT OF RIGHTS",
+        "text": "2.1 SaaS Services License. Subject to the terms of this Agreement, Provider grants Customer a non-exclusive, non-transferable right to access and use the SaaS Services and Documentation during the Subscription Term solely for Customer's internal business operations.\n2.2 User Subscriptions. Customer may purchase user subscriptions as specified in the applicable Order Form. Each Authorized User must have a unique login credential and may not share credentials with others.\n2.3 Restrictions. Customer shall not: (a) modify, copy, or create derivative works of the SaaS Services; (b) reverse engineer, decompile, or disassemble the SaaS Services; (c) rent, lease, lend, sell, sublicense, or otherwise transfer rights to the SaaS Services; (d) use the SaaS Services for service bureau or time-sharing purposes; or (e) remove or modify any proprietary markings or notices."
+      },
+      {
+        "title": "3. PROVISION OF SERVICES",
+        "text": "3.1 Hosting and Support. Provider shall: (a) host and maintain the Application Platform; (b) provide standard technical support during Normal Business Hours; and (c) perform backups of Customer Data in accordance with Provider's standard backup procedures.\n3.2 Updates and Maintenance. Provider may perform scheduled maintenance and updates to the SaaS Services. Provider shall use commercially reasonable efforts to provide advance notice of scheduled maintenance that may affect availability.\n3.3 Uptime Commitment. Provider shall use commercially reasonable efforts to maintain the SaaS Services with an uptime percentage of 99.9% calculated monthly, excluding scheduled maintenance and force majeure events."
+      },
+      {
+        "title": "4. SUBSCRIPTION FEES AND PAYMENT",
+        "text": "4.1 Subscription Fees. Customer shall pay Provider the subscription fees specified in the applicable Order Form (\"Subscription Fees\"). All fees are non-refundable except as expressly provided in this Agreement.\n4.2 Payment Terms. Invoices are due and payable within thirty (30) days of the invoice date. Late payments shall accrue interest at the rate of 1.5% per month or the maximum rate permitted by law, whichever is less.\n4.3 Fee Increases. Provider may increase Subscription Fees upon renewal by providing at least sixty (60) days' prior written notice. Annual fee increases shall not exceed the greater of (a) 5% or (b) the percentage increase in the Consumer Price Index.\n4.4 Taxes. All fees are exclusive of applicable taxes. Customer shall pay all sales, use, VAT, and other taxes, excluding taxes based on Provider's net income."
+      },
+      {
+        "title": "5. TERM AND RENEWAL",
+        "text": "5.1 Initial Term. The initial Subscription Term shall commence on the Effective Date and continue for the period specified in the Order Form.\n5.2 Auto-Renewal. This Agreement shall automatically renew for successive renewal terms equal to the initial Subscription Term unless either party provides written notice of non-renewal at least thirty (30) days prior to the end of the then-current term.\n5.3 Termination for Convenience. Customer may terminate this Agreement for convenience upon thirty (30) days' prior written notice. Provider shall refund any prepaid fees for unused services on a pro-rata basis."
+      },
+      {
+        "title": "6. CUSTOMER DATA AND PRIVACY",
+        "text": "6.1 Ownership. As between the parties, Customer retains all right, title, and interest in and to the Customer Data. Customer grants Provider a limited license to use Customer Data solely to provide the SaaS Services.\n6.2 Data Security. Provider shall maintain administrative, physical, and technical safeguards designed to protect the security, confidentiality, and integrity of Customer Data in accordance with industry standards.\n6.3 Data Processing. Provider shall process Customer Data in accordance with its Privacy Policy and applicable data protection laws. If processing personal data subject to GDPR, the parties shall execute a Data Processing Addendum.\n6.4 Data Portability. Upon request during the Subscription Term or within thirty (30) days after termination, Provider shall make Customer Data available for export in a commonly used format."
+      },
+      {
+        "title": "7. SERVICE LEVEL AGREEMENT",
+        "text": "7.1 Availability. Provider commits to maintaining 99.9% uptime for the SaaS Services during each calendar month, calculated as: (Total Minutes in Month - Downtime Minutes) / Total Minutes in Month.\n7.2 Exclusions. Uptime calculations exclude: (a) scheduled maintenance windows; (b) downtime caused by Customer's acts or omissions; (c) force majeure events; and (d) internet connectivity issues outside Provider's control.\n7.3 Service Credits. If Provider fails to meet the uptime commitment, Customer may request service credits as follows: (a) 95-99.9% uptime: 10% credit; (b) 90-95% uptime: 25% credit; (c) below 90% uptime: 50% credit. Credits apply only to future Subscription Fees and do not exceed one month's fees."
+      },
+      {
+        "title": "8. INTELLECTUAL PROPERTY",
+        "text": "8.1 Provider IP. Provider retains all right, title, and interest in and to the SaaS Services, Application Platform, and Documentation, including all intellectual property rights therein.\n8.2 Feedback. Customer may provide suggestions or feedback regarding the SaaS Services. Provider may use such feedback without restriction or compensation to Customer."
+      },
+      {
+        "title": "9. WARRANTIES AND DISCLAIMERS",
+        "text": "9.1 Performance Warranty. Provider warrants that the SaaS Services shall perform materially in accordance with the Documentation. Customer's exclusive remedy for breach of this warranty is Provider's correction of the non-conformity or, if Provider cannot reasonably correct it, termination and pro-rata refund.\n9.2 Disclaimer. EXCEPT AS EXPRESSLY PROVIDED HEREIN, THE SAAS SERVICES ARE PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND. PROVIDER DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT."
+      },
+      {
+        "title": "10. LIMITATION OF LIABILITY",
+        "text": "10.1 Cap on Liability. EXCEPT FOR EXCLUDED CLAIMS, EACH PARTY'S TOTAL LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL NOT EXCEED THE SUBSCRIPTION FEES PAID OR PAYABLE BY CUSTOMER IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.\n10.2 Excluded Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, OR LOST DATA, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\n10.3 Excluded Claims. The limitations in this Section 10 do not apply to: (a) either party's indemnification obligations; (b) Customer's payment obligations; (c) violations of intellectual property rights; or (d) either party's gross negligence or willful misconduct."
+      },
+      {
+        "title": "11. INDEMNIFICATION",
+        "text": "11.1 Provider Indemnity. Provider shall defend, indemnify, and hold harmless Customer from third-party claims that the SaaS Services infringe any patent, copyright, or trademark. Provider's obligations are conditioned on Customer providing prompt notice and full cooperation.\n11.2 Customer Indemnity. Customer shall defend, indemnify, and hold harmless Provider from third-party claims arising from: (a) Customer Data; (b) Customer's violation of this Agreement; or (c) Customer's violation of applicable law."
+      },
+      {
+        "title": "12. CONFIDENTIALITY",
+        "text": "12.1 Confidential Information. Each party may disclose Confidential Information to the other. Confidential Information means non-public information marked as confidential or that reasonably should be considered confidential.\n12.2 Protection. The receiving party shall: (a) protect Confidential Information with the same degree of care used to protect its own confidential information; and (b) not disclose Confidential Information except to employees and contractors with a need to know.\n12.3 Exclusions. Confidential Information does not include information that: (a) is publicly available; (b) was known prior to disclosure; (c) was independently developed; or (d) was received from a third party without restriction."
+      },
+      {
+        "title": "13. TERMINATION",
+        "text": "13.1 Termination for Cause. Either party may terminate this Agreement if the other party materially breaches and fails to cure within thirty (30) days of written notice.\n13.2 Effect of Termination. Upon termination: (a) Customer's access to the SaaS Services shall cease; (b) Provider shall make Customer Data available for export for thirty (30) days; and (c) all payment obligations for services rendered shall become immediately due.\n13.3 Survival. Sections relating to payment, confidentiality, intellectual property, warranties, limitations of liability, and indemnification shall survive termination."
+      },
+      {
+        "title": "14. GENERAL PROVISIONS",
+        "text": "14.1 Entire Agreement. This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements.\n14.2 Amendment. This Agreement may only be amended by a written agreement signed by both parties.\n14.3 Governing Law. This Agreement shall be governed by the laws of [State], without regard to conflicts of law principles.\n14.4 Dispute Resolution. Any disputes shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association.\n14.5 Force Majeure. Neither party shall be liable for failure to perform due to causes beyond its reasonable control.\n14.6 Assignment. Neither party may assign this Agreement without the other party's prior written consent, except to a successor in connection with a merger or acquisition.\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\nPROVIDER:\t\t\t\tCUSTOMER:\nBy: _________________________\t\tBy: _________________________\nName: [Name]\t\t\t\tName: [Name]\nTitle: [Title]\t\t\t\tTitle: [Title]\nDate: _______________\t\t\tDate: _______________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.042223Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

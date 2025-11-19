@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "template": "saas-data-processing-addendum",
+    "version": "2025.11",
+    "vertical": "saas",
+    "jurisdiction": "EU / GDPR",
+    "renewal": {
+      "type": "co-terminous",
+      "termMonths": 12,
+      "noticeDays": 60
+    },
+    "counterparties": [
+      { "name": "LatticeWorks, Inc.", "role": "processor" },
+      { "name": "Northstar Retail Holdings", "role": "controller" }
+    ]
+  },
+  "financials": {
+    "baseFee": {
+      "amount": 0,
+      "currency": "USD",
+      "billingFrequency": "n/a"
+    },
+    "incentives": []
+  },
+  "clauses": [
+    {
+      "id": "subprocessor-approval",
+      "category": "privacy",
+      "text": "Processor must obtain Controller's written approval prior to onboarding any new subprocessors.",
+      "benchmarkPercentile": 88,
+      "riskPosture": "standard",
+      "source": { "page": 3, "section": "2.3" },
+      "playbook": {
+        "fallback": "Require 30-day advance notice with termination right if objections unresolved.",
+        "impact": "medium",
+        "stakeholders": ["privacy", "security"]
+      }
+    },
+    {
+      "id": "breach-notification",
+      "category": "privacy",
+      "text": "Processor shall notify Controller without undue delay and no later than 24 hours after becoming aware of a Personal Data Breach.",
+      "benchmarkPercentile": 72,
+      "riskPosture": "strong",
+      "source": { "page": 5, "section": "4.1" },
+      "playbook": {
+        "fallback": "Add obligation to provide incident report within 48 hours.",
+        "impact": "medium",
+        "stakeholders": ["privacy", "security", "comms"]
+      }
+    },
+    {
+      "id": "data-transfer",
+      "category": "compliance",
+      "text": "Processor relies on EU Standard Contractual Clauses 2021/914, Module 2 for cross-border transfers.",
+      "benchmarkPercentile": 64,
+      "riskPosture": "watch",
+      "source": { "page": 6, "section": "5.4" },
+      "playbook": {
+        "fallback": "Require documented Transfer Impact Assessment and US data center option.",
+        "impact": "high",
+        "stakeholders": ["privacy", "legal"]
+      }
+    }
+  ],
+  "risks": [
+    {
+      "id": "data-transfer",
+      "severity": 4,
+      "signal": "Relies solely on SCCs without documented TIA.",
+      "recommendation": "Request TIA and supplementary encryption controls.",
+      "linkedClause": "data-transfer"
+    }
+  ],
+  "obligations": [
+    {
+      "owner": "processor",
+      "description": "Maintain ISO 27001 certification and provide evidence annually.",
+      "kpi": "compliance",
+      "due": "2026-01-15"
+    },
+    {
+      "owner": "controller",
+      "description": "Respond to data subject access requests within 10 business days of processor notification.",
+      "kpi": "privacy",
+      "due": null
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Transfer Impact Assessment",
+        "current": "Not provided",
+        "target": "Provide annual TIA summary",
+        "fallback": "Quarterly attestations with SOC 2 mapping",
+        "impact": "high",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "audit": {
+    "sourceFile": "saas-dpa-redacted.pdf",
+    "confidence": {
+      "overall": 0.89,
+      "fields": {
+        "clauses.breach-notification": 0.94,
+        "clauses.data-transfer": 0.8
+      }
+    }
+  }
+}

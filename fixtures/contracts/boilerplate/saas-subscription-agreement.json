@@ -1,0 +1,355 @@
+{
+  "metadata": {
+    "template": "saas-subscription-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "SaaS_Subscription_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "COMPANY",
+        "role": "party-1"
+      },
+      {
+        "name": "CUSTOMER",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "confidentiality",
+      "section": "RECITALS",
+      "text": "WHEREAS, Provider has developed and operates a proprietary cloud-based software platform providing [DESCRIPTION OF SERVICE] (\"Platform\");\nWHEREAS, Customer desires to subscribe to and use the Platform for its internal business operations; and\nWHEREAS, Provider desires to grant Customer access to the Platform subject to the terms and conditions set forth herein.\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, and for other good and valuable consideration,",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "general",
+      "section": "1.1 \"Authorized Users\"",
+      "text": "means Customer's employees, contractors, and consultants who are authorized by Customer to access and use the Services under the rights granted to Customer pursuant to this Agreement.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "confidentiality",
+      "section": "1.2 \"Confidential Information\"",
+      "text": "means all non-public information disclosed by one party to the other, whether orally or in writing, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "general",
+      "section": "1.3 \"Customer Data\"",
+      "text": "means any data, information, or material provided, uploaded, or submitted by Customer or Authorized Users to the Services.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "general",
+      "section": "1.4 \"Services\"",
+      "text": "means the Platform, related support services, and all updates, enhancements, and modifications thereto provided by Provider.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "general",
+      "section": "1.5 \"Subscription Term\"",
+      "text": "means the initial subscription period and any renewal periods as specified in the Order Form.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "general",
+      "section": "2.1 License Grant",
+      "text": "Subject to the terms and conditions of this Agreement, Provider hereby grants Customer a non-exclusive, non-transferable, non-sublicensable right to access and use the Services during the Subscription Term solely for Customer's internal business purposes.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "general",
+      "section": "2.2 User Limitations",
+      "text": "Customer may permit up to [NUMBER] Authorized Users to access the Services. Customer may add additional Authorized Users by purchasing additional user licenses at Provider's then-current rates.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "SAAS SUBSCRIPTION AGREEMENT\n\nThis SaaS Subscription Agreement (\"Agreement\") is entered into as of [DATE] (\"Effective Date\") by and between:\n\nPROVIDER: [COMPANY NAME], a [STATE] corporation with its principal place of business at [ADDRESS] (\"Provider\" or \"Company\")\n\nCUSTOMER: [CUSTOMER NAME], a [STATE] [ENTITY TYPE] with its principal place of business at [ADDRESS] (\"Customer\" or \"Subscriber\")\n\nRECITALS\n\nWHEREAS, Provider has developed and operates a proprietary cloud-based software platform providing [DESCRIPTION OF SERVICE] (\"Platform\");\n\nWHEREAS, Customer desires to subscribe to and use the Platform for its internal business operations; and\n\nWHEREAS, Provider desires to grant Customer access to the Platform subject to the terms and conditions set forth herein.\n\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties agree as follows:\n\n1. DEFINITIONS\n\n1.1 \"Authorized Users\"\n\nmeans Customer's employees, contractors, and consultants who are authorized by Customer to access and use the Services under the rights granted to Customer pursuant to this Agreement.\n\n1.2 \"Confidential Information\"\n\nmeans all non-public information disclosed by one party to the other, whether orally or in writing, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure.\n\n1.3 \"Customer Data\"\n\nmeans any data, information, or material provided, uploaded, or submitted by Customer or Authorized Users to the Services.\n\n1.4 \"Services\"\n\nmeans the Platform, related support services, and all updates, enhancements, and modifications thereto provided by Provider.\n\n1.5 \"Subscription Term\"\n\nmeans the initial subscription period and any renewal periods as specified in the Order Form.\n\n2. LICENSE GRANT AND SCOPE\n\n2.1 License Grant\n\nSubject to the terms and conditions of this Agreement, Provider hereby grants Customer a non-exclusive, non-transferable, non-sublicensable right to access and use the Services during the Subscription Term solely for Customer's internal business purposes.\n\n2.2 User Limitations\n\nCustomer may permit up to [NUMBER] Authorized Users to access the Services. Customer may add additional Authorized Users by purchasing additional user licenses at Provider's then-current rates.\n\n2.3 Usage Restrictions\n\nCustomer shall not, and shall not permit any third party to:\n\nUse the Services for any purpose other than as specified in this Agreement\n\nCopy, modify, or create derivative works of the Services\n\nReverse engineer, decompile, disassemble, or otherwise attempt to discover the source code\n\nRent, lease, sell, sublicense, assign, distribute, or transfer the Services to any third party\n\nRemove, alter, or obscure any proprietary notices on the Services\n\nUse the Services in any manner that violates applicable laws or regulations\n\nInterfere with or disrupt the integrity or performance of the Services\n\n3. SUBSCRIPTION FEES AND PAYMENT TERMS\n\n3.1 Subscription Fees\n\nCustomer agrees to pay Provider the subscription fees as set forth in the Order Form attached hereto as Exhibit B (\"Subscription Fees\").\n\n3.2 Payment Terms\n\nSubscription Fees shall be billed [MONTHLY/QUARTERLY/ANNUALLY] in advance. Payment is due within thirty (30) days of the invoice date. All fees are non-refundable except as expressly provided in this Agreement.\n\n3.3 Late Payments\n\nLate payments shall accrue interest at the rate of 1.5% per month or the maximum rate permitted by law, whichever is less.\n\n3.4 Taxes\n\nAll fees are exclusive of applicable taxes, duties, and levies. Customer shall be responsible for all Taxes except for taxes based on Provider's net income.\n\n4. SERVICE LEVEL AGREEMENT\n\n4.1 Uptime Commitment\n\nProvider shall use commercially reasonable efforts to maintain the Services with an uptime percentage of at least 99.5% during each calendar month, calculated in accordance with the SLA attached as Exhibit A.\n\n4.2 Service Credits\n\nIf Provider fails to meet the uptime commitment, Customer shall be eligible for service credits as set forth in the SLA. Service credits are Customer's sole and exclusive remedy for any failure to meet the SLA.\n\n5. CUSTOMER DATA AND PRIVACY\n\n5.1 Customer Data Ownership\n\nAs between the parties, Customer retains all right, title, and interest in and to the Customer Data. Customer grants Provider a limited license to use, copy, transmit, store, and back up Customer Data solely to the extent necessary to provide the Services.\n\n5.2 Data Protection\n\nProvider shall implement and maintain appropriate technical and organizational measures designed to protect Customer Data against unauthorized access, use, or disclosure.\n\n5.3 Data Retention\n\nUpon termination of this Agreement, Provider shall, at Customer's written request within thirty (30) days after termination, either return Customer Data or securely delete all Customer Data from Provider's systems.\n\n6. INTELLECTUAL PROPERTY RIGHTS\n\n6.1 Provider IP\n\nProvider retains all right, title, and interest in and to the Services, including all intellectual property rights therein. No rights are granted to Customer hereunder other than as expressly set forth in this Agreement.\n\n6.2 Customer Feedback\n\nCustomer may provide suggestions, comments, or feedback regarding the Services. Provider shall have a royalty-free, worldwide, transferable, sublicensable, irrevocable, perpetual license to use and incorporate such feedback into the Services.\n\n7. CONFIDENTIALITY\n\n7.1 Obligations\n\nEach party agrees to maintain the confidentiality of the other party's Confidential Information and not to disclose such information to any third party without the disclosing party's prior written consent.\n\n7.2 Exceptions\n\nConfidential Information does not include information that is or becomes publicly available, was rightfully in the receiving party's possession prior to disclosure, or is independently developed.\n\n8. WARRANTIES AND DISCLAIMERS\n\n8.1 Provider Warranties\n\nProvider represents and warrants that it has the right and authority to enter into this Agreement, the Services will perform materially in accordance with the Documentation, and the Services will not infringe any third-party intellectual property rights.\n\n8.2 DISCLAIMER\n\nEXCEPT AS EXPRESSLY PROVIDED IN THIS AGREEMENT, THE SERVICES ARE PROVIDED \"AS IS\" AND PROVIDER MAKES NO OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.\n\n9. LIMITATION OF LIABILITY\n\n9.1 Consequential Damages\n\nIN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, LOSS OF DATA, OR BUSINESS INTERRUPTION.\n\n9.2 Liability Cap\n\nEACH PARTY'S TOTAL CUMULATIVE LIABILITY ARISING OUT OF OR RELATING TO THIS AGREEMENT SHALL NOT EXCEED THE TOTAL SUBSCRIPTION FEES PAID BY CUSTOMER IN THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.\n\n10. INDEMNIFICATION\n\n10.1 Provider Indemnification\n\nProvider shall defend, indemnify, and hold harmless Customer from third-party claims alleging that Customer's authorized use of the Services infringes such third party's intellectual property rights.\n\n10.2 Customer Indemnification\n\nCustomer shall defend, indemnify, and hold harmless Provider from claims arising from Customer Data, Customer's use of the Services in violation of this Agreement, or Customer's violation of applicable laws.\n\n11. TERM AND TERMINATION\n\n11.1 Initial Term\n\nThe initial term shall commence on the Effective Date and continue for the period specified in the Order Form.\n\n11.2 Renewal\n\nThis Agreement shall automatically renew for successive periods unless either party provides written notice of non-renewal at least sixty (60) days prior to expiration.\n\n11.3 Termination for Cause\n\nEither party may terminate this Agreement if the other party materially breaches and fails to cure within thirty (30) days after receiving written notice.\n\n11.4 Effect of Termination\n\nUpon termination, all rights granted to Customer shall cease, Customer shall cease use of the Services, and Provider shall make Customer Data available for download for thirty (30) days.\n\n12. GENERAL PROVISIONS\n\n12.1 Entire Agreement\n\nThis Agreement constitutes the entire agreement between the parties and supersedes all prior agreements and understandings.\n\n12.2 Amendments\n\nThis Agreement may be amended only by a written agreement signed by authorized representatives of both parties.\n\n12.3 Governing Law\n\nThis Agreement shall be governed by the laws of the State of [STATE], without regard to its conflicts of law principles.\n\n12.4 Notices\n\nAll notices shall be in writing and delivered via email with confirmation or certified mail to the addresses set forth above.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\n\nPROVIDER:\n\n[COMPANY NAME]\n\nBy: _________________________\n\nName: _______________________\n\nTitle: ________________________\n\nDate: ________________________\n\nCUSTOMER:\n\n[CUSTOMER NAME]\n\nBy: _________________________\n\nName: _______________________\n\nTitle: ________________________\n\nDate: ________________________\n\nEXHIBIT A\n\nSERVICE LEVEL AGREEMENT\n\n1. Uptime Commitment\n\nProvider commits to maintaining the Services with a Monthly Uptime Percentage of at least 99.5%.\n\n2. Definitions\n\nMonthly Uptime Percentage: Total number of minutes in a calendar month minus Downtime, divided by total number of minutes in a calendar month.\n\nDowntime: Period during which the Services are unavailable to Customer.\n\n3. Service Credits\n\nIf Provider fails to meet the Monthly Uptime Percentage:\n\n99.0% - < 99.5%: 10% of monthly fees\n\n95.0% - < 99.0%: 25% of monthly fees\n\n< 95.0%: 50% of monthly fees\n\nEXHIBIT B\n\nORDER FORM\n\nCustomer Name: [CUSTOMER NAME]\n\nService Plan: [PLAN NAME]\n\nNumber of Users: [NUMBER]\n\nSubscription Fees: $[AMOUNT] per [PERIOD]\n\nBilling Frequency: [MONTHLY/QUARTERLY/ANNUALLY]\n\nInitial Term: [X] [MONTHS/YEARS]\n\nEffective Date: [DATE]\n\nPayment Method: [CREDIT CARD/ACH/WIRE/INVOICE]\n\nTotal Initial Subscription Fee: $[TOTAL AMOUNT]",
+    "sections": [
+      {
+        "title": "RECITALS",
+        "text": "WHEREAS, Provider has developed and operates a proprietary cloud-based software platform providing [DESCRIPTION OF SERVICE] (\"Platform\");\nWHEREAS, Customer desires to subscribe to and use the Platform for its internal business operations; and\nWHEREAS, Provider desires to grant Customer access to the Platform subject to the terms and conditions set forth herein.\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties agree as follows:"
+      },
+      {
+        "title": "1. DEFINITIONS",
+        "text": ""
+      },
+      {
+        "title": "1.1 \"Authorized Users\"",
+        "text": "means Customer's employees, contractors, and consultants who are authorized by Customer to access and use the Services under the rights granted to Customer pursuant to this Agreement."
+      },
+      {
+        "title": "1.2 \"Confidential Information\"",
+        "text": "means all non-public information disclosed by one party to the other, whether orally or in writing, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure."
+      },
+      {
+        "title": "1.3 \"Customer Data\"",
+        "text": "means any data, information, or material provided, uploaded, or submitted by Customer or Authorized Users to the Services."
+      },
+      {
+        "title": "1.4 \"Services\"",
+        "text": "means the Platform, related support services, and all updates, enhancements, and modifications thereto provided by Provider."
+      },
+      {
+        "title": "1.5 \"Subscription Term\"",
+        "text": "means the initial subscription period and any renewal periods as specified in the Order Form."
+      },
+      {
+        "title": "2. LICENSE GRANT AND SCOPE",
+        "text": ""
+      },
+      {
+        "title": "2.1 License Grant",
+        "text": "Subject to the terms and conditions of this Agreement, Provider hereby grants Customer a non-exclusive, non-transferable, non-sublicensable right to access and use the Services during the Subscription Term solely for Customer's internal business purposes."
+      },
+      {
+        "title": "2.2 User Limitations",
+        "text": "Customer may permit up to [NUMBER] Authorized Users to access the Services. Customer may add additional Authorized Users by purchasing additional user licenses at Provider's then-current rates."
+      },
+      {
+        "title": "2.3 Usage Restrictions",
+        "text": "Customer shall not, and shall not permit any third party to:\nUse the Services for any purpose other than as specified in this Agreement\nCopy, modify, or create derivative works of the Services\nReverse engineer, decompile, disassemble, or otherwise attempt to discover the source code\nRent, lease, sell, sublicense, assign, distribute, or transfer the Services to any third party\nRemove, alter, or obscure any proprietary notices on the Services\nUse the Services in any manner that violates applicable laws or regulations\nInterfere with or disrupt the integrity or performance of the Services"
+      },
+      {
+        "title": "3. SUBSCRIPTION FEES AND PAYMENT TERMS",
+        "text": ""
+      },
+      {
+        "title": "3.1 Subscription Fees",
+        "text": "Customer agrees to pay Provider the subscription fees as set forth in the Order Form attached hereto as Exhibit B (\"Subscription Fees\")."
+      },
+      {
+        "title": "3.2 Payment Terms",
+        "text": "Subscription Fees shall be billed [MONTHLY/QUARTERLY/ANNUALLY] in advance. Payment is due within thirty (30) days of the invoice date. All fees are non-refundable except as expressly provided in this Agreement."
+      },
+      {
+        "title": "3.3 Late Payments",
+        "text": "Late payments shall accrue interest at the rate of 1.5% per month or the maximum rate permitted by law, whichever is less."
+      },
+      {
+        "title": "3.4 Taxes",
+        "text": "All fees are exclusive of applicable taxes, duties, and levies. Customer shall be responsible for all Taxes except for taxes based on Provider's net income."
+      },
+      {
+        "title": "4. SERVICE LEVEL AGREEMENT",
+        "text": ""
+      },
+      {
+        "title": "4.1 Uptime Commitment",
+        "text": "Provider shall use commercially reasonable efforts to maintain the Services with an uptime percentage of at least 99.5% during each calendar month, calculated in accordance with the SLA attached as Exhibit A."
+      },
+      {
+        "title": "4.2 Service Credits",
+        "text": "If Provider fails to meet the uptime commitment, Customer shall be eligible for service credits as set forth in the SLA. Service credits are Customer's sole and exclusive remedy for any failure to meet the SLA."
+      },
+      {
+        "title": "5. CUSTOMER DATA AND PRIVACY",
+        "text": ""
+      },
+      {
+        "title": "5.1 Customer Data Ownership",
+        "text": "As between the parties, Customer retains all right, title, and interest in and to the Customer Data. Customer grants Provider a limited license to use, copy, transmit, store, and back up Customer Data solely to the extent necessary to provide the Services."
+      },
+      {
+        "title": "5.2 Data Protection",
+        "text": "Provider shall implement and maintain appropriate technical and organizational measures designed to protect Customer Data against unauthorized access, use, or disclosure."
+      },
+      {
+        "title": "5.3 Data Retention",
+        "text": "Upon termination of this Agreement, Provider shall, at Customer's written request within thirty (30) days after termination, either return Customer Data or securely delete all Customer Data from Provider's systems."
+      },
+      {
+        "title": "6. INTELLECTUAL PROPERTY RIGHTS",
+        "text": ""
+      },
+      {
+        "title": "6.1 Provider IP",
+        "text": "Provider retains all right, title, and interest in and to the Services, including all intellectual property rights therein. No rights are granted to Customer hereunder other than as expressly set forth in this Agreement."
+      },
+      {
+        "title": "6.2 Customer Feedback",
+        "text": "Customer may provide suggestions, comments, or feedback regarding the Services. Provider shall have a royalty-free, worldwide, transferable, sublicensable, irrevocable, perpetual license to use and incorporate such feedback into the Services."
+      },
+      {
+        "title": "7. CONFIDENTIALITY",
+        "text": ""
+      },
+      {
+        "title": "7.1 Obligations",
+        "text": "Each party agrees to maintain the confidentiality of the other party's Confidential Information and not to disclose such information to any third party without the disclosing party's prior written consent."
+      },
+      {
+        "title": "7.2 Exceptions",
+        "text": "Confidential Information does not include information that is or becomes publicly available, was rightfully in the receiving party's possession prior to disclosure, or is independently developed."
+      },
+      {
+        "title": "8. WARRANTIES AND DISCLAIMERS",
+        "text": ""
+      },
+      {
+        "title": "8.1 Provider Warranties",
+        "text": "Provider represents and warrants that it has the right and authority to enter into this Agreement, the Services will perform materially in accordance with the Documentation, and the Services will not infringe any third-party intellectual property rights."
+      },
+      {
+        "title": "8.2 DISCLAIMER",
+        "text": "EXCEPT AS EXPRESSLY PROVIDED IN THIS AGREEMENT, THE SERVICES ARE PROVIDED \"AS IS\" AND PROVIDER MAKES NO OTHER WARRANTIES, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT."
+      },
+      {
+        "title": "9. LIMITATION OF LIABILITY",
+        "text": ""
+      },
+      {
+        "title": "9.1 Consequential Damages",
+        "text": "IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOST REVENUE, LOSS OF DATA, OR BUSINESS INTERRUPTION."
+      },
+      {
+        "title": "9.2 Liability Cap",
+        "text": "EACH PARTY'S TOTAL CUMULATIVE LIABILITY ARISING OUT OF OR RELATING TO THIS AGREEMENT SHALL NOT EXCEED THE TOTAL SUBSCRIPTION FEES PAID BY CUSTOMER IN THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY."
+      },
+      {
+        "title": "10. INDEMNIFICATION",
+        "text": ""
+      },
+      {
+        "title": "10.1 Provider Indemnification",
+        "text": "Provider shall defend, indemnify, and hold harmless Customer from third-party claims alleging that Customer's authorized use of the Services infringes such third party's intellectual property rights."
+      },
+      {
+        "title": "10.2 Customer Indemnification",
+        "text": "Customer shall defend, indemnify, and hold harmless Provider from claims arising from Customer Data, Customer's use of the Services in violation of this Agreement, or Customer's violation of applicable laws."
+      },
+      {
+        "title": "11. TERM AND TERMINATION",
+        "text": ""
+      },
+      {
+        "title": "11.1 Initial Term",
+        "text": "The initial term shall commence on the Effective Date and continue for the period specified in the Order Form."
+      },
+      {
+        "title": "11.2 Renewal",
+        "text": "This Agreement shall automatically renew for successive periods unless either party provides written notice of non-renewal at least sixty (60) days prior to expiration."
+      },
+      {
+        "title": "11.3 Termination for Cause",
+        "text": "Either party may terminate this Agreement if the other party materially breaches and fails to cure within thirty (30) days after receiving written notice."
+      },
+      {
+        "title": "11.4 Effect of Termination",
+        "text": "Upon termination, all rights granted to Customer shall cease, Customer shall cease use of the Services, and Provider shall make Customer Data available for download for thirty (30) days."
+      },
+      {
+        "title": "12. GENERAL PROVISIONS",
+        "text": ""
+      },
+      {
+        "title": "12.1 Entire Agreement",
+        "text": "This Agreement constitutes the entire agreement between the parties and supersedes all prior agreements and understandings."
+      },
+      {
+        "title": "12.2 Amendments",
+        "text": "This Agreement may be amended only by a written agreement signed by authorized representatives of both parties."
+      },
+      {
+        "title": "12.3 Governing Law",
+        "text": "This Agreement shall be governed by the laws of the State of [STATE], without regard to its conflicts of law principles."
+      },
+      {
+        "title": "12.4 Notices",
+        "text": "All notices shall be in writing and delivered via email with confirmation or certified mail to the addresses set forth above.\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\nPROVIDER:\n[COMPANY NAME]\nBy: _________________________\nName: _______________________\nTitle: ________________________\nDate: ________________________\nCUSTOMER:\n[CUSTOMER NAME]\nBy: _________________________\nName: _______________________\nTitle: ________________________\nDate: ________________________\nEXHIBIT A"
+      },
+      {
+        "title": "SERVICE LEVEL AGREEMENT",
+        "text": ""
+      },
+      {
+        "title": "1. Uptime Commitment",
+        "text": "Provider commits to maintaining the Services with a Monthly Uptime Percentage of at least 99.5%."
+      },
+      {
+        "title": "2. Definitions",
+        "text": "Monthly Uptime Percentage: Total number of minutes in a calendar month minus Downtime, divided by total number of minutes in a calendar month.\nDowntime: Period during which the Services are unavailable to Customer."
+      },
+      {
+        "title": "3. Service Credits",
+        "text": "If Provider fails to meet the Monthly Uptime Percentage:\n99.0% - < 99.5%: 10% of monthly fees\n95.0% - < 99.0%: 25% of monthly fees\n< 95.0%: 50% of monthly fees\nEXHIBIT B"
+      },
+      {
+        "title": "ORDER FORM",
+        "text": "Customer Name: [CUSTOMER NAME]\nService Plan: [PLAN NAME]\nNumber of Users: [NUMBER]\nSubscription Fees: $[AMOUNT] per [PERIOD]\nBilling Frequency: [MONTHLY/QUARTERLY/ANNUALLY]\nInitial Term: [X] [MONTHS/YEARS]\nEffective Date: [DATE]\nPayment Method: [CREDIT CARD/ACH/WIRE/INVOICE]\nTotal Initial Subscription Fee: $[TOTAL AMOUNT]"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.057220Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

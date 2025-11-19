@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "template": "employment-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "Employment_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "Company",
+        "role": "party-1"
+      },
+      {
+        "name": "EMPLOYEE",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "obligation",
+      "section": "1. POSITION AND DUTIES",
+      "text": "1.1 Position. Employee is hired as [Job Title] reporting to [Supervisor Title].\n1.2 Duties. Employee shall perform the duties and responsibilities described in the attached Job Description and such other duties as reasonably assigned.\n1.3 Standard of Performance. Employee shall perform all duties diligently, competently, and in the best interests of Employer.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. COMPENSATION AND BENEFITS",
+      "text": "2.1 Base Salary. Employee shall receive an annual salary of $[Amount], payable in accordance with Employer's standard payroll practices.\n2.2 Bonus. Employee may be eligible for an annual performance bonus of up to [Percentage]% of base salary, at Employer's discretion based on individual and company performance.\n2.3 Benefits. Employee is eligible to participate in Employer's standard benefit programs, including health insurance, retirement plans, and paid time off, subject to plan terms and elig",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. TERM AND TERMINATION",
+      "text": "3.1 Employment Term. Employment shall commence on [Date]. This is an [at-will/fixed-term] employment relationship.\n3.2 At-Will Employment. Either party may terminate employment at any time, with or without cause or notice, except as required by law.\n3.3 Notice Period. Employee agrees to provide [Number] weeks' notice of resignation. Employer may provide severance in lieu of notice at its discretion.\n3.4 Termination for Cause. Employer may terminate immediately for: (a) material breach of duties;",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "obligation",
+      "section": "4. WORK SCHEDULE AND LOCATION",
+      "text": "4.1 Work Hours. Standard work hours are [Hours] per week, [Days]. Employee may be required to work additional hours as needed.\n4.2 Work Location. Employee's primary work location is [Location]. [Remote work is permitted/required to work on-site].",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. CONFIDENTIALITY AND INTELLECTUAL PROPERTY",
+      "text": "5.1 Confidential Information. Employee acknowledges access to Employer's confidential information including trade secrets, business plans, customer data, and proprietary information.\n5.2 Non-Disclosure. Employee shall not disclose or use confidential information except as required to perform duties. This obligation survives termination indefinitely.\n5.3 Work Product. All inventions, discoveries, works, and intellectual property created in the scope of employment are the exclusive property of Emp",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. NON-COMPETE AND NON-SOLICITATION",
+      "text": "6.1 Non-Compete. During employment and for [Number] months thereafter, Employee shall not engage in any competitive business within [Geographic Area/Industry].\n6.2 Non-Solicitation. For [Number] months after termination, Employee shall not: (a) solicit Employer's customers or clients; (b) recruit or hire Employer's employees; or (c) induce others to terminate their relationship with Employer.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "obligation",
+      "section": "7. EMPLOYEE REPRESENTATIONS",
+      "text": "7.1 Authority. Employee represents that entering this Agreement does not violate any other agreement or obligation.\n7.2 Eligibility. Employee is legally authorized to work in [Country] and will provide required documentation.\n7.3 Policies. Employee agrees to comply with all Employer policies and procedures as amended from time to time.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "obligation",
+      "section": "8. PROBATIONARY PERIOD",
+      "text": "The first [Number] months of employment shall be a probationary period. During this time, either party may terminate employment without notice. Employee is not eligible for certain benefits during the probationary period.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. GENERAL PROVISIONS",
+      "text": "9.1 Entire Agreement. This Agreement constitutes the entire agreement and supersedes all prior understandings.\n9.2 Amendment. This Agreement may be amended only by written agreement signed by both parties.\n9.3 Governing Law. This Agreement shall be governed by the laws of [State].\n9.4 Severability. If any provision is unenforceable, the remaining provisions remain in effect.\n9.5 Assignment. Employee may not assign this Agreement. Employer may assign to successors.\nIN WITNESS WHEREOF, the parties",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "EMPLOYMENT AGREEMENT\n\nThis Employment Agreement (\"Agreement\") is entered into as of [Date] by and between [Company Name] (\"Employer\") and [Employee Name] (\"Employee\").\n\n1. POSITION AND DUTIES\n\n1.1 Position. Employee is hired as [Job Title] reporting to [Supervisor Title].\n\n1.2 Duties. Employee shall perform the duties and responsibilities described in the attached Job Description and such other duties as reasonably assigned.\n\n1.3 Standard of Performance. Employee shall perform all duties diligently, competently, and in the best interests of Employer.\n\n2. COMPENSATION AND BENEFITS\n\n2.1 Base Salary. Employee shall receive an annual salary of $[Amount], payable in accordance with Employer's standard payroll practices.\n\n2.2 Bonus. Employee may be eligible for an annual performance bonus of up to [Percentage]% of base salary, at Employer's discretion based on individual and company performance.\n\n2.3 Benefits. Employee is eligible to participate in Employer's standard benefit programs, including health insurance, retirement plans, and paid time off, subject to plan terms and eligibility requirements.\n\n2.4 Equity. Employee shall receive [Number] stock options/RSUs, subject to the terms of Employer's equity incentive plan and separate award agreement.\n\n3. TERM AND TERMINATION\n\n3.1 Employment Term. Employment shall commence on [Date]. This is an [at-will/fixed-term] employment relationship.\n\n3.2 At-Will Employment. Either party may terminate employment at any time, with or without cause or notice, except as required by law.\n\n3.3 Notice Period. Employee agrees to provide [Number] weeks' notice of resignation. Employer may provide severance in lieu of notice at its discretion.\n\n3.4 Termination for Cause. Employer may terminate immediately for: (a) material breach of duties; (b) misconduct; (c) violation of policies; (d) conviction of a crime; or (e) failure to perform.\n\n4. WORK SCHEDULE AND LOCATION\n\n4.1 Work Hours. Standard work hours are [Hours] per week, [Days]. Employee may be required to work additional hours as needed.\n\n4.2 Work Location. Employee's primary work location is [Location]. [Remote work is permitted/required to work on-site].\n\n5. CONFIDENTIALITY AND INTELLECTUAL PROPERTY\n\n5.1 Confidential Information. Employee acknowledges access to Employer's confidential information including trade secrets, business plans, customer data, and proprietary information.\n\n5.2 Non-Disclosure. Employee shall not disclose or use confidential information except as required to perform duties. This obligation survives termination indefinitely.\n\n5.3 Work Product. All inventions, discoveries, works, and intellectual property created in the scope of employment are the exclusive property of Employer. Employee hereby assigns all rights to Employer.\n\n6. NON-COMPETE AND NON-SOLICITATION\n\n6.1 Non-Compete. During employment and for [Number] months thereafter, Employee shall not engage in any competitive business within [Geographic Area/Industry].\n\n6.2 Non-Solicitation. For [Number] months after termination, Employee shall not: (a) solicit Employer's customers or clients; (b) recruit or hire Employer's employees; or (c) induce others to terminate their relationship with Employer.\n\n7. EMPLOYEE REPRESENTATIONS\n\n7.1 Authority. Employee represents that entering this Agreement does not violate any other agreement or obligation.\n\n7.2 Eligibility. Employee is legally authorized to work in [Country] and will provide required documentation.\n\n7.3 Policies. Employee agrees to comply with all Employer policies and procedures as amended from time to time.\n\n8. PROBATIONARY PERIOD\n\nThe first [Number] months of employment shall be a probationary period. During this time, either party may terminate employment without notice. Employee is not eligible for certain benefits during the probationary period.\n\n9. GENERAL PROVISIONS\n\n9.1 Entire Agreement. This Agreement constitutes the entire agreement and supersedes all prior understandings.\n\n9.2 Amendment. This Agreement may be amended only by written agreement signed by both parties.\n\n9.3 Governing Law. This Agreement shall be governed by the laws of [State].\n\n9.4 Severability. If any provision is unenforceable, the remaining provisions remain in effect.\n\n9.5 Assignment. Employee may not assign this Agreement. Employer may assign to successors.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement.\n\nEMPLOYER:\t\t\t\tEMPLOYEE:\n\nBy: _____________________\t\tSignature: _____________________\n\nName: [Name]\t\t\t\tName: [Name]\n\nTitle: [Title]\t\t\t\tDate: _____________\n\nDate: _____________",
+    "sections": [
+      {
+        "title": "1. POSITION AND DUTIES",
+        "text": "1.1 Position. Employee is hired as [Job Title] reporting to [Supervisor Title].\n1.2 Duties. Employee shall perform the duties and responsibilities described in the attached Job Description and such other duties as reasonably assigned.\n1.3 Standard of Performance. Employee shall perform all duties diligently, competently, and in the best interests of Employer."
+      },
+      {
+        "title": "2. COMPENSATION AND BENEFITS",
+        "text": "2.1 Base Salary. Employee shall receive an annual salary of $[Amount], payable in accordance with Employer's standard payroll practices.\n2.2 Bonus. Employee may be eligible for an annual performance bonus of up to [Percentage]% of base salary, at Employer's discretion based on individual and company performance.\n2.3 Benefits. Employee is eligible to participate in Employer's standard benefit programs, including health insurance, retirement plans, and paid time off, subject to plan terms and eligibility requirements.\n2.4 Equity. Employee shall receive [Number] stock options/RSUs, subject to the terms of Employer's equity incentive plan and separate award agreement."
+      },
+      {
+        "title": "3. TERM AND TERMINATION",
+        "text": "3.1 Employment Term. Employment shall commence on [Date]. This is an [at-will/fixed-term] employment relationship.\n3.2 At-Will Employment. Either party may terminate employment at any time, with or without cause or notice, except as required by law.\n3.3 Notice Period. Employee agrees to provide [Number] weeks' notice of resignation. Employer may provide severance in lieu of notice at its discretion.\n3.4 Termination for Cause. Employer may terminate immediately for: (a) material breach of duties; (b) misconduct; (c) violation of policies; (d) conviction of a crime; or (e) failure to perform."
+      },
+      {
+        "title": "4. WORK SCHEDULE AND LOCATION",
+        "text": "4.1 Work Hours. Standard work hours are [Hours] per week, [Days]. Employee may be required to work additional hours as needed.\n4.2 Work Location. Employee's primary work location is [Location]. [Remote work is permitted/required to work on-site]."
+      },
+      {
+        "title": "5. CONFIDENTIALITY AND INTELLECTUAL PROPERTY",
+        "text": "5.1 Confidential Information. Employee acknowledges access to Employer's confidential information including trade secrets, business plans, customer data, and proprietary information.\n5.2 Non-Disclosure. Employee shall not disclose or use confidential information except as required to perform duties. This obligation survives termination indefinitely.\n5.3 Work Product. All inventions, discoveries, works, and intellectual property created in the scope of employment are the exclusive property of Employer. Employee hereby assigns all rights to Employer."
+      },
+      {
+        "title": "6. NON-COMPETE AND NON-SOLICITATION",
+        "text": "6.1 Non-Compete. During employment and for [Number] months thereafter, Employee shall not engage in any competitive business within [Geographic Area/Industry].\n6.2 Non-Solicitation. For [Number] months after termination, Employee shall not: (a) solicit Employer's customers or clients; (b) recruit or hire Employer's employees; or (c) induce others to terminate their relationship with Employer."
+      },
+      {
+        "title": "7. EMPLOYEE REPRESENTATIONS",
+        "text": "7.1 Authority. Employee represents that entering this Agreement does not violate any other agreement or obligation.\n7.2 Eligibility. Employee is legally authorized to work in [Country] and will provide required documentation.\n7.3 Policies. Employee agrees to comply with all Employer policies and procedures as amended from time to time."
+      },
+      {
+        "title": "8. PROBATIONARY PERIOD",
+        "text": "The first [Number] months of employment shall be a probationary period. During this time, either party may terminate employment without notice. Employee is not eligible for certain benefits during the probationary period."
+      },
+      {
+        "title": "9. GENERAL PROVISIONS",
+        "text": "9.1 Entire Agreement. This Agreement constitutes the entire agreement and supersedes all prior understandings.\n9.2 Amendment. This Agreement may be amended only by written agreement signed by both parties.\n9.3 Governing Law. This Agreement shall be governed by the laws of [State].\n9.4 Severability. If any provision is unenforceable, the remaining provisions remain in effect.\n9.5 Assignment. Employee may not assign this Agreement. Employer may assign to successors.\nIN WITNESS WHEREOF, the parties have executed this Agreement.\nEMPLOYER:\t\t\t\tEMPLOYEE:\nBy: _____________________\t\tSignature: _____________________\nName: [Name]\t\t\t\tName: [Name]\nTitle: [Title]\t\t\t\tDate: _____________\nDate: _____________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:55.988221Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

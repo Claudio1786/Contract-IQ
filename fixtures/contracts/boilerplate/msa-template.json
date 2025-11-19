@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "template": "msa-template",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "MSA_Template.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "CUSTOMER",
+        "role": "party-1"
+      },
+      {
+        "name": "Client",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "obligation",
+      "section": "1. SCOPE OF SERVICES",
+      "text": "1.1. General Services. Provider agrees to provide the services (\"Services\") as described in one or more Statements of Work (each, an \"SOW\") executed by the Parties from time to time. Each SOW shall reference this Agreement and be subject to its terms and conditions.\n1.2. Modifications. The Parties may modify the Services or add additional Services by executing new SOWs or written amendments to existing SOWs. Any modifications must be agreed to in writing by authorized representatives of both Par",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-2",
+      "category": "obligation",
+      "section": "2. TERM AND TERMINATION",
+      "text": "2.1. Term. This Agreement shall commence on the Effective Date and continue for an initial term of [NUMBER] years (\"Initial Term\"), unless earlier terminated as provided herein. This Agreement shall automatically renew for successive [NUMBER]-year periods (each, a \"Renewal Term\") unless either Party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current term.\n2.2. Termination for Convenience. Either Party may terminate this Agreement for convenience",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "obligation",
+      "section": "3. FEES AND PAYMENT",
+      "text": "3.1. Fees. Customer shall pay Provider the fees (\"Fees\") as set forth in each SOW. Unless otherwise specified, all Fees are quoted and payable in U.S. Dollars.\n3.2. Payment Terms. Provider shall invoice Customer in accordance with the payment schedule set forth in each SOW. All invoices are due and payable within thirty (30) days of the invoice date unless otherwise specified.\n3.3. Late Payments. Late payments shall accrue interest at the rate of 1.5% per month (or the maximum rate permitted by ",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "payment",
+      "section": "4. INTELLECTUAL PROPERTY RIGHTS",
+      "text": "4.1. Provider IP. Provider retains all right, title, and interest in and to: (a) all pre-existing intellectual property; (b) all deliverables, tools, methodologies, and know-how developed or used in connection with the Services; and (c) all modifications, enhancements, or derivative works thereof.\n4.2. Customer Data. Customer retains all right, title, and interest in and to all data, content, and materials provided by Customer (\"Customer Data\"). Customer grants Provider a limited, non-exclusive ",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "obligation",
+      "section": "5. CONFIDENTIALITY",
+      "text": "5.1. Definition. \"Confidential Information\" means all non-public information disclosed by one Party (\"Disclosing Party\") to the other Party (\"Receiving Party\"), whether orally, in writing, or by inspection of tangible objects, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and circumstances of disclosure.\n5.2. Obligations. Receiving Party shall: (a) hold Confidential Information in strict confidence; (b) not discl",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "obligation",
+      "section": "6. WARRANTIES",
+      "text": "6.1. Provider Warranties. Provider warrants that: (a) Services shall be performed in a professional and workmanlike manner consistent with industry standards; (b) Provider has the right and authority to enter into this Agreement; and (c) Services shall comply with all applicable laws and regulations.\n6.2. DISCLAIMER. EXCEPT AS EXPRESSLY PROVIDED HEREIN, PROVIDER MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICUL",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-7",
+      "category": "obligation",
+      "section": "7. LIMITATION OF LIABILITY",
+      "text": "7.1. Cap on Liability. EXCEPT FOR BREACHES OF SECTION 5 (CONFIDENTIALITY), EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL NOT EXCEED THE TOTAL FEES PAID BY CUSTOMER TO PROVIDER DURING THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.\n7.2. Exclusion of Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOSS OF DATA, OR LOSS OF B",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "obligation",
+      "section": "8. INDEMNIFICATION",
+      "text": "8.1. By Provider. Provider shall indemnify, defend, and hold harmless Customer from and against any claims, damages, losses, and expenses arising from: (a) Provider's gross negligence or willful misconduct; or (b) allegations that the Services infringe any third-party intellectual property rights.\n8.2. By Customer. Customer shall indemnify, defend, and hold harmless Provider from and against any claims, damages, losses, and expenses arising from: (a) Customer Data; or (b) Customer's use of the S",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "9. GENERAL PROVISIONS",
+      "text": "9.1. Governing Law. This Agreement shall be governed by the laws of [STATE/COUNTRY], without regard to conflicts of law principles.\n9.2. Entire Agreement. This Agreement, together with all SOWs, constitutes the entire agreement between the Parties and supersedes all prior agreements and understandings.\n9.3. Amendments. This Agreement may be amended only by written instrument signed by authorized representatives of both Parties.\n9.4. Assignment. Neither Party may assign this Agreement without the",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "MASTER SERVICE AGREEMENT\n\nThis Master Service Agreement (\"Agreement\") is entered into as of [DATE] (\"Effective Date\"), by and between:\n\nService Provider: [PROVIDER NAME], a [STATE/COUNTRY] [ENTITY TYPE], with principal offices at [ADDRESS] (\"Provider\" or \"Company\");\n\nCustomer: [CUSTOMER NAME], a [STATE/COUNTRY] [ENTITY TYPE], with principal offices at [ADDRESS] (\"Customer\" or \"Client\").\n\n1. SCOPE OF SERVICES\n\n1.1. General Services. Provider agrees to provide the services (\"Services\") as described in one or more Statements of Work (each, an \"SOW\") executed by the Parties from time to time. Each SOW shall reference this Agreement and be subject to its terms and conditions.\n\n1.2. Modifications. The Parties may modify the Services or add additional Services by executing new SOWs or written amendments to existing SOWs. Any modifications must be agreed to in writing by authorized representatives of both Parties.\n\n2. TERM AND TERMINATION\n\n2.1. Term. This Agreement shall commence on the Effective Date and continue for an initial term of [NUMBER] years (\"Initial Term\"), unless earlier terminated as provided herein. This Agreement shall automatically renew for successive [NUMBER]-year periods (each, a \"Renewal Term\") unless either Party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current term.\n\n2.2. Termination for Convenience. Either Party may terminate this Agreement for convenience upon ninety (90) days' prior written notice to the other Party. Customer shall remain liable for all Fees for Services rendered through the effective date of termination.\n\n2.3. Termination for Cause. Either Party may terminate this Agreement immediately upon written notice if the other Party: (a) materially breaches this Agreement and fails to cure such breach within thirty (30) days after written notice; (b) becomes insolvent or files for bankruptcy; or (c) ceases to conduct business in the ordinary course.\n\n3. FEES AND PAYMENT\n\n3.1. Fees. Customer shall pay Provider the fees (\"Fees\") as set forth in each SOW. Unless otherwise specified, all Fees are quoted and payable in U.S. Dollars.\n\n3.2. Payment Terms. Provider shall invoice Customer in accordance with the payment schedule set forth in each SOW. All invoices are due and payable within thirty (30) days of the invoice date unless otherwise specified.\n\n3.3. Late Payments. Late payments shall accrue interest at the rate of 1.5% per month (or the maximum rate permitted by law, whichever is less) from the date due until paid in full.\n\n3.4. Taxes. All Fees are exclusive of applicable taxes, duties, and similar charges. Customer shall be responsible for all such taxes, excluding only taxes based on Provider's net income.\n\n4. INTELLECTUAL PROPERTY RIGHTS\n\n4.1. Provider IP. Provider retains all right, title, and interest in and to: (a) all pre-existing intellectual property; (b) all deliverables, tools, methodologies, and know-how developed or used in connection with the Services; and (c) all modifications, enhancements, or derivative works thereof.\n\n4.2. Customer Data. Customer retains all right, title, and interest in and to all data, content, and materials provided by Customer (\"Customer Data\"). Customer grants Provider a limited, non-exclusive license to use Customer Data solely to provide the Services.\n\n4.3. License to Customer. Subject to Customer's payment of all Fees, Provider grants Customer a non-exclusive, non-transferable, limited license to use the deliverables solely for Customer's internal business purposes during the term of the applicable SOW.\n\n5. CONFIDENTIALITY\n\n5.1. Definition. \"Confidential Information\" means all non-public information disclosed by one Party (\"Disclosing Party\") to the other Party (\"Receiving Party\"), whether orally, in writing, or by inspection of tangible objects, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and circumstances of disclosure.\n\n5.2. Obligations. Receiving Party shall: (a) hold Confidential Information in strict confidence; (b) not disclose Confidential Information to third parties without prior written consent; (c) use Confidential Information only for purposes of this Agreement; and (d) protect Confidential Information using at least the same degree of care as it uses for its own confidential information, but no less than reasonable care.\n\n6. WARRANTIES\n\n6.1. Provider Warranties. Provider warrants that: (a) Services shall be performed in a professional and workmanlike manner consistent with industry standards; (b) Provider has the right and authority to enter into this Agreement; and (c) Services shall comply with all applicable laws and regulations.\n\n6.2. DISCLAIMER. EXCEPT AS EXPRESSLY PROVIDED HEREIN, PROVIDER MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.\n\n7. LIMITATION OF LIABILITY\n\n7.1. Cap on Liability. EXCEPT FOR BREACHES OF SECTION 5 (CONFIDENTIALITY), EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL NOT EXCEED THE TOTAL FEES PAID BY CUSTOMER TO PROVIDER DURING THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.\n\n7.2. Exclusion of Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOSS OF DATA, OR LOSS OF BUSINESS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.\n\n8. INDEMNIFICATION\n\n8.1. By Provider. Provider shall indemnify, defend, and hold harmless Customer from and against any claims, damages, losses, and expenses arising from: (a) Provider's gross negligence or willful misconduct; or (b) allegations that the Services infringe any third-party intellectual property rights.\n\n8.2. By Customer. Customer shall indemnify, defend, and hold harmless Provider from and against any claims, damages, losses, and expenses arising from: (a) Customer Data; or (b) Customer's use of the Services in violation of this Agreement or applicable law.\n\n9. GENERAL PROVISIONS\n\n9.1. Governing Law. This Agreement shall be governed by the laws of [STATE/COUNTRY], without regard to conflicts of law principles.\n\n9.2. Entire Agreement. This Agreement, together with all SOWs, constitutes the entire agreement between the Parties and supersedes all prior agreements and understandings.\n\n9.3. Amendments. This Agreement may be amended only by written instrument signed by authorized representatives of both Parties.\n\n9.4. Assignment. Neither Party may assign this Agreement without the prior written consent of the other Party, except that either Party may assign this Agreement in connection with a merger, acquisition, or sale of all or substantially all of its assets.\n\n9.5. Severability. If any provision is held invalid or unenforceable, the remaining provisions shall remain in full force and effect.\n\nIN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.\n\nSERVICE PROVIDER:\n\n__________________________________________________\n\nName: _________________________________\n\nTitle: _________________________________\n\nDate: _________________________________\n\nCUSTOMER:\n\n__________________________________________________\n\nName: _________________________________\n\nTitle: _________________________________\n\nDate: _________________________________",
+    "sections": [
+      {
+        "title": "1. SCOPE OF SERVICES",
+        "text": "1.1. General Services. Provider agrees to provide the services (\"Services\") as described in one or more Statements of Work (each, an \"SOW\") executed by the Parties from time to time. Each SOW shall reference this Agreement and be subject to its terms and conditions.\n1.2. Modifications. The Parties may modify the Services or add additional Services by executing new SOWs or written amendments to existing SOWs. Any modifications must be agreed to in writing by authorized representatives of both Parties."
+      },
+      {
+        "title": "2. TERM AND TERMINATION",
+        "text": "2.1. Term. This Agreement shall commence on the Effective Date and continue for an initial term of [NUMBER] years (\"Initial Term\"), unless earlier terminated as provided herein. This Agreement shall automatically renew for successive [NUMBER]-year periods (each, a \"Renewal Term\") unless either Party provides written notice of non-renewal at least ninety (90) days prior to the end of the then-current term.\n2.2. Termination for Convenience. Either Party may terminate this Agreement for convenience upon ninety (90) days' prior written notice to the other Party. Customer shall remain liable for all Fees for Services rendered through the effective date of termination.\n2.3. Termination for Cause. Either Party may terminate this Agreement immediately upon written notice if the other Party: (a) materially breaches this Agreement and fails to cure such breach within thirty (30) days after written notice; (b) becomes insolvent or files for bankruptcy; or (c) ceases to conduct business in the ordinary course."
+      },
+      {
+        "title": "3. FEES AND PAYMENT",
+        "text": "3.1. Fees. Customer shall pay Provider the fees (\"Fees\") as set forth in each SOW. Unless otherwise specified, all Fees are quoted and payable in U.S. Dollars.\n3.2. Payment Terms. Provider shall invoice Customer in accordance with the payment schedule set forth in each SOW. All invoices are due and payable within thirty (30) days of the invoice date unless otherwise specified.\n3.3. Late Payments. Late payments shall accrue interest at the rate of 1.5% per month (or the maximum rate permitted by law, whichever is less) from the date due until paid in full.\n3.4. Taxes. All Fees are exclusive of applicable taxes, duties, and similar charges. Customer shall be responsible for all such taxes, excluding only taxes based on Provider's net income."
+      },
+      {
+        "title": "4. INTELLECTUAL PROPERTY RIGHTS",
+        "text": "4.1. Provider IP. Provider retains all right, title, and interest in and to: (a) all pre-existing intellectual property; (b) all deliverables, tools, methodologies, and know-how developed or used in connection with the Services; and (c) all modifications, enhancements, or derivative works thereof.\n4.2. Customer Data. Customer retains all right, title, and interest in and to all data, content, and materials provided by Customer (\"Customer Data\"). Customer grants Provider a limited, non-exclusive license to use Customer Data solely to provide the Services.\n4.3. License to Customer. Subject to Customer's payment of all Fees, Provider grants Customer a non-exclusive, non-transferable, limited license to use the deliverables solely for Customer's internal business purposes during the term of the applicable SOW."
+      },
+      {
+        "title": "5. CONFIDENTIALITY",
+        "text": "5.1. Definition. \"Confidential Information\" means all non-public information disclosed by one Party (\"Disclosing Party\") to the other Party (\"Receiving Party\"), whether orally, in writing, or by inspection of tangible objects, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and circumstances of disclosure.\n5.2. Obligations. Receiving Party shall: (a) hold Confidential Information in strict confidence; (b) not disclose Confidential Information to third parties without prior written consent; (c) use Confidential Information only for purposes of this Agreement; and (d) protect Confidential Information using at least the same degree of care as it uses for its own confidential information, but no less than reasonable care."
+      },
+      {
+        "title": "6. WARRANTIES",
+        "text": "6.1. Provider Warranties. Provider warrants that: (a) Services shall be performed in a professional and workmanlike manner consistent with industry standards; (b) Provider has the right and authority to enter into this Agreement; and (c) Services shall comply with all applicable laws and regulations.\n6.2. DISCLAIMER. EXCEPT AS EXPRESSLY PROVIDED HEREIN, PROVIDER MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT."
+      },
+      {
+        "title": "7. LIMITATION OF LIABILITY",
+        "text": "7.1. Cap on Liability. EXCEPT FOR BREACHES OF SECTION 5 (CONFIDENTIALITY), EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT SHALL NOT EXCEED THE TOTAL FEES PAID BY CUSTOMER TO PROVIDER DURING THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO LIABILITY.\n7.2. Exclusion of Damages. IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFITS, LOSS OF DATA, OR LOSS OF BUSINESS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES."
+      },
+      {
+        "title": "8. INDEMNIFICATION",
+        "text": "8.1. By Provider. Provider shall indemnify, defend, and hold harmless Customer from and against any claims, damages, losses, and expenses arising from: (a) Provider's gross negligence or willful misconduct; or (b) allegations that the Services infringe any third-party intellectual property rights.\n8.2. By Customer. Customer shall indemnify, defend, and hold harmless Provider from and against any claims, damages, losses, and expenses arising from: (a) Customer Data; or (b) Customer's use of the Services in violation of this Agreement or applicable law."
+      },
+      {
+        "title": "9. GENERAL PROVISIONS",
+        "text": "9.1. Governing Law. This Agreement shall be governed by the laws of [STATE/COUNTRY], without regard to conflicts of law principles.\n9.2. Entire Agreement. This Agreement, together with all SOWs, constitutes the entire agreement between the Parties and supersedes all prior agreements and understandings.\n9.3. Amendments. This Agreement may be amended only by written instrument signed by authorized representatives of both Parties.\n9.4. Assignment. Neither Party may assign this Agreement without the prior written consent of the other Party, except that either Party may assign this Agreement in connection with a merger, acquisition, or sale of all or substantially all of its assets.\n9.5. Severability. If any provision is held invalid or unenforceable, the remaining provisions shall remain in full force and effect.\nIN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.\nSERVICE PROVIDER:\n__________________________________________________\nName: _________________________________\nTitle: _________________________________\nDate: _________________________________\nCUSTOMER:\n__________________________________________________\nName: _________________________________\nTitle: _________________________________\nDate: _________________________________"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.001220Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}

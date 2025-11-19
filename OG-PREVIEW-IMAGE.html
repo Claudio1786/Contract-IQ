@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract IQ - Open Graph Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Arial, sans-serif;
+        }
+        
+        .og-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Decorative background circles */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .bg-circle-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            top: -200px;
+            left: -200px;
+        }
+        
+        .bg-circle-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+            bottom: -150px;
+            right: -150px;
+        }
+        
+        .content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .logo-container {
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+        
+        .logo-icon {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.5);
+            margin: 0 auto;
+        }
+        
+        .document-icon {
+            width: 80px;
+            height: 106px;
+            background: white;
+            border-radius: 10px;
+            position: relative;
+            opacity: 0.95;
+        }
+        
+        .document-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 26px 26px 0;
+            border-color: transparent rgba(255,255,255,0.7) transparent transparent;
+        }
+        
+        .document-lines {
+            position: absolute;
+            top: 42px;
+            left: 16px;
+            right: 16px;
+        }
+        
+        .line {
+            height: 5px;
+            border-radius: 2.5px;
+            margin-bottom: 8px;
+        }
+        
+        .line-1 {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8));
+        }
+        
+        .line-2 {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.6), rgba(139, 92, 246, 0.6));
+        }
+        
+        .line-3 {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.5), rgba(139, 92, 246, 0.5));
+            width: 60%;
+        }
+        
+        .spark {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+            border-radius: 50%;
+        }
+        
+        .spark::before,
+        .spark::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(135deg, #8B5CF6, #3B82F6);
+        }
+        
+        .spark::before {
+            width: 2px;
+            height: 10px;
+            left: 4px;
+            top: -10px;
+        }
+        
+        .spark::after {
+            width: 10px;
+            height: 2px;
+            left: -10px;
+            top: 4px;
+        }
+        
+        h1 {
+            font-size: 72px;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 20px 0;
+            letter-spacing: -1px;
+        }
+        
+        .iq {
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 28px;
+            color: #94a3b8;
+            margin: 0;
+            font-weight: 400;
+        }
+        
+        .badge {
+            display: inline-block;
+            margin-top: 32px;
+            padding: 12px 24px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 24px;
+            font-size: 16px;
+            color: #60a5fa;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="og-container">
+        <!-- Background decoration -->
+        <div class="bg-circle bg-circle-1"></div>
+        <div class="bg-circle bg-circle-2"></div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <div class="document-icon">
+                        <div class="document-lines">
+                            <div class="line line-1"></div>
+                            <div class="line line-2"></div>
+                            <div class="line line-3"></div>
+                        </div>
+                        <div class="spark"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <h1>Contract <span class="iq">IQ</span></h1>
+            <p class="tagline">AI-Powered Contract Intelligence</p>
+            <div class="badge">Smart Analysis • Risk Detection • Portfolio Insights</div>
+        </div>
+    </div>
+    
+    <!-- 
+    TO CREATE THE IMAGE:
+    
+    1. Open this file in Chrome
+    2. Press F12 to open DevTools
+    3. Press Ctrl+Shift+M (Windows) for device mode
+    4. Set dimensions to 1200 x 630
+    5. Right-click page → "Capture screenshot"
+    6. Save as: og-image.png
+    7. Move to: apps/web/public/og-image.png
+    -->
+</body>
+</html>

@@ -1,0 +1,411 @@
+{
+  "metadata": {
+    "template": "vendor-services-agreement",
+    "version": "2025.11",
+    "vertical": "general",
+    "jurisdiction": "United States",
+    "source": "boilerplate",
+    "source_file": "Vendor_Services_Agreement.docx",
+    "renewal": {
+      "type": "fixed",
+      "termMonths": 12,
+      "noticeDays": 30
+    },
+    "counterparties": [
+      {
+        "name": "CLIENT",
+        "role": "party-1"
+      },
+      {
+        "name": "COMPANY",
+        "role": "party-2"
+      }
+    ]
+  },
+  "financials": null,
+  "clauses": [
+    {
+      "id": "clause-1",
+      "category": "termination",
+      "section": "RECITALS",
+      "text": "WHEREAS, Client desires to engage Vendor to provide certain products and/or services as described herein;\nWHEREAS, Vendor represents that it has the expertise, resources, and capability to provide such products and services; and\nWHEREAS, the parties desire to set forth the terms and conditions governing their business relationship.\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, and for other good and valuable consideration, the receipt and sufficiency o",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-3",
+      "category": "termination",
+      "section": "1.1 \"Deliverables\"",
+      "text": "means the products, work product, materials, and services to be provided by Vendor as specified in the applicable Statement of Work.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-4",
+      "category": "general",
+      "section": "1.2 \"Statement of Work\" or \"SOW\"",
+      "text": "means a written document executed by both parties that specifies the scope, deliverables, timelines, and pricing for specific Products or Services under this Agreement.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-5",
+      "category": "termination",
+      "section": "1.3 \"Purchase Order\" or \"PO\"",
+      "text": "means a written order issued by Client to Vendor specifying the Products or Services to be provided, pricing, quantities, and delivery dates.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-6",
+      "category": "termination",
+      "section": "1.4 \"Vendor Personnel\"",
+      "text": "means Vendor's employees, contractors, and agents engaged in the provision of Products or Services under this Agreement.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-8",
+      "category": "termination",
+      "section": "2.1 Services and Products",
+      "text": "Vendor agrees to provide the Products and/or Services to Client as specified in one or more Purchase Orders or Statements of Work executed pursuant to this Agreement.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-9",
+      "category": "obligation",
+      "section": "2.2 Quality Standards",
+      "text": "All Products and Services shall:\nMeet or exceed industry standards\nConform to specifications set forth in the applicable SOW or PO\nBe free from defects in materials and workmanship\nComply with all applicable laws, regulations, and codes\nBe performed in a professional and workmanlike manner",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    },
+    {
+      "id": "clause-10",
+      "category": "obligation",
+      "section": "2.3 Changes to Scope",
+      "text": "Any changes to the scope of work must be documented in a written change order signed by authorized representatives of both parties.",
+      "benchmarkPercentile": 50,
+      "riskPosture": "standard"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-001",
+      "severity": "low",
+      "title": "Boilerplate Template",
+      "description": "This is a standard boilerplate template requiring customization for specific use cases.",
+      "mitigation": "Review and customize all sections before execution.",
+      "confidence": 0.85
+    }
+  ],
+  "obligations": [
+    {
+      "party": "party-1",
+      "action": "comply-with-terms",
+      "deadline": null,
+      "recurring": true,
+      "condition": "during term"
+    }
+  ],
+  "negotiation": {
+    "playbook": [
+      {
+        "topic": "Term Negotiation",
+        "current": "Standard terms",
+        "target": "Favorable terms",
+        "fallback": "Market standard",
+        "impact": "medium",
+        "confidence": 0.8,
+        "talking_points": [
+          "Review industry benchmarks",
+          "Assess risk allocation",
+          "Consider long-term relationship"
+        ],
+        "risk_callouts": [
+          "Ensure all terms are clearly defined"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "full_text": "VENDOR SERVICES AGREEMENT\n\nThis Vendor Services Agreement (\"Agreement\") is entered into as of [DATE] (\"Effective Date\") by and between:\n\nCLIENT: [COMPANY NAME], a [STATE] corporation with its principal place of business at [ADDRESS] (\"Client\" or \"Company\")\n\nVENDOR: [VENDOR NAME], a [STATE] [ENTITY TYPE] with its principal place of business at [ADDRESS] (\"Vendor\" or \"Supplier\")\n\nRECITALS\n\nWHEREAS, Client desires to engage Vendor to provide certain products and/or services as described herein;\n\nWHEREAS, Vendor represents that it has the expertise, resources, and capability to provide such products and services; and\n\nWHEREAS, the parties desire to set forth the terms and conditions governing their business relationship.\n\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties agree as follows:\n\n1. DEFINITIONS\n\n1.1 \"Deliverables\"\n\nmeans the products, work product, materials, and services to be provided by Vendor as specified in the applicable Statement of Work.\n\n1.2 \"Statement of Work\" or \"SOW\"\n\nmeans a written document executed by both parties that specifies the scope, deliverables, timelines, and pricing for specific Products or Services under this Agreement.\n\n1.3 \"Purchase Order\" or \"PO\"\n\nmeans a written order issued by Client to Vendor specifying the Products or Services to be provided, pricing, quantities, and delivery dates.\n\n1.4 \"Vendor Personnel\"\n\nmeans Vendor's employees, contractors, and agents engaged in the provision of Products or Services under this Agreement.\n\n2. SCOPE OF WORK\n\n2.1 Services and Products\n\nVendor agrees to provide the Products and/or Services to Client as specified in one or more Purchase Orders or Statements of Work executed pursuant to this Agreement.\n\n2.2 Quality Standards\n\nAll Products and Services shall:\n\nMeet or exceed industry standards\n\nConform to specifications set forth in the applicable SOW or PO\n\nBe free from defects in materials and workmanship\n\nComply with all applicable laws, regulations, and codes\n\nBe performed in a professional and workmanlike manner\n\n2.3 Changes to Scope\n\nAny changes to the scope of work must be documented in a written change order signed by authorized representatives of both parties.\n\n3. DELIVERY AND PERFORMANCE\n\n3.1 Delivery Schedule\n\nVendor shall deliver Products and Services in accordance with the schedule set forth in the applicable SOW or PO. Time is of the essence in the performance of this Agreement.\n\n3.2 Delays\n\nIf Vendor anticipates any delay, Vendor shall immediately notify Client in writing, stating the cause, expected duration, and steps being taken to mitigate the delay.\n\n3.3 Late Delivery\n\nIf Vendor fails to deliver by the agreed-upon date, Client may cancel the order without penalty or Vendor may be subject to liquidated damages as specified in the SOW.\n\n4. PRICING AND PAYMENT TERMS\n\n4.1 Pricing\n\nThe prices for Products and Services shall be as set forth in the applicable SOW or PO. All prices are in U.S. Dollars unless otherwise specified.\n\n4.2 Payment Terms\n\nUnless otherwise specified, payment shall be due within [30/45/60] days of Client's receipt of a properly submitted invoice. Payments shall be made via [ACH/WIRE TRANSFER/CHECK].\n\n4.3 Late Payment\n\nAmounts not paid when due shall accrue interest at the lesser of 1.5% per month or the maximum rate permitted by law.\n\n4.4 Taxes\n\nAll prices are exclusive of sales, use, excise, and other taxes. Client shall pay or reimburse Vendor for all applicable Taxes, except taxes based on Vendor's net income.\n\n5. ACCEPTANCE AND INSPECTION\n\n5.1 Inspection Period\n\nClient shall have [10] business days from delivery to inspect Products or review Deliverables.\n\n5.2 Acceptance\n\nProducts or Deliverables shall be deemed accepted if Client provides written acceptance or if the Inspection Period expires without written notice of rejection.\n\n5.3 Rejection\n\nClient may reject Products or Deliverables that fail to meet specifications by providing written notice within the Inspection Period.\n\n6. WARRANTIES\n\n6.1 Product Warranties\n\nVendor warrants that all Products shall be new (unless otherwise specified), genuine, free from defects, conform to specifications, be fit for their intended purpose, and comply with all applicable laws.\n\n6.2 Service Warranties\n\nVendor warrants that all Services shall be performed in a professional, workmanlike manner by qualified personnel and shall comply with all applicable laws and industry standards.\n\n6.3 Warranty Period\n\nFor Products: [12/24/36] months from delivery. For Services: [12/24] months from acceptance.\n\n6.4 Warranty Remedies\n\nIf Products or Services fail to conform to warranties, Vendor shall, at Client's option, repair or replace defective Products, re-perform defective Services, or refund the amount paid.\n\n7. INTELLECTUAL PROPERTY RIGHTS\n\n7.1 Work Product\n\nAll work product, deliverables, materials, and intellectual property created by Vendor specifically for Client shall be deemed \"works made for hire.\" To the extent not qualifying as works made for hire, Vendor assigns all rights to Client.\n\n7.2 IP Infringement\n\nVendor represents and warrants that the Products, Services, and Deliverables do not and will not infringe any third-party intellectual property rights.\n\n8. CONFIDENTIALITY\n\n8.1 Obligations\n\nEach party shall hold Confidential Information in strict confidence, not disclose it to third parties, and use it only for purposes of this Agreement.\n\n8.2 Exceptions\n\nConfidential Information does not include information that is publicly available, was rightfully possessed prior to disclosure, is rightfully received from a third party, or is independently developed.\n\n9. COMPLIANCE AND REGULATORY\n\n9.1 Legal Compliance\n\nVendor shall comply with all applicable federal, state, and local laws, regulations, and ordinances, including labor, health, safety, environmental, export control, and anti-corruption laws.\n\n9.2 Permits and Licenses\n\nVendor shall obtain and maintain all necessary licenses, permits, certifications, and approvals required to provide the Products and Services.\n\n10. INSURANCE\n\n10.1 Required Coverage\n\nVendor shall maintain Commercial General Liability, Professional Liability, Workers' Compensation, and other insurance as specified in the SOW.\n\n10.2 Certificates\n\nVendor shall provide Client with certificates of insurance evidencing required coverages prior to commencing work.\n\n11. LIMITATION OF LIABILITY\n\n11.1 Consequential Damages\n\nEXCEPT FOR CONFIDENTIALITY BREACHES, INDEMNIFICATION OBLIGATIONS, OR GROSS NEGLIGENCE, NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.\n\n11.2 Liability Cap\n\nVENDOR'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT PAID BY CLIENT IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO LIABILITY.\n\n12. INDEMNIFICATION\n\n12.1 Vendor Indemnification\n\nVendor shall defend, indemnify, and hold harmless Client from third-party claims arising from personal injury, property damage, IP infringement, Vendor's breach, violation of laws, or acts of Vendor Personnel.\n\n12.2 Client Indemnification\n\nClient shall indemnify Vendor from claims arising from Client's breach, misuse of Products/Services, or unauthorized modifications.\n\n13. INDEPENDENT CONTRACTOR\n\nVendor is an independent contractor, not an employee, agent, or partner of Client. Vendor is responsible for all compensation, benefits, taxes, and compliance for Vendor Personnel.\n\n14. TERM AND TERMINATION\n\n14.1 Initial Term\n\nThe initial term shall commence on the Effective Date and continue for [X] years unless earlier terminated.\n\n14.2 Renewal\n\nThis Agreement shall automatically renew unless either party provides written notice of non-renewal at least [90] days prior to expiration.\n\n14.3 Termination for Convenience\n\nClient may terminate for convenience upon [30/60/90] days' prior written notice. Client shall pay for all accepted Products/Services through termination and reasonable non-recoverable costs.\n\n14.4 Termination for Cause\n\nEither party may terminate immediately if the other party materially breaches and fails to cure within [30] days, becomes insolvent, or ceases business operations.\n\n14.5 Effect of Termination\n\nUpon termination, all outstanding payments become due, Vendor shall cease work, deliver all Work Product and Client property, and cooperate in transition.\n\n15. GENERAL PROVISIONS\n\n15.1 Entire Agreement\n\nThis Agreement, together with all SOWs, POs, and exhibits, constitutes the entire agreement and supersedes all prior agreements.\n\n15.2 Amendments\n\nThis Agreement may be amended only by a written document signed by authorized representatives of both parties.\n\n15.3 Governing Law\n\nThis Agreement shall be governed by the laws of the State of [STATE], without regard to its conflicts of law principles.\n\n15.4 Notices\n\nAll notices shall be in writing and delivered via personal delivery, certified mail, overnight courier, or email to the addresses set forth above.\n\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\n\nCLIENT:\n\n[COMPANY NAME]\n\nBy: _________________________\n\nName: _______________________\n\nTitle: ________________________\n\nDate: ________________________\n\nVENDOR:\n\n[VENDOR NAME]\n\nBy: _________________________\n\nName: _______________________\n\nTitle: ________________________\n\nDate: ________________________\n\nEXHIBIT A\n\nSTATEMENT OF WORK TEMPLATE\n\nPROJECT: [PROJECT NAME]\n\nSOW NUMBER: [NUMBER]\n\nEFFECTIVE DATE: [DATE]\n\n1. Scope of Work\n\n[Detailed description of products/services to be provided]\n\n2. Deliverables\n\n[List of deliverables with descriptions and due dates]\n\n3. Acceptance Criteria\n\n[Specific criteria that must be met]\n\n4. Pricing\n\nTotal: $[AMOUNT]\n\n5. Payment Terms\n\n[Payment schedule tied to milestones]\n\nEXHIBIT B\n\nPURCHASE ORDER TEMPLATE\n\nPO NUMBER: [NUMBER]\n\nDATE: [DATE]\n\nVENDOR: [NAME]\n\nSHIP TO: [ADDRESS]\n\nDELIVERY DATE: [DATE]\n\nPAYMENT TERMS: Net [30/45/60] days\n\nLine Items:\n\n1. [Product/Service] - Qty: [X] - Unit Price: $[AMOUNT] - Total: $[TOTAL]\n\n2. [Product/Service] - Qty: [X] - Unit Price: $[AMOUNT] - Total: $[TOTAL]\n\nTOTAL: $[AMOUNT]",
+    "sections": [
+      {
+        "title": "RECITALS",
+        "text": "WHEREAS, Client desires to engage Vendor to provide certain products and/or services as described herein;\nWHEREAS, Vendor represents that it has the expertise, resources, and capability to provide such products and services; and\nWHEREAS, the parties desire to set forth the terms and conditions governing their business relationship.\nNOW, THEREFORE, in consideration of the mutual covenants and agreements contained herein, and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties agree as follows:"
+      },
+      {
+        "title": "1. DEFINITIONS",
+        "text": ""
+      },
+      {
+        "title": "1.1 \"Deliverables\"",
+        "text": "means the products, work product, materials, and services to be provided by Vendor as specified in the applicable Statement of Work."
+      },
+      {
+        "title": "1.2 \"Statement of Work\" or \"SOW\"",
+        "text": "means a written document executed by both parties that specifies the scope, deliverables, timelines, and pricing for specific Products or Services under this Agreement."
+      },
+      {
+        "title": "1.3 \"Purchase Order\" or \"PO\"",
+        "text": "means a written order issued by Client to Vendor specifying the Products or Services to be provided, pricing, quantities, and delivery dates."
+      },
+      {
+        "title": "1.4 \"Vendor Personnel\"",
+        "text": "means Vendor's employees, contractors, and agents engaged in the provision of Products or Services under this Agreement."
+      },
+      {
+        "title": "2. SCOPE OF WORK",
+        "text": ""
+      },
+      {
+        "title": "2.1 Services and Products",
+        "text": "Vendor agrees to provide the Products and/or Services to Client as specified in one or more Purchase Orders or Statements of Work executed pursuant to this Agreement."
+      },
+      {
+        "title": "2.2 Quality Standards",
+        "text": "All Products and Services shall:\nMeet or exceed industry standards\nConform to specifications set forth in the applicable SOW or PO\nBe free from defects in materials and workmanship\nComply with all applicable laws, regulations, and codes\nBe performed in a professional and workmanlike manner"
+      },
+      {
+        "title": "2.3 Changes to Scope",
+        "text": "Any changes to the scope of work must be documented in a written change order signed by authorized representatives of both parties."
+      },
+      {
+        "title": "3. DELIVERY AND PERFORMANCE",
+        "text": ""
+      },
+      {
+        "title": "3.1 Delivery Schedule",
+        "text": "Vendor shall deliver Products and Services in accordance with the schedule set forth in the applicable SOW or PO. Time is of the essence in the performance of this Agreement."
+      },
+      {
+        "title": "3.2 Delays",
+        "text": "If Vendor anticipates any delay, Vendor shall immediately notify Client in writing, stating the cause, expected duration, and steps being taken to mitigate the delay."
+      },
+      {
+        "title": "3.3 Late Delivery",
+        "text": "If Vendor fails to deliver by the agreed-upon date, Client may cancel the order without penalty or Vendor may be subject to liquidated damages as specified in the SOW."
+      },
+      {
+        "title": "4. PRICING AND PAYMENT TERMS",
+        "text": ""
+      },
+      {
+        "title": "4.1 Pricing",
+        "text": "The prices for Products and Services shall be as set forth in the applicable SOW or PO. All prices are in U.S. Dollars unless otherwise specified."
+      },
+      {
+        "title": "4.2 Payment Terms",
+        "text": "Unless otherwise specified, payment shall be due within [30/45/60] days of Client's receipt of a properly submitted invoice. Payments shall be made via [ACH/WIRE TRANSFER/CHECK]."
+      },
+      {
+        "title": "4.3 Late Payment",
+        "text": "Amounts not paid when due shall accrue interest at the lesser of 1.5% per month or the maximum rate permitted by law."
+      },
+      {
+        "title": "4.4 Taxes",
+        "text": "All prices are exclusive of sales, use, excise, and other taxes. Client shall pay or reimburse Vendor for all applicable Taxes, except taxes based on Vendor's net income."
+      },
+      {
+        "title": "5. ACCEPTANCE AND INSPECTION",
+        "text": ""
+      },
+      {
+        "title": "5.1 Inspection Period",
+        "text": "Client shall have [10] business days from delivery to inspect Products or review Deliverables."
+      },
+      {
+        "title": "5.2 Acceptance",
+        "text": "Products or Deliverables shall be deemed accepted if Client provides written acceptance or if the Inspection Period expires without written notice of rejection."
+      },
+      {
+        "title": "5.3 Rejection",
+        "text": "Client may reject Products or Deliverables that fail to meet specifications by providing written notice within the Inspection Period."
+      },
+      {
+        "title": "6. WARRANTIES",
+        "text": ""
+      },
+      {
+        "title": "6.1 Product Warranties",
+        "text": "Vendor warrants that all Products shall be new (unless otherwise specified), genuine, free from defects, conform to specifications, be fit for their intended purpose, and comply with all applicable laws."
+      },
+      {
+        "title": "6.2 Service Warranties",
+        "text": "Vendor warrants that all Services shall be performed in a professional, workmanlike manner by qualified personnel and shall comply with all applicable laws and industry standards."
+      },
+      {
+        "title": "6.3 Warranty Period",
+        "text": "For Products: [12/24/36] months from delivery. For Services: [12/24] months from acceptance."
+      },
+      {
+        "title": "6.4 Warranty Remedies",
+        "text": "If Products or Services fail to conform to warranties, Vendor shall, at Client's option, repair or replace defective Products, re-perform defective Services, or refund the amount paid."
+      },
+      {
+        "title": "7. INTELLECTUAL PROPERTY RIGHTS",
+        "text": ""
+      },
+      {
+        "title": "7.1 Work Product",
+        "text": "All work product, deliverables, materials, and intellectual property created by Vendor specifically for Client shall be deemed \"works made for hire.\" To the extent not qualifying as works made for hire, Vendor assigns all rights to Client."
+      },
+      {
+        "title": "7.2 IP Infringement",
+        "text": "Vendor represents and warrants that the Products, Services, and Deliverables do not and will not infringe any third-party intellectual property rights."
+      },
+      {
+        "title": "8. CONFIDENTIALITY",
+        "text": ""
+      },
+      {
+        "title": "8.1 Obligations",
+        "text": "Each party shall hold Confidential Information in strict confidence, not disclose it to third parties, and use it only for purposes of this Agreement."
+      },
+      {
+        "title": "8.2 Exceptions",
+        "text": "Confidential Information does not include information that is publicly available, was rightfully possessed prior to disclosure, is rightfully received from a third party, or is independently developed."
+      },
+      {
+        "title": "9. COMPLIANCE AND REGULATORY",
+        "text": ""
+      },
+      {
+        "title": "9.1 Legal Compliance",
+        "text": "Vendor shall comply with all applicable federal, state, and local laws, regulations, and ordinances, including labor, health, safety, environmental, export control, and anti-corruption laws."
+      },
+      {
+        "title": "9.2 Permits and Licenses",
+        "text": "Vendor shall obtain and maintain all necessary licenses, permits, certifications, and approvals required to provide the Products and Services."
+      },
+      {
+        "title": "10. INSURANCE",
+        "text": ""
+      },
+      {
+        "title": "10.1 Required Coverage",
+        "text": "Vendor shall maintain Commercial General Liability, Professional Liability, Workers' Compensation, and other insurance as specified in the SOW."
+      },
+      {
+        "title": "10.2 Certificates",
+        "text": "Vendor shall provide Client with certificates of insurance evidencing required coverages prior to commencing work."
+      },
+      {
+        "title": "11. LIMITATION OF LIABILITY",
+        "text": ""
+      },
+      {
+        "title": "11.1 Consequential Damages",
+        "text": "EXCEPT FOR CONFIDENTIALITY BREACHES, INDEMNIFICATION OBLIGATIONS, OR GROSS NEGLIGENCE, NEITHER PARTY SHALL BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES."
+      },
+      {
+        "title": "11.2 Liability Cap",
+        "text": "VENDOR'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT PAID BY CLIENT IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO LIABILITY."
+      },
+      {
+        "title": "12. INDEMNIFICATION",
+        "text": ""
+      },
+      {
+        "title": "12.1 Vendor Indemnification",
+        "text": "Vendor shall defend, indemnify, and hold harmless Client from third-party claims arising from personal injury, property damage, IP infringement, Vendor's breach, violation of laws, or acts of Vendor Personnel."
+      },
+      {
+        "title": "12.2 Client Indemnification",
+        "text": "Client shall indemnify Vendor from claims arising from Client's breach, misuse of Products/Services, or unauthorized modifications."
+      },
+      {
+        "title": "13. INDEPENDENT CONTRACTOR",
+        "text": "Vendor is an independent contractor, not an employee, agent, or partner of Client. Vendor is responsible for all compensation, benefits, taxes, and compliance for Vendor Personnel."
+      },
+      {
+        "title": "14. TERM AND TERMINATION",
+        "text": ""
+      },
+      {
+        "title": "14.1 Initial Term",
+        "text": "The initial term shall commence on the Effective Date and continue for [X] years unless earlier terminated."
+      },
+      {
+        "title": "14.2 Renewal",
+        "text": "This Agreement shall automatically renew unless either party provides written notice of non-renewal at least [90] days prior to expiration."
+      },
+      {
+        "title": "14.3 Termination for Convenience",
+        "text": "Client may terminate for convenience upon [30/60/90] days' prior written notice. Client shall pay for all accepted Products/Services through termination and reasonable non-recoverable costs."
+      },
+      {
+        "title": "14.4 Termination for Cause",
+        "text": "Either party may terminate immediately if the other party materially breaches and fails to cure within [30] days, becomes insolvent, or ceases business operations."
+      },
+      {
+        "title": "14.5 Effect of Termination",
+        "text": "Upon termination, all outstanding payments become due, Vendor shall cease work, deliver all Work Product and Client property, and cooperate in transition."
+      },
+      {
+        "title": "15. GENERAL PROVISIONS",
+        "text": ""
+      },
+      {
+        "title": "15.1 Entire Agreement",
+        "text": "This Agreement, together with all SOWs, POs, and exhibits, constitutes the entire agreement and supersedes all prior agreements."
+      },
+      {
+        "title": "15.2 Amendments",
+        "text": "This Agreement may be amended only by a written document signed by authorized representatives of both parties."
+      },
+      {
+        "title": "15.3 Governing Law",
+        "text": "This Agreement shall be governed by the laws of the State of [STATE], without regard to its conflicts of law principles."
+      },
+      {
+        "title": "15.4 Notices",
+        "text": "All notices shall be in writing and delivered via personal delivery, certified mail, overnight courier, or email to the addresses set forth above.\nIN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.\nCLIENT:\n[COMPANY NAME]\nBy: _________________________\nName: _______________________\nTitle: ________________________\nDate: ________________________\nVENDOR:\n[VENDOR NAME]\nBy: _________________________\nName: _______________________\nTitle: ________________________\nDate: ________________________\nEXHIBIT A"
+      },
+      {
+        "title": "STATEMENT OF WORK TEMPLATE",
+        "text": ""
+      },
+      {
+        "title": "PROJECT: [PROJECT NAME]",
+        "text": "SOW NUMBER: [NUMBER]\nEFFECTIVE DATE: [DATE]"
+      },
+      {
+        "title": "1. Scope of Work",
+        "text": "[Detailed description of products/services to be provided]"
+      },
+      {
+        "title": "2. Deliverables",
+        "text": "[List of deliverables with descriptions and due dates]"
+      },
+      {
+        "title": "3. Acceptance Criteria",
+        "text": "[Specific criteria that must be met]"
+      },
+      {
+        "title": "4. Pricing",
+        "text": "Total: $[AMOUNT]"
+      },
+      {
+        "title": "5. Payment Terms",
+        "text": "[Payment schedule tied to milestones]\nEXHIBIT B"
+      },
+      {
+        "title": "PURCHASE ORDER TEMPLATE",
+        "text": "PO NUMBER: [NUMBER]\nDATE: [DATE]\nVENDOR: [NAME]\nSHIP TO: [ADDRESS]\nDELIVERY DATE: [DATE]\nPAYMENT TERMS: Net [30/45/60] days"
+      },
+      {
+        "title": "Line Items:",
+        "text": "1. [Product/Service] - Qty: [X] - Unit Price: $[AMOUNT] - Total: $[TOTAL]\n2. [Product/Service] - Qty: [X] - Unit Price: $[AMOUNT] - Total: $[TOTAL]\nTOTAL: $[AMOUNT]"
+      }
+    ]
+  },
+  "audit": {
+    "confidence": 0.75,
+    "extractedAt": "2025-11-15T19:46:56.085230Z",
+    "model": "docx-converter-v1",
+    "reviewRequired": true,
+    "note": "Automated conversion from boilerplate template"
+  }
+}
