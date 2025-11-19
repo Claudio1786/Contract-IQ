@@ -23,7 +23,7 @@ export default function UploadPage() {
   // Key objectives for uploaded contracts
   const contractObjectives = [
     { id: 'risk_assessment', label: 'Risk Assessment & Liability Review' },
-    { id: 'pricing_analysis', label: 'Pricing & Cost Optimization' },
+    { id: 'pricing_analysis', label: 'Pricing & Terms Optimization' },
     { id: 'sla_review', label: 'Service Level Agreement Review' },
     { id: 'termination_rights', label: 'Termination Rights & Exit Clauses' },
     { id: 'data_protection', label: 'Data Protection & Privacy Compliance' },

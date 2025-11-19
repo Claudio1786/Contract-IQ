@@ -33,7 +33,7 @@ export default function EmptyState() {
     },
     {
       icon: '💰',
-      text: 'What\'s our total SaaS spend by category?'
+      text: 'What\'s our total revenue by segment?'
     },
     {
       icon: '⚠️',
@@ -69,7 +69,7 @@ export default function EmptyState() {
       
       {/* Hero Text */}
       <h1 className="empty-state-title">
-        Contract Intelligence for Your SaaS & Vendor Stack
+        Contract Intelligence for Your Customer Base
       </h1>
       
       <p className="empty-state-description">
