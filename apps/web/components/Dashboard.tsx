@@ -62,14 +62,13 @@ interface RiskItemProps {
 
 function RiskItem({ title, renewalDate, risk, onViewDetails }: RiskItemProps) {
   return (
-    <div style={{ marginBottom: 'var(--space-4)' }}>
+    <div className="mb-4">
       <h4 className="text-lg font-medium text-primary">{title}</h4>
       <p className="text-base text-secondary">Renews: {renewalDate}</p>
       <p className="text-base text-tertiary">Risk: {risk}</p>
       <button 
-        className="btn-ghost btn-sm" 
+        className="btn-ghost btn-sm inline-flex items-center gap-[6px] mt-2" 
         onClick={onViewDetails}
-        style={{ marginTop: 'var(--space-2)', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
       >
         <span>View Details</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -149,7 +148,7 @@ export default function Dashboard() {
       {/* Page Header */}
       <div className="dashboard-page-header">
         <div className="dashboard-header-content">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <div className="flex items-center justify-between w-full">
             <div>
               <h1>Dashboard</h1>
               <p className="dashboard-header-subtitle">
@@ -158,29 +157,9 @@ export default function Dashboard() {
             </div>
             <button
               onClick={() => router.push('/app/admin/contracts/new')}
-              style={{
-                padding: '12px 24px',
-                background: 'linear-gradient(135deg, #3B82F6, #2563EB)',
-                border: 'none',
-                borderRadius: '12px',
-                color: 'white',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.4)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
-              }}
+              className="px-6 py-3 rounded-xl text-white text-[16px] font-semibold flex items-center gap-2 
+                bg-gradient-to-br from-blue-500 to-blue-600 shadow-md hover:shadow-lg transition-transform 
+                hover:-translate-y-0.5"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <line x1="12" y1="5" x2="12" y2="19"/>
@@ -202,7 +181,7 @@ export default function Dashboard() {
                 <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
-            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
+          <div className="kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
               </svg>
@@ -226,7 +205,7 @@ export default function Dashboard() {
                 <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
               </svg>
             </div>
-            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
+          <div className="kpi-trend" style={{ '--trend-bg': 'rgba(16,185,129,0.1)', '--trend-color': '#10B981' } as React.CSSProperties}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
               </svg>
@@ -250,7 +229,7 @@ export default function Dashboard() {
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
             </div>
-            <div className="kpi-trend" style={{ '--trend-bg': 'rgba(245,158,11,0.1)', '--trend-color': '#F59E0B', display: 'inline-flex', alignItems: 'center', gap: '6px' } as React.CSSProperties}>
+            <div className="kpi-trend inline-flex items-center gap-[6px]" style={{ '--trend-bg': 'rgba(245,158,11,0.1)', '--trend-color': '#F59E0B' } as React.CSSProperties}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
               </svg>
@@ -295,55 +274,28 @@ export default function Dashboard() {
       <div className="chart-card">
         <div className="chart-header">
           <h2 className="chart-title">Contract Value by Month</h2>
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div className="flex gap-2">
             <button 
               className={`chart-tab ${chartPeriod === '6M' ? 'active' : ''}`}
               onClick={() => setChartPeriod('6M')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '10px',
-                fontSize: '14px',
-                fontWeight: '500',
-                background: chartPeriod === '6M' ? 'var(--surface-4)' : 'transparent',
-                color: chartPeriod === '6M' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                border: chartPeriod === '6M' ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
+              className={`px-4 py-2 rounded-[10px] text-[14px] font-medium border transition 
+                ${chartPeriod === '6M' ? 'bg-[var(--surface-4)] text-[var(--text-primary)] border-white/10' : 'bg-transparent text-[var(--text-tertiary)] border-transparent'}`}
             >
               6M
             </button>
             <button 
               className={`chart-tab ${chartPeriod === '1Y' ? 'active' : ''}`}
               onClick={() => setChartPeriod('1Y')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '10px',
-                fontSize: '14px',
-                fontWeight: '500',
-                background: chartPeriod === '1Y' ? 'var(--surface-4)' : 'transparent',
-                color: chartPeriod === '1Y' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                border: chartPeriod === '1Y' ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
+              className={`px-4 py-2 rounded-[10px] text-[14px] font-medium border transition 
+                ${chartPeriod === '1Y' ? 'bg-[var(--surface-4)] text-[var(--text-primary)] border-white/10' : 'bg-transparent text-[var(--text-tertiary)] border-transparent'}`}
             >
               1Y
             </button>
             <button 
               className={`chart-tab ${chartPeriod === 'All' ? 'active' : ''}`}
               onClick={() => setChartPeriod('All')}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '10px',
-                fontSize: '14px',
-                fontWeight: '500',
-                background: chartPeriod === 'All' ? 'var(--surface-4)' : 'transparent',
-                color: chartPeriod === 'All' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                border: chartPeriod === 'All' ? '1px solid rgba(255,255,255,0.1)' : '1px solid transparent',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
+              className={`px-4 py-2 rounded-[10px] text-[14px] font-medium border transition 
+                ${chartPeriod === 'All' ? 'bg-[var(--surface-4)] text-[var(--text-primary)] border-white/10' : 'bg-transparent text-[var(--text-tertiary)] border-transparent'}`}
             >
               All Time
             </button>
@@ -376,21 +328,10 @@ export default function Dashboard() {
           <div className="table-header">
             <h2 className="table-title">Recent Customer Contracts</h2>
             <button 
-              className="table-action"
+              className="table-action px-4 py-2 bg-[var(--surface-4)] border border-white/10 rounded-[10px] text-[var(--text-primary)] text-[14px] font-medium transition hover:brightness-110"
               onClick={() => router.push('/contracts')}
-              style={{
-                padding: '10px 18px',
-                background: 'var(--surface-4)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '10px',
-                color: 'var(--text-primary)',
-                fontSize: '14px',
-                fontWeight: '500',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
             >
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <span className="inline-flex items-center gap-[6px]">
                 <span>View All</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14"/>
@@ -411,13 +352,13 @@ export default function Dashboard() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={4} style={{ textAlign: 'center', padding: '24px', color: 'var(--text-tertiary)' }}>
+                  <td colSpan={4} className="text-center py-6 text-[var(--color-text-tertiary)]">
                     Loading customer contracts...
                   </td>
                 </tr>
               ) : contracts.length === 0 ? (
                 <tr>
-                  <td colSpan={4} style={{ textAlign: 'center', padding: '24px', color: 'var(--text-tertiary)' }}>
+                  <td colSpan={4} className="text-center py-6 text-[var(--color-text-tertiary)]">
                     No customer contracts yet. Add your first customer contract to get started.
                   </td>
                 </tr>
@@ -430,14 +371,14 @@ export default function Dashboard() {
                   return (
                     <tr key={contract.id}>
                       <td>
-                        <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>
+                        <div className="font-semibold text-[var(--color-text-primary)] mb-1">
                           {contract.customerName || contract.contractName}
                         </div>
-                        <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>
+                        <div className="text-[13px] text-[var(--color-text-tertiary)]">
                           {contract.industry || contract.customerType || 'B2B SaaS'}
                         </div>
                       </td>
-                      <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                      <td className="font-semibold text-[var(--color-text-primary)]">
                         ${acv.toLocaleString()}
                       </td>
                       <td><span className="badge badge-active">Active</span></td>
