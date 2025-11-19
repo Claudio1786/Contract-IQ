@@ -522,7 +522,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div className="hero-badge">AI-Powered Revenue Intelligence for B2B SaaS</div>
+          <div className="hero-badge">AI-Powered Revenue Intelligence for B2B Companies</div>
           <h1 className="hero-title">Turn Customer Contracts Into Revenue Intelligence</h1>
           <p className="hero-subtitle">
             Prevent churn, spot expansion opportunities, and never miss a renewal. Contract IQ transforms your MSAs into actionable revenue insights with AI-powered analysis.
@@ -563,7 +563,7 @@ export default function LandingPage() {
             <div className="section-label">Platform Capabilities</div>
             <h2 className="section-title">Built for Revenue Operations Teams</h2>
             <p className="section-subtitle">
-              Contract IQ is purpose-built for B2B SaaS companies managing 200+ customer contracts. RevOps, CS Ops, Sales Ops—if you own revenue retention, this is for you.
+              Contract IQ is purpose-built for B2B companies managing 200+ customer contracts. RevOps, CS Ops, Sales Ops—if you own revenue retention, this is for you.
             </p>
           </div>
 
@@ -624,7 +624,7 @@ export default function LandingPage() {
         <div className="cta-content">
           <h2 className="cta-title">Start Managing Your Customer Portfolio Smarter</h2>
           <p className="cta-subtitle">
-            Join B2B SaaS companies using Contract IQ to eliminate revenue leakage and maximize customer lifetime value. Full platform access, no credit card required.
+            Join B2B companies using Contract IQ to eliminate revenue leakage and maximize customer lifetime value. Full platform access, no credit card required.
           </p>
           <a href="/app" className="btn-primary" style={{ fontSize: '19px', padding: '20px 48px' }}>
             🎯 Get Started Free
@@ -640,7 +640,7 @@ export default function LandingPage() {
             <div className="logo-text" style={{ fontSize: '18px' }}>Contract IQ</div>
           </div>
           <p className="footer-text">
-            © 2024 Contract IQ. Revenue intelligence for B2B SaaS companies.
+            © 2024 Contract IQ. Revenue intelligence for B2B companies.
           </p>
         </div>
       </footer>
