@@ -40,14 +40,27 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({
         <MetricCard
           title="Total Contracts"
           value={data.totalContracts.toString()}
-          icon="📋"
+          icon={(
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="9" y="2" width="6" height="4" rx="1"/>
+              <rect x="4" y="6" width="16" height="16" rx="2"/>
+              <path d="M9 10h6"/>
+              <path d="M9 14h6"/>
+            </svg>
+          )}
           trend={+5}
           trendLabel="vs last month"
         />
         <MetricCard
           title="Avg Risk Score"
           value={data.avgRiskScore.toFixed(1)}
-          icon="⚠️"
+          icon={(
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          )}
           trend={-0.3}
           trendLabel="lower risk"
           color={data.avgRiskScore > 7 ? 'red' : data.avgRiskScore > 4 ? 'yellow' : 'green'}
@@ -55,7 +68,14 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({
         <MetricCard
           title="Renewals Due"
           value={data.upcomingRenewals.toString()}
-          icon="📅"
+          icon={(
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          )}
           trend={+2}
           trendLabel="next 90 days"
           color={data.upcomingRenewals > 10 ? 'red' : 'default'}
@@ -63,7 +83,13 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({
         <MetricCard
           title="Potential Savings"
           value={`$${(data.potentialSavings / 1000).toFixed(0)}K`}
-          icon="💰"
+          icon={(
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M8 12h8"/>
+              <path d="M12 8v8"/>
+            </svg>
+          )}
           trend={+15}
           trendLabel="identified"
           color="green"
@@ -98,7 +124,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({
 interface MetricCardProps {
   title: string;
   value: string;
-  icon: string;
+  icon: React.ReactNode;
   trend?: number;
   trendLabel?: string;
   color?: 'default' | 'green' | 'yellow' | 'red';
@@ -120,7 +146,17 @@ const MetricCard: React.FC<MetricCardProps> = ({
   };
 
   const trendColor = trend && trend > 0 ? 'text-green-600' : 'text-red-600';
-  const trendIcon = trend && trend > 0 ? '↗️' : '↘️';
+  const TrendSvg = () => (
+    trend && trend > 0 ? (
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <polyline points="4 14 10 8 14 12 20 6"/>
+      </svg>
+    ) : (
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <polyline points="4 10 10 16 14 12 20 18"/>
+      </svg>
+    )
+  );
 
   return (
     <Card className={`p-3 ${colorClasses[color]}`}>
@@ -130,8 +166,8 @@ const MetricCard: React.FC<MetricCardProps> = ({
           <div className="text-lg font-semibold text-gray-900 mt-1">{value}</div>
           {trend !== undefined && trendLabel && (
             <div className="flex items-center mt-1">
-              <span className={`text-xs ${trendColor}`}>
-                {trendIcon} {Math.abs(trend)}{typeof trend === 'number' && trend % 1 !== 0 ? '' : '%'}
+              <span className={`text-xs ${trendColor} inline-flex items-center gap-1`}>
+                <TrendSvg /> {Math.abs(trend)}{typeof trend === 'number' && trend % 1 !== 0 ? '' : '%'}
               </span>
               <span className="text-xs text-gray-500 ml-1">{trendLabel}</span>
             </div>
