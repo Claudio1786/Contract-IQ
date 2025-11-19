@@ -365,10 +365,10 @@ export const EnhancedPlaybookGenerator: React.FC<EnhancedPlaybookGeneratorProps>
                 </p>
               </div>
               <div className="text-center">
-                <div className="text-2xl mb-2">💰</div>
-                <h3 className="font-medium text-gray-900 mb-2">Cost Transparency</h3>
+                <div className="text-2xl mb-2">⚙️</div>
+                <h3 className="font-medium text-gray-900 mb-2">Operational Efficiency</h3>
                 <p className="text-sm text-gray-600">
-                  Real-time cost tracking and optimization recommendations
+                  Real-time efficiency tracking and optimization recommendations
                 </p>
               </div>
             </div>

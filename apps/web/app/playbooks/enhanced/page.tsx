@@ -138,12 +138,12 @@ export default function EnhancedPlaybooksPage() {
               </div>
 
               <div className="bg-white rounded-lg p-6 border border-purple-200 shadow-sm">
-                <div className="text-3xl mb-3">💰</div>
+                <div className="text-3xl mb-3">⚙️</div>
                 <h3 className="text-lg font-semibold text-purple-900 mb-2">
-                  Cost Optimization
+                  Operational Efficiency
                 </h3>
                 <p className="text-purple-700 text-sm">
-                  Real-time cost tracking and intelligent model routing to balance quality with operational efficiency.
+                  Real-time efficiency tracking and intelligent model routing to balance quality with speed.
                 </p>
               </div>
 
