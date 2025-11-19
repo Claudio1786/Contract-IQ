@@ -214,7 +214,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Active Vendors */}
+        {/* Active Customers */}
         <div className="kpi-card" style={{ '--kpi-gradient': 'linear-gradient(90deg, #10B981, #059669)', '--kpi-bg': 'rgba(16,185,129,0.12)' } as React.CSSProperties}>
           <div className="kpi-header">
             <div className="kpi-icon">
@@ -230,10 +230,10 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="kpi-value">247</div>
-          <div className="kpi-label">Active Vendors</div>
+          <div className="kpi-label">Active Customers</div>
           <div className="kpi-meta">
             <span className="kpi-meta-item">New this month</span>
-            <span className="kpi-meta-value">12 vendors</span>
+            <span className="kpi-meta-value">12 customers</span>
           </div>
         </div>
 
@@ -476,7 +476,7 @@ export default function Dashboard() {
               </svg>
               INSIGHT
             </div>
-            <div className="insight-text">SaaS consolidation opportunity: 4 vendors offer overlapping features. Consolidation could save $89,000/year.</div>
+            <div className="insight-text">Expansion bundling opportunity: 4 customers are candidates for bundle alignment. Potential revenue impact: $89,000/year.</div>
           </div>
           <div className="insight-item" style={{ '--insight-color': '#10B981' } as React.CSSProperties}>
             <div className="insight-type">
@@ -494,7 +494,7 @@ export default function Dashboard() {
               </svg>
               TREND
             </div>
-            <div className="insight-text">Contract spend increased 12.5% QoQ, driven primarily by cloud infrastructure expansion.</div>
+            <div className="insight-text">Revenue increased 12.5% QoQ, driven primarily by customer expansions.</div>
           </div>
         </div>
       </div>
