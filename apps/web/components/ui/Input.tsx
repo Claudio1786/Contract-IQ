@@ -2,13 +2,13 @@ import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const inputVariants = cva(
-  'flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-gray-400 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+  'flex w-full rounded-md border border-[color:var(--border-default)] bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-gray-400 focus:border-[var(--primary-600)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-600)] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {
         default: '',
-        error: 'border-red-500 focus:border-red-600 focus:ring-red-600',
-        success: 'border-green-500 focus:border-green-600 focus:ring-green-600'
+        error: 'border-[color:var(--danger-500)] focus:border-[var(--danger-600)] focus:ring-[var(--danger-600)]',
+        success: 'border-[color:var(--success-500)] focus:border-[var(--success-600)] focus:ring-[var(--success-600)]'
       },
       size: {
         sm: 'h-8 px-2 py-1 text-xs',
@@ -42,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor={inputId} className="block text-sm font-medium text-[var(--color-text-inverse)] mb-1">
             {label}
           </label>
         )}
@@ -69,7 +69,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {(errorText || helperText) && (
-          <p className={`mt-1 text-xs ${hasError ? 'text-red-600' : 'text-gray-500'}`}>
+          <p className={`mt-1 text-xs ${hasError ? 'text-[var(--danger-600)]' : 'text-gray-500'}`}>
             {errorText || helperText}
           </p>
         )}

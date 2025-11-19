@@ -6,11 +6,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-600',
-        secondary: 'border border-gray-300 bg-white text-gray-900 hover:bg-gray-50 focus-visible:ring-gray-600',
-        ghost: 'text-gray-600 hover:bg-gray-100 hover:text-gray-900',
-        danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-600',
-        success: 'bg-green-600 text-white hover:bg-green-700 focus-visible:ring-green-600'
+        primary:
+          'bg-[var(--primary-600)] text-[var(--text-primary)] hover:bg-[var(--primary-700)] focus-visible:ring-[var(--primary-600)]',
+        secondary:
+          'border border-[color:var(--border-default)] bg-white text-[var(--color-text-inverse)] hover:bg-gray-50 focus-visible:ring-[var(--gray-600)]',
+        ghost:
+          'text-[var(--color-text-tertiary)] hover:bg-[var(--border-subtle)] hover:text-[var(--color-text-primary)]',
+        danger:
+          'bg-[var(--danger-600)] text-[var(--text-primary)] hover:bg-[var(--danger-700)] focus-visible:ring-[var(--danger-600)]',
+        success:
+          'bg-[var(--success-600)] text-[var(--text-primary)] hover:bg-[var(--success-700)] focus-visible:ring-[var(--success-600)]'
       },
       size: {
         sm: 'h-8 px-3 text-sm',

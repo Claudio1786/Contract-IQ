@@ -6,12 +6,13 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-gray-200',
-        elevated: 'border-gray-200 shadow-md',
-        interactive: 'border-gray-200 hover:shadow-md hover:border-gray-300 cursor-pointer transition-all',
-        success: 'border-green-200 bg-green-50',
-        warning: 'border-orange-200 bg-orange-50',
-        danger: 'border-red-200 bg-red-50'
+        default: 'border-[color:var(--border-default)]',
+        elevated: 'border-[color:var(--border-default)] shadow-md',
+        interactive:
+          'border-[color:var(--border-default)] hover:shadow-md hover:border-[color:var(--border-emphasis)] cursor-pointer transition-all',
+        success: 'border-[color:var(--success-200)] bg-[var(--success-50)]',
+        warning: 'border-[color:var(--warning-200)] bg-[var(--warning-50)]',
+        danger: 'border-[color:var(--danger-200)] bg-[var(--danger-50)]'
       },
       padding: {
         none: 'p-0',
