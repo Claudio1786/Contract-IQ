@@ -268,12 +268,12 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
               </div>
             </div>
             <div className="ml-4">
-              <p className="text-sm text-gray-600">Total Savings</p>
+              <p className="text-sm text-gray-600">Total Revenue Impact</p>
               <p className="text-2xl font-semibold text-gray-900">
                 ${(metricsData.totalSavings / 1000).toFixed(0)}K
               </p>
               <p className="text-xs text-blue-600">
-                ${(metricsData.averageSavings / 1000).toFixed(0)}K avg per deal
+                ${(metricsData.averageSavings / 1000).toFixed(0)}K avg revenue impact per deal
               </p>
             </div>
           </div>
@@ -333,7 +333,7 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
                 </div>
                 <div className="text-right">
                   <div className="font-medium text-green-600">
-                    ${(scenario.averageSavings / 1000).toFixed(0)}K avg savings
+                    ${(scenario.averageSavings / 1000).toFixed(0)}K avg revenue impact
                   </div>
                   <div className="text-sm text-gray-600">
                     {scenario.averageTimeToClose} days avg
@@ -405,7 +405,7 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-600">Savings Accuracy</span>
+                <span className="text-sm text-gray-600">Forecast Accuracy</span>
                 <span className="font-medium">
                   {metricsData.predictionAccuracy.savingsAccuracy.toFixed(1)}%
                 </span>
@@ -457,7 +457,7 @@ export const MetricsDashboard: React.FC<MetricsDashboardProps> = ({
                   <span className="font-medium text-green-600">{month.successRate.toFixed(1)}%</span> success
                 </div>
                 <div className="text-sm text-gray-600">
-                  <span className="font-medium text-blue-600">${(month.savings / 1000).toFixed(0)}K</span> saved
+                  <span className="font-medium text-blue-600">${(month.savings / 1000).toFixed(0)}K</span> revenue impact
                 </div>
               </div>
             </div>

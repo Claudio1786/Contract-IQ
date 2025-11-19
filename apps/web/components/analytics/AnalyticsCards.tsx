@@ -61,7 +61,7 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({
           color={data.upcomingRenewals > 10 ? 'red' : 'default'}
         />
         <MetricCard
-          title="Potential Savings"
+          title="Expansion Potential"
           value={`$${(data.potentialSavings / 1000).toFixed(0)}K`}
           icon="💰"
           trend={+15}
@@ -86,9 +86,9 @@ export const AnalyticsCards: React.FC<AnalyticsCardsProps> = ({
         </div>
       </Card>
 
-      {/* Spending Trend */}
+      {/* Revenue Trend */}
       <Card className="p-4">
-        <h3 className="text-sm font-medium text-gray-900 mb-3">Monthly Spend Trend</h3>
+        <h3 className="text-sm font-medium text-gray-900 mb-3">Monthly Revenue Trend</h3>
         <SpendingChart data={data.monthlySpend} />
       </Card>
     </div>
