@@ -484,7 +484,7 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
           <button
             onClick={() => {
               setFormData({
-                contractType: 'Service Agreement',
+                contractType: 'Service Contract',
                 scenario: 'liability_cap_negotiation',
                 objectives: ['reasonable_liability_cap', 'carve_out_exceptions'],
                 currentTerms: 'Unlimited liability, one-sided indemnification',
@@ -500,7 +500,7 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
           <button
             onClick={() => {
               setFormData({
-                contractType: 'Service Agreement',
+                contractType: 'Service Contract',
                 scenario: 'termination_exit_rights',
                 objectives: ['termination_for_convenience', 'data_portability_rights'],
                 currentTerms: 'Locked 3-year term, no convenience termination',
@@ -516,7 +516,7 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
           <button
             onClick={() => {
               setFormData({
-                contractType: 'Service Agreement',
+                contractType: 'Service Contract',
                 scenario: 'payment_terms_optimization',
                 objectives: ['extend_payment_terms', 'early_payment_discounts'],
                 currentTerms: '30-day payment terms, no early discounts',
@@ -532,7 +532,7 @@ export const PlaybookGenerator: React.FC<PlaybookGeneratorProps> = ({
           <button
             onClick={() => {
               setFormData({
-                contractType: 'Service Agreement',
+                contractType: 'Service Contract',
                 scenario: 'ip_rights_protection',
                 objectives: ['retain_ip_ownership', 'work_product_ownership'],
                 currentTerms: 'Unclear IP ownership, vendor-friendly terms',
