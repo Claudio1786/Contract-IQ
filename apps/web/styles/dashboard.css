@@ -353,6 +353,9 @@
 }
 
 @media (max-width: 768px) {
+  .dashboard-header-content h1 {
+    font-size: 32px;
+  }
   .kpi-grid {
     grid-template-columns: 1fr;
   }
