@@ -270,8 +270,8 @@ export default function SettingsPage() {
               </div>
               <div className="setting-item">
                 <div className="setting-info">
-                  <div className="setting-label">Playbook Generation</div>
-                  <div className="setting-description">Auto-generate negotiation playbooks for renewals</div>
+                  <div className="setting-label">Intelligence Brief Generation</div>
+                  <div className="setting-description">Auto-generate account intelligence briefs for renewals</div>
                 </div>
                 <label className="settings-toggle">
                   <input

@@ -79,11 +79,35 @@ function RiskItem({ title, renewalDate, risk, onViewDetails }: RiskItemProps) {
 
 /**
  * Dashboard Component - Flow AI Design System
- * Main dashboard with KPIs, charts, vendor table, and AI insights
+ * Main dashboard with KPIs, charts, customer table, and AI insights
  */
 export default function Dashboard() {
   const router = useRouter();
   const [chartPeriod, setChartPeriod] = React.useState('1Y');
+  const [loading, setLoading] = React.useState(true);
+  const [contracts, setContracts] = React.useState<any[]>([]);
+  const [summary, setSummary] = React.useState<any>(null);
+
+  // Fetch real contract data on mount
+  React.useEffect(() => {
+    async function fetchContracts() {
+      try {
+        const response = await fetch('/api/contracts');
+        const data = await response.json();
+        
+        if (data.success) {
+          setContracts(data.contracts);
+          setSummary(data.summary);
+        }
+      } catch (error) {
+        console.error('Error fetching contracts:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchContracts();
+  }, []);
 
   const handleStartChat = () => {
     router.push('/chat');
@@ -121,10 +145,46 @@ export default function Dashboard() {
       {/* Page Header */}
       <div className="dashboard-page-header">
         <div className="dashboard-header-content">
-          <h1>Dashboard</h1>
-          <p className="dashboard-header-subtitle">
-            Real-time insights into your vendor relationships and contract performance
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <div>
+              <h1>Dashboard</h1>
+              <p className="dashboard-header-subtitle">
+                Real-time insights into your customer relationships and contract performance
+              </p>
+            </div>
+            <button
+              onClick={() => router.push('/app/admin/contracts/new')}
+              style={{
+                padding: '12px 24px',
+                background: 'linear-gradient(135deg, #3B82F6, #2563EB)',
+                border: 'none',
+                borderRadius: '12px',
+                color: 'white',
+                fontSize: '16px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.4)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Add Contract
+            </button>
+          </div>
         </div>
       </div>
 
@@ -145,11 +205,12 @@ export default function Dashboard() {
               +12.5%
             </div>
           </div>
-          <div className="kpi-value">$24.8M</div>
+          <div className="kpi-value">
+            {loading ? '...' : `$${((summary?.total_acv || 0) / 1000).toFixed(1)}K`}
+          </div>
           <div className="kpi-label">Total Contract Value</div>
           <div className="kpi-meta">
-            <span className="kpi-meta-item">vs last quarter</span>
-            <span className="kpi-meta-value">+$2.8M</span>
+            <span className="kpi-meta-item">{loading ? 'Loading...' : `${summary?.total || 0} contracts`}</span>
           </div>
         </div>
 
@@ -214,10 +275,10 @@ export default function Dashboard() {
               -3
             </div>
           </div>
-          <div className="kpi-value">12</div>
+          <div className="kpi-value">{loading ? '...' : summary?.high_risk || 0}</div>
           <div className="kpi-label">High Risk Contracts</div>
           <div className="kpi-meta">
-            <span className="kpi-meta-item">Resolved this month</span>
+            <span className="kpi-meta-item">{loading ? 'Loading...' : 'Needs immediate action'}</span>
             <span className="kpi-meta-value">5 contracts</span>
           </div>
         </div>
@@ -303,10 +364,10 @@ export default function Dashboard() {
 
       {/* Two Column Layout */}
       <div className="two-column">
-        {/* Top Vendors Table */}
+        {/* Top Contracts Table - CUSTOMER REVENUE INTELLIGENCE */}
         <div className="table-card">
           <div className="table-header">
-            <h2 className="table-title">Top Vendors by Spend</h2>
+            <h2 className="table-title">Recent Customer Contracts</h2>
             <button 
               className="table-action"
               onClick={() => router.push('/contracts')}
@@ -328,58 +389,54 @@ export default function Dashboard() {
           <table className="dashboard-table">
             <thead>
               <tr>
-                <th>Vendor</th>
-                <th>Contract Value</th>
+                <th>Customer</th>
+                <th>ACV</th>
                 <th>Status</th>
-                <th>Risk Level</th>
+                <th>Churn Risk</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>AWS</div>
-                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Cloud Infrastructure</div>
-                </td>
-                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$420,000</td>
-                <td><span className="badge badge-active">Active</span></td>
-                <td><span className="badge badge-medium">Medium</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Microsoft</div>
-                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Enterprise Software</div>
-                </td>
-                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$295,000</td>
-                <td><span className="badge badge-expiring">Expiring</span></td>
-                <td><span className="badge badge-high">High</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Salesforce</div>
-                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>CRM Platform</div>
-                </td>
-                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$180,000</td>
-                <td><span className="badge badge-expiring">Expiring</span></td>
-                <td><span className="badge badge-high">High</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Google Workspace</div>
-                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Productivity Suite</div>
-                </td>
-                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$84,000</td>
-                <td><span className="badge badge-active">Active</span></td>
-                <td><span className="badge badge-low">Low</span></td>
-              </tr>
-              <tr>
-                <td>
-                  <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>HubSpot</div>
-                  <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Marketing Platform</div>
-                </td>
-                <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$78,000</td>
-                <td><span className="badge badge-active">Active</span></td>
-                <td><span className="badge badge-medium">Medium</span></td>
-              </tr>
+              {loading ? (
+                <tr>
+                  <td colSpan={4} style={{ textAlign: 'center', padding: '24px', color: 'var(--text-tertiary)' }}>
+                    Loading customer contracts...
+                  </td>
+                </tr>
+              ) : contracts.length === 0 ? (
+                <tr>
+                  <td colSpan={4} style={{ textAlign: 'center', padding: '24px', color: 'var(--text-tertiary)' }}>
+                    No customer contracts yet. Add your first customer contract to get started.
+                  </td>
+                </tr>
+              ) : (
+                contracts.slice(0, 5).map((contract: any) => {
+                  const riskLevel = contract.riskScore?.riskClassification || 'MEDIUM';
+                  const riskBadge = riskLevel === 'HIGH' ? 'badge-high' : riskLevel === 'LOW' ? 'badge-low' : 'badge-medium';
+                  const acv = contract.annualContractValue || contract.annualValue || 0;
+                  
+                  return (
+                    <tr key={contract.id}>
+                      <td>
+                        <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>
+                          {contract.customerName || contract.contractName}
+                        </div>
+                        <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>
+                          {contract.industry || contract.customerType || 'B2B SaaS'}
+                        </div>
+                      </td>
+                      <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+                        ${acv.toLocaleString()}
+                      </td>
+                      <td><span className="badge badge-active">Active</span></td>
+                      <td>
+                        <span className={`badge ${riskBadge}`}>
+                          {riskLevel.charAt(0) + riskLevel.slice(1).toLowerCase()}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

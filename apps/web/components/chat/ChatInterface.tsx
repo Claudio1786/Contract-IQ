@@ -138,7 +138,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
         </svg>
       ),
-      label: 'Generate negotiation playbook',
+      label: 'Generate renewal brief',
       description: 'Create strategy for upcoming renewals',
       bg: 'rgba(139,92,246,0.1)'
     },
@@ -148,8 +148,8 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
       ),
-      label: 'Search specific vendor',
-      description: 'Find all contracts with a particular vendor',
+      label: 'Search specific customer',
+      description: 'Find all contracts with a particular customer',
       bg: 'rgba(6,182,212,0.1)'
     }
   ];
@@ -210,7 +210,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 </svg>
               </div>
               <h2 className="empty-title">What can I help you with?</h2>
-              <p className="empty-subtitle">Ask me about contracts, renewals, risks, vendors, or any insights you need</p>
+              <p className="empty-subtitle">Ask me about customer contracts, renewals, churn risks, or revenue insights</p>
               
               {/* Suggestions Grid */}
               <div className="suggestions">

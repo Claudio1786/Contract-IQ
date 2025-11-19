@@ -2,295 +2,325 @@
 
 import React, { useState } from 'react';
 import AppLayout from '../../components/layout/AppLayout';
-import '../../styles/alerts.css';
 
 interface Alert {
   id: string;
-  type: 'renewal' | 'risk' | 'system' | 'success';
-  title: string;
+  type: 'urgent' | 'important' | 'info';
+  category: 'renewal' | 'risk' | 'pricing' | 'notice';
+  customer: string;
   message: string;
-  timestamp: string;
-  priority: 'high' | 'medium' | 'low';
-  contractId?: string;
-  actionRequired: boolean;
+  actionRequired: string;
+  dueDate: string;
+  isRead: boolean;
 }
 
-interface AlertCardProps extends Alert {
-  onViewContract?: (contractId: string) => void;
-  onMarkResolved?: (id: string) => void;
-}
-
-function AlertCard({ 
-  id, 
-  type, 
-  title, 
-  message, 
-  timestamp, 
-  priority, 
-  contractId, 
-  actionRequired,
-  onViewContract,
-  onMarkResolved 
-}: AlertCardProps) {
-  const getAlertIcon = () => {
-    const color = priority === 'high' ? '#EF4444' : priority === 'medium' ? '#F59E0B' : '#06B6D4';
-    return (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
-        {type === 'renewal' && <><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>}
-        {type === 'risk' && <><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></>}
-        {type === 'system' && <><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></>}
-        {type === 'success' && <><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></>}
-      </svg>
-    );
-  };
-
-  const getPriorityClass = () => {
-    return priority === 'high' ? 'alert-card-high' : priority === 'medium' ? 'alert-card-medium' : 'alert-card-low';
-  };
-
-  const getIconClass = () => {
-    return priority === 'high' ? 'alert-icon-high' : priority === 'medium' ? 'alert-icon-medium' : 'alert-icon-low';
-  };
-
-  const getBadgeClass = () => {
-    return priority === 'high' ? 'badge-glow-error' : priority === 'medium' ? 'badge-glow-warning' : 'badge-glow-info';
-  };
-
-  return (
-    <div className={`alert-card-flow ${getPriorityClass()}`}>
-      <div className="alert-header-flow">
-        <div className={`alert-icon-flow ${getIconClass()}`}>
-          {getAlertIcon()}
-        </div>
-        <div className="alert-title-group">
-          <div className="alert-meta-flow">
-            <div className="alert-title-flow">{title}</div>
-            {actionRequired && <span className={`badge-glow ${getBadgeClass()}`}>{priority.toUpperCase()}</span>}
-          </div>
-          <div className="alert-subtitle-flow">{type === 'renewal' ? 'Renewal deadline approaching' : type === 'risk' ? 'Risk assessment' : type === 'system' ? 'System notification' : 'Success'}</div>
-        </div>
-      </div>
-
-      <div className="alert-body-flow">
-        {message}
-      </div>
-
-      {actionRequired && contractId && (
-        <div className="alert-actions-flow">
-          <button className="btn-flow btn-flow-primary" onClick={() => onViewContract?.(contractId)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-              <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-            </svg>
-            View Contract
-          </button>
-          {onMarkResolved && (
-            <button className="btn-flow btn-flow-secondary" onClick={() => onMarkResolved(id)}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="9 11 12 14 22 4"/>
-                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-              </svg>
-              Mark Resolved
-            </button>
-          )}
-        </div>
-      )}
-
-      <div className="alert-timestamp-flow">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
-        Created {timestamp}
-      </div>
-    </div>
-  );
-}
-
+/**
+ * Renewal Alerts Page - Customer Revenue Intelligence
+ * Track upcoming renewals, churn risks, and expansion opportunities
+ */
 export default function AlertsPage() {
-  const [filterType, setFilterType] = useState<string>('all');
-
-  const alerts: Alert[] = [
+  const [filterType, setFilterType] = useState('all');
+  const [alerts, setAlerts] = useState<Alert[]>([
     {
       id: '1',
-      type: 'renewal',
-      title: 'Salesforce Enterprise Agreement - Renewal Alert',
-      message: 'Contract expires in 30 days. Auto-renewal clause requires 60-day notice to cancel. You\'re now past the cancellation window and will be automatically renewed unless action is taken immediately.',
-      timestamp: '2 hours ago',
-      priority: 'high',
-      contractId: 'cont-001',
-      actionRequired: true
+      type: 'urgent',
+      category: 'renewal',
+      customer: 'TechFlow Industries',
+      message: 'Renewal deadline approaching in 15 days',
+      actionRequired: 'Contact customer success team to schedule renewal discussion',
+      dueDate: 'Jan 15, 2026',
+      isRead: false
     },
     {
       id: '2',
-      type: 'risk',
-      title: 'Microsoft 365 License - Payment Failure',
-      message: 'Payment method on file was declined for the Microsoft 365 Enterprise E5 license renewal. Service will be suspended in 5 days if payment is not updated.',
-      timestamp: '5 hours ago',
-      priority: 'high',
-      contractId: 'cont-002',
-      actionRequired: true
+      type: 'urgent',
+      category: 'risk',
+      customer: 'GlobalRetail Solutions',
+      message: 'High churn risk detected - usage dropped 45% this quarter',
+      actionRequired: 'Schedule executive business review',
+      dueDate: 'Jan 20, 2026',
+      isRead: false
     },
     {
       id: '3',
-      type: 'renewal',
-      title: 'AWS Enterprise Support - Renewal Notice',
-      message: 'Your AWS Enterprise Support contract renews in 90 days. Notice period for non-renewal is 60 days. Consider reviewing usage patterns and negotiating terms.',
-      timestamp: '1 day ago',
-      priority: 'medium',
-      contractId: 'cont-003',
-      actionRequired: true
+      type: 'important',
+      category: 'pricing',
+      message: 'Acme Corp paying 30% below current market rate',
+      actionRequired: 'Prepare pricing adjustment proposal for renewal',
+      dueDate: 'Feb 15, 2026',
+      isRead: false
     },
     {
       id: '4',
-      type: 'system',
-      title: 'Slack Price Update Notification',
-      message: 'Slack has announced a 12% price increase for Business+ plans, effective on your next renewal date (Aug 12, 2026). Your annual cost will increase from $48,000 to $53,760.',
-      timestamp: '2 days ago',
-      priority: 'low',
-      contractId: 'cont-004',
-      actionRequired: true
+      type: 'urgent',
+      category: 'notice',
+      customer: 'DataSync Solutions',
+      message: '30-day notice period deadline in 5 days',
+      actionRequired: 'Submit renewal notice or contract will auto-terminate',
+      dueDate: 'Jan 10, 2026',
+      isRead: false
     },
     {
       id: '5',
-      type: 'success',
-      title: 'Adobe Creative Cloud - Successfully Renewed',
-      message: 'Your Adobe Creative Cloud Enterprise subscription has been successfully renewed for another year. All 250 licenses are now active through November 2026.',
-      timestamp: '3 days ago',
-      priority: 'low',
-      contractId: 'cont-005',
-      actionRequired: false
+      type: 'info',
+      category: 'pricing',
+      customer: 'CloudScale Inc',
+      message: 'Expansion opportunity: Customer using 95% of seat capacity',
+      actionRequired: 'Reach out to discuss seat expansion',
+      dueDate: 'Jan 31, 2026',
+      isRead: true
     }
-  ];
+  ]);
+
+  const markAsRead = (id: string) => {
+    setAlerts(alerts.map(alert => 
+      alert.id === id ? { ...alert, isRead: true } : alert
+    ));
+  };
+
+  const dismissAlert = (id: string) => {
+    setAlerts(alerts.filter(alert => alert.id !== id));
+  };
 
   const filteredAlerts = filterType === 'all' 
     ? alerts 
     : alerts.filter(alert => alert.type === filterType);
 
-  const urgentCount = alerts.filter(a => a.priority === 'high').length;
-
-  const handleViewContract = (contractId: string) => {
-    console.log('Viewing contract:', contractId);
-    // Navigate to contract page - functionality preserved
-    window.location.href = `/contracts/${contractId}`;
-  };
-
-  const handleMarkResolved = (id: string) => {
-    console.log('Marking resolved:', id);
-    // Mark alert as resolved - functionality preserved
-    alert(`Alert ${id} marked as resolved`);
-  };
+  const urgentCount = alerts.filter(a => a.type === 'urgent' && !a.isRead).length;
+  const importantCount = alerts.filter(a => a.type === 'important' && !a.isRead).length;
 
   return (
     <AppLayout>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px 32px', position: 'relative', zIndex: 1 }}>
-        {/* Decorative Waves Background */}
-        <div className="decorative-waves">
-          <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style={{ stopColor: 'rgba(59,130,246,0.25)', stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: 'rgba(139,92,246,0.15)', stopOpacity: 1 }} />
-              </linearGradient>
-              <linearGradient id="wave2" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style={{ stopColor: 'rgba(139,92,246,0.2)', stopOpacity: 1 }} />
-                <stop offset="100%" style={{ stopColor: 'rgba(59,130,246,0.1)', stopOpacity: 1 }} />
-              </linearGradient>
-            </defs>
-            <path d="M0,400 Q250,200 500,400 T1000,400 L1000,1000 L0,1000 Z" fill="url(#wave1)"/>
-            <path d="M0,500 Q250,350 500,500 T1000,500 L1000,1000 L0,1000 Z" fill="url(#wave2)"/>
-          </svg>
-        </div>
-
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '48px 32px' }}>
         {/* Page Header */}
-        <div className="alerts-page-header">
-          <div className="alerts-header-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
-              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-              <line x1="12" y1="9" x2="12" y2="13"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-          </div>
-          <div className="alerts-header-content">
-            <h1>Alerts & Notifications</h1>
-            <p className="alerts-header-subtitle">
-              <span className="badge-glow badge-glow-error">{urgentCount} urgent</span> 
-              alerts require immediate attention
-            </p>
-          </div>
-        </div>
-
-        {/* Filter Tabs with Sliding Indicator */}
-        <div className="filter-tabs" data-active={filterType}>
-          <button 
-            className={`filter-tab ${filterType === 'all' ? 'active' : ''}`}
-            onClick={() => setFilterType('all')}
-          >
-            All Alerts
-            <span className="tab-count">{alerts.length}</span>
-          </button>
-          <button 
-            className={`filter-tab ${filterType === 'renewal' ? 'active' : ''}`}
-            onClick={() => setFilterType('renewal')}
-          >
-            Renewals
-            <span className="tab-count">{alerts.filter(a => a.type === 'renewal').length}</span>
-          </button>
-          <button 
-            className={`filter-tab ${filterType === 'risk' ? 'active' : ''}`}
-            onClick={() => setFilterType('risk')}
-          >
-            Risk
-            <span className="tab-count">{alerts.filter(a => a.type === 'risk').length}</span>
-          </button>
-          <button 
-            className={`filter-tab ${filterType === 'system' ? 'active' : ''}`}
-            onClick={() => setFilterType('system')}
-          >
-            System
-            <span className="tab-count">{alerts.filter(a => a.type === 'system').length}</span>
-          </button>
-          <button 
-            className={`filter-tab ${filterType === 'success' ? 'active' : ''}`}
-            onClick={() => setFilterType('success')}
-          >
-            Success
-            <span className="tab-count">{alerts.filter(a => a.type === 'success').length}</span>
-          </button>
-        </div>
-
-        {/* Alerts Grid */}
-        <div className="alerts-grid">
-          {filteredAlerts.length === 0 ? (
-            <div style={{ 
-              textAlign: 'center', 
-              padding: '64px 32px',
-              background: 'linear-gradient(135deg, var(--surface-2) 0%, var(--surface-3) 100%)',
-              borderRadius: '20px',
-              border: '1px solid rgba(255,255,255,0.08)'
+        <div style={{
+          background: 'linear-gradient(135deg, #0F1319 0%, #14171F 100%)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: '16px',
+          padding: '32px',
+          marginBottom: '32px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{
+              width: '56px',
+              height: '56px',
+              background: 'linear-gradient(135deg, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.08) 100%)',
+              borderRadius: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 0 1px rgba(239,68,68,0.2), 0 0 20px rgba(239,68,68,0.15)'
             }}>
-              <div style={{ fontSize: '48px', marginBottom: '16px' }}>🎉</div>
-              <h3 style={{ fontSize: '20px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '8px' }}>
-                No alerts to show
-              </h3>
-              <p style={{ fontSize: '15px', color: 'var(--text-tertiary)' }}>
-                {filterType === 'all' 
-                  ? "You're all caught up! No alerts at this time."
-                  : `No ${filterType} alerts to display.`
-                }
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
+                <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+              </svg>
+            </div>
+            <div style={{ flex: 1 }}>
+              <h1 style={{ fontSize: '32px', fontWeight: '700', color: '#F8FAFC', marginBottom: '8px' }}>
+                Renewal Alerts
+              </h1>
+              <p style={{ fontSize: '16px', color: '#94A3B8' }}>
+                Track upcoming renewals, churn risks, and revenue optimization opportunities
               </p>
             </div>
-          ) : (
-            filteredAlerts.map(alert => (
-              <AlertCard
-                key={alert.id}
-                {...alert}
-                onViewContract={handleViewContract}
-                onMarkResolved={handleMarkResolved}
-              />
-            ))
-          )}
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <div style={{
+                padding: '12px 20px',
+                background: 'rgba(239,68,68,0.15)',
+                border: '1px solid rgba(239,68,68,0.3)',
+                borderRadius: '10px',
+                textAlign: 'center'
+              }}>
+                <div style={{ fontSize: '24px', fontWeight: '700', color: '#EF4444' }}>{urgentCount}</div>
+                <div style={{ fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Urgent</div>
+              </div>
+              <div style={{
+                padding: '12px 20px',
+                background: 'rgba(245,158,11,0.15)',
+                border: '1px solid rgba(245,158,11,0.3)',
+                borderRadius: '10px',
+                textAlign: 'center'
+              }}>
+                <div style={{ fontSize: '24px', fontWeight: '700', color: '#F59E0B' }}>{importantCount}</div>
+                <div style={{ fontSize: '12px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Important</div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* Filter Tabs */}
+        <div style={{
+          display: 'flex',
+          gap: '12px',
+          marginBottom: '32px',
+          padding: '8px',
+          background: '#0F1319',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: '12px',
+          width: 'fit-content'
+        }}>
+          {[
+            { value: 'all', label: 'All Alerts' },
+            { value: 'urgent', label: 'Urgent' },
+            { value: 'important', label: 'Important' },
+            { value: 'info', label: 'Info' }
+          ].map(tab => (
+            <button
+              key={tab.value}
+              onClick={() => setFilterType(tab.value)}
+              style={{
+                padding: '10px 20px',
+                background: filterType === tab.value ? 'rgba(59,130,246,0.15)' : 'transparent',
+                border: filterType === tab.value ? '1px solid rgba(59,130,246,0.3)' : '1px solid transparent',
+                borderRadius: '8px',
+                color: filterType === tab.value ? '#3B82F6' : '#94A3B8',
+                fontSize: '14px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Alerts List */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {filteredAlerts.map(alert => (
+            <div
+              key={alert.id}
+              style={{
+                background: 'linear-gradient(135deg, #0F1319 0%, #14171F 100%)',
+                border: `1px solid ${alert.type === 'urgent' ? 'rgba(239,68,68,0.3)' : alert.type === 'important' ? 'rgba(245,158,11,0.3)' : 'rgba(59,130,246,0.3)'}`,
+                borderRadius: '16px',
+                padding: '24px',
+                opacity: alert.isRead ? 0.6 : 1,
+                position: 'relative',
+                transition: 'all 0.3s'
+              }}
+            >
+              {/* Alert Type Badge */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '4px',
+                background: alert.type === 'urgent' ? '#EF4444' : alert.type === 'important' ? '#F59E0B' : '#3B82F6',
+                borderTopLeftRadius: '16px',
+                borderTopRightRadius: '16px'
+              }} />
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <div style={{ flex: 1 }}>
+                  {/* Category & Customer */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                    <span style={{
+                      padding: '4px 10px',
+                      background: alert.type === 'urgent' ? 'rgba(239,68,68,0.15)' : alert.type === 'important' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)',
+                      border: `1px solid ${alert.type === 'urgent' ? 'rgba(239,68,68,0.3)' : alert.type === 'important' ? 'rgba(245,158,11,0.3)' : 'rgba(59,130,246,0.3)'}`,
+                      borderRadius: '6px',
+                      fontSize: '11px',
+                      fontWeight: '700',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px',
+                      color: alert.type === 'urgent' ? '#EF4444' : alert.type === 'important' ? '#F59E0B' : '#3B82F6'
+                    }}>
+                      {alert.category}
+                    </span>
+                    {alert.customer && (
+                      <span style={{ fontSize: '16px', fontWeight: '600', color: '#F8FAFC' }}>
+                        {alert.customer}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Message */}
+                  <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#F8FAFC', marginBottom: '8px' }}>
+                    {alert.message}
+                  </h3>
+
+                  {/* Action Required */}
+                  <p style={{ fontSize: '14px', color: '#CBD5E1', marginBottom: '12px' }}>
+                    <strong style={{ color: '#F8FAFC' }}>Action Required:</strong> {alert.actionRequired}
+                  </p>
+
+                  {/* Due Date */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span style={{ fontSize: '14px', color: '#94A3B8' }}>
+                      Due: {alert.dueDate}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {!alert.isRead && (
+                    <button
+                      onClick={() => markAsRead(alert.id)}
+                      style={{
+                        padding: '8px 16px',
+                        background: 'rgba(59,130,246,0.15)',
+                        border: '1px solid rgba(59,130,246,0.3)',
+                        borderRadius: '8px',
+                        color: '#3B82F6',
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      Mark Read
+                    </button>
+                  )}
+                  <button
+                    onClick={() => dismissAlert(alert.id)}
+                    style={{
+                      padding: '8px 16px',
+                      background: 'rgba(239,68,68,0.15)',
+                      border: '1px solid rgba(239,68,68,0.3)',
+                      borderRadius: '8px',
+                      color: '#EF4444',
+                      fontSize: '14px',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {filteredAlerts.length === 0 && (
+          <div style={{
+            textAlign: 'center',
+            padding: '80px 32px',
+            background: 'linear-gradient(135deg, #0F1319 0%, #14171F 100%)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '16px'
+          }}>
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="1.5" style={{ margin: '0 auto 24px' }}>
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <h3 style={{ fontSize: '24px', fontWeight: '600', color: '#F8FAFC', marginBottom: '12px' }}>
+              No {filterType !== 'all' ? filterType : ''} alerts
+            </h3>
+            <p style={{ fontSize: '16px', color: '#94A3B8' }}>
+              All caught up! No active alerts at this time.
+            </p>
+          </div>
+        )}
       </div>
     </AppLayout>
   );

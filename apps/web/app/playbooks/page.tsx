@@ -5,8 +5,8 @@ import { PlaybookGenerator } from '../../components/playbooks/PlaybookGenerator'
 import { PlaybookView } from '../../components/playbooks/PlaybookView';
 import { Button } from '../../components/ui';
 
-// Simple playbook interface for basic functionality
-interface BasicPlaybook {
+// Simple renewal brief interface for basic functionality
+interface BasicRenewalBrief {
   id: string;
   title: string;
   content: string;
@@ -16,22 +16,22 @@ interface BasicPlaybook {
   createdAt: Date;
 }
 
-export default function PlaybooksPage() {
-  const [generatedPlaybook, setGeneratedPlaybook] = useState<BasicPlaybook | null>(null);
-  const [playbookMetadata, setPlaybookMetadata] = useState<any>(null);
+export default function RenewalBriefsPage() {
+  const [generatedBrief, setGeneratedBrief] = useState<BasicRenewalBrief | null>(null);
+  const [briefMetadata, setBriefMetadata] = useState<any>(null);
   const [showGenerator, setShowGenerator] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const handlePlaybookGenerated = (playbook: BasicPlaybook, metadata?: any) => {
-    setGeneratedPlaybook(playbook);
-    setPlaybookMetadata(metadata);
+  const handleBriefGenerated = (brief: BasicRenewalBrief, metadata?: any) => {
+    setGeneratedBrief(brief);
+    setBriefMetadata(metadata);
     setShowGenerator(false);
     setError(null);
   };
 
   const resetView = () => {
-    setGeneratedPlaybook(null);
-    setPlaybookMetadata(null);
+    setGeneratedBrief(null);
+    setBriefMetadata(null);
     setShowGenerator(true);
     setError(null);
   };
@@ -46,10 +46,10 @@ export default function PlaybooksPage() {
             <div className="flex items-center justify-between mb-8">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">
-                  Contract Negotiation Playbooks
+                  Account Intelligence Briefs
                 </h1>
                 <p className="mt-2 text-sm text-gray-600">
-                  Generate strategic playbooks for B2B vendor contract negotiations
+                  Generate strategic intelligence briefs for customer renewal negotiations
                 </p>
               </div>
               
@@ -59,7 +59,7 @@ export default function PlaybooksPage() {
                   variant="outline"
                   className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
                 >
-                  Generate New Playbook
+                  Generate New Intelligence Brief
                 </Button>
               )}
             </div>
@@ -71,17 +71,17 @@ export default function PlaybooksPage() {
                 <div className="space-y-8">
                   <div className="bg-blue-50 rounded-lg p-6">
                     <h2 className="text-xl font-semibold text-blue-900 mb-4">
-                      AI-Powered Contract Negotiation Playbooks
+                      AI-Powered Account Intelligence Briefs
                     </h2>
                     <p className="text-blue-700 mb-4">
-                      Generate strategic negotiation playbooks using advanced AI analysis and market intelligence
+                      Generate strategic account intelligence briefs using advanced AI analysis and customer insights
                     </p>
-                    <PlaybookGenerator onPlaybookGenerated={(playbook) => handlePlaybookGenerated(playbook)} />
+                    <PlaybookGenerator onPlaybookGenerated={(brief) => handleBriefGenerated(brief)} />
                   </div>
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <PlaybookView playbook={generatedPlaybook!} />
+                  <PlaybookView playbook={generatedBrief!} />
                 </div>
               )}
             </div>
@@ -92,7 +92,7 @@ export default function PlaybooksPage() {
         <div className="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="px-6 py-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              Quick Playbook Templates
+              Quick Intelligence Brief Templates
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-6 border border-blue-200">

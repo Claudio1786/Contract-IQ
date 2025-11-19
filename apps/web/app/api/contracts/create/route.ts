@@ -132,9 +132,9 @@ function calculateRiskScore(contract: any) {
   } else if (contract.whoCanTerminate === 'CUSTOMER_ONLY') {
     terminationRiskScore = 70
     terminationFactors.push('Customer has unilateral termination rights')
-  } else if (contract.whoCanTerminate === 'VENDOR_ONLY') {
+  } else if (contract.whoCanTerminate === 'PROVIDER_ONLY') {
     terminationRiskScore = 10
-    terminationFactors.push('Only vendor can terminate')
+    terminationFactors.push('Only provider can terminate')
   }
   
   // Compliance risk (10% weight) - Placeholder

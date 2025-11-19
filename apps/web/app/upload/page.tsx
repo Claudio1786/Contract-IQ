@@ -306,7 +306,7 @@ export default function UploadPage() {
                           }
                         }}
                       >
-                        🎯 Create Negotiation Playbook
+                        🎯 Generate Account Intelligence Brief
                       </button>
                     </div>
                   </>

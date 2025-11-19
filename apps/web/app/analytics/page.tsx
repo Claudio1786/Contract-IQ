@@ -5,8 +5,8 @@ import AppLayout from '../../components/layout/AppLayout';
 import '../../styles/analytics.css';
 
 /**
- * Analytics Dashboard - Flow AI Design System
- * Vendor Agreement Dashboard with KPIs, Charts, Tables, and AI Insights
+ * Revenue Intelligence Dashboard - Flow AI Design System
+ * Customer contract analytics with KPIs, Charts, Tables, and AI Insights
  */
 export default function AnalyticsPage() {
   const [chartPeriod, setChartPeriod] = useState('1Y');
@@ -31,9 +31,9 @@ export default function AnalyticsPage() {
       <div className="analytics-container">
         {/* Page Header */}
         <div className="analytics-page-header">
-          <h1>Vendor Agreement Dashboard</h1>
+          <h1>Revenue Intelligence Dashboard</h1>
           <p className="analytics-header-subtitle">
-            Real-time insights into your vendor relationships and contract performance
+            Real-time insights into your customer contracts and revenue performance
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          {/* Active Vendors */}
+          {/* Active Customer Contracts */}
           <div
             className="analytics-kpi-card"
             style={{
@@ -89,11 +89,11 @@ export default function AnalyticsPage() {
                 +8
               </div>
             </div>
-            <div className="analytics-kpi-value">247</div>
-            <div className="analytics-kpi-label">Active Vendors</div>
+            <div className="analytics-kpi-value">147</div>
+            <div className="analytics-kpi-label">Active Customer Contracts</div>
             <div className="analytics-kpi-meta">
               <span className="analytics-kpi-meta-item">New this month</span>
-              <span className="analytics-kpi-meta-value">12 vendors</span>
+              <span className="analytics-kpi-meta-value">12 customers</span>
             </div>
           </div>
 
@@ -203,66 +203,66 @@ export default function AnalyticsPage() {
 
         {/* Two Column Layout */}
         <div className="analytics-two-column">
-          {/* Top Vendors Table */}
+          {/* Top Customers Table */}
           <div className="analytics-table-card">
             <div className="analytics-table-header">
-              <h2 className="analytics-table-title">Top Vendors by Spend</h2>
+              <h2 className="analytics-table-title">Top Customers by ACV</h2>
               <button className="analytics-table-action">View All →</button>
             </div>
             <table className="analytics-table">
               <thead>
                 <tr>
-                  <th>Vendor</th>
-                  <th>Contract Value</th>
+                  <th>Customer</th>
+                  <th>Annual Contract Value</th>
                   <th>Status</th>
-                  <th>Risk Level</th>
+                  <th>Churn Risk</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>AWS</div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>CloudFirst Corp</div>
                     <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Cloud Infrastructure</div>
                   </td>
-                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$420,000</td>
-                  <td><span className="analytics-badge analytics-badge-active">Active</span></td>
-                  <td><span className="analytics-badge analytics-badge-medium">Medium</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Microsoft</div>
-                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Enterprise Software</div>
-                  </td>
-                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$295,000</td>
-                  <td><span className="analytics-badge analytics-badge-expiring">Expiring</span></td>
-                  <td><span className="analytics-badge analytics-badge-high">High</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Salesforce</div>
-                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>CRM Platform</div>
-                  </td>
-                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$180,000</td>
-                  <td><span className="analytics-badge analytics-badge-expiring">Expiring</span></td>
-                  <td><span className="analytics-badge analytics-badge-high">High</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>Google Workspace</div>
-                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Productivity Suite</div>
-                  </td>
-                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$84,000</td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$540,000</td>
                   <td><span className="analytics-badge analytics-badge-active">Active</span></td>
                   <td><span className="analytics-badge analytics-badge-low">Low</span></td>
                 </tr>
                 <tr>
                   <td>
-                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>HubSpot</div>
-                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Marketing Platform</div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>FinServe Global</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Financial Services</div>
                   </td>
-                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$78,000</td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$480,000</td>
                   <td><span className="analytics-badge analytics-badge-active">Active</span></td>
-                  <td><span className="analytics-badge analytics-badge-medium">Medium</span></td>
+                  <td><span className="analytics-badge analytics-badge-low">Low</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>DataFlow Analytics</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Data & Analytics</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$360,000</td>
+                  <td><span className="analytics-badge analytics-badge-active">Active</span></td>
+                  <td><span className="analytics-badge analytics-badge-low">Low</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>NextGen Robotics</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>Manufacturing - Robotics</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$240,000</td>
+                  <td><span className="analytics-badge analytics-badge-active">Active</span></td>
+                  <td><span className="analytics-badge analytics-badge-low">Low</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginBottom: '4px' }}>TechScale Inc.</div>
+                    <div style={{ fontSize: '13px', color: 'var(--text-tertiary)' }}>FinTech</div>
+                  </td>
+                  <td style={{ fontWeight: 600, color: 'var(--text-primary)' }}>$180,000</td>
+                  <td><span className="analytics-badge analytics-badge-active">Active</span></td>
+                  <td><span className="analytics-badge analytics-badge-low">Low</span></td>
                 </tr>
               </tbody>
             </table>
@@ -296,10 +296,10 @@ export default function AnalyticsPage() {
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="12" cy="12" r="10"/>
                 </svg>
-                OPTIMIZATION
+                CHURN RISK
               </div>
               <div className="analytics-insight-text">
-                AWS usage shows 32% underutilization. Potential savings: $134,000/year with plan optimization.
+                GrowthCo Labs shows low engagement (43 days since last login). Churn probability: 45%. Recommend immediate outreach.
               </div>
             </div>
 
@@ -311,7 +311,7 @@ export default function AnalyticsPage() {
                 INSIGHT
               </div>
               <div className="analytics-insight-text">
-                SaaS consolidation opportunity: 4 vendors offer overlapping features. Consolidation could save $89,000/year.
+                4 customers paying below market rate. Pricing correction at renewal could recover $148K in ARR.
               </div>
             </div>
 
@@ -323,7 +323,7 @@ export default function AnalyticsPage() {
                 OPPORTUNITY
               </div>
               <div className="analytics-insight-text">
-                Salesforce renewal coming up. Historical data suggests 15-20% discount available with early negotiation.
+                CloudFirst Corp is over seat limit (152/150). Immediate expansion opportunity: +$180K ARR.
               </div>
             </div>
 
@@ -335,7 +335,7 @@ export default function AnalyticsPage() {
                 TREND
               </div>
               <div className="analytics-insight-text">
-                Contract spend increased 12.5% QoQ, driven primarily by cloud infrastructure expansion.
+                Customer ACV increased 12.5% QoQ. 23 renewals secured this quarter with 94% retention rate.
               </div>
             </div>
           </div>

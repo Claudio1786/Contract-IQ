@@ -125,7 +125,14 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
           <NavItem
             href="/playbooks"
             icon="🎯"
-            label="Playbooks"
+            label="Intelligence Reports"
+            collapsed={!sidebarOpen}
+            isActive={false}
+          />
+          <NavItem
+            href="/alerts"
+            icon="🔔"
+            label="Renewal Alerts"
             collapsed={!sidebarOpen}
             isActive={false}
           />

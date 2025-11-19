@@ -48,6 +48,8 @@ model Contract {
   
   // Contract identification
   customerName     String
+  customerType     String?      // 'Enterprise', 'Mid-Market', 'SMB', 'Startup'
+  industry         String?      // 'FinTech', 'Healthcare', 'SaaS', 'Retail', etc.
   contractType     String?      // 'MSA', 'SOW', 'Order Form', 'Amendment'
   effectiveDate    DateTime?
   
@@ -56,7 +58,7 @@ model Contract {
   renewalType             String   // 'AUTO_RENEWAL', 'MANUAL_RENEWAL', 'ONE_TIME'
   renewalNoticeDays       Int?
   renewalNoticeDeadline   DateTime? // Calculated field
-  whoCanTerminate         String?   // 'EITHER_PARTY', 'CUSTOMER_ONLY', 'VENDOR_ONLY'
+  whoCanTerminate         String?   // 'EITHER_PARTY', 'CUSTOMER_ONLY', 'PROVIDER_ONLY'
   
   // Pricing
   pricingModel     String?      // 'PER_USER', 'FLAT_FEE', 'USAGE_BASED', 'HYBRID'

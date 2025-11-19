@@ -522,10 +522,10 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div className="hero-badge">AI-Powered Contract Intelligence</div>
-          <h1 className="hero-title">Master Your Contracts with Intelligence</h1>
+          <div className="hero-badge">AI-Powered Revenue Intelligence for B2B SaaS</div>
+          <h1 className="hero-title">Turn Customer Contracts Into Revenue Intelligence</h1>
           <p className="hero-subtitle">
-            Extract insights, negotiate better terms, and manage agreements with AI that understands the nuances of contract language. No legal degree required.
+            Prevent churn, spot expansion opportunities, and never miss a renewal. Contract IQ transforms your MSAs into actionable revenue insights with AI-powered analysis.
           </p>
           <div className="hero-cta-group">
             <a href="/app" className="btn-primary">🚀 Try Demo Now</a>
@@ -538,20 +538,20 @@ export default function LandingPage() {
       <section className="stats">
         <div className="stats-container">
           <div className="stat-item">
-            <div className="stat-value">10x</div>
-            <div className="stat-label">Faster Contract Review</div>
+            <div className="stat-value">$850K</div>
+            <div className="stat-label">Churn Prevented (YTD)</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">95%</div>
-            <div className="stat-label">Risk Detection Rate</div>
+            <div className="stat-value">$1.2M</div>
+            <div className="stat-label">Expansion Pipeline Identified</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">$2.4M</div>
-            <div className="stat-label">Average Savings per Year</div>
+            <div className="stat-value">2,000+</div>
+            <div className="stat-label">Customer MSAs Analyzed</div>
           </div>
           <div className="stat-item">
-            <div className="stat-value">24/7</div>
-            <div className="stat-label">AI Contract Advisor</div>
+            <div className="stat-value">100%</div>
+            <div className="stat-label">Renewal Visibility</div>
           </div>
         </div>
       </section>
@@ -560,59 +560,59 @@ export default function LandingPage() {
       <section className="features" id="features">
         <div className="features-container">
           <div className="section-header">
-            <div className="section-label">Features</div>
-            <h2 className="section-title">Everything You Need to Win</h2>
+            <div className="section-label">Platform Capabilities</div>
+            <h2 className="section-title">Built for Revenue Operations Teams</h2>
             <p className="section-subtitle">
-              From AI-powered analysis to negotiation playbooks, Contract IQ gives you the edge in every deal.
+              Contract IQ is purpose-built for B2B SaaS companies managing 200+ customer contracts. RevOps, CS Ops, Sales Ops—if you own revenue retention, this is for you.
             </p>
           </div>
 
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">💬</div>
-              <h3 className="feature-title">AI Contract Chat</h3>
+              <div className="feature-icon">🔍</div>
+              <h3 className="feature-title">Instant Answers on Any Customer Agreement</h3>
               <p className="feature-description">
-                Ask questions about any contract in plain English. Get instant answers with exact clause citations and confidence scores.
+                Ask questions across your entire customer contract portfolio in plain English. Which customers have auto-renewal clauses? What pricing was agreed in Q2 2024? Get instant answers with exact MSA citations.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">🎯</div>
-              <h3 className="feature-title">Risk Analysis</h3>
+              <div className="feature-icon">🛡️</div>
+              <h3 className="feature-title">Spot Revenue Risks Before They Impact ARR</h3>
               <p className="feature-description">
-                Automatically detect unfavorable terms, liability risks, and missing protections. Get prioritized action items with severity ratings.
+                AI automatically flags customers with aggressive termination clauses, below-market pricing, or unusual payment terms. Get prioritized alerts on contracts that need attention before renewal discussions.
               </p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">📊</div>
-              <h3 className="feature-title">Smart Dashboards</h3>
+              <h3 className="feature-title">Complete Visibility Across Your Customer Base</h3>
               <p className="feature-description">
-                Track all your agreements in one place. See renewal dates, spending patterns, and vendor performance at a glance.
+                Unified dashboard showing all customer MSAs with renewal timelines, contract value trends, and expansion opportunities. Filter by industry, contract size, or renewal quarter to focus your revenue team's efforts.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">🤝</div>
-              <h3 className="feature-title">Negotiation Playbooks</h3>
+              <div className="feature-icon">📅</div>
+              <h3 className="feature-title">90-Day Renewal Playbooks with Pricing Intelligence</h3>
               <p className="feature-description">
-                Get AI-generated negotiation strategies with specific clauses to add, remove, or modify. Backed by market benchmarks.
+                For every upcoming renewal, get AI-generated playbooks showing pricing gaps vs. current market rates, expansion opportunities, and redline history. Enter renewal discussions with complete context.
               </p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">⚡</div>
-              <h3 className="feature-title">Instant Insights</h3>
+              <h3 className="feature-title">Bulk Upload Customer MSAs in Minutes</h3>
               <p className="feature-description">
-                Upload any contract and get a comprehensive analysis in seconds. Key terms, obligations, and risks extracted automatically.
+                Upload entire folders of customer agreements and get comprehensive analysis across all docs. Extract renewal dates, pricing terms, SLAs, and custom clauses automatically. Retroactive intelligence on your existing portfolio.
               </p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">🔔</div>
-              <h3 className="feature-title">Smart Alerts</h3>
+              <h3 className="feature-title">Automated Renewal & Risk Notifications</h3>
               <p className="feature-description">
-                Never miss a renewal, deadline, or payment. Get proactive notifications about critical contract events and risks.
+                Get Slack/email alerts 90, 60, and 30 days before customer renewals with full contract context. Automatic flagging of pricing below benchmarks or terms that need updating. Your revenue team stays ahead of every deadline.
               </p>
             </div>
           </div>
@@ -622,12 +622,12 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="cta-section" id="demo">
         <div className="cta-content">
-          <h2 className="cta-title">Ready to Transform Your Contract Management?</h2>
+          <h2 className="cta-title">Start Managing Your Customer Portfolio Smarter</h2>
           <p className="cta-subtitle">
-            Experience the power of AI-driven contract intelligence. No credit card required. No sign-up friction. Just instant access to the full platform.
+            Join B2B SaaS companies using Contract IQ to eliminate revenue leakage and maximize customer lifetime value. Full platform access, no credit card required.
           </p>
           <a href="/app" className="btn-primary" style={{ fontSize: '19px', padding: '20px 48px' }}>
-            🎯 Access Full Demo Now
+            🎯 Get Started Free
           </a>
         </div>
       </section>
@@ -640,7 +640,7 @@ export default function LandingPage() {
             <div className="logo-text" style={{ fontSize: '18px' }}>Contract IQ</div>
           </div>
           <p className="footer-text">
-            © 2024 Contract IQ. Built with intelligence, designed for results.
+            © 2024 Contract IQ. Revenue intelligence for B2B SaaS companies.
           </p>
         </div>
       </footer>
