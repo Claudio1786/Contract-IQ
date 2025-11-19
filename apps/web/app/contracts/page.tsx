@@ -603,8 +603,6 @@ export default function ContractsPage() {
             </div>
           ))}
         </div>
-      </div>
     </AppLayout>
   );
-}
 }
