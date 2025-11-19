@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AppLayout from '../../components/layout/AppLayout';
+import PageHeader from '@/components/ui/PageHeader';
 import '../../styles/contracts.css';
 
 interface Contract {
@@ -437,60 +438,27 @@ export default function ContractsPage() {
         {!loading && !error && (
           <>
             {/* Page Header */}
-            <div className="contracts-page-header">
-              <div className="contracts-header-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                <div>
-                  <h1>Customer Contracts</h1>
-                  <div className="contracts-header-meta">
-                    <div className="contracts-stat-item">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                      </svg>
-                      <span>{portfolioStats?.totalContracts || contractsData.length} Active Customers</span>
-                    </div>
-                    <div className="contracts-stat-item">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                      </svg>
-                      <span>Last synced just now</span>
-                    </div>
-                  </div>
-                </div>
-            <button
-              onClick={() => router.push('/app/admin/contracts/new')}
-              style={{
-                padding: '12px 24px',
-                background: 'linear-gradient(135deg, #3B82F6, #2563EB)',
-                border: 'none',
-                borderRadius: '12px',
-                color: 'white',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.4)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
-              }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              Add Contract
-            </button>
-          </div>
-        </div>
+            <PageHeader
+              title="Customer Contracts"
+              subtitle="Browse customer agreements, renewal dates, and key terms"
+              icon={
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+                  <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+              }
+              actions={
+                <button
+                  onClick={() => router.push('/app/admin/contracts/new')}
+                  className="px-6 py-3 rounded-xl text-white text-[16px] font-semibold flex items-center gap-2 bg-gradient-to-br from-blue-500 to-blue-600 shadow-md hover:shadow-lg transition-transform hover:-translate-y-0.5"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                  Add Contract
+                </button>
+              }
+            />
 
         {/* Stats Summary */}
         <div className="contracts-stats-summary">
