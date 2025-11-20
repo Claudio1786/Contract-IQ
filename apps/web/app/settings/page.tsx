@@ -38,6 +38,8 @@ export default function SettingsPage() {
   });
 
   const [showSaveMessage, setShowSaveMessage] = useState(false);
+  const [seeding, setSeeding] = useState(false);
+  const [seedMessage, setSeedMessage] = useState<string | null>(null);
 
   const handleSave = () => {
     console.log('Saving settings:', {
@@ -53,6 +55,28 @@ export default function SettingsPage() {
   const handleCancel = () => {
     // Reset to initial values or navigate away
     window.location.reload();
+  };
+
+  const handleLoadDemoData = async () => {
+    try {
+      setSeeding(true);
+      setSeedMessage(null);
+      const res = await fetch('/api/demo/seed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reset: true }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSeedMessage(`✅ Loaded ${data.count} demo contracts ($${(data.total_acv || 0).toLocaleString()} ACV).`);
+      } else {
+        setSeedMessage(`❌ Failed to load demo data: ${data.error || 'Unknown error'}`);
+      }
+    } catch (e: any) {
+      setSeedMessage(`❌ Failed to load demo data: ${String(e)}`);
+    } finally {
+      setSeeding(false);
+    }
   };
 
   return (
@@ -370,6 +394,43 @@ export default function SettingsPage() {
                   <span className="settings-toggle-slider"></span>
                 </label>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Demo Data */}
+        <div className="settings-section">
+          <div className="settings-section-card">
+            <div className="settings-section-header">
+              <div className="settings-section-icon" style={{ '--icon-bg': 'rgba(59,130,246,0.12)' } as React.CSSProperties}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div className="settings-section-title">Demo Environment</div>
+            </div>
+            <div className="settings-group">
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-label">Load Demo Data</div>
+                  <div className="setting-description">Populate the portfolio with 6 realistic customer contracts (~$2.3M ACV) for demos.</div>
+                </div>
+                <button className="settings-btn settings-btn-primary" onClick={handleLoadDemoData} disabled={seeding}>
+                  {seeding ? 'Loading…' : 'Load Demo Data'}
+                </button>
+              </div>
+              {seedMessage && (
+                <div style={{
+                  background: 'linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(59,130,246,0.04) 100%)',
+                  border: '1px solid rgba(59,130,246,0.25)',
+                  borderRadius: '12px',
+                  padding: '12px 14px',
+                  color: 'var(--text-primary)'
+                }}>
+                  {seedMessage}
+                </div>
+              )}
             </div>
           </div>
         </div>
