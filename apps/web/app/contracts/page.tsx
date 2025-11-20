@@ -440,7 +440,7 @@ export default function ContractsPage() {
             <div className="contracts-page-header">
               <div className="contracts-header-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <div>
-                  <h1>Customer Contracts</h1>
+                  <h1>Contracts Library</h1>
                   <div className="contracts-header-meta">
                     <div className="contracts-stat-item">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -457,38 +457,74 @@ export default function ContractsPage() {
                     </div>
                   </div>
                 </div>
-            <button
-              onClick={() => router.push('/app/admin/contracts/new')}
-              style={{
-                padding: '12px 24px',
-                background: 'linear-gradient(135deg, #3B82F6, #2563EB)',
-                border: 'none',
-                borderRadius: '12px',
-                color: 'white',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.4)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
-              }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              Add Contract
-            </button>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button
+                onClick={() => {
+                  const el = document.getElementById('intelligence-briefs');
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                style={{
+                  padding: '12px 24px',
+                  background: 'linear-gradient(135deg, #8B5CF6, #6366F1)',
+                  border: 'none',
+                  borderRadius: '12px',
+                  color: 'white',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(99, 102, 241, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(99, 102, 241, 0.3)';
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M12 20l9-16-9 6-9-6 9 16z"/>
+                </svg>
+                Generate Brief
+              </button>
+              <button
+                onClick={() => router.push('/app/admin/contracts/new')}
+                style={{
+                  padding: '12px 24px',
+                  background: 'linear-gradient(135deg, #3B82F6, #2563EB)',
+                  border: 'none',
+                  borderRadius: '12px',
+                  color: 'white',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 6px 16px rgba(59, 130, 246, 0.4)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(59, 130, 246, 0.3)';
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Add Contract
+              </button>
+            </div>
           </div>
         </div>
 
@@ -505,7 +541,7 @@ export default function ContractsPage() {
               </div>
             </div>
             <div className="contracts-stat-number">12</div>
-            <div className="contracts-stat-label">High Churn Risk</div>
+            <div className="contracts-stat-label">High Risk Contracts</div>
           </div>
 
           <div className="contracts-stat-card" style={{ '--stat-bg': 'rgba(245,158,11,0.1)', '--stat-color': '#F59E0B' } as React.CSSProperties}>
@@ -519,7 +555,7 @@ export default function ContractsPage() {
               </div>
             </div>
             <div className="contracts-stat-number">37</div>
-            <div className="contracts-stat-label">Medium Churn Risk</div>
+            <div className="contracts-stat-label">Medium Risk Contracts</div>
           </div>
 
           <div className="contracts-stat-card" style={{ '--stat-bg': 'rgba(16,185,129,0.1)', '--stat-color': '#10B981' } as React.CSSProperties}>
@@ -531,7 +567,7 @@ export default function ContractsPage() {
               </div>
             </div>
             <div className="contracts-stat-number">198</div>
-            <div className="contracts-stat-label">Low Churn Risk</div>
+            <div className="contracts-stat-label">Low Risk Contracts</div>
           </div>
 
           <div className="contracts-stat-card" style={{ '--stat-bg': 'rgba(59,130,246,0.1)', '--stat-color': '#3B82F6' } as React.CSSProperties}>
@@ -543,7 +579,7 @@ export default function ContractsPage() {
               </div>
             </div>
             <div className="contracts-stat-number">$2.3M</div>
-            <div className="contracts-stat-label">Total ACV</div>
+            <div className="contracts-stat-label">Total Contract Value</div>
           </div>
         </div>
 
