@@ -101,7 +101,15 @@ export default function AlertsPage() {
               </svg>
             </div>
             <div className="flex-1">
-              <h1 className="text-[32px] font-bold text-slate-50 mb-2">
+              <h1 style={{
+                fontSize: '40px',
+                fontWeight: 700,
+                marginBottom: '8px',
+                background: 'linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
                 Renewal Alerts
               </h1>
               <p className="text-[16px] text-slate-400">
