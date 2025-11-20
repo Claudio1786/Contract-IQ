@@ -30,11 +30,30 @@ export default function AnalyticsPage() {
     <AppLayout>
       <div className="analytics-container">
         {/* Page Header */}
-        <div className="analytics-page-header">
-          <h1>Revenue Intelligence Dashboard</h1>
-          <p className="analytics-header-subtitle">
-            Real-time insights into your customer contracts and revenue performance
-          </p>
+        <div className="bg-gradient-to-br from-[#0F1319] to-[#14171F] border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+          <div className="flex items-center gap-5">
+            <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-[0_0_0_1px_rgba(59,130,246,0.2),0_0_20px_rgba(59,130,246,0.15)] bg-[linear-gradient(135deg,rgba(59,130,246,0.15)_0%,rgba(59,130,246,0.08)_100%)]">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
+                <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <div className="flex-1">
+              <h1 style={{
+                fontSize: '40px',
+                fontWeight: 700,
+                marginBottom: '8px',
+                background: 'linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                Revenue Intelligence Dashboard
+              </h1>
+              <p className="text-[16px] text-slate-400">
+                Real-time insights into your customer contracts and revenue performance
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* KPI Grid */}
