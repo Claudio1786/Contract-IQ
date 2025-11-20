@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import AppLayout from '../../components/layout/AppLayout';
+import PageHeader from '@/components/ui/PageHeader';
 import '../../styles/analytics.css';
 
 /**
@@ -30,12 +31,16 @@ export default function AnalyticsPage() {
     <AppLayout>
       <div className="analytics-container">
         {/* Page Header */}
-        <div className="analytics-page-header">
-          <h1>Revenue Intelligence Dashboard</h1>
-          <p className="analytics-header-subtitle">
-            Real-time insights into your customer contracts and revenue performance
-          </p>
-        </div>
+        <PageHeader
+          color="blue"
+          title="Revenue Intelligence Dashboard"
+          subtitle="Real-time insights into your customer contracts and revenue performance"
+          icon={
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            </svg>
+          }
+        />
 
         {/* KPI Grid */}
         <div className="analytics-kpi-grid">
