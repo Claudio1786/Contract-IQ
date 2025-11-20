@@ -437,27 +437,42 @@ export default function ContractsPage() {
         {!loading && !error && (
           <>
             {/* Page Header */}
-            <div className="contracts-page-header">
-              <div className="contracts-header-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-                <div>
-                  <h1>Contracts Library</h1>
-                  <div className="contracts-header-meta">
-                    <div className="contracts-stat-item">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <div className="bg-gradient-to-br from-[#0F1319] to-[#14171F] border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-[0_0_0_1px_rgba(16,185,129,0.2),0_0_20px_rgba(16,185,129,0.15)] bg-[linear-gradient(135deg,rgba(16,185,129,0.15)_0%,rgba(16,185,129,0.08)_100%)]">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2">
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  <h1 style={{
+                    fontSize: '40px',
+                    fontWeight: 700,
+                    marginBottom: '8px',
+                    background: 'linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
+                    Contracts Library
+                  </h1>
+                  <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
                         <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                       </svg>
-                      <span>{portfolioStats?.totalContracts || contractsData.length} Active Customers</span>
+                      <span className="text-[14px] text-slate-400">{portfolioStats?.totalContracts || contractsData.length} Active Customers</span>
                     </div>
-                    <div className="contracts-stat-item">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="12 6 12 12 16 14"/>
                       </svg>
-                      <span>Last synced just now</span>
+                      <span className="text-[14px] text-slate-400">Last synced just now</span>
                     </div>
                   </div>
                 </div>
-            <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: '12px' }}>
               <button
                 onClick={() => {
                   const el = document.getElementById('intelligence-briefs');
