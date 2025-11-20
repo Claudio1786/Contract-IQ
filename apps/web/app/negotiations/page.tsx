@@ -179,11 +179,33 @@ export default function NegotiationsPage() {
     <AppLayout>
       <div>
         {/* Page Header */}
-        <div style={{ marginBottom: 'var(--space-6)' }}>
-          <h1 className="text-h1">Contract Negotiations</h1>
-          <p className="text-base text-secondary" style={{ marginTop: 'var(--space-2)' }}>
-            Monitor and manage high-volume contract markups from clients
-          </p>
+        <div className="bg-gradient-to-br from-[#0F1319] to-[#14171F] border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+          <div className="flex items-center gap-5">
+            <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-[0_0_0_1px_rgba(139,92,246,0.2),0_0_20px_rgba(139,92,246,0.15)] bg-[linear-gradient(135deg,rgba(139,92,246,0.15)_0%,rgba(139,92,246,0.08)_100%)]">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2">
+                <path d="M17 8h1a4 4 0 110 8h-1m-10-8H6a4 4 0 100 8h1m2-4h6"/>
+                <circle cx="9" cy="8" r="3"/>
+                <circle cx="15" cy="8" r="3"/>
+                <path d="M9 11v3a3 3 0 003 3h0a3 3 0 003-3v-3"/>
+              </svg>
+            </div>
+            <div className="flex-1">
+              <h1 style={{
+                fontSize: '40px',
+                fontWeight: 700,
+                marginBottom: '8px',
+                background: 'linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                Contract Negotiations
+              </h1>
+              <p className="text-[16px] text-slate-400">
+                Track and manage contract negotiation workflows
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Status Filter Tabs */}
