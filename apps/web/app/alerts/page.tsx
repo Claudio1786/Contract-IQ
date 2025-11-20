@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import AppLayout from '../../components/layout/AppLayout';
+import PageHeader from '@/components/ui/PageHeader';
 
 interface Alert {
   id: string;
@@ -93,21 +94,16 @@ export default function AlertsPage() {
     <AppLayout>
       <div className="max-w-[1400px] mx-auto px-8 py-12">
         {/* Page Header */}
-        <div className="bg-gradient-to-br from-[#0F1319] to-[#14171F] border border-white/10 rounded-2xl p-8 mb-8 shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
-          <div className="flex items-center gap-5">
-            <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-[0_0_0_1px_rgba(239,68,68,0.2),0_0_20px_rgba(239,68,68,0.15)] bg-[linear-gradient(135deg,rgba(239,68,68,0.15)_0%,rgba(239,68,68,0.08)_100%)]">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2">
-                <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-              </svg>
-            </div>
-            <div className="flex-1">
-              <h1 className="text-[32px] font-bold text-slate-50 mb-2">
-                Renewal Alerts
-              </h1>
-              <p className="text-[16px] text-slate-400">
-                Track upcoming renewals, churn risks, and revenue optimization opportunities
-              </p>
-            </div>
+        <PageHeader
+          color="orange"
+          title="Renewal Alerts"
+          subtitle="Track upcoming renewals, churn risks, and revenue optimization opportunities"
+          icon={
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+              <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+          }
+          actions={
             <div className="flex gap-3">
               <div className="px-5 py-3 bg-red-500/15 border border-red-500/30 rounded-lg text-center">
                 <div className="text-2xl font-bold text-red-500">{urgentCount}</div>
@@ -118,8 +114,8 @@ export default function AlertsPage() {
                 <div className="text-[12px] text-slate-400 uppercase tracking-wide">Important</div>
               </div>
             </div>
-          </div>
-        </div>
+          }
+        />
 
         {/* Filter Tabs */}
         <div className="flex gap-3 mb-8 p-2 bg-[#0F1319] border border-white/10 rounded-xl w-fit">

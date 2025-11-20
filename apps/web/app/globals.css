@@ -10,6 +10,7 @@
 @import '../styles/components.css';
 @import '../styles/components-dark.css';  /* Premium dark mode components */
 @import '../styles/layout.css';
+@import '../styles/page-header.css';
 
 /* Tailwind CSS (for any utility classes we need) */
 @tailwind base;
