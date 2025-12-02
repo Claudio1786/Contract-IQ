@@ -522,14 +522,14 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div className="hero-badge">Contract Negotiation Platform with AI</div>
+          <div className="hero-badge">Contract Negotiation Platform</div>
           <h1 className="hero-title">Negotiate Customer Contracts with AI-Powered Confidence</h1>
           <p className="hero-subtitle">
-            Create new contracts from your templates. Upload customer redlines and get instant risk analysis, counter-language suggestions, and negotiation guidance. Built for companies that don't have in-house legal teams—but need to negotiate like they do.
+            Create contracts from your templates. Upload customer redlines and know exactly where to negotiate. Close deals faster—without an in-house legal team.
           </p>
           <div className="hero-cta-group">
             <a href="/app" className="btn-primary">Create Your First Contract</a>
-            <a href="/app" className="btn-secondary">Upload for Analysis</a>
+            <a href="#features" className="btn-secondary">See How It Works</a>
           </div>
         </div>
       </section>

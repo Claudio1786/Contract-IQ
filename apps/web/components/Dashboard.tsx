@@ -155,18 +155,33 @@ export default function Dashboard() {
                 Real-time insights into your customer relationships and contract performance
               </p>
             </div>
-            <button
-              onClick={() => router.push('/app/admin/contracts/new')}
-              className="px-6 py-3 rounded-xl text-white text-[16px] font-semibold flex items-center gap-2 
-                bg-gradient-to-br from-blue-500 to-blue-600 shadow-md hover:shadow-lg transition-transform 
-                hover:-translate-y-0.5"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
-              Add Contract
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={() => router.push('/contracts/new')}
+                className="px-6 py-3 rounded-xl text-white text-[16px] font-semibold flex items-center gap-2 
+                  bg-gradient-to-br from-green-500 to-green-600 shadow-md hover:shadow-lg transition-transform 
+                  hover:-translate-y-0.5"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Create New Contract
+              </button>
+              <button
+                onClick={() => router.push('/upload')}
+                className="px-6 py-3 rounded-xl text-[16px] font-semibold flex items-center gap-2 
+                  bg-[var(--surface-4)] border border-white/10 text-[var(--text-primary)]
+                  hover:brightness-110 transition"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M7 16l5-5 5 5"/>
+                  <path d="M12 11V21"/>
+                  <rect x="3" y="3" width="18" height="6" rx="2"/>
+                </svg>
+                Upload Existing Contract
+              </button>
+            </div>
           </div>
         </div>
       </div>
