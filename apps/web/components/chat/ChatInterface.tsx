@@ -210,7 +210,74 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 </svg>
               </div>
               <h2 className="empty-title">What can I help you with?</h2>
-              <p className="empty-subtitle">Ask me about customer contracts, renewals, churn risks, or revenue insights</p>
+              <p className="empty-subtitle">Ask questions about your contracts - terms, clauses, negotiation history, or portfolio insights</p>
+              
+              {/* Example Prompts */}
+              <div className="example-prompts" style={{ marginTop: '20px', marginBottom: '30px' }}>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '10px' }}>Try asking:</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center' }}>
+                  <div 
+                    className="prompt-chip"
+                    onClick={() => handleSuggestionClick("Show me all contracts with liability caps below $1M")}
+                    style={{ 
+                      padding: '8px 16px', 
+                      background: 'var(--surface-3)', 
+                      borderRadius: '20px', 
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      border: '1px solid var(--border-subtle)'
+                    }}
+                  >
+                    Show me all contracts with liability caps below $1M
+                  </div>
+                  <div 
+                    className="prompt-chip"
+                    onClick={() => handleSuggestionClick("What payment terms did we agree to with Acme Corp?")}
+                    style={{ 
+                      padding: '8px 16px', 
+                      background: 'var(--surface-3)', 
+                      borderRadius: '20px', 
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      border: '1px solid var(--border-subtle)'
+                    }}
+                  >
+                    What payment terms did we agree to with Acme Corp?
+                  </div>
+                  <div 
+                    className="prompt-chip"
+                    onClick={() => handleSuggestionClick("Which customers have most-favored-nation clauses?")}
+                    style={{ 
+                      padding: '8px 16px', 
+                      background: 'var(--surface-3)', 
+                      borderRadius: '20px', 
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      border: '1px solid var(--border-subtle)'
+                    }}
+                  >
+                    Which customers have most-favored-nation clauses?
+                  </div>
+                  <div 
+                    className="prompt-chip"
+                    onClick={() => handleSuggestionClick("Compare indemnification terms across enterprise customers")}
+                    style={{ 
+                      padding: '8px 16px', 
+                      background: 'var(--surface-3)', 
+                      borderRadius: '20px', 
+                      fontSize: '13px',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      border: '1px solid var(--border-subtle)'
+                    }}
+                  >
+                    Compare indemnification terms across enterprise customers
+                  </div>
+                </div>
+              </div>
               
               {/* Suggestions Grid */}
               <div className="suggestions">

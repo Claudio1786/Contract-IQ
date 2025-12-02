@@ -15,11 +15,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-  // Main Navigation Section - CUSTOMER REVENUE INTELLIGENCE FOCUS
+  // Main Navigation Section - CONTRACT NEGOTIATION FOCUS
   const mainNavItems = [
     { 
       href: '/app', 
-      label: 'Dashboard',
+      label: 'Command Center',
       iconClass: 'icon-home',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -29,8 +29,21 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       active: pathname === '/app' 
     },
     { 
+      href: '/contracts', 
+      label: 'Contracts',
+      iconClass: 'icon-contracts',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+      ),
+      badge: '247',
+      badgeClass: 'badge-primary',
+      active: pathname.startsWith('/contracts') 
+    },
+    { 
       href: '/chat', 
-      label: 'Chat',
+      label: 'AI Assistant',
       iconClass: 'icon-chat',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -40,21 +53,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       active: pathname.startsWith('/chat') 
     },
     { 
-      href: '/contracts', 
-      label: 'Customers',
-      iconClass: 'icon-contracts',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-        </svg>
-      ),
-      badge: '147',
-      badgeClass: 'badge-primary',
-      active: pathname.startsWith('/contracts') 
-    },
-    { 
       href: '/analytics', 
-      label: 'Revenue Intelligence',
+      label: 'Revenue Intel',
       iconClass: 'icon-analytics',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -69,15 +69,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const managementNavItems = [
     {
       href: '/alerts',
-      label: 'Renewal Alerts',
+      label: 'Activity Center',
       iconClass: 'icon-alerts',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
+          <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
         </svg>
       ),
-      badge: '23',
+      badge: '12',
       badgeClass: 'badge-error',
       active: pathname.startsWith('/alerts')
     },

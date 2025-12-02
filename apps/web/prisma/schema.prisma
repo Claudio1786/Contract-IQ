@@ -31,6 +31,9 @@ model User {
   organization   Organization @relation(fields: [organizationId], references: [id])
   createdAt      DateTime     @default(now())
   
+  // New relations for negotiation features
+  templates      ContractTemplate[]
+  
   @@index([organizationId])
 }
 
@@ -75,10 +78,19 @@ model Contract {
   status              String   @default("active") // 'active', 'archived', 'expired'
   manualEntryComplete Boolean  @default(false)
   
+  // New fields for negotiation features
+  stage               String?  @default("draft") // 'draft', 'sent', 'negotiating', 'signed'
+  templateId          String?
+  userId              String?  // Track who created the contract
+  
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
   
   riskScore        RiskScore?
+  
+  // New relations
+  template            ContractTemplate?    @relation(fields: [templateId], references: [id])
+  negotiation         NegotiationSession?
   
   @@index([organizationId])
   @@index([customerName])
@@ -132,4 +144,90 @@ model SalesforceConnection {
   
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONTRACT TEMPLATES - User's standard agreements they reuse
+// ═══════════════════════════════════════════════════════════════════════════
+
+model ContractTemplate {
+  id               String   @id @default(cuid())
+  userId           String
+  name             String   // "Standard MSA", "Services Agreement", "SOW Template"
+  description      String?  // "Our standard contract for enterprise customers"
+  templateType     String   @default("custom") // 'msa', 'services', 'sow', 'nda', 'custom'
+  fileUrl          String   // S3/Supabase storage URL to the template file
+  fileType         String   @default("pdf") // 'pdf', 'docx'
+  variables        Json?    // ["customer_name", "contract_value", "term_length", "payment_terms"]
+  isActive         Boolean  @default(true)
+  usageCount       Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contracts        Contract[]
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// NEGOTIATION SESSIONS - Tracks the back-and-forth on each contract
+// ═══════════════════════════════════════════════════════════════════════════
+
+model NegotiationSession {
+  id                  String   @id @default(cuid())
+  contractId          String   @unique
+  status              String   @default("draft") 
+                      // 'draft' = user creating
+                      // 'sent' = sent to customer, waiting
+                      // 'received_redlines' = customer sent back changes
+                      // 'under_review' = user reviewing redlines
+                      // 'counter_sent' = user sent counter-proposal
+                      // 'approved' = ready to sign
+                      // 'signed' = done
+  
+  originalVersionUrl  String?  // Your version you sent
+  customerRedlineUrl  String?  // Customer's marked up version
+  currentVersionUrl   String?  // Latest version after negotiations
+  versionNumber       Int      @default(1)
+  
+  totalChanges        Int      @default(0)
+  highRiskChanges     Int      @default(0)
+  mediumRiskChanges   Int      @default(0)
+  lowRiskChanges      Int      @default(0)
+  
+  lastActivityAt      DateTime @default(now())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  contract            Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  changes             ContractChange[]
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONTRACT CHANGES - Each individual redline/change from customer
+// ═══════════════════════════════════════════════════════════════════════════
+
+model ContractChange {
+  id                    String   @id @default(cuid())
+  sessionId             String
+  
+  changeType            String   // 'addition', 'deletion', 'modification'
+  section               String   // "Section 4.2 - Liability", "Payment Terms"
+  
+  originalText          String?  @db.Text // What you had
+  changedText           String?  @db.Text // What customer changed it to
+  
+  riskScore             String   @default("medium") // 'high', 'medium', 'low'
+  riskExplanation       String?  @db.Text // AI explains why this is risky
+  suggestedCounter      String?  @db.Text // AI suggests counter-language
+  talkingPoints         String[] // AI suggests what to say on a call
+  
+  userDecision          String   @default("pending") 
+                        // 'pending', 'accepted', 'rejected', 'countered'
+  userCounterText       String?  @db.Text // If user writes their own counter
+  userNotes             String?  @db.Text // Any notes the user adds
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  session               NegotiationSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 }
