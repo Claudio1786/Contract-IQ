@@ -578,7 +578,7 @@ export default function LandingPage() {
 
             <div className="feature-card">
               <div className="feature-icon">🔄</div>
-              <h3 className="feature-title">Red Line Analysis (Will's Core Feature)</h3>
+              <h3 className="feature-title">Red Line Analysis</h3>
               <p className="feature-description">
                 Upload customer redlines and get instant AI analysis. The system tracks every change for you: "These are the changes. This is where you want to negotiate." Risk scoring, business impact, and suggested counter-language for each redline.
               </p>
