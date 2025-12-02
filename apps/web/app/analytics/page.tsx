@@ -50,10 +50,33 @@ export default function AnalyticsPage() {
                 Revenue Intelligence
               </h1>
               <p className="text-[16px] text-slate-400">
-                Bonus: Track contract value and revenue trends from your negotiated agreements
+                Your complete view of customer contract performance. Track renewals, monitor contract values, and identify growth opportunities—all automatically populated from your negotiated agreements.
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Info Box */}
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%)',
+          border: '1px solid rgba(99, 102, 241, 0.2)',
+          borderRadius: '12px',
+          padding: '20px',
+          marginBottom: '32px',
+          marginTop: '24px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366F1" strokeWidth="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#E8EAF0', margin: 0 }}>
+              Automatic Revenue Tracking
+            </h3>
+          </div>
+          <p style={{ fontSize: '14px', color: '#9CA3B8', margin: 0, lineHeight: 1.6 }}>
+            Every contract you negotiate and sign flows into this dashboard automatically. 
+            No spreadsheets, no manual entry—just real-time visibility into your revenue.
+          </p>
         </div>
 
         {/* KPI Grid */}
@@ -225,7 +248,7 @@ export default function AnalyticsPage() {
           {/* Top Customers Table */}
           <div className="analytics-table-card">
             <div className="analytics-table-header">
-              <h2 className="analytics-table-title">Top Customers by ACV</h2>
+              <h2 className="analytics-table-title">Your Contract Portfolio</h2>
               <button className="analytics-table-action">View All →</button>
             </div>
             <table className="analytics-table">
