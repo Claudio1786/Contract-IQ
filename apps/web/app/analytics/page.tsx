@@ -47,10 +47,10 @@ export default function AnalyticsPage() {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}>
-                Revenue Intelligence Dashboard
+                Revenue Intelligence
               </h1>
               <p className="text-[16px] text-slate-400">
-                Real-time insights into your customer contracts and revenue performance
+                Bonus: Track contract value and revenue trends from your negotiated agreements
               </p>
             </div>
           </div>

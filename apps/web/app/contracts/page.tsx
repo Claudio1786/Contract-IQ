@@ -454,8 +454,11 @@ export default function ContractsPage() {
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text'
                   }}>
-                    Contracts Library
+                    Customer Contracts Library
                   </h1>
+                  <p style={{ fontSize: '16px', color: '#9CA3B8', marginBottom: '12px' }}>
+                    Search, compare, and manage your entire contract portfolio
+                  </p>
                   <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">

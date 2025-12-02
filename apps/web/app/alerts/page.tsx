@@ -15,8 +15,8 @@ interface Alert {
 }
 
 /**
- * Renewal Alerts Page - Customer Revenue Intelligence
- * Track upcoming renewals, churn risks, and expansion opportunities
+ * Contract Activity Center
+ * Track active negotiations, document changes, and renewal alerts
  */
 export default function AlertsPage() {
   const [filterType, setFilterType] = useState('all');
@@ -110,10 +110,10 @@ export default function AlertsPage() {
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}>
-                Renewal Alerts
+                Contract Activity Center
               </h1>
               <p className="text-[16px] text-slate-400">
-                Track upcoming renewals, churn risks, and revenue optimization opportunities
+                Track active negotiations, red lines, and renewal alerts in real-time
               </p>
             </div>
             <div className="flex gap-3">
