@@ -513,8 +513,8 @@ export default function LandingPage() {
             <div className="logo-icon">📄</div>
             <div className="logo-text">Contract IQ</div>
           </div>
-          <button className="nav-cta" onClick={() => window.location.href = '/upload'}>
-            Upload Contract
+          <button className="nav-cta" onClick={() => window.location.href = '/app'}>
+            Access Demo
           </button>
         </div>
       </nav>
@@ -522,14 +522,14 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div className="hero-badge">Contract Negotiation Platform</div>
-          <h1 className="hero-title">Your Customer Sent Back Redlines. Now What?</h1>
+          <div className="hero-badge">Customer Contract Intelligence Platform</div>
+          <h1 className="hero-title">The Intelligent Layer for Customer Contract Operations</h1>
           <p className="hero-subtitle">
-            They changed 47 things across 30 pages. You have 24 hours to respond. Contract IQ shows you every change, flags the risks, and gives you the exact language to push back—in under 60 seconds.
+            From contract creation to redline negotiation to post-signature intelligence. One platform that gives every team visibility into your customer agreements.
           </p>
           <div className="hero-cta-group">
-            <a href="/upload" className="btn-primary">Upload a Contract</a>
-            <a href="#features" className="btn-secondary">Watch Demo</a>
+            <a href="/app" className="btn-primary">Create Your First Contract</a>
+            <a href="#features" className="btn-secondary">See How It Works</a>
           </div>
         </div>
       </section>
@@ -539,7 +539,7 @@ export default function LandingPage() {
         <div className="stats-container">
           <div className="stat-item">
             <div className="stat-value">2,000+</div>
-            <div className="stat-label">Customer Contracts Analyzed</div>
+            <div className="stat-label">Customer Contracts Managed</div>
           </div>
           <div className="stat-item">
             <div className="stat-value">$120M+</div>
@@ -551,7 +551,7 @@ export default function LandingPage() {
           </div>
           <div className="stat-item">
             <div className="stat-value">4 min</div>
-            <div className="stat-label">Average Redline Response Time</div>
+            <div className="stat-label">Average Redline Response</div>
           </div>
         </div>
       </section>
@@ -561,58 +561,58 @@ export default function LandingPage() {
         <div className="features-container">
           <div className="section-header">
             <div className="section-label">Platform Capabilities</div>
-            <h2 className="section-title">What Happens After They Send Back Redlines</h2>
+            <h2 className="section-title">Customer Contracts. From Creation to Close to Renewal.</h2>
             <p className="section-subtitle">
-              You're not a lawyer. But you're the one deciding whether to accept terms that could cost thousands—or lose the deal. Here's how Contract IQ helps.
+              Contract IQ centralizes how your organization creates, negotiates, and manages customer agreements. Sales closes faster. Legal gains oversight. Revenue teams see the full picture.
             </p>
           </div>
 
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🔍</div>
-              <h3 className="feature-title">Instant Redline Detection</h3>
+              <div className="feature-icon">📝</div>
+              <h3 className="feature-title">Contract Creation</h3>
               <p className="feature-description">
-                Upload their marked-up contract. In seconds, see every addition, deletion, and modification—including the liability change buried on page 27. Each change scored High, Medium, or Low risk with plain-English explanations.
+                Start Every Deal from Your Strongest Position. Generate customer agreements from your standard templates—MSAs, SOWs, NDAs, and service contracts. Populate customer details once. Maintain consistency across every deal. Your best-negotiated terms become your starting point for every new relationship.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon">🔍</div>
+              <h3 className="feature-title">Redline Analysis</h3>
+              <p className="feature-description">
+                See Every Change. Understand Every Risk. When customers return marked-up contracts, know exactly what changed. Contract IQ surfaces every addition, deletion, and modification—with risk scoring and plain-language explanations. The subtle liability shift on page 27 gets the same visibility as the pricing change on page 3.
               </p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">💬</div>
-              <h3 className="feature-title">Know Exactly What to Say Back</h3>
+              <h3 className="feature-title">Negotiation Intelligence</h3>
               <p className="feature-description">
-                For every risky clause, get specific counter-language ready to copy and paste. Talking points for the call. Alternative phrasing that protects you. Stop Googling "indemnity clause" at midnight.
+                Know Exactly Where to Negotiate. For every flagged clause, access suggested counter-language and alternative terms. Ask questions about specific provisions and receive contextual guidance. Transform redline review from a bottleneck into a competitive advantage.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">📝</div>
-              <h3 className="feature-title">Start from Strength, Not Scratch</h3>
+              <div className="feature-icon">📚</div>
+              <h3 className="feature-title">Template Library</h3>
               <p className="feature-description">
-                Professional templates for MSAs, SOWs, NDAs, and service agreements. Customized to your business. Your best negotiated terms become your starting point for every new deal.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">💡</div>
-              <h3 className="feature-title">Ask Anything About Any Clause</h3>
-              <p className="feature-description">
-                "What does this indemnity clause actually mean?" "Is this payment term standard?" Get plain-English answers based on your specific contract—not generic legal templates.
-              </p>
-            </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">✉️</div>
-              <h3 className="feature-title">Respond in Minutes, Not Days</h3>
-              <p className="feature-description">
-                For every redline you reject or counter, get a professional email response drafted automatically. Maintain deal momentum. No more "let me get back to you" delays.
+                Build Institutional Knowledge Into Every Contract. Capture your strongest negotiated positions as reusable templates. Learn from every deal. Ensure new team members start with proven language. Your contract library becomes smarter with every agreement you close.
               </p>
             </div>
 
             <div className="feature-card">
               <div className="feature-icon">📊</div>
-              <h3 className="feature-title">Contracts That Don't Disappear</h3>
+              <h3 className="feature-title">Revenue Intelligence</h3>
               <p className="feature-description">
-                Once signed, renewal dates, payment terms, and obligations are extracted automatically. Get alerts 90/60/30 days out. Your contract archive becomes actionable data.
+                Signed Contracts Become Actionable Data. Post-signature, Contract IQ extracts renewal dates, payment terms, and key obligations automatically. Surface expansion opportunities. Protect against revenue leakage. Alert stakeholders before critical deadlines—not after.
+              </p>
+            </div>
+
+            <div className="feature-card">
+              <div className="feature-icon">✉️</div>
+              <h3 className="feature-title">Response Drafting</h3>
+              <p className="feature-description">
+                Maintain Negotiation Momentum. Generate professional email responses for every redline you counter or reject. Articulate your position clearly. Propose alternatives. Keep deals moving forward without waiting for review cycles.
               </p>
             </div>
           </div>
@@ -622,12 +622,15 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="cta-section" id="demo">
         <div className="cta-content">
-          <h2 className="cta-title">Stop Losing Deals to Contract Confusion</h2>
+          <h2 className="cta-title">Transform How Your Organization Handles Customer Contracts</h2>
           <p className="cta-subtitle">
-            Every redline you accept blind is a risk. Every deal that stalls waiting for review is revenue walking away. See what you've been missing.
+            AI-powered contract creation, negotiation intelligence, and post-signature analytics. See the platform in action.
           </p>
-          <a href="/upload" className="btn-primary" style={{ fontSize: '19px', padding: '20px 48px' }}>
-            Analyze Your First Contract Free
+          <p className="cta-subtitle" style={{ marginTop: '16px' }}>
+            Enterprise ready. SOC 2 compliant. Implementation in days, not months.
+          </p>
+          <a href="/demo" className="btn-primary" style={{ fontSize: '19px', padding: '20px 48px' }}>
+            Request a Demo
           </a>
         </div>
       </section>
@@ -640,7 +643,7 @@ export default function LandingPage() {
             <div className="logo-text" style={{ fontSize: '18px' }}>Contract IQ</div>
           </div>
           <p className="footer-text">
-            © 2024 Contract IQ. AI-powered contract negotiation platform.
+            © 2024 Contract IQ. Customer Contract Intelligence Platform. All rights reserved.
           </p>
         </div>
       </footer>
