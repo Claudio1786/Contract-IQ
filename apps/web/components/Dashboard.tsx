@@ -168,7 +168,7 @@ export default function Dashboard() {
                 Create New Contract
               </button>
               <button
-                onClick={() => router.push('/upload')}
+                onClick={() => router.push('/contracts/redlines/upload')}
                 className="px-6 py-3 rounded-xl text-[16px] font-semibold flex items-center gap-2 
                   bg-[var(--surface-4)] border border-white/10 text-[var(--text-primary)]
                   hover:brightness-110 transition"
@@ -178,7 +178,7 @@ export default function Dashboard() {
                   <path d="M12 11V21"/>
                   <rect x="3" y="3" width="18" height="6" rx="2"/>
                 </svg>
-                Upload for Negotiation
+                Upload Redlines
               </button>
             </div>
           </div>

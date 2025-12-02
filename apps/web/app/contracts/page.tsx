@@ -709,10 +709,17 @@ export default function ContractsPage() {
                   </svg>
                   View Details
                 </button>
-                <button className="contract-btn contract-btn-secondary">
+                <button 
+                  className="contract-btn contract-btn-secondary"
+                  onClick={() => router.push(`/contracts/${contract.id}/redlines`)}
+                  title="Upload Redlines"
+                >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    <path d="M7 16l5-5 5 5"/>
+                    <path d="M12 11V21"/>
+                    <rect x="3" y="3" width="18" height="6" rx="2"/>
                   </svg>
+                  Upload Redlines
                 </button>
             </div>
               </div>
