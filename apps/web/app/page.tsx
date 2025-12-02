@@ -522,14 +522,14 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <div className="hero-badge">AI-Powered Revenue Intelligence for B2B Companies</div>
-          <h1 className="hero-title">Turn Customer Contracts Into Revenue Intelligence</h1>
+          <div className="hero-badge">Contract Negotiation Platform with AI</div>
+          <h1 className="hero-title">Negotiate Customer Contracts with AI-Powered Confidence</h1>
           <p className="hero-subtitle">
-            Prevent churn, spot expansion opportunities, and never miss a renewal. Contract IQ transforms your MSAs into actionable revenue insights with AI-powered analysis.
+            Create new contracts from your templates. Upload customer redlines and get instant risk analysis, counter-language suggestions, and negotiation guidance. Built for companies that don't have in-house legal teams—but need to negotiate like they do.
           </p>
           <div className="hero-cta-group">
-            <a href="/app" className="btn-primary">🚀 Try Demo Now</a>
-            <a href="#features" className="btn-secondary">See How It Works</a>
+            <a href="/app" className="btn-primary">Create Your First Contract</a>
+            <a href="/app" className="btn-secondary">Upload for Analysis</a>
           </div>
         </div>
       </section>
@@ -561,58 +561,58 @@ export default function LandingPage() {
         <div className="features-container">
           <div className="section-header">
             <div className="section-label">Platform Capabilities</div>
-            <h2 className="section-title">Built for Revenue Operations Teams</h2>
+            <h2 className="section-title">Built for Companies Without Legal Teams</h2>
             <p className="section-subtitle">
-              Contract IQ is purpose-built for B2B companies managing 200+ customer contracts. RevOps, CS Ops, Sales Ops—if you own revenue retention, this is for you.
+              Contract IQ empowers your team to negotiate customer contracts with confidence. Get AI-powered guidance at every step—from template selection to redline analysis to counter-language generation.
             </p>
           </div>
 
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🔍</div>
-              <h3 className="feature-title">Instant Answers on Any Customer Agreement</h3>
+              <div className="feature-icon">📝</div>
+              <h3 className="feature-title">Create New Contract</h3>
               <p className="feature-description">
-                Ask questions across your entire customer contract portfolio in plain English. Which customers have auto-renewal clauses? What pricing was agreed in Q2 2024? Get instant answers with exact MSA citations.
+                Start from your standard templates or common agreement types. Input customer details once, and generate professional contracts ready for negotiation. No legal expertise required.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">🛡️</div>
-              <h3 className="feature-title">Spot Revenue Risks Before They Impact ARR</h3>
+              <div className="feature-icon">🔄</div>
+              <h3 className="feature-title">Red Line Analysis (Will's Core Feature)</h3>
               <p className="feature-description">
-                AI automatically flags customers with aggressive termination clauses, below-market pricing, or unusual payment terms. Get prioritized alerts on contracts that need attention before renewal discussions.
+                Upload customer redlines and get instant AI analysis. The system tracks every change for you: "These are the changes. This is where you want to negotiate." Risk scoring, business impact, and suggested counter-language for each redline.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">📊</div>
-              <h3 className="feature-title">Complete Visibility Across Your Customer Base</h3>
+              <div className="feature-icon">💡</div>
+              <h3 className="feature-title">AI Negotiation Assistant</h3>
               <p className="feature-description">
-                Unified dashboard showing all customer MSAs with renewal timelines, contract value trends, and expansion opportunities. Filter by industry, contract size, or renewal quarter to focus your revenue team's efforts.
+                Ask questions about any clause or term. Get plain-English explanations of legal language and suggestions for more favorable terms. "What does this indemnity clause mean?" → Instant, actionable answers.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">📅</div>
-              <h3 className="feature-title">90-Day Renewal Playbooks with Pricing Intelligence</h3>
+              <div className="feature-icon">📚</div>
+              <h3 className="feature-title">Template Library & Reuse</h3>
               <p className="feature-description">
-                For every upcoming renewal, get AI-generated playbooks showing pricing gaps vs. current market rates, expansion opportunities, and redline history. Enter renewal discussions with complete context.
+                Build your library of standard agreements. Upload your best negotiated contracts as templates. Reuse successful language and terms across new deals. Learn from every negotiation.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">⚡</div>
-              <h3 className="feature-title">Bulk Upload Customer MSAs in Minutes</h3>
+              <div className="feature-icon">💰</div>
+              <h3 className="feature-title">Revenue Intelligence (Bonus)</h3>
               <p className="feature-description">
-                Upload entire folders of customer agreements and get comprehensive analysis across all docs. Extract renewal dates, pricing terms, SLAs, and custom clauses automatically. Retroactive intelligence on your existing portfolio.
+                Once contracts are signed, track renewal dates, payment terms, and revenue trends. Never miss a renewal window. Spot expansion opportunities. Revenue protection comes standard with every negotiation.
               </p>
             </div>
 
             <div className="feature-card">
-              <div className="feature-icon">🔔</div>
-              <h3 className="feature-title">Automated Renewal & Risk Notifications</h3>
+              <div className="feature-icon">✉️</div>
+              <h3 className="feature-title">Email Response Drafting</h3>
               <p className="feature-description">
-                Get Slack/email alerts 90, 60, and 30 days before customer renewals with full contract context. Automatic flagging of pricing below benchmarks or terms that need updating. Your revenue team stays ahead of every deadline.
+                For every redline you reject or counter, get a professionally drafted email response. Explain your position clearly and propose alternatives. Maintain negotiation momentum without legal delays.
               </p>
             </div>
           </div>
@@ -622,12 +622,12 @@ export default function LandingPage() {
       {/* CTA Section */}
       <section className="cta-section" id="demo">
         <div className="cta-content">
-          <h2 className="cta-title">Start Managing Your Customer Portfolio Smarter</h2>
+          <h2 className="cta-title">Stop Losing Deals to Unfavorable Contract Terms</h2>
           <p className="cta-subtitle">
-            Join B2B companies using Contract IQ to eliminate revenue leakage and maximize customer lifetime value. Full platform access, no credit card required.
+            Join companies using Contract IQ to negotiate better contracts without lawyers. AI-powered redline analysis and negotiation guidance on every deal. Start free—no credit card required.
           </p>
           <a href="/app" className="btn-primary" style={{ fontSize: '19px', padding: '20px 48px' }}>
-            🎯 Get Started Free
+            ✨ Start Negotiating Smarter
           </a>
         </div>
       </section>
@@ -640,7 +640,7 @@ export default function LandingPage() {
             <div className="logo-text" style={{ fontSize: '18px' }}>Contract IQ</div>
           </div>
           <p className="footer-text">
-            © 2024 Contract IQ. Revenue intelligence for B2B companies.
+            © 2024 Contract IQ. AI-powered contract negotiation platform.
           </p>
         </div>
       </footer>
