@@ -148,13 +148,14 @@ export default function Dashboard() {
       {/* Page Header */}
       <div className="dashboard-page-header">
         <div className="dashboard-header-content">
-          <div>
-            <h1>Your Negotiation Command Center</h1>
-            <p className="dashboard-header-subtitle">
-              Create new contracts. Review customer redlines. Close deals faster.
-            </p>
-            {/* Primary Action Buttons */}
-            <div className="flex gap-4 mt-6">
+          <div className="flex items-center justify-between w-full">
+            <div>
+              <h1>Your Negotiation Command Center</h1>
+              <p className="dashboard-header-subtitle">
+                Create new contracts. Review customer redlines. Close deals faster.
+              </p>
+            </div>
+            <div className="flex gap-3">
               <button
                 onClick={() => router.push('/contracts/new')}
                 className="px-6 py-3 rounded-xl text-white text-[16px] font-semibold flex items-center gap-2 
@@ -168,7 +169,7 @@ export default function Dashboard() {
                 Create New Contract
               </button>
               <button
-                onClick={() => router.push(`/contracts/redlines/upload`)}
+                onClick={() => router.push('/contracts')}
                 className="px-6 py-3 rounded-xl text-[16px] font-semibold flex items-center gap-2 
                   bg-[var(--surface-4)] border border-white/10 text-[var(--text-primary)]
                   hover:brightness-110 transition"
@@ -178,7 +179,7 @@ export default function Dashboard() {
                   <path d="M12 11V21"/>
                   <rect x="3" y="3" width="18" height="6" rx="2"/>
                 </svg>
-                Upload Redlines
+                Upload for Negotiation
               </button>
             </div>
           </div>
@@ -337,10 +338,10 @@ export default function Dashboard() {
 
       {/* Two Column Layout */}
       <div className="two-column">
-        {/* Requires Your Attention */}
+        {/* Requires Your Attention Section */}
         <div className="table-card">
           <div className="table-header">
-            <h2 className="table-title">⚠️ Requires Your Attention</h2>
+            <h2 className="table-title">Requires Your Attention</h2>
             <button 
               className="table-action px-4 py-2 bg-[var(--surface-4)] border border-white/10 rounded-[10px] text-[var(--text-primary)] text-[14px] font-medium transition hover:brightness-110"
               onClick={() => router.push('/contracts')}
@@ -354,101 +355,118 @@ export default function Dashboard() {
               </span>
             </button>
           </div>
-          <div className="space-y-3 p-4">
-            <p className="text-[var(--text-secondary)]">3 contracts awaiting your review</p>
-              {/* Negotiation Action Items */}
-              <div className="p-3 bg-[var(--surface-3)] rounded-lg border border-red-500/20 hover:brightness-110 transition cursor-pointer">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-semibold text-[var(--text-primary)]">Acme Corp</div>
-                    <div className="text-sm text-[var(--text-secondary)]">Customer sent redlines (2 days ago)</div>
-                  </div>
-                  <button className="px-3 py-1.5 bg-red-500/20 text-red-400 rounded-md text-sm font-medium hover:bg-red-500/30 transition">
-                    Review Redlines
-                  </button>
-                </div>
-              </div>
-
-              <div className="p-3 bg-[var(--surface-3)] rounded-lg border border-yellow-500/20 hover:brightness-110 transition cursor-pointer">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-semibold text-[var(--text-primary)]">TechCo</div>
-                    <div className="text-sm text-[var(--text-secondary)]">High-risk changes detected</div>
-                  </div>
-                  <button className="px-3 py-1.5 bg-yellow-500/20 text-yellow-400 rounded-md text-sm font-medium hover:bg-yellow-500/30 transition">
-                    View Analysis
-                  </button>
-                </div>
-              </div>
-
-              <div className="p-3 bg-[var(--surface-3)] rounded-lg border border-blue-500/20 hover:brightness-110 transition cursor-pointer">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-semibold text-[var(--text-primary)]">DataCorp</div>
-                    <div className="text-sm text-[var(--text-secondary)]">Approval requested by sales</div>
-                  </div>
-                  <button className="px-3 py-1.5 bg-blue-500/20 text-blue-400 rounded-md text-sm font-medium hover:bg-blue-500/30 transition">
-                    Approve/Reject
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <table className="dashboard-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>ACV</th>
+                <th>Status</th>
+                <th>Churn Risk</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={4} className="text-center py-6 text-[var(--color-text-tertiary)]">
+                    Loading customer contracts...
+                  </td>
+                </tr>
+              ) : contracts.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="text-center py-6 text-[var(--color-text-tertiary)]">
+                    No customer contracts yet. Add your first customer contract to get started.
+                  </td>
+                </tr>
+              ) : (
+                contracts.slice(0, 5).map((contract: any) => {
+                  const riskLevel = contract.riskScore?.riskClassification || 'MEDIUM';
+                  const riskBadge = riskLevel === 'HIGH' ? 'badge-high' : riskLevel === 'LOW' ? 'badge-low' : 'badge-medium';
+                  const acv = contract.annualContractValue || contract.annualValue || 0;
+                  
+                  return (
+                    <tr key={contract.id}>
+                      <td>
+                        <div className="font-semibold text-[var(--color-text-primary)] mb-1">
+                          {contract.customerName || contract.contractName}
+                        </div>
+                        <div className="text-[13px] text-[var(--color-text-tertiary)]">
+                          {contract.industry || contract.customerType || 'B2B SaaS'}
+                        </div>
+                      </td>
+                      <td className="font-semibold text-[var(--color-text-primary)]">
+                        ${acv.toLocaleString()}
+                      </td>
+                      <td><span className="badge badge-active">Active</span></td>
+                      <td>
+                        <span className={`badge ${riskBadge}`}>
+                          {riskLevel.charAt(0) + riskLevel.slice(1).toLowerCase()}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
         </div>
 
-        {/* In Progress Section */}
+        {/* AI Insights */}
         <div className="insights-card">
           <div className="insights-header">
             <div className="insights-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2">
-                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
               </svg>
             </div>
-            <h3 className="insights-title">📝 In Progress</h3>
+            <h3 className="insights-title">AI Insights</h3>
           </div>
-          <div className="p-4">
-            <p className="text-[var(--text-secondary)] mb-4 font-semibold">8 contracts under negotiation</p>
-            
-            <div className="space-y-3">
-              <div className="flex justify-between items-center p-2 hover:bg-[var(--surface-3)] rounded transition">
-                <span className="text-[var(--text-primary)]">3 awaiting customer response</span>
-                <span className="text-sm text-[var(--text-secondary)]">→</span>
-              </div>
-              
-              <div className="flex justify-between items-center p-2 hover:bg-[var(--surface-3)] rounded transition">
-                <span className="text-[var(--text-primary)]">2 awaiting your review</span>
-                <span className="text-sm text-[var(--text-secondary)]">→</span>
-              </div>
-              
-              <div className="flex justify-between items-center p-2 hover:bg-[var(--surface-3)] rounded transition">
-                <span className="text-[var(--text-primary)]">3 in draft stage</span>
-                <span className="text-sm text-[var(--text-secondary)]">→</span>
-              </div>
+          <div className="insight-item" style={{ '--insight-color': '#EF4444' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+              </svg>
+              URGENT
             </div>
-            
-            <button 
-              className="mt-4 w-full px-4 py-2 bg-[var(--surface-4)] border border-white/10 rounded-[10px] text-[var(--text-primary)] text-[14px] font-medium transition hover:brightness-110"
-              onClick={() => router.push('/contracts?status=negotiating')}
-            >
-              View All Negotiations →
-            </button>
+            <div className="insight-text">3 contracts require renewal notice within 30 days to avoid auto-renewal. Total value: $475,000.</div>
           </div>
-
-          {/* Recently Closed Section */}
-          <div className="mt-6 p-4 bg-[var(--surface-3)] rounded-lg">
-            <h4 className="font-semibold text-[var(--text-primary)] mb-2">✅ Recently Closed (This Week)</h4>
-            <p className="text-sm text-[var(--text-secondary)]">5 contracts signed totaling $647K</p>
-            <p className="text-sm text-[var(--text-secondary)]">Avg negotiation time: 12 days</p>
-            <button 
-              className="mt-3 text-sm text-blue-400 hover:text-blue-300 transition"
-              onClick={() => router.push('/analytics')}
-            >
-              View Revenue Dashboard →
-            </button>
+          <div className="insight-item" style={{ '--insight-color': '#10B981' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10"/>
+              </svg>
+              EXPANSION
+            </div>
+            <div className="insight-text">Expansion signals detected across key accounts. Estimated revenue impact: $134,000/year with targeted upsells.</div>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#3B82F6' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+              INSIGHT
+            </div>
+            <div className="insight-text">Bundling opportunity: 4 customers show alignment for packaged expansion. Estimated revenue impact: $89,000/year.</div>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#10B981' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              OPPORTUNITY
+            </div>
+            <div className="insight-text">Top customer renewal approaching. Early engagement suggests 5–10% uplift possible with multi-year commitment.</div>
+          </div>
+          <div className="insight-item" style={{ '--insight-color': '#8B5CF6' } as React.CSSProperties}>
+            <div className="insight-type">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+              TREND
+            </div>
+            <div className="insight-text">Revenue increased 12.5% QoQ, driven primarily by customer expansions.</div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
