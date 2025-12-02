@@ -1,9 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+// Get environment variables
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+// Only create client if env vars exist
+const supabase = supabaseUrl && supabaseKey 
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
 
 export async function uploadContractFile(
   file: File,
@@ -13,6 +17,16 @@ export async function uploadContractFile(
   const timestamp = Date.now();
   const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
   const path = `${userId}/${folder}/${timestamp}_${safeName}`;
+  
+  // If Supabase not configured, return mock URL for development
+  if (!supabase) {
+    console.warn('Supabase not configured - using mock upload');
+    const mockPath = `${userId}/${folder}/${timestamp}_${safeName}`;
+    return { 
+      url: `/mock-uploads/${mockPath}`, 
+      path: mockPath 
+    };
+  }
   
   const { data, error } = await supabase.storage
     .from('contracts')
@@ -31,6 +45,12 @@ export async function uploadContractFile(
 }
 
 export async function extractTextFromPDF(fileUrl: string): Promise<string> {
+  // If it's a mock URL, return mock text
+  if (fileUrl.startsWith('/mock-uploads/')) {
+    console.warn('Mock upload detected - returning sample text');
+    return 'This is sample contract text for development purposes. In production, this would contain the actual PDF content.';
+  }
+  
   // Option 1: Use pdf-parse library
   const response = await fetch(fileUrl);
   const buffer = await response.arrayBuffer();
